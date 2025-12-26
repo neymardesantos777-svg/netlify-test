@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test Page - Live!</title>
+    <title>WorldBankFx x Professor | Forex Trading & Tech Mastery</title>
     <style>
         * {
             margin: 0;
@@ -12,123 +12,516 @@
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            overflow-x: hidden;
+        }
+        
+        /* Hero Section */
+        .hero {
             min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            position: relative;
+            overflow: hidden;
         }
         
-        .container {
-            background: white;
-            padding: 60px 40px;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            text-align: center;
-            max-width: 600px;
-            animation: fadeIn 0.6s ease-out;
-        }
-        
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        h1 {
-            font-size: 3em;
-            color: #667eea;
-            margin-bottom: 20px;
-            font-weight: 700;
-        }
-        
-        .status {
-            display: inline-block;
-            background: #10b981;
-            color: white;
-            padding: 10px 30px;
-            border-radius: 50px;
-            font-weight: 600;
-            margin-bottom: 30px;
-            animation: pulse 2s ease-in-out infinite;
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
         }
         
         @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
         
-        p {
-            font-size: 1.2em;
-            color: #666;
-            line-height: 1.6;
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+            padding: 40px 20px;
+            max-width: 1200px;
+        }
+        
+        .brand {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffd700, #ffed4e, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -2px;
+            text-transform: uppercase;
+            animation: shimmer 3s ease-in-out infinite;
+        }
+        
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .tagline {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: #00d4ff;
             margin-bottom: 30px;
+            font-weight: 600;
         }
         
-        .timestamp {
-            font-size: 0.9em;
-            color: #999;
-            font-style: italic;
+        .experience {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 40px 0;
+            flex-wrap: wrap;
         }
         
-        button {
-            background: #667eea;
-            color: white;
+        .exp-item {
+            text-align: center;
+        }
+        
+        .exp-number {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #ffd700;
+        }
+        
+        .exp-label {
+            font-size: 0.9rem;
+            color: #aaa;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .cta-btn {
+            padding: 18px 40px;
+            font-size: 1.1rem;
+            font-weight: 700;
             border: none;
-            padding: 15px 40px;
-            font-size: 1.1em;
             border-radius: 50px;
             cursor: pointer;
-            font-weight: 600;
             transition: all 0.3s ease;
-            margin-top: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
-        button:hover {
-            background: #764ba2;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        .cta-primary {
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            color: #000;
         }
         
-        .counter {
-            font-size: 2em;
-            color: #667eea;
+        .cta-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
+        }
+        
+        .cta-secondary {
+            background: transparent;
+            border: 2px solid #00d4ff;
+            color: #00d4ff;
+        }
+        
+        .cta-secondary:hover {
+            background: #00d4ff;
+            color: #000;
+            transform: translateY(-3px);
+        }
+        
+        /* Services Grid */
+        .services {
+            padding: 100px 20px;
+            background: #0f0f0f;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 60px;
+            color: #ffd700;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .service-card {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            padding: 40px 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: #ffd700;
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.2);
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .service-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #00d4ff;
+        }
+        
+        .service-desc {
+            color: #aaa;
+            line-height: 1.6;
+        }
+        
+        /* Products Section */
+        .products {
+            padding: 100px 20px;
+            background: #1a1a1a;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .product-card {
+            background: #0f0f0f;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+        }
+        
+        .product-card:hover {
+            border-color: #ffd700;
+            transform: translateY(-5px);
+        }
+        
+        .product-image {
+            height: 200px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+        
+        .product-info {
+            padding: 25px;
+        }
+        
+        .product-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #ffd700;
+        }
+        
+        .product-price {
+            font-size: 1.5rem;
             font-weight: 700;
-            margin-top: 20px;
+            color: #00d4ff;
+            margin: 15px 0;
+        }
+        
+        .buy-btn {
+            width: 100%;
+            padding: 12px;
+            background: #ffd700;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            color: #000;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .buy-btn:hover {
+            background: #ffed4e;
+            transform: scale(1.05);
+        }
+        
+        /* Blog Section */
+        .blog {
+            padding: 100px 20px;
+            background: #0f0f0f;
+        }
+        
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .blog-card {
+            background: #1a1a1a;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+        }
+        
+        .blog-card:hover {
+            border-color: #00d4ff;
+            transform: translateY(-5px);
+        }
+        
+        .blog-image {
+            height: 200px;
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+        }
+        
+        .blog-content {
+            padding: 25px;
+        }
+        
+        .blog-title {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        
+        .blog-excerpt {
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .read-more {
+            color: #00d4ff;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        
+        /* Footer */
+        footer {
+            background: #000;
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid #333;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        
+        .social-link {
+            width: 50px;
+            height: 50px;
+            background: #1a1a1a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .social-link:hover {
+            background: #ffd700;
+            transform: scale(1.1);
+        }
+        
+        @media (max-width: 768px) {
+            .experience {
+                gap: 20px;
+            }
+            
+            .exp-number {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🚀 It's Live!</h1>
-        <div class="status">✓ Successfully Deployed</div>
-        <p>Your Netlify test page is now live on the internet. You can modify this code anytime and redeploy instantly.</p>
-        <p class="timestamp">Deployed: <span id="time"></span></p>
-        
-        <button onclick="incrementCounter()">Click Me!</button>
-        <div class="counter" id="counter">Clicks: 0</div>
-    </div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="brand">WorldBankFx × Professor</h1>
+            <p class="tagline">Forex Trading Mastery • Tech Innovation • Financial Freedom</p>
+            
+            <div class="experience">
+                <div class="exp-item">
+                    <div class="exp-number">5</div>
+                    <div class="exp-label">Years Forex</div>
+                </div>
+                <div class="exp-item">
+                    <div class="exp-number">8</div>
+                    <div class="exp-label">Years Tech</div>
+                </div>
+            </div>
+            
+            <div class="cta-buttons">
+                <button class="cta-btn cta-primary" onclick="scrollToSection('services')">Explore Services</button>
+                <button class="cta-btn cta-secondary" onclick="scrollToSection('products')">Shop Products</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <h2 class="section-title">What I Offer</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">📈</div>
+                <h3 class="service-title">Forex Masterclasses</h3>
+                <p class="service-desc">Learn from 5 years of proven trading strategies. Live sessions, one-on-one mentoring, and exclusive insights.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">💻</div>
+                <h3 class="service-title">Tech Tutoring</h3>
+                <p class="service-desc">8 years of IT experience at your fingertips. Programming, systems, networking - master it all through live webinars.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">🛠️</div>
+                <h3 class="service-title">Remote Support</h3>
+                <p class="service-desc">Technical issues? I've got you. Fast, professional remote IT support for individuals and businesses.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">🎯</div>
+                <h3 class="service-title">Custom Indicators</h3>
+                <p class="service-desc">Exclusive trading indicators built from real market experience. Gain the edge you need.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">📚</div>
+                <h3 class="service-title">Courses & E-Books</h3>
+                <p class="service-desc">Comprehensive digital courses on Forex and Tech. Learn at your pace, master at your level.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">🎓</div>
+                <h3 class="service-title">Live Webinars</h3>
+                <p class="service-desc">Interactive sessions right on this platform. Ask questions, get answers, level up in real-time.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <h2 class="section-title">Featured Products</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image">📊</div>
+                <div class="product-info">
+                    <h3 class="product-title">Pro Trading Course</h3>
+                    <p class="service-desc">Complete A-Z Forex mastery</p>
+                    <div class="product-price">$299</div>
+                    <button class="buy-btn">Buy Now</button>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image">⚡</div>
+                <div class="product-info">
+                    <h3 class="product-title">Custom Indicator Pack</h3>
+                    <p class="service-desc">5 powerful MT4/MT5 indicators</p>
+                    <div class="product-price">$149</div>
+                    <button class="buy-btn">Buy Now</button>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image">📖</div>
+                <div class="product-info">
+                    <h3 class="product-title">Trading Psychology E-Book</h3>
+                    <p class="service-desc">Master your mindset</p>
+                    <div class="product-price">$29</div>
+                    <button class="buy-btn">Buy Now</button>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image">👕</div>
+                <div class="product-info">
+                    <h3 class="product-title">WorldBankFx Merch</h3>
+                    <p class="service-desc">Rep the brand in style</p>
+                    <div class="product-price">$49</div>
+                    <button class="buy-btn">Buy Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blog" id="blog">
+        <h2 class="section-title">Latest Insights</h2>
+        <div class="blog-grid">
+            <div class="blog-card">
+                <div class="blog-image"></div>
+                <div class="blog-content">
+                    <h3 class="blog-title">5 Chart Patterns That Changed My Trading</h3>
+                    <p class="blog-excerpt">After 5 years in the markets, these patterns have proven to be the most reliable...</p>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+            </div>
+            
+            <div class="blog-card">
+                <div class="blog-image"></div>
+                <div class="blog-content">
+                    <h3 class="blog-title">Building Scalable Web Apps in 2024</h3>
+                    <p class="blog-excerpt">Modern architecture patterns every developer should know...</p>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+            </div>
+            
+            <div class="blog-card">
+                <div class="blog-image"></div>
+                <div class="blog-content">
+                    <h3 class="blog-title">Risk Management: The Real Secret</h3>
+                    <p class="blog-excerpt">It's not about winning every trade. It's about this...</p>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+            <a href="#" class="social-link">📱</a>
+            <a href="#" class="social-link">📧</a>
+            <a href="#" class="social-link">💼</a>
+            <a href="#" class="social-link">📺</a>
+        </div>
+        <p style="color: #666;">© 2024 WorldBankFx × Professor. All rights reserved.</p>
+    </footer>
 
     <script>
-        // Display current time
-        document.getElementById('time').textContent = new Date().toLocaleString();
-        
-        // Simple counter to test interactivity
-        let count = 0;
-        function incrementCounter() {
-            count++;
-            document.getElementById('counter').textContent = 'Clicks: ' + count;
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
         }
     </script>
 </body>
