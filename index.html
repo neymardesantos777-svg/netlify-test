@@ -264,6 +264,147 @@
             transform: scale(1.05);
         }
         
+        /* Payment Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: #1a1a2e;
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            border: 2px solid #ffd700;
+            position: relative;
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
+            color: #fff;
+            background: none;
+            border: none;
+            cursor: pointer;
+            width: auto;
+            padding: 0;
+        }
+        
+        .close-btn:hover {
+            color: #ffd700;
+            transform: none;
+        }
+        
+        .modal-title {
+            font-size: 1.8rem;
+            color: #ffd700;
+            margin-bottom: 10px;
+        }
+        
+        .modal-price {
+            font-size: 2.5rem;
+            color: #00d4ff;
+            font-weight: 900;
+            margin-bottom: 30px;
+        }
+        
+        .payment-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .payment-btn {
+            padding: 18px;
+            border-radius: 12px;
+            border: 2px solid;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #fff;
+        }
+        
+        .payment-btn.paypal {
+            background: #0070ba;
+            border-color: #0070ba;
+        }
+        
+        .payment-btn.paypal:hover {
+            background: #005ea6;
+            transform: translateY(-3px);
+        }
+        
+        .payment-btn.whatsapp {
+            background: #25D366;
+            border-color: #25D366;
+        }
+        
+        .payment-btn.whatsapp:hover {
+            background: #1fb855;
+            transform: translateY(-3px);
+        }
+        
+        .payment-btn.email {
+            background: #ea4335;
+            border-color: #ea4335;
+        }
+        
+        .payment-btn.email:hover {
+            background: #d33426;
+            transform: translateY(-3px);
+        }
+        
+        .payment-info {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+        
+        .payment-info p {
+            font-size: 0.9rem;
+            color: #aaa;
+            margin: 5px 0;
+        }
+        
+        .payment-info strong {
+            color: #ffd700;
+        }
+        
         /* Blog Section */
         .blog {
             padding: 100px 20px;
@@ -439,7 +580,7 @@
                     <h3 class="product-title">Pro Trading Course</h3>
                     <p class="service-desc">Complete A-Z Forex mastery</p>
                     <div class="product-price">$299</div>
-                    <button class="buy-btn">Buy Now</button>
+                    <button class="buy-btn" onclick="openPayment('Pro Trading Course', '$299')">Buy Now</button>
                 </div>
             </div>
             
@@ -449,7 +590,7 @@
                     <h3 class="product-title">Custom Indicator Pack</h3>
                     <p class="service-desc">5 powerful MT4/MT5 indicators</p>
                     <div class="product-price">$149</div>
-                    <button class="buy-btn">Buy Now</button>
+                    <button class="buy-btn" onclick="openPayment('Custom Indicator Pack', '$149')">Buy Now</button>
                 </div>
             </div>
             
@@ -459,7 +600,7 @@
                     <h3 class="product-title">Trading Psychology E-Book</h3>
                     <p class="service-desc">Master your mindset</p>
                     <div class="product-price">$29</div>
-                    <button class="buy-btn">Buy Now</button>
+                    <button class="buy-btn" onclick="openPayment('Trading Psychology E-Book', '$29')">Buy Now</button>
                 </div>
             </div>
             
@@ -508,6 +649,36 @@
         </div>
     </section>
 
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closePayment()">×</button>
+            <h2 class="modal-title" id="modalProductName">Product Name</h2>
+            <div class="modal-price" id="modalPrice">$0</div>
+            
+            <div class="payment-options">
+                <a href="mailto:neemacharles777@gmail.com" class="payment-btn paypal">
+                    💳 Pay with PayPal
+                </a>
+                
+                <a id="whatsappBtn" href="#" target="_blank" class="payment-btn whatsapp">
+                    💬 Contact via WhatsApp
+                </a>
+                
+                <a id="emailBtn" href="#" class="payment-btn email">
+                    📧 Email to Purchase
+                </a>
+            </div>
+            
+            <div class="payment-info">
+                <p><strong>PayPal:</strong> neemacharles777@gmail.com</p>
+                <p><strong>WhatsApp:</strong> +256 783 354 348</p>
+                <p><strong>Email:</strong> unlimited.worldbankfx@gmail.com</p>
+                <p style="margin-top: 15px; font-size: 0.85rem;">Choose your preferred payment method above. I'll respond within 24 hours!</p>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer>
         <div class="social-links">
@@ -523,6 +694,40 @@
         function scrollToSection(id) {
             document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
         }
+
+        let currentProduct = '';
+        let currentPrice = '';
+
+        function openPayment(product, price) {
+            currentProduct = product;
+            currentPrice = price;
+            document.getElementById('modalProductName').textContent = product;
+            document.getElementById('modalPrice').textContent = price;
+            document.getElementById('paymentModal').classList.add('active');
+            
+            // Update WhatsApp link
+            const whatsappMsg = `Hi! I'm interested in purchasing: ${product} (${price})`;
+            const whatsappLink = `https://wa.me/256783354348?text=${encodeURIComponent(whatsappMsg)}`;
+            document.getElementById('whatsappBtn').href = whatsappLink;
+            
+            // Update Email link
+            const emailSubject = `Purchase Inquiry: ${product}`;
+            const emailBody = `Hi WorldBankFx,\n\nI'm interested in purchasing:\n${product} - ${price}\n\nPlease provide payment instructions.\n\nThank you!`;
+            const emailLink = `mailto:unlimited.worldbankfx@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+            document.getElementById('emailBtn').href = emailLink;
+        }
+
+        function closePayment() {
+            document.getElementById('paymentModal').classList.remove('active');
+        }
+
+        // Close modal when clicking outside
+        document.addEventListener('click', function(event) {
+            const modal = document.getElementById('paymentModal');
+            if (event.target === modal) {
+                closePayment();
+            }
+        });
     </script>
 </body>
 </html>
