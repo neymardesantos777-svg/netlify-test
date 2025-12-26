@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pip Calculator | WorldBankFx</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            color: #ffd700;
+            margin-bottom: 15px;
+        }
+        
+        .subtitle {
+            color: #aaa;
+            font-size: 1.1rem;
+        }
+        
+        .calculator-card {
+            background: #0f0f0f;
+            border-radius: 20px;
+            padding: 40px;
+            border: 2px solid #ffd700;
+            box-shadow: 0 20px 60px rgba(255, 215, 0, 0.2);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            color: #00d4ff;
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+        
+        .form-group select,
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group select:focus,
+        .form-group input:focus {
+            outline: none;
+            border-color: #ffd700;
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .calculate-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            border: none;
+            border-radius: 12px;
+            color: #000;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .calculate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
+        }
+        
+        .result-section {
+            margin-top: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border-radius: 15px;
+            border: 1px solid #00d4ff;
+            display: none;
+        }
+        
+        .result-section.show {
+            display: block;
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .result-title {
+            color: #00d4ff;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .result-value {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 900;
+            color: #ffd700;
+            margin-bottom: 20px;
+        }
+        
+        .result-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .detail-item {
+            background: #0f0f0f;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .detail-label {
+            color: #aaa;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        
+        .detail-value {
+            color: #fff;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+        
+        .info-box {
+            margin-top: 40px;
+            padding: 25px;
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+        
+        .info-box h3 {
+            color: #ffd700;
+            margin-bottom: 15px;
+        }
+        
+        .info-box p {
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .calculator-card {
+                padding: 25px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .result-value {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">WORLDBANKFX × PROFESSOR</div>
+            <h1>Pip Calculator</h1>
+            <p class="subtitle">Calculate your pip value instantly for any currency pair</p>
+        </div>
+
+        <div class="calculator-card">
+            <form id="pipForm">
+                <div class="form-group">
+                    <label>Currency Pair</label>
+                    <select id="currencyPair" required>
+                        <option value="">Select Currency Pair</option>
+                        <optgroup label="Major Pairs">
+                            <option value="EURUSD">EUR/USD</option>
+                            <option value="GBPUSD">GBP/USD</option>
+                            <option value="USDJPY">USD/JPY</option>
+                            <option value="USDCHF">USD/CHF</option>
+                            <option value="AUDUSD">AUD/USD</option>
+                            <option value="USDCAD">USD/CAD</option>
+                            <option value="NZDUSD">NZD/USD</option>
+                        </optgroup>
+                        <optgroup label="Cross Pairs">
+                            <option value="EURGBP">EUR/GBP</option>
+                            <option value="EURJPY">EUR/JPY</option>
+                            <option value="GBPJPY">GBP/JPY</option>
+                            <option value="AUDJPY">AUD/JPY</option>
+                            <option value="EURAUD">EUR/AUD</option>
+                            <option value="EURCHF">EUR/CHF</option>
+                        </optgroup>
+                        <optgroup label="Exotic Pairs">
+                            <option value="USDZAR">USD/ZAR</option>
+                            <option value="USDTRY">USD/TRY</option>
+                            <option value="USDMXN">USD/MXN</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Account Currency</label>
+                        <select id="accountCurrency" required>
+                            <option value="USD">USD - US Dollar</option>
+                            <option value="EUR">EUR - Euro</option>
+                            <option value="GBP">GBP - British Pound</option>
+                            <option value="JPY">JPY - Japanese Yen</option>
+                            <option value="CHF">CHF - Swiss Franc</option>
+                            <option value="AUD">AUD - Australian Dollar</option>
+                            <option value="CAD">CAD - Canadian Dollar</option>
+                            <option value="NZD">NZD - New Zealand Dollar</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Position Size (Lots)</label>
+                        <input type="number" id="lotSize" step="0.01" min="0.01" value="1.00" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="calculate-btn">Calculate Pip Value</button>
+            </form>
+
+            <div id="resultSection" class="result-section">
+                <div class="result-title">Pip Value</div>
+                <div class="result-value" id="pipValue">$0.00</div>
+                
+                <div class="result-details">
+                    <div class="detail-item">
+                        <div class="detail-label">Currency Pair</div>
+                        <div class="detail-value" id="resultPair">-</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Lot Size</div>
+                        <div class="detail-value" id="resultLots">-</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Account Currency</div>
+                        <div class="detail-value" id="resultCurrency">-</div>
+                    </div>
+                </div>
+
+                <div class="result-details" style="margin-top: 20px;">
+                    <div class="detail-item">
+                        <div class="detail-label">10 Pips Movement</div>
+                        <div class="detail-value" id="pips10">-</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">50 Pips Movement</div>
+                        <div class="detail-value" id="pips50">-</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">100 Pips Movement</div>
+                        <div class="detail-value" id="pips100">-</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <h3>What is a Pip?</h3>
+            <p>
+                A pip (percentage in point) is the smallest price move that a given exchange rate can make. 
+                For most currency pairs, a pip is 0.0001, except for pairs involving the Japanese Yen where it's 0.01.
+            </p>
+            <p>
+                Understanding pip value is crucial for risk management and position sizing in forex trading. 
+                This calculator helps you determine the monetary value of each pip movement in your trades.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Simplified pip calculation (using standard lot sizes)
+        // 1 standard lot = 100,000 units
+        // For most pairs: 1 pip = 0.0001
+        // For JPY pairs: 1 pip = 0.01
+
+        const pipSizes = {
+            // JPY pairs use 0.01 pip
+            JPY: 0.01,
+            // All other pairs use 0.0001 pip
+            default: 0.0001
+        };
+
+        // Approximate exchange rates (in real app, would fetch from API)
+        const exchangeRates = {
+            EURUSD: 1.0850,
+            GBPUSD: 1.2650,
+            USDJPY: 149.50,
+            USDCHF: 0.8850,
+            AUDUSD: 0.6550,
+            USDCAD: 1.3550,
+            NZDUSD: 0.6050,
+            EURGBP: 0.8580,
+            EURJPY: 162.20,
+            GBPJPY: 188.80,
+            AUDJPY: 97.90,
+            EURAUD: 1.6560,
+            EURCHF: 0.9600,
+            USDZAR: 18.50,
+            USDTRY: 32.50,
+            USDMXN: 17.20
+        };
+
+        document.getElementById('pipForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            calculatePipValue();
+        });
+
+        function calculatePipValue() {
+            const pair = document.getElementById('currencyPair').value;
+            const accountCurrency = document.getElementById('accountCurrency').value;
+            const lotSize = parseFloat(document.getElementById('lotSize').value);
+
+            if (!pair) {
+                alert('Please select a currency pair');
+                return;
+            }
+
+            // Determine pip size based on currency pair
+            const quoteCurrency = pair.slice(-3);
+            const pipSize = quoteCurrency === 'JPY' ? pipSizes.JPY : pipSizes.default;
+
+            // Standard lot = 100,000 units
+            const units = lotSize * 100000;
+
+            // Calculate pip value in quote currency
+            let pipValueInQuote = units * pipSize;
+
+            // Convert to account currency if different from quote currency
+            let pipValueInAccount = pipValueInQuote;
+            
+            if (accountCurrency !== quoteCurrency) {
+                // Simplified conversion (in real app, would need proper conversion rates)
+                const conversionPair = quoteCurrency + accountCurrency;
+                const reverseConversionPair = accountCurrency + quoteCurrency;
+                
+                if (exchangeRates[conversionPair]) {
+                    pipValueInAccount = pipValueInQuote * exchangeRates[conversionPair];
+                } else if (exchangeRates[reverseConversionPair]) {
+                    pipValueInAccount = pipValueInQuote / exchangeRates[reverseConversionPair];
+                } else if (quoteCurrency === 'USD') {
+                    // If quote is USD, convert to account currency
+                    const usdToAccount = exchangeRates['USD' + accountCurrency] || 1;
+                    pipValueInAccount = pipValueInQuote * usdToAccount;
+                } else if (accountCurrency === 'USD') {
+                    // If account is USD, convert from quote currency
+                    const quoteToUSD = exchangeRates[quoteCurrency + 'USD'] || exchangeRates['USD' + quoteCurrency] ? 1/exchangeRates['USD' + quoteCurrency] : 1;
+                    pipValueInAccount = pipValueInQuote * quoteToUSD;
+                }
+            }
+
+            // Display results
+            const currencySymbol = getCurrencySymbol(accountCurrency);
+            document.getElementById('pipValue').textContent = currencySymbol + pipValueInAccount.toFixed(2);
+            document.getElementById('resultPair').textContent = pair;
+            document.getElementById('resultLots').textContent = lotSize.toFixed(2);
+            document.getElementById('resultCurrency').textContent = accountCurrency;
+            
+            document.getElementById('pips10').textContent = currencySymbol + (pipValueInAccount * 10).toFixed(2);
+            document.getElementById('pips50').textContent = currencySymbol + (pipValueInAccount * 50).toFixed(2);
+            document.getElementById('pips100').textContent = currencySymbol + (pipValueInAccount * 100).toFixed(2);
+
+            // Show result section
+            document.getElementById('resultSection').classList.add('show');
+        }
+
+        function getCurrencySymbol(currency) {
+            const symbols = {
+                USD: '$',
+                EUR: '€',
+                GBP: '£',
+                JPY: '¥',
+                CHF: 'CHF ',
+                AUD: 'A$',
+                CAD: 'C$',
+                NZD: 'NZ$'
+            };
+            return symbols[currency] || currency + ' ';
+        }
+    </script>
+</body>
+</html>
