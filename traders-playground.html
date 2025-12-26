@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trader's Playground | WorldBankFx</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            color: #ffd700;
+            margin-bottom: 15px;
+        }
+        
+        .subtitle {
+            color: #aaa;
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .intro-section {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(0, 212, 255, 0.1));
+            border: 2px solid #ffd700;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 60px;
+            text-align: center;
+        }
+        
+        .intro-section h2 {
+            color: #00d4ff;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+        
+        .intro-section p {
+            color: #ccc;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .game-card {
+            background: #0f0f0f;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid #333;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-10px);
+            border-color: #ffd700;
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.3);
+        }
+        
+        .game-card.coming-soon {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .game-card.coming-soon:hover {
+            transform: none;
+            border-color: #333;
+            box-shadow: none;
+        }
+        
+        .game-banner {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .game-banner::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(0, 212, 255, 0.2));
+            z-index: 0;
+        }
+        
+        .game-banner span {
+            z-index: 1;
+            position: relative;
+        }
+        
+        .game-info {
+            padding: 30px;
+        }
+        
+        .game-title {
+            font-size: 1.8rem;
+            color: #ffd700;
+            margin-bottom: 10px;
+        }
+        
+        .game-purpose {
+            color: #00d4ff;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .game-description {
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .game-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+        }
+        
+        .difficulty {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .difficulty-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .difficulty-bars {
+            display: flex;
+            gap: 3px;
+        }
+        
+        .bar {
+            width: 8px;
+            height: 20px;
+            background: #333;
+            border-radius: 2px;
+        }
+        
+        .bar.active {
+            background: #ffd700;
+        }
+        
+        .bar.active.hard {
+            background: #ef4444;
+        }
+        
+        .play-btn {
+            padding: 10px 25px;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            border: none;
+            border-radius: 8px;
+            color: #000;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .play-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+        }
+        
+        .coming-soon-badge {
+            background: #666;
+            color: #fff;
+            padding: 10px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .stats-section {
+            background: #0f0f0f;
+            border-radius: 20px;
+            padding: 40px;
+            border: 2px solid #00d4ff;
+            text-align: center;
+        }
+        
+        .stats-section h2 {
+            color: #00d4ff;
+            font-size: 2rem;
+            margin-bottom: 30px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .stat-card {
+            background: #1a1a1a;
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid #333;
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #ffd700;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .intro-section {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">WORLDBANKFX × PROFESSOR</div>
+            <h1>🎮 Trader's Playground</h1>
+            <p class="subtitle">
+                Master your emotions, sharpen your skills, and break bad trading habits through interactive challenges
+            </p>
+        </div>
+
+        <div class="intro-section">
+            <h2>Why Games for Traders?</h2>
+            <p>
+                Trading is 80% psychology and 20% strategy. These games are designed to help you develop discipline, 
+                patience, and emotional control. Feeling the urge to overtrade? Complete the challenge first. 
+                Want revenge after a loss? Play the frustration breaker. Every game has a purpose - to make you a better trader.
+            </p>
+        </div>
+
+        <div class="games-grid">
+            <!-- Game 1: Patience Test -->
+            <div class="game-card coming-soon" onclick="playGame('patience-test')">
+                <div class="game-banner" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                    <span>🎯</span>
+                </div>
+                <div class="game-info">
+                    <h3 class="game-title">Patience Test</h3>
+                    <div class="game-purpose">🚫 Overtrading Prevention</div>
+                    <p class="game-description">
+                        Can you resist clicking? Wait for the perfect moment when the target turns green. 
+                        One early click and you fail. 60 seconds of pure discipline testing.
+                    </p>
+                    <div class="game-meta">
+                        <div class="difficulty">
+                            <span class="difficulty-label">Difficulty:</span>
+                            <div class="difficulty-bars">
+                                <div class="bar active hard"></div>
+                                <div class="bar active hard"></div>
+                                <div class="bar active hard"></div>
+                                <div class="bar active hard"></div>
+                                <div class="bar"></div>
+                            </div>
+                        </div>
+                        <span class="coming-soon-badge">Coming Soon</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game 2: Revenge Breaker -->
+            <div class="game-card coming-soon" onclick="playGame('revenge-breaker')">
+                <div class="game-banner" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+                    <span>😤</span>
+                </div>
+                <div class="game-info">
+                    <h3 class="game-title">Revenge Breaker</h3>
+                    <div class="game-purpose">💢 Revenge Trading Stopper</div>
+                    <p class="game-description">
+                        Designed to frustrate you, then teach control. Navigate a ball through obstacles - 
+                        hit a wall 3 times and restart. Gets harder when you fail. Can you stay calm?
+                    </p>
+                    <div class="game-meta">
+                        <div class="difficulty">
+                            <span class="difficulty-label">Difficulty:</span>
+                            <div class="difficulty-bars">
+                                <div class="bar active hard"></div>
+                                <div class="bar active hard"></div>
+                                <div class="bar active hard"></div>
+                                <div class="bar active hard"></div>
+                                <div class="bar active hard"></div>
+                            </div>
+                        </div>
+                        <span class="coming-soon-badge">Coming Soon</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game 3: Risk Manager Simulator -->
+            <div class="game-card coming-soon" onclick="playGame('risk-simulator')">
+                <div class="game-banner" style="background: linear-gradient(135deg, #fa709a, #fee140);">
+                    <span>📊</span>
+                </div>
+                <div class="game-info">
+                    <h3 class="game-title">Risk Manager Simulator</h3>
+                    <div class="game-purpose">🎓 Position Sizing Practice</div>
+                    <p class="game-description">
+                        Mini trading sim with $1000 starting capital. Reach $2000 by following proper risk management. 
+                        Break the 2% rule and it's game over. Learn by doing!
+                    </p>
+                    <div class="game-meta">
+                        <div class="difficulty">
+                            <span class="difficulty-label">Difficulty:</span>
+                            <div class="difficulty-bars">
+                                <div class="bar active"></div>
+                                <div class="bar active"></div>
+                                <div class="bar active"></div>
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                            </div>
+                        </div>
+                        <span class="coming-soon-badge">Coming Soon</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game 4: Chart Pattern Master -->
+            <div class="game-card coming-soon" onclick="playGame('pattern-master')">
+                <div class="game-banner" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
+                    <span>📈</span>
+                </div>
+                <div class="game-info">
+                    <h3 class="game-title">Chart Pattern Master</h3>
+                    <div class="game-purpose">🧠 Pattern Recognition Training</div>
+                    <p class="game-description">
+                        Fast-paced pattern identification game. Recognize Head & Shoulders, Double Tops, Triangles, 
+                        and more. 20 patterns in 60 seconds - can you do it?
+                    </p>
+                    <div class="game-meta">
+                        <div class="difficulty">
+                            <span class="difficulty-label">Difficulty:</span>
+                            <div class="difficulty-bars">
+                                <div class="bar active"></div>
+                                <div class="bar active"></div>
+                                <div class="bar active"></div>
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                            </div>
+                        </div>
+                        <span class="coming-soon-badge">Coming Soon</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game 5: Discipline Challenge -->
+            <div class="game-card coming-soon" onclick="playGame('discipline-challenge')">
+                <div class="game-banner" style="background: linear-gradient(135deg, #a8edea, #fed6e3);">
+                    <span>🧘</span>
+                </div>
+                <div class="game-info">
+                    <h3 class="game-title">Discipline Challenge</h3>
+                    <div class="game-purpose">🎯 Focus & Control Training</div>
+                    <p class="game-description">
+                        Navigate through moving obstacles for 2 minutes without touching the line. 
+                        Speed increases like market volatility. Stay focused, stay disciplined.
+                    </p>
+                    <div class="game-meta">
+                        <div class="difficulty">
+                            <span class="difficulty-label">Difficulty:</span>
+                            <div class="difficulty-bars">
+                                <div class="bar active"></div>
+                                <div class="bar active"></div>
+                                <div class="bar active"></div>
+                                <div class="bar active"></div>
+                                <div class="bar"></div>
+                            </div>
+                        </div>
+                        <span class="coming-soon-badge">Coming Soon</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-section">
+            <h2>Your Gaming Stats</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">0</div>
+                    <div class="stat-label">Games Completed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">0</div>
+                    <div class="stat-label">Challenges Passed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">0</div>
+                    <div class="stat-label">Total Playtime</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">-</div>
+                    <div class="stat-label">Best Score</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function playGame(gameId) {
+            // For now, show coming soon message
+            // Later, these will link to actual game pages
+            alert('🎮 This game is coming soon!\n\nStay tuned - we\'re building something awesome for you!');
+            
+            // When games are ready, will redirect like this:
+            // window.location.href = gameId + '.html';
+        }
+
+        // Track stats (using localStorage for now)
+        function updateStats() {
+            const stats = JSON.parse(localStorage.getItem('worldbankfx_game_stats') || '{}');
+            
+            // Update display if stats exist
+            if (stats.gamesCompleted) {
+                document.querySelector('.stat-card:nth-child(1) .stat-value').textContent = stats.gamesCompleted;
+            }
+            if (stats.challengesPassed) {
+                document.querySelector('.stat-card:nth-child(2) .stat-value').textContent = stats.challengesPassed;
+            }
+            if (stats.totalPlaytime) {
+                document.querySelector('.stat-card:nth-child(3) .stat-value').textContent = 
+                    Math.floor(stats.totalPlaytime / 60) + ' mins';
+            }
+            if (stats.bestScore) {
+                document.querySelector('.stat-card:nth-child(4) .stat-value').textContent = stats.bestScore;
+            }
+        }
+
+        // Load stats on page load
+        updateStats();
+    </script>
+</body>
+</html>
