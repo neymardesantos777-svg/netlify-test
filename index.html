@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WorldBankFx x Professor | Forex Trading & Tech Mastery</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -11,45 +12,248 @@
             box-sizing: border-box;
         }
         
+        html {
+            scroll-behavior: smooth;
+        }
+        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: #0a0a0a;
             color: #fff;
             overflow-x: hidden;
         }
-        
-        /* Hero Section */
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #0f0f0f;
+            min-width: 220px;
+            border: 1px solid #ffd700;
+            border-radius: 8px;
+            margin-top: -2px;
+            padding: 10px 0;
+        }
+
+        .dropdown:hover .dropdown-content,
+        .dropdown-content:hover {
+            display: block;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 12px 20px;
+            border-bottom: 1px solid #333;
+            color: #fff;
+        }
+
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-content a:hover {
+            background: rgba(255, 215, 0, 0.1);
+            color: #ffd700;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            color: #ffd700;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 400px;
+            height: 100vh;
+            background: #0f0f0f;
+            z-index: 2000;
+            padding: 80px 30px 30px;
+            transition: right 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .mobile-nav.active {
+            right: 0;
+        }
+
+        .mobile-nav-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
+            color: #ffd700;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+        }
+
+        .mobile-nav-links li {
+            margin-bottom: 20px;
+        }
+
+        .mobile-nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: block;
+            padding: 10px 0;
+        }
+
+        .mobile-dropdown-toggle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 10px 0;
+        }
+
+        .mobile-dropdown-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding-left: 20px;
+        }
+
+        .mobile-dropdown-content.active {
+            max-height: 500px;
+        }
+
+        .mobile-dropdown-content a {
+            font-size: 1rem;
+            padding: 8px 0;
+            color: #aaa;
+        }
+
         .hero {
+            position: relative;
             min-height: 100vh;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
             overflow: hidden;
+            margin-top: 70px;
         }
-        
-        .hero::before {
-            content: '';
+
+        .hero-background {
             position: absolute;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%);
-            animation: pulse 8s ease-in-out infinite;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
         }
-        
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+
+        .hero-background video,
+        .hero-background img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.4;
         }
-        
-        .hero-content {
-            text-align: center;
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.9) 0%, rgba(15, 52, 96, 0.85) 100%);
             z-index: 1;
+        }
+
+        .animated-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(255, 215, 0, 0.05) 0%, transparent 50%);
+            animation: bgFloat 20s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        @keyframes bgFloat {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(5deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
             padding: 40px 20px;
             max-width: 1200px;
         }
-        
+
         .brand {
             font-size: clamp(2.5rem, 8vw, 5rem);
             font-weight: 900;
@@ -57,24 +261,24 @@
             background: linear-gradient(135deg, #ffd700, #ffed4e, #ffd700);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
             letter-spacing: -2px;
             text-transform: uppercase;
             animation: shimmer 3s ease-in-out infinite;
+            background-size: 200% auto;
         }
-        
+
         @keyframes shimmer {
             0%, 100% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
         }
-        
+
         .tagline {
             font-size: clamp(1.2rem, 3vw, 1.8rem);
             color: #00d4ff;
             margin-bottom: 30px;
             font-weight: 600;
         }
-        
+
         .experience {
             display: flex;
             justify-content: center;
@@ -82,24 +286,24 @@
             margin: 40px 0;
             flex-wrap: wrap;
         }
-        
+
         .exp-item {
             text-align: center;
         }
-        
+
         .exp-number {
             font-size: 3rem;
             font-weight: 900;
             color: #ffd700;
         }
-        
+
         .exp-label {
             font-size: 0.9rem;
             color: #aaa;
             text-transform: uppercase;
             letter-spacing: 2px;
         }
-        
+
         .cta-buttons {
             display: flex;
             gap: 20px;
@@ -107,7 +311,7 @@
             margin-top: 40px;
             flex-wrap: wrap;
         }
-        
+
         .cta-btn {
             padding: 18px 40px;
             font-size: 1.1rem;
@@ -118,109 +322,209 @@
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
+            text-decoration: none;
+            display: inline-block;
         }
-        
+
         .cta-primary {
             background: linear-gradient(135deg, #ffd700, #ffed4e);
             color: #000;
         }
-        
+
         .cta-primary:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
         }
-        
+
         .cta-secondary {
             background: transparent;
             border: 2px solid #00d4ff;
             color: #00d4ff;
         }
-        
+
         .cta-secondary:hover {
             background: #00d4ff;
             color: #000;
             transform: translateY(-3px);
         }
-        
-        /* Services Grid */
-        .services {
+
+        .market-clocks {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+
+        .clock-item {
+            background: rgba(15, 15, 15, 0.8);
+            padding: 20px 30px;
+            border-radius: 15px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            text-align: center;
+            min-width: 200px;
+        }
+
+        .clock-city {
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .clock-time {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #ffd700;
+            font-family: 'Courier New', monospace;
+        }
+
+        .clock-day {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .clock-status {
+            font-size: 0.8rem;
+            margin-top: 8px;
+            font-weight: 600;
+        }
+
+        .clock-status.open {
+            color: #10b981;
+        }
+
+        .clock-status.closed {
+            color: #ef4444;
+        }
+
+        .services-slider, .products-slider {
             padding: 100px 20px;
+            overflow: hidden;
+        }
+
+        .services-slider {
             background: #0f0f0f;
         }
-        
+
+        .products-slider {
+            background: #1a1a1a;
+        }
+
         .section-title {
             text-align: center;
             font-size: clamp(2rem, 5vw, 3rem);
             margin-bottom: 60px;
             color: #ffd700;
         }
-        
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
+
+        .slider-wrapper {
+            position: relative;
         }
-        
-        .service-card {
+
+        .slider-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .slider-track {
+            display: flex;
+            animation: slide 40s linear infinite;
+        }
+
+        .slider-track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes slide {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .products-track {
+            animation: slideReverse 35s linear infinite;
+        }
+
+        @keyframes slideReverse {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(0); }
+        }
+
+        .slider-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .slider-btn {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 215, 0, 0.2);
+            border: 2px solid #ffd700;
+            border-radius: 50%;
+            color: #ffd700;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .slider-btn:hover {
+            background: #ffd700;
+            color: #000;
+            transform: scale(1.1);
+        }
+		.service-card {
+            flex: 0 0 350px;
             background: linear-gradient(135deg, #1a1a2e, #16213e);
             padding: 40px 30px;
             border-radius: 20px;
             border: 1px solid rgba(255, 215, 0, 0.1);
+            margin: 0 15px;
             transition: all 0.3s ease;
             cursor: pointer;
         }
-        
+
         .service-card:hover {
             transform: translateY(-10px);
             border-color: #ffd700;
             box-shadow: 0 20px 40px rgba(255, 215, 0, 0.2);
         }
-        
+
         .service-icon {
             font-size: 3rem;
             margin-bottom: 20px;
         }
-        
+
         .service-title {
             font-size: 1.5rem;
             margin-bottom: 15px;
             color: #00d4ff;
         }
-        
+
         .service-desc {
             color: #aaa;
             line-height: 1.6;
         }
-        
-        /* Products Section */
-        .products {
-            padding: 100px 20px;
-            background: #1a1a1a;
-        }
-        
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
+
         .product-card {
+            flex: 0 0 300px;
             background: #0f0f0f;
             border-radius: 15px;
             overflow: hidden;
             border: 1px solid #333;
+            margin: 0 15px;
             transition: all 0.3s ease;
         }
-        
+
         .product-card:hover {
             border-color: #ffd700;
             transform: translateY(-5px);
         }
-        
+
         .product-image {
             height: 200px;
             background: linear-gradient(135deg, #667eea, #764ba2);
@@ -229,24 +533,24 @@
             justify-content: center;
             font-size: 4rem;
         }
-        
+
         .product-info {
             padding: 25px;
         }
-        
+
         .product-title {
             font-size: 1.3rem;
             margin-bottom: 10px;
             color: #ffd700;
         }
-        
+
         .product-price {
             font-size: 1.5rem;
             font-weight: 700;
             color: #00d4ff;
             margin: 15px 0;
         }
-        
+
         .buy-btn {
             width: 100%;
             padding: 12px;
@@ -258,222 +562,129 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-        
+
         .buy-btn:hover {
             background: #ffed4e;
             transform: scale(1.05);
         }
-        
-        /* Payment Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .modal.active {
-            display: flex;
-        }
-        
-        .modal-content {
-            background: #1a1a2e;
-            padding: 40px;
-            border-radius: 20px;
-            max-width: 500px;
-            width: 90%;
-            border: 2px solid #ffd700;
-            position: relative;
-            animation: slideIn 0.3s ease-out;
-        }
-        
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .close-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 2rem;
-            color: #fff;
-            background: none;
-            border: none;
-            cursor: pointer;
-            width: auto;
-            padding: 0;
-        }
-        
-        .close-btn:hover {
-            color: #ffd700;
-            transform: none;
-        }
-        
-        .modal-title {
-            font-size: 1.8rem;
-            color: #ffd700;
-            margin-bottom: 10px;
-        }
-        
-        .modal-price {
-            font-size: 2.5rem;
-            color: #00d4ff;
-            font-weight: 900;
-            margin-bottom: 30px;
-        }
-        
-        .payment-options {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        
-        .payment-btn {
-            padding: 18px;
-            border-radius: 12px;
-            border: 2px solid;
-            font-weight: 700;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            text-decoration: none;
-            color: #fff;
-        }
-        
-        .payment-btn.paypal {
-            background: #0070ba;
-            border-color: #0070ba;
-        }
-        
-        .payment-btn.paypal:hover {
-            background: #005ea6;
-            transform: translateY(-3px);
-        }
-        
-        .payment-btn.whatsapp {
-            background: #25D366;
-            border-color: #25D366;
-        }
-        
-        .payment-btn.whatsapp:hover {
-            background: #1fb855;
-            transform: translateY(-3px);
-        }
-        
-        .payment-btn.email {
-            background: #ea4335;
-            border-color: #ea4335;
-        }
-        
-        .payment-btn.email:hover {
-            background: #d33426;
-            transform: translateY(-3px);
-        }
-        
-        .payment-info {
-            margin-top: 20px;
-            padding: 20px;
-            background: rgba(255, 215, 0, 0.1);
-            border-radius: 10px;
-            border: 1px solid rgba(255, 215, 0, 0.3);
-        }
-        
-        .payment-info p {
-            font-size: 0.9rem;
-            color: #aaa;
-            margin: 5px 0;
-        }
-        
-        .payment-info strong {
-            color: #ffd700;
-        }
-        
-        /* Blog Section */
-        .blog {
+
+        .social-feed {
             padding: 100px 20px;
             background: #0f0f0f;
         }
-        
-        .blog-grid {
+
+        .feed-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .feed-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
+            margin-top: 40px;
         }
-        
-        .blog-card {
+
+        .feed-card {
             background: #1a1a1a;
             border-radius: 15px;
             overflow: hidden;
             border: 1px solid #333;
             transition: all 0.3s ease;
         }
-        
-        .blog-card:hover {
-            border-color: #00d4ff;
+
+        .feed-card:hover {
+            border-color: #ffd700;
             transform: translateY(-5px);
         }
-        
-        .blog-image {
-            height: 200px;
-            background: linear-gradient(135deg, #f093fb, #f5576c);
+
+        .feed-header {
+            padding: 15px;
+            background: #0f0f0f;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
         }
-        
-        .blog-content {
-            padding: 25px;
-        }
-        
-        .blog-title {
-            font-size: 1.4rem;
-            margin-bottom: 10px;
+
+        .feed-image {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: #fff;
+            font-size: 2rem;
         }
-        
-        .blog-excerpt {
+
+        .feed-content {
+            padding: 20px;
             color: #aaa;
             line-height: 1.6;
-            margin-bottom: 15px;
         }
-        
-        .read-more {
-            color: #00d4ff;
-            font-weight: 600;
-            text-decoration: none;
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            border: none;
+            border-radius: 50%;
+            color: #000;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
         }
-        
-        /* Footer */
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.5);
+        }
+
         footer {
             background: #000;
-            padding: 40px 20px;
+            padding: 60px 20px 40px;
             text-align: center;
             border-top: 1px solid #333;
         }
-        
-        .social-links {
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-brand {
+            margin-bottom: 30px;
+        }
+
+        .footer-brand h3 {
+            color: #ffd700;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .footer-brand p {
+            color: #aaa;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+		.footer-social {
             display: flex;
             gap: 20px;
             justify-content: center;
-            margin: 20px 0;
+            margin: 30px 0;
         }
-        
+
         .social-link {
             width: 50px;
             height: 50px;
@@ -485,27 +696,204 @@
             font-size: 1.5rem;
             transition: all 0.3s ease;
             text-decoration: none;
+            color: #ffd700;
         }
-        
+
         .social-link:hover {
             background: #ffd700;
+            color: #000;
             transform: scale(1.1);
         }
-        
-        @media (max-width: 768px) {
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+            text-align: left;
+        }
+
+        .footer-column h4 {
+            color: #00d4ff;
+            margin-bottom: 15px;
+        }
+
+        .footer-column a {
+            display: block;
+            color: #aaa;
+            margin: 8px 0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: #ffd700;
+        }
+
+        .footer-column p {
+            color: #aaa;
+            font-size: 0.9rem;
+            margin: 8px 0;
+        }
+
+        .footer-bottom {
+            color: #666;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+        }
+
+        @media (max-width: 968px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .mobile-nav {
+                display: block;
+            }
+
             .experience {
                 gap: 20px;
             }
-            
+
             .exp-number {
                 font-size: 2rem;
+            }
+
+            .market-clocks {
+                gap: 15px;
+            }
+
+            .clock-item {
+                min-width: 160px;
+                padding: 15px 20px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Hero Section -->
-    <section class="hero">
+    <nav>
+        <div class="nav-container">
+            <div class="logo" onclick="scrollToTop()">WORLDBANKFX × PROFESSOR</div>
+            
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li class="dropdown">
+                    <a href="#services">Services</a>
+                    <div class="dropdown-content">
+                        <a href="services.html">All Services</a>
+                        <a href="services.html#masterclass">Forex Masterclass</a>
+                        <a href="services.html#tech-tutoring">Tech Tutoring</a>
+                        <a href="services.html#remote-support">Remote Support</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#tools">Tools</a>
+                    <div class="dropdown-content">
+                        <a href="pip-calculator.html">Pip Calculator</a>
+                        <a href="trading-growth-calculator.html">Growth Calculator</a>
+                        <a href="tools.html">All Tools</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="traders-playground.html">Games</a>
+                    <div class="dropdown-content">
+                        <a href="patience-test.html">Patience Test</a>
+                        <a href="revenge-breaker.html">Revenge Breaker</a>
+                        <a href="revenge-breaker.html">Probability Revealer</a>
+                        <a href="traders-playground.html">All Games</a>
+                    </div>
+                </li>
+                <li><a href="shop.html">Shop</a></li>
+                <li class="dropdown">
+                    <a href="#content">Content</a>
+                    <div class="dropdown-content">
+                        <a href="blog.html">Blog</a>
+                        <a href="news.html">Forex News</a>
+                        <a href="articles.html">Articles</a>
+                    </div>
+                </li>
+                <li><a href="journal.html">Trading Journal</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="mobile-nav" id="mobileNav">
+        <button class="mobile-nav-close" onclick="toggleMobileMenu()">
+            <i class="fas fa-times"></i>
+        </button>
+        
+        <ul class="mobile-nav-links">
+            <li><a href="#home" onclick="toggleMobileMenu()">Home</a></li>
+            <li>
+                <div class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(this)">
+                    <span>Services</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="mobile-dropdown-content">
+                    <a href="services.html" onclick="toggleMobileMenu()">All Services</a>
+                    <a href="services.html#masterclass" onclick="toggleMobileMenu()">Forex Masterclass</a>
+                    <a href="services.html#tech-tutoring" onclick="toggleMobileMenu()">Tech Tutoring</a>
+                </div>
+            </li>
+            <li>
+                <div class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(this)">
+                    <span>Tools</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="mobile-dropdown-content">
+                    <a href="pip-calculator.html" onclick="toggleMobileMenu()">Pip Calculator</a>
+                    <a href="trading-growth-calculator.html" onclick="toggleMobileMenu()">Growth Calculator</a>
+                    <a href="tools.html" onclick="toggleMobileMenu()">All Tools</a>
+                </div>
+            </li>
+            <li>
+                <div class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(this)">
+                    <span>Games</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="mobile-dropdown-content">
+                    <a href="patience-test.html" onclick="toggleMobileMenu()">Patience Test</a>
+                    <a href="revenge-breaker.html" onclick="toggleMobileMenu()">Revenge Breaker</a>
+                    <a href="revenge-breaker.html" onclick="toggleMobileMenu()">Probability Revealer</a>
+                    <a href="traders-playground.html" onclick="toggleMobileMenu()">All Games</a>
+                </div>
+            </li>
+            <li><a href="shop.html" onclick="toggleMobileMenu()">Shop</a></li>
+            <li>
+                <div class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(this)">
+                    <span>Content</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="mobile-dropdown-content">
+                    <a href="blog.html" onclick="toggleMobileMenu()">Blog</a>
+                    <a href="news.html" onclick="toggleMobileMenu()">Forex News</a>
+                </div>
+            </li>
+            <li><a href="journal.html" onclick="toggleMobileMenu()">Trading Journal</a></li>
+            <li><a href="contact.html" onclick="toggleMobileMenu()">Contact</a></li>
+        </ul>
+    </div>
+
+    <section class="hero" id="home">
+        <div class="hero-background">
+            <video autoplay muted loop playsinline>
+                <source src="hero-background.mp4" type="video/mp4">
+            </video>
+        </div>
+        
+        <div class="hero-overlay"></div>
+        <div class="animated-bg"></div>
+        
         <div class="hero-content">
             <h1 class="brand">WorldBankFx × Professor</h1>
             <p class="tagline">Forex Trading Mastery • Tech Innovation • Financial Freedom</p>
@@ -522,195 +910,429 @@
             </div>
             
             <div class="cta-buttons">
-                <button class="cta-btn cta-primary" onclick="scrollToSection('services')">Explore Services</button>
-                <button class="cta-btn cta-secondary" onclick="scrollToSection('products')">Shop Products</button>
+                <a href="#services" class="cta-btn cta-primary">Explore Services</a>
+                <a href="#products" class="cta-btn cta-secondary">Shop Products</a>
+            </div>
+
+            <div class="market-clocks">
+                <div class="clock-item">
+                    <div class="clock-city">🗼 Tokyo</div>
+                    <div class="clock-time" id="tokyoTime">--:--:--</div>
+                    <div class="clock-day" id="tokyoDay">---</div>
+                    <div class="clock-status" id="tokyoStatus">Closed</div>
+                </div>
+                <div class="clock-item">
+                    <div class="clock-city">🏛️ London</div>
+                    <div class="clock-time" id="londonTime">--:--:--</div>
+                    <div class="clock-day" id="londonDay">---</div>
+                    <div class="clock-status" id="londonStatus">Closed</div>
+                </div>
+                <div class="clock-item">
+                    <div class="clock-city">🗽 New York</div>
+                    <div class="clock-time" id="newYorkTime">--:--:--</div>
+                    <div class="clock-day" id="newYorkDay">---</div>
+                    <div class="clock-status" id="newYorkStatus">Closed</div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section class="services" id="services">
+    <section class="services-slider" id="services">
         <h2 class="section-title">What I Offer</h2>
-        <div class="services-grid">
-            <div class="service-card">
-                <div class="service-icon">📈</div>
-                <h3 class="service-title">Forex Masterclasses</h3>
-                <p class="service-desc">Learn from 5 years of proven trading strategies. Live sessions, one-on-one mentoring, and exclusive insights.</p>
+        <div class="slider-wrapper">
+            <div class="slider-container">
+                <div class="slider-track" id="servicesTrack">
+                    <div class="service-card">
+                        <div class="service-icon">📈</div>
+                        <h3 class="service-title">Forex Masterclasses</h3>
+                        <p class="service-desc">Learn from 5 years of proven trading strategies. Live sessions and exclusive insights.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">💻</div>
+                        <h3 class="service-title">Tech Tutoring</h3>
+                        <p class="service-desc">8 years of IT experience. Programming, systems, networking through live webinars.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🛠️</div>
+                        <h3 class="service-title">Remote Support</h3>
+                        <p class="service-desc">Fast, professional remote IT support for individuals and businesses.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">🎯</div>
+                        <h3 class="service-title">Custom Indicators</h3>
+                        <p class="service-desc">Exclusive trading indicators built from real market experience.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">📚</div>
+                        <h3 class="service-title">Courses & E-Books</h3>
+                        <p class="service-desc">Comprehensive digital courses on Forex and Tech. Learn at your pace.</p>
+</div>
+<div class="service-card">
+<div class="service-icon">🎓</div>
+<h3 class="service-title">Live Webinars</h3>
+<p class="service-desc">Interactive sessions. Ask questions, get answers, level up in real-time.</p>
+</div>
+<div class="service-card">
+<div class="service-icon">📈</div>
+<h3 class="service-title">Forex Masterclasses</h3>
+<p class="service-desc">Learn from 5 years of proven trading strategies. Live sessions and exclusive insights.</p>
+</div>
+<div class="service-card">
+<div class="service-icon">💻</div>
+<h3 class="service-title">Tech Tutoring</h3>
+<p class="service-desc">8 years of IT experience. Programming, systems, networking through live webinars.</p>
+</div>
+<div class="service-card">
+<div class="service-icon">🛠️</div>
+<h3 class="service-title">Remote Support</h3>
+<p class="service-desc">Fast, professional remote IT support for individuals and businesses.</p>
+</div>
+<div class="service-card">
+<div class="service-icon">🎯</div>
+<h3 class="service-title">Custom Indicators</h3>
+<p class="service-desc">Exclusive trading indicators built from real market experience.</p>
+</div>
+<div class="service-card">
+<div class="service-icon">📚</div>
+<h3 class="service-title">Courses & E-Books</h3>
+<p class="service-desc">Comprehensive digital courses on Forex and Tech. Learn at your pace.</p>
+</div>
+<div class="service-card">
+<div class="service-icon">🎓</div>
+<h3 class="service-title">Live Webinars</h3>
+<p class="service-desc">Interactive sessions. Ask questions, get answers, level up in real-time.</p>
+</div>
+</div>
+</div>
+<div class="slider-controls">
+<button class="slider-btn" onclick="scrollSlider('servicesTrack', -1)">
+<i class="fas fa-chevron-left"></i>
+</button>
+<button class="slider-btn" onclick="scrollSlider('servicesTrack', 1)">
+<i class="fas fa-chevron-right"></i>
+</button>
+</div>
+</div>
+</section>
+<section class="products-slider" id="products">
+    <h2 class="section-title">Featured Products</h2>
+    <div class="slider-wrapper">
+        <div class="slider-container">
+            <div class="products-track slider-track" id="productsTrack">
+                    <div class="product-card">
+                        <div class="product-image">📊</div>
+                        <div class="product-info">
+                            <h3 class="product-title">Pro Trading Course</h3>
+                            <p class="service-desc">Complete A-Z Forex mastery</p>
+                            <div class="product-price">$299</div>
+                            <button class="buy-btn" onclick="openPayment('Pro Trading Course', '$299')">Buy Now</button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image">⚡</div>
+                        <div class="product-info">
+                            <h3 class="product-title">Custom Indicator Pack</h3>
+                            <p class="service-desc">5 powerful MT4/MT5 indicators</p>
+                            <div class="product-price">$149</div>
+                            <button class="buy-btn" onclick="openPayment('Custom Indicator Pack', '$149')">Buy Now</button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image">📖</div>
+                        <div class="product-info">
+                            <h3 class="product-title">Trading Psychology E-Book</h3>
+                            <p class="service-desc">Master your mindset</p>
+                            <div class="product-price">$29</div>
+                            <button class="buy-btn" onclick="openPayment('Trading Psychology E-Book', '$29')">Buy Now</button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image">👕</div>
+                        <div class="product-info">
+                            <h3 class="product-title">WorldBankFx Merch</h3>
+                            <p class="service-desc">Rep the brand in style</p>
+                            <div class="product-price">$49</div>
+                            <button class="buy-btn" onclick="openPayment('WorldBankFx Merch', '$49')">Buy Now</button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image">📊</div>
+                        <div class="product-info">
+                            <h3 class="product-title">Pro Trading Course</h3>
+                            <p class="service-desc">Complete A-Z Forex mastery</p>
+                            <div class="product-price">$299</div>
+                            <button class="buy-btn" onclick="openPayment('Pro Trading Course', '$299')">Buy Now</button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image">⚡</div>
+                        <div class="product-info">
+                            <h3 class="product-title">Custom Indicator Pack</h3>
+                            <p class="service-desc">5 powerful MT4/MT5 indicators</p>
+                            <div class="product-price">$149</div>
+                            <button class="buy-btn" onclick="openPayment('Custom Indicator Pack', '$149')">Buy Now</button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image">📖</div>
+                        <div class="product-info">
+                            <h3 class="product-title">Trading Psychology E-Book</h3>
+                            <p class="service-desc">Master your mindset</p>
+                            <div class="product-price">$29</div>
+                            <button class="buy-btn" onclick="openPayment('Trading Psychology E-Book', '$29')">Buy Now</button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image">👕</div>
+                        <div class="product-info">
+                            <h3 class="product-title">WorldBankFx Merch</h3>
+                            <p class="service-desc">Rep the brand in style</p>
+                            <div class="product-price">$49</div>
+                            <button class="buy-btn" onclick="openPayment('WorldBankFx Merch', '$49')">Buy Now</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
-            <div class="service-card">
-                <div class="service-icon">💻</div>
-                <h3 class="service-title">Tech Tutoring</h3>
-                <p class="service-desc">8 years of IT experience at your fingertips. Programming, systems, networking - master it all through live webinars.</p>
-            </div>
-            
-            <div class="service-card">
-                <div class="service-icon">🛠️</div>
-                <h3 class="service-title">Remote Support</h3>
-                <p class="service-desc">Technical issues? I've got you. Fast, professional remote IT support for individuals and businesses.</p>
-            </div>
-            
-            <div class="service-card">
-                <div class="service-icon">🎯</div>
-                <h3 class="service-title">Custom Indicators</h3>
-                <p class="service-desc">Exclusive trading indicators built from real market experience. Gain the edge you need.</p>
-            </div>
-            
-            <div class="service-card">
-                <div class="service-icon">📚</div>
-                <h3 class="service-title">Courses & E-Books</h3>
-                <p class="service-desc">Comprehensive digital courses on Forex and Tech. Learn at your pace, master at your level.</p>
-            </div>
-            
-            <div class="service-card">
-                <div class="service-icon">🎓</div>
-                <h3 class="service-title">Live Webinars</h3>
-                <p class="service-desc">Interactive sessions right on this platform. Ask questions, get answers, level up in real-time.</p>
+            <div class="slider-controls">
+                <button class="slider-btn" onclick="scrollSlider('productsTrack', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="slider-btn" onclick="scrollSlider('productsTrack', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
             </div>
         </div>
     </section>
 
-    <!-- Products Section -->
-    <section class="products" id="products">
-        <h2 class="section-title">Featured Products</h2>
-        <div class="products-grid">
-            <div class="product-card">
-                <div class="product-image">📊</div>
-                <div class="product-info">
-                    <h3 class="product-title">Pro Trading Course</h3>
-                    <p class="service-desc">Complete A-Z Forex mastery</p>
-                    <div class="product-price">$299</div>
-                    <button class="buy-btn" onclick="openPayment('Pro Trading Course', '$299')">Buy Now</button>
+    <section class="social-feed">
+        <div class="feed-container">
+            <h2 class="section-title">Latest Updates</h2>
+            <div class="feed-grid">
+                <div class="feed-card">
+                    <div class="feed-header">
+                        <i class="fab fa-instagram" style="font-size: 1.3rem; color: #E4405F;"></i>
+                        <span>Instagram</span>
+                    </div>
+                    <div class="feed-image" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                        <i class="fab fa-instagram" style="font-size: 4rem; color: rgba(255,255,255,0.3);"></i>
+                    </div>
+                    <div class="feed-content">
+                        Latest trading insights and daily market analysis. Follow for more! 📈
+                    </div>
                 </div>
-            </div>
-            
-            <div class="product-card">
-                <div class="product-image">⚡</div>
-                <div class="product-info">
-                    <h3 class="product-title">Custom Indicator Pack</h3>
-                    <p class="service-desc">5 powerful MT4/MT5 indicators</p>
-                    <div class="product-price">$149</div>
-                    <button class="buy-btn" onclick="openPayment('Custom Indicator Pack', '$149')">Buy Now</button>
+
+                <div class="feed-card">
+                    <div class="feed-header">
+                        <i class="fab fa-youtube" style="font-size: 1.3rem; color: #FF0000;"></i>
+                        <span>YouTube</span>
+                    </div>
+                    <div class="feed-image" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+                        <i class="fab fa-youtube" style="font-size: 4rem; color: rgba(255,255,255,0.3);"></i>
+                    </div>
+                    <div class="feed-content">
+                        New video: 5 Chart Patterns That Changed My Trading 🎥
+                    </div>
                 </div>
-            </div>
-            
-            <div class="product-card">
-                <div class="product-image">📖</div>
-                <div class="product-info">
-                    <h3 class="product-title">Trading Psychology E-Book</h3>
-                    <p class="service-desc">Master your mindset</p>
-                    <div class="product-price">$29</div>
-                    <button class="buy-btn" onclick="openPayment('Trading Psychology E-Book', '$29')">Buy Now</button>
-                </div>
-            </div>
-            
-            <div class="product-card">
-                <div class="product-image">👕</div>
-                <div class="product-info">
-                    <h3 class="product-title">WorldBankFx Merch</h3>
-                    <p class="service-desc">Rep the brand in style</p>
-                    <div class="product-price">$49</div>
-                    <button class="buy-btn" onclick="openPayment('WorldBankFx Merch', '$49')">Buy Now</button>
+
+                <div class="feed-card">
+                    <div class="feed-header">
+                        <i class="fas fa-star" style="font-size: 1.3rem; color: #ffd700;"></i>
+                        <span>Featured</span>
+                    </div>
+                    <div class="feed-image" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
+                        <i class="fas fa-trophy" style="font-size: 4rem; color: rgba(255,255,255,0.3);"></i>
+                    </div>
+                    <div class="feed-content">
+                        Success story: Student turned $500 into $5,000 in 3 months! 🏆
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Blog Section -->
-    <section class="blog" id="blog">
-        <h2 class="section-title">Latest Insights</h2>
-        <div class="blog-grid">
-            <div class="blog-card">
-                <div class="blog-image"></div>
-                <div class="blog-content">
-                    <h3 class="blog-title">5 Chart Patterns That Changed My Trading</h3>
-                    <p class="blog-excerpt">After 5 years in the markets, these patterns have proven to be the most reliable...</p>
-                    <a href="#" class="read-more">Read More →</a>
-                </div>
-            </div>
+    <div id="paymentModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); z-index: 10000; align-items: center; justify-content: center;">
+        <div style="background: #1a1a2e; padding: 40px; border-radius: 20px; max-width: 500px; width: 90%; border: 2px solid #ffd700; position: relative;">
+            <button onclick="closePayment()" style="position: absolute; top: 20px; right: 20px; font-size: 2rem; color: #fff; background: none; border: none; cursor: pointer; width: auto; padding: 0;">×</button>
+            <h2 id="modalProductName" style="font-size: 1.8rem; color: #ffd700; margin-bottom: 10px;">Product Name</h2>
+            <div id="modalPrice" style="font-size: 2.5rem; color: #00d4ff; font-weight: 900; margin-bottom: 30px;">$0</div>
             
-            <div class="blog-card">
-                <div class="blog-image"></div>
-                <div class="blog-content">
-                    <h3 class="blog-title">Building Scalable Web Apps in 2024</h3>
-                    <p class="blog-excerpt">Modern architecture patterns every developer should know...</p>
-                    <a href="#" class="read-more">Read More →</a>
-                </div>
-            </div>
-            
-            <div class="blog-card">
-                <div class="blog-image"></div>
-                <div class="blog-content">
-                    <h3 class="blog-title">Risk Management: The Real Secret</h3>
-                    <p class="blog-excerpt">It's not about winning every trade. It's about this...</p>
-                    <a href="#" class="read-more">Read More →</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Payment Modal -->
-    <div id="paymentModal" class="modal">
-        <div class="modal-content">
-            <button class="close-btn" onclick="closePayment()">×</button>
-            <h2 class="modal-title" id="modalProductName">Product Name</h2>
-            <div class="modal-price" id="modalPrice">$0</div>
-            
-            <div class="payment-options">
-                <a href="mailto:neemacharles777@gmail.com" class="payment-btn paypal">
+            <div style="display: flex; flex-direction: column; gap: 15px;">
+                <a href="mailto:neemacharles777@gmail.com" style="padding: 18px; border-radius: 12px; border: 2px solid #0070ba; font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; color: #fff; background: #0070ba;">
                     💳 Pay with PayPal
                 </a>
                 
-                <a id="whatsappBtn" href="#" target="_blank" class="payment-btn whatsapp">
+                <a id="whatsappBtn" href="#" target="_blank" style="padding: 18px; border-radius: 12px; border: 2px solid #25D366; font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; color: #fff; background: #25D366;">
                     💬 Contact via WhatsApp
                 </a>
                 
-                <a id="emailBtn" href="#" class="payment-btn email">
+                <a id="emailBtn" href="#" style="padding: 18px; border-radius: 12px; border: 2px solid #ea4335; font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; color: #fff; background: #ea4335;">
                     📧 Email to Purchase
                 </a>
             </div>
             
-            <div class="payment-info">
-                <p><strong>PayPal:</strong> neemacharles777@gmail.com</p>
-                <p><strong>WhatsApp:</strong> +256 783 354 348</p>
-                <p><strong>Email:</strong> unlimited.worldbankfx@gmail.com</p>
-                <p style="margin-top: 15px; font-size: 0.85rem;">Choose your preferred payment method above. I'll respond within 24 hours!</p>
+            <div style="margin-top: 20px; padding: 20px; background: rgba(255, 215, 0, 0.1); border-radius: 10px; border: 1px solid rgba(255, 215, 0, 0.3);">
+                <p style="font-size: 0.9rem; color: #aaa; margin: 5px 0;"><strong style="color: #ffd700;">PayPal:</strong> neemacharles777@gmail.com</p>
+                <p style="font-size: 0.9rem; color: #aaa; margin: 5px 0;"><strong style="color: #ffd700;">WhatsApp:</strong> +256 783 354 348</p>
+                <p style="font-size: 0.9rem; color: #aaa; margin: 5px 0;"><strong style="color: #ffd700;">Email:</strong> unlimited.worldbankfx@gmail.com</p>
+                <p style="margin-top: 15px; font-size: 0.85rem; color: #aaa;">Choose your preferred payment method above. I'll respond within 24 hours!</p>
             </div>
         </div>
     </div>
 
-    <!-- Footer -->
     <footer>
-        <div class="social-links">
-            <a href="#" class="social-link">📱</a>
-            <a href="#" class="social-link">📧</a>
-            <a href="#" class="social-link">💼</a>
-            <a href="#" class="social-link">📺</a>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>WorldBankFx × Professor</h3>
+                <p>Empowering traders worldwide with knowledge, tools, and discipline. Your journey to financial freedom starts here.</p>
+            </div>
+            
+            <div class="footer-social">
+                <a href="#" class="social-link">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="social-link">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <a href="#" class="social-link">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="social-link">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+            </div>
+            
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <a href="#home">Home</a>
+                    <a href="services.html">Services</a>
+                    <a href="shop.html">Shop</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Tools</h4>
+                    <a href="pip-calculator.html">Pip Calculator</a>
+                    <a href="trading-growth-calculator.html">Growth Calculator</a>
+                    <a href="traders-playground.html">Trading Games</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <a href="blog.html">Blog</a>
+                    <a href="news.html">Forex News</a>
+                    <a href="journal.html">Trading Journal</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact</h4>
+                    <p>unlimited.worldbankfx@gmail.com</p>
+                    <p>+256 783 354 348</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2025 WorldBankFx × Professor. All rights reserved.</p>
+            </div>
         </div>
-        <p style="color: #666;">© 2025 WorldBankFx × Professor. All rights reserved.</p>
     </footer>
 
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
     <script>
-        function scrollToSection(id) {
-            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        function toggleMobileMenu() {
+            const mobileNav = document.getElementById('mobileNav');
+            mobileNav.classList.toggle('active');
         }
 
-        let currentProduct = '';
-        let currentPrice = '';
+        function toggleMobileDropdown(element) {
+            const dropdownContent = element.nextElementSibling;
+            const isActive = dropdownContent.classList.contains('active');
+            
+            document.querySelectorAll('.mobile-dropdown-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            if (!isActive) {
+                dropdownContent.classList.add('active');
+            }
+            
+            const icon = element.querySelector('i');
+            icon.style.transform = dropdownContent.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0deg)';
+        }
+
+        function updateClocks() {
+            const now = new Date();
+            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            
+            const tokyo = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
+            document.getElementById('tokyoTime').textContent = tokyo.toLocaleTimeString('en-US', { hour12: false });
+            document.getElementById('tokyoDay').textContent = days[tokyo.getDay()];
+            const tokyoHour = tokyo.getHours();
+            const tokyoDay = tokyo.getDay();
+            const tokyoOpen = tokyoDay !== 0 && tokyoDay !== 6 && tokyoHour >= 9 && tokyoHour < 18;
+            const tokyoWeekend = tokyoDay === 0 || tokyoDay === 6;
+            document.getElementById('tokyoStatus').textContent = tokyoWeekend ? 'Weekend - Opens Monday' : (tokyoOpen ? 'Open' : 'Closed');
+            document.getElementById('tokyoStatus').className = 'clock-status ' + (tokyoOpen ? 'open' : 'closed');
+            
+            const london = new Date(now.toLocaleString('en-US', { timeZone: 'Europe/London' }));
+            document.getElementById('londonTime').textContent = london.toLocaleTimeString('en-US', { hour12: false });
+            document.getElementById('londonDay').textContent = days[london.getDay()];
+            const londonHour = london.getHours();
+            const londonDay = london.getDay();
+            const londonOpen = londonDay !== 0 && londonDay !== 6 && londonHour >= 8 && londonHour < 17;
+            const londonWeekend = londonDay === 0 || londonDay === 6;
+            document.getElementById('londonStatus').textContent = londonWeekend ? 'Weekend - Opens Monday' : (londonOpen ? 'Open' : 'Closed');
+            document.getElementById('londonStatus').className = 'clock-status ' + (londonOpen ? 'open' : 'closed');
+            
+            const newYork = new Date(now.toLocaleString('en-US', { timeZone: 'America/New_York' }));
+            document.getElementById('newYorkTime').textContent = newYork.toLocaleTimeString('en-US', { hour12: false });
+            document.getElementById('newYorkDay').textContent = days[newYork.getDay()];
+            const nyHour = newYork.getHours();
+            const nyDay = newYork.getDay();
+            const nyOpen = nyDay !== 0 && nyDay !== 6 && nyHour >= 9 && nyHour < 17;
+            const nyWeekend = nyDay === 0 || nyDay === 6;
+            document.getElementById('newYorkStatus').textContent = nyWeekend ? 'Weekend - Opens Monday' : (nyOpen ? 'Open' : 'Closed');
+            document.getElementById('newYorkStatus').className = 'clock-status ' + (nyOpen ? 'open' : 'closed');
+        }
+        setInterval(updateClocks, 1000);
+        updateClocks();
+
+        function scrollSlider(trackId, direction) {
+            const container = document.getElementById(trackId).parentElement;
+            const cardWidth = trackId === 'servicesTrack' ? 380 : 330;
+            
+            container.scrollBy({
+                left: direction * cardWidth,
+                behavior: 'smooth'
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const sliderButtons = document.querySelectorAll('.slider-btn');
+            
+            sliderButtons.forEach(btn => {
+                btn.addEventListener('mouseenter', function() {
+                    const track = this.closest('.slider-wrapper').querySelector('.slider-track');
+                    track.style.animationPlayState = 'paused';
+                });
+                
+                btn.addEventListener('mouseleave', function() {
+                    const track = this.closest('.slider-wrapper').querySelector('.slider-track');
+                    track.style.animationPlayState = 'running';
+                });
+            });
+        });
 
         function openPayment(product, price) {
-            currentProduct = product;
-            currentPrice = price;
             document.getElementById('modalProductName').textContent = product;
             document.getElementById('modalPrice').textContent = price;
-            document.getElementById('paymentModal').classList.add('active');
+            const modal = document.getElementById('paymentModal');
+            modal.style.display = 'flex';
             
-            // Update WhatsApp link
             const whatsappMsg = `Hi! I'm interested in purchasing: ${product} (${price})`;
             const whatsappLink = `https://wa.me/256783354348?text=${encodeURIComponent(whatsappMsg)}`;
             document.getElementById('whatsappBtn').href = whatsappLink;
             
-            // Update Email link
             const emailSubject = `Purchase Inquiry: ${product}`;
             const emailBody = `Hi WorldBankFx,\n\nI'm interested in purchasing:\n${product} - ${price}\n\nPlease provide payment instructions.\n\nThank you!`;
             const emailLink = `mailto:unlimited.worldbankfx@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
@@ -718,14 +1340,37 @@
         }
 
         function closePayment() {
-            document.getElementById('paymentModal').classList.remove('active');
+            document.getElementById('paymentModal').style.display = 'none';
         }
 
-        // Close modal when clicking outside
         document.addEventListener('click', function(event) {
             const modal = document.getElementById('paymentModal');
             if (event.target === modal) {
                 closePayment();
+            }
+        });
+
+        window.addEventListener('scroll', function() {
+            const backToTop = document.getElementById('backToTop');
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        document.addEventListener('click', function(event) {
+            const mobileNav = document.getElementById('mobileNav');
+            const mobileBtn = document.querySelector('.mobile-menu-btn');
+            
+            if (mobileNav.classList.contains('active') && 
+                !mobileNav.contains(event.target) && 
+                !mobileBtn.contains(event.target)) {
+                mobileNav.classList.remove('active');
             }
         });
     </script>

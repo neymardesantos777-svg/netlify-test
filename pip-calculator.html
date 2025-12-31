@@ -4,11 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pip Calculator | WorldBankFx</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
         }
         
         body {
@@ -18,11 +23,183 @@
             min-height: 100vh;
             padding: 20px;
         }
+
+        /* Navigation Styles */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+            left: 0;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #0f0f0f;
+            min-width: 220px;
+            border: 1px solid #ffd700;
+            border-radius: 8px;
+            margin-top: -2px;
+            padding: 10px 0;
+        }
+
+        .dropdown:hover .dropdown-content,
+        .dropdown-content:hover {
+            display: block;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 12px 20px;
+            border-bottom: 1px solid #333;
+            color: #fff;
+        }
+
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-content a:hover {
+            background: rgba(255, 215, 0, 0.1);
+            color: #ffd700;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            color: #ffd700;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 400px;
+            height: 100vh;
+            background: #0f0f0f;
+            z-index: 2000;
+            padding: 80px 30px 30px;
+            transition: right 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .mobile-nav.active {
+            right: 0;
+        }
+
+        .mobile-nav-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
+            color: #ffd700;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+        }
+
+        .mobile-nav-links li {
+            margin-bottom: 20px;
+        }
+
+        .mobile-nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: block;
+            padding: 10px 0;
+        }
+
+        .mobile-dropdown-toggle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 10px 0;
+        }
+
+        .mobile-dropdown-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding-left: 20px;
+        }
+
+        .mobile-dropdown-content.active {
+            max-height: 500px;
+        }
+
+        .mobile-dropdown-content a {
+            font-size: 1rem;
+            padding: 8px 0;
+            color: #aaa;
+        }
         
         .container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 100px 20px 40px;
         }
         
         .header {
@@ -30,13 +207,12 @@
             margin-bottom: 50px;
         }
         
-        .logo {
-            font-size: 1.5rem;
+        .header .logo-text {
+            font-size: 1.2rem;
             font-weight: 900;
             background: linear-gradient(135deg, #ffd700, #ffed4e);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
             margin-bottom: 10px;
         }
         
@@ -201,8 +377,146 @@
             line-height: 1.6;
             margin-bottom: 10px;
         }
+
+        /* PART 2 STYLES CONTINUE IN NEXT ARTIFACT */
+		/* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            border: none;
+            border-radius: 50%;
+            color: #000;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.5);
+        }
+
+        /* Footer Styles */
+        footer {
+            background: #000;
+            padding: 60px 20px 40px;
+            text-align: center;
+            border-top: 1px solid #333;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-brand {
+            margin-bottom: 30px;
+        }
+
+        .footer-brand h3 {
+            color: #ffd700;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .footer-brand p {
+            color: #aaa;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            background: #1a1a1a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #ffd700;
+        }
+
+        .social-link:hover {
+            background: #ffd700;
+            color: #000;
+            transform: scale(1.1);
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+            text-align: left;
+        }
+
+        .footer-column h4 {
+            color: #00d4ff;
+            margin-bottom: 15px;
+        }
+
+        .footer-column a {
+            display: block;
+            color: #aaa;
+            margin: 8px 0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: #ffd700;
+        }
+
+        .footer-column p {
+            color: #aaa;
+            font-size: 0.9rem;
+            margin: 8px 0;
+        }
+
+        .footer-bottom {
+            color: #666;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+        }
         
-        @media (max-width: 768px) {
+        @media (max-width: 968px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .mobile-nav {
+                display: block;
+            }
+
             h1 {
                 font-size: 2rem;
             }
@@ -219,12 +533,131 @@
                 font-size: 2rem;
             }
         }
+        
+        @media print {
+            nav, .mobile-nav, .back-to-top, footer {
+                display: none;
+            }
+
+            body {
+                background: white;
+                color: black;
+            }
+        }
     </style>
 </head>
 <body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">WORLDBANKFX × PROFESSOR</a>
+            
+            <ul class="nav-links">
+                <li><a href="index.html#home">Home</a></li>
+                <li class="dropdown">
+                    <a href="#services">Services</a>
+                    <div class="dropdown-content">
+                        <a href="services.html">All Services</a>
+                        <a href="services.html#masterclass">Forex Masterclass</a>
+                        <a href="services.html#tech-tutoring">Tech Tutoring</a>
+                        <a href="services.html#remote-support">Remote Support</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#tools">Tools</a>
+                    <div class="dropdown-content">
+                        <a href="pip-calculator.html">Pip Calculator</a>
+                        <a href="trading-growth-calculator.html">Growth Calculator</a>
+                        <a href="tools.html">All Tools</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="traders-playground.html">Games</a>
+                    <div class="dropdown-content">
+                        <a href="patience-test.html">Patience Test</a>
+                        <a href="revenge-breaker.html">Revenge Breaker</a>
+                        <a href="revenge-breaker.html">Probability Revealer</a>
+                        <a href="traders-playground.html">All Games</a>
+                    </div>
+                </li>
+                <li><a href="shop.html">Shop</a></li>
+                <li class="dropdown">
+                    <a href="#content">Content</a>
+                    <div class="dropdown-content">
+                        <a href="blog.html">Blog</a>
+                        <a href="news.html">Forex News</a>
+                        <a href="articles.html">Articles</a>
+                    </div>
+                </li>
+                <li><a href="journal.html">Trading Journal</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="mobile-nav" id="mobileNav">
+        <button class="mobile-nav-close" onclick="toggleMobileMenu()">
+            <i class="fas fa-times"></i>
+        </button>
+        
+        <ul class="mobile-nav-links">
+            <li><a href="index.html#home" onclick="toggleMobileMenu()">Home</a></li>
+            <li>
+                <div class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(this)">
+                    <span>Services</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="mobile-dropdown-content">
+                    <a href="services.html" onclick="toggleMobileMenu()">All Services</a>
+                    <a href="services.html#masterclass" onclick="toggleMobileMenu()">Forex Masterclass</a>
+                    <a href="services.html#tech-tutoring" onclick="toggleMobileMenu()">Tech Tutoring</a>
+                </div>
+            </li>
+            <li>
+                <div class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(this)">
+                    <span>Tools</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="mobile-dropdown-content">
+                    <a href="pip-calculator.html" onclick="toggleMobileMenu()">Pip Calculator</a>
+                    <a href="trading-growth-calculator.html" onclick="toggleMobileMenu()">Growth Calculator</a>
+                    <a href="tools.html" onclick="toggleMobileMenu()">All Tools</a>
+                </div>
+            </li>
+            <li>
+                <div class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(this)">
+                    <span>Games</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="mobile-dropdown-content">
+                    <a href="patience-test.html" onclick="toggleMobileMenu()">Patience Test</a>
+                    <a href="revenge-breaker.html" onclick="toggleMobileMenu()">Revenge Breaker</a>
+                    <a href="revenge-breaker.html" onclick="toggleMobileMenu()">Probability Revealer</a>
+                    <a href="traders-playground.html" onclick="toggleMobileMenu()">All Games</a>
+                </div>
+            </li>
+            <li><a href="shop.html" onclick="toggleMobileMenu()">Shop</a></li>
+            <li>
+                <div class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(this)">
+                    <span>Content</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="mobile-dropdown-content">
+                    <a href="blog.html" onclick="toggleMobileMenu()">Blog</a>
+                    <a href="news.html" onclick="toggleMobileMenu()">Forex News</a>
+                </div>
+            </li>
+            <li><a href="journal.html" onclick="toggleMobileMenu()">Trading Journal</a></li>
+            <li><a href="contact.html" onclick="toggleMobileMenu()">Contact</a></li>
+        </ul>
+    </div>
+
     <div class="container">
         <div class="header">
-            <div class="logo">WORLDBANKFX × PROFESSOR</div>
+            <div class="logo-text">WORLDBANKFX × PROFESSOR</div>
             <h1>Pip Calculator</h1>
             <p class="subtitle">Calculate your pip value instantly for any currency pair</p>
         </div>
@@ -333,20 +766,118 @@
         </div>
     </div>
 
-    <script>
-        // Simplified pip calculation (using standard lot sizes)
-        // 1 standard lot = 100,000 units
-        // For most pairs: 1 pip = 0.0001
-        // For JPY pairs: 1 pip = 0.01
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>WorldBankFx × Professor</h3>
+                <p>Empowering traders worldwide with knowledge, tools, and discipline. Your journey to financial freedom starts here.</p>
+            </div>
+            
+            <div class="footer-social">
+                <a href="#" class="social-link">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="social-link">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <a href="#" class="social-link">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="social-link">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+            </div>
+            
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <a href="index.html">Home</a>
+                    <a href="services.html">Services</a>
+                    <a href="shop.html">Shop</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Tools</h4>
+                    <a href="pip-calculator.html">Pip Calculator</a>
+                    <a href="trading-growth-calculator.html">Growth Calculator</a>
+                    <a href="traders-playground.html">Trading Games</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <a href="blog.html">Blog</a>
+                    <a href="news.html">Forex News</a>
+                    <a href="journal.html">Trading Journal</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact</h4>
+                    <p>unlimited.worldbankfx@gmail.com</p>
+                    <p>+256 783 354 348</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2025 WorldBankFx × Professor. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Mobile Menu Functions
+        function toggleMobileMenu() {
+            const mobileNav = document.getElementById('mobileNav');
+            mobileNav.classList.toggle('active');
+        }
+
+        function toggleMobileDropdown(element) {
+            const dropdownContent = element.nextElementSibling;
+            const isActive = dropdownContent.classList.contains('active');
+            
+            document.querySelectorAll('.mobile-dropdown-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            if (!isActive) {
+                dropdownContent.classList.add('active');
+            }
+            
+            const icon = element.querySelector('i');
+            icon.style.transform = dropdownContent.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0deg)';
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.addEventListener('scroll', function() {
+            const backToTop = document.getElementById('backToTop');
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+
+        document.addEventListener('click', function(event) {
+            const mobileNav = document.getElementById('mobileNav');
+            const mobileBtn = document.querySelector('.mobile-menu-btn');
+            
+            if (mobileNav.classList.contains('active') && 
+                !mobileNav.contains(event.target) && 
+                !mobileBtn.contains(event.target)) {
+                mobileNav.classList.remove('active');
+            }
+        });
+
+        // ORIGINAL PIP CALCULATOR LOGIC - UNTOUCHED
         const pipSizes = {
-            // JPY pairs use 0.01 pip
             JPY: 0.01,
-            // All other pairs use 0.0001 pip
             default: 0.0001
         };
 
-        // Approximate exchange rates (in real app, would fetch from API)
         const exchangeRates = {
             EURUSD: 1.0850,
             GBPUSD: 1.2650,
@@ -381,21 +912,13 @@
                 return;
             }
 
-            // Determine pip size based on currency pair
             const quoteCurrency = pair.slice(-3);
             const pipSize = quoteCurrency === 'JPY' ? pipSizes.JPY : pipSizes.default;
-
-            // Standard lot = 100,000 units
             const units = lotSize * 100000;
-
-            // Calculate pip value in quote currency
             let pipValueInQuote = units * pipSize;
-
-            // Convert to account currency if different from quote currency
             let pipValueInAccount = pipValueInQuote;
             
             if (accountCurrency !== quoteCurrency) {
-                // Simplified conversion (in real app, would need proper conversion rates)
                 const conversionPair = quoteCurrency + accountCurrency;
                 const reverseConversionPair = accountCurrency + quoteCurrency;
                 
@@ -404,17 +927,14 @@
                 } else if (exchangeRates[reverseConversionPair]) {
                     pipValueInAccount = pipValueInQuote / exchangeRates[reverseConversionPair];
                 } else if (quoteCurrency === 'USD') {
-                    // If quote is USD, convert to account currency
                     const usdToAccount = exchangeRates['USD' + accountCurrency] || 1;
                     pipValueInAccount = pipValueInQuote * usdToAccount;
                 } else if (accountCurrency === 'USD') {
-                    // If account is USD, convert from quote currency
                     const quoteToUSD = exchangeRates[quoteCurrency + 'USD'] || exchangeRates['USD' + quoteCurrency] ? 1/exchangeRates['USD' + quoteCurrency] : 1;
                     pipValueInAccount = pipValueInQuote * quoteToUSD;
                 }
             }
 
-            // Display results
             const currencySymbol = getCurrencySymbol(accountCurrency);
             document.getElementById('pipValue').textContent = currencySymbol + pipValueInAccount.toFixed(2);
             document.getElementById('resultPair').textContent = pair;
@@ -425,7 +945,6 @@
             document.getElementById('pips50').textContent = currencySymbol + (pipValueInAccount * 50).toFixed(2);
             document.getElementById('pips100').textContent = currencySymbol + (pipValueInAccount * 100).toFixed(2);
 
-            // Show result section
             document.getElementById('resultSection').classList.add('show');
         }
 
