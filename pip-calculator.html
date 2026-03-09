@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Pip Calculator",
+  "description": "Free forex pip calculator for calculating pip values across all currency pairs including XAUUSD and BTCUSD",
+  "url": "https://worldbankfx.netlify.app/pip-calculator.html",
+  "applicationCategory": "FinanceApplication",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "creator": { "@type": "Organization", "name": "WorldBankFx × Professor", "url": "https://worldbankfx.netlify.app" }
+}
+</script>
+<head>
+  <link rel="stylesheet" href="popup-ads.css">
+  <script src="popup-ads.js"></script>
+  <meta name="description" content="Free Forex Pip Calculator — Instantly calculate pip value for any currency pair including XAUUSD gold and BTCUSD bitcoin. Real-time results, no button click needed.">
+  <meta name="keywords" content="pip calculator, forex calculator, pip value calculator, XAUUSD pip calculator, gold pip calculator, BTCUSD pip calculator, forex tools, position sizing, risk management">
+  <meta name="author" content="WorldBankFx × Professor">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://worldbankfx.netlify.app/pip-calculator.html">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://worldbankfx.netlify.app/pip-calculator.html">
+  <meta property="og:title" content="Free Pip Calculator | WorldBankFx Trading Tools">
+  <meta property="og:description" content="Calculate pip value instantly for any currency pair including Gold and Bitcoin. Real-time results.">
+  <meta property="og:image" content="https://worldbankfx.netlify.app/pip-calculator-preview.jpg">
+  <meta property="twitter:card" content="summary_large_image">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pip Calculator | WorldBankFx</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --gold: #ffd700;
+      --gold-light: #ffed4e;
+      --cyan: #00d4ff;
+      --green: #10b981;
+      --red: #ef4444;
+      --bg: #080808;
+      --bg2: #0f0f0f;
+      --bg3: #1a1a1a;
+      --bg4: #1a1a2e;
+      --border: #2a2a2a;
+      --text: #ffffff;
+      --text-muted: #888;
+      --text-dim: #555;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed; top: 0; width: 100%; left: 0;
+      background: rgba(8,8,8,0.97); backdrop-filter: blur(12px);
+      z-index: 1000; border-bottom: 1px solid rgba(255,215,0,0.15);
+    }
+    .nav-container {
+      max-width: 1400px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 14px 24px;
+    }
+    .logo {
+      font-size: 1.15rem; font-weight: 900;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      text-decoration: none; white-space: nowrap;
+    }
+    .nav-links { display: flex; gap: 24px; list-style: none; align-items: center; }
+    .nav-links a { color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--gold); }
+    .dropdown { position: relative; }
+    .dropdown-content {
+      display: none; position: absolute; top: 100%; left: 0;
+      background: #0f0f0f; min-width: 200px;
+      border: 1px solid var(--gold); border-radius: 8px;
+      margin-top: 4px; padding: 8px 0; z-index: 100;
+    }
+    .dropdown:hover .dropdown-content, .dropdown-content:hover { display: block; }
+    .dropdown-content a { display: block; padding: 10px 18px; border-bottom: 1px solid #222; color: var(--text); font-size: 0.85rem; }
+    .dropdown-content a:last-child { border-bottom: none; }
+    .dropdown-content a:hover { background: rgba(255,215,0,0.08); color: var(--gold); }
+    .mobile-menu-btn { display: none; font-size: 1.4rem; color: var(--gold); cursor: pointer; background: none; border: none; }
+    .mobile-nav {
+      display: none; position: fixed; top: 0; right: -100%;
+      width: 82%; max-width: 380px; height: 100vh;
+      background: #0a0a0a; z-index: 2000;
+      padding: 70px 28px 28px;
+      transition: right 0.3s ease; overflow-y: auto;
+      border-left: 1px solid #222;
+    }
+    .mobile-nav.active { right: 0; }
+    .mobile-nav-close { position: absolute; top: 18px; right: 18px; font-size: 1.8rem; color: var(--gold); cursor: pointer; background: none; border: none; }
+    .mobile-nav-links { list-style: none; }
+    .mobile-nav-links li { border-bottom: 1px solid #1a1a1a; }
+    .mobile-nav-links a { color: var(--text); text-decoration: none; font-size: 1rem; font-weight: 600; display: block; padding: 12px 0; }
+    .mobile-dropdown-toggle { display: flex; justify-content: space-between; align-items: center; cursor: pointer; color: var(--text); font-size: 1rem; font-weight: 600; padding: 12px 0; }
+    .mobile-dropdown-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; padding-left: 16px; }
+    .mobile-dropdown-content.active { max-height: 400px; }
+    .mobile-dropdown-content a { font-size: 0.9rem; padding: 8px 0; color: #999; border-bottom: none; }
+    .mobile-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 1999; }
+    .mobile-overlay.active { display: block; }
+
+    /* ===== LAYOUT ===== */
+    .container { max-width: 680px; margin: 0 auto; padding: 90px 16px 48px; }
+
+    .header { text-align: center; margin-bottom: 32px; }
+    .header .logo-text {
+      font-size: 0.85rem; font-weight: 900; letter-spacing: 2.5px; text-transform: uppercase;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
+    h1 { font-size: clamp(1.8rem, 5vw, 2.6rem); color: var(--gold); margin-bottom: 8px; line-height: 1.2; }
+    .subtitle { color: var(--text-muted); font-size: clamp(0.85rem, 2.5vw, 1rem); }
+
+    /* ===== CALCULATOR CARD ===== */
+    .calculator-card {
+      background: var(--bg2); border-radius: 18px;
+      padding: clamp(20px, 5vw, 36px);
+      border: 1.5px solid var(--gold);
+      box-shadow: 0 0 40px rgba(255,215,0,0.07);
+    }
+
+    /* INPUTS ROW */
+    .inputs-row {
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px;
+      margin-bottom: 4px;
+    }
+    @media (max-width: 560px) { .inputs-row { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 380px) { .inputs-row { grid-template-columns: 1fr; } }
+
+    .form-group label {
+      display: block; color: var(--cyan); font-weight: 700;
+      margin-bottom: 6px; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .form-group select, .form-group input {
+      width: 100%; padding: 11px 13px;
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 8px; color: var(--text); font-size: 0.95rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-group select:focus, .form-group input:focus {
+      outline: none; border-color: var(--gold);
+      box-shadow: 0 0 0 2px rgba(255,215,0,0.12);
+    }
+    .form-group select option { background: var(--bg3); }
+
+    /* live indicator */
+    .live-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 0.7rem; font-weight: 700; color: var(--green);
+      text-transform: uppercase; letter-spacing: 0.5px;
+      margin-bottom: 16px;
+    }
+    .live-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--green); animation: pulse 1.4s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.7); }
+    }
+
+    /* ===== RESULTS ===== */
+    .result-section {
+      margin-top: 20px; padding: clamp(20px, 4vw, 32px);
+      background: linear-gradient(135deg, #111122, #0e1628);
+      border-radius: 14px; border: 1px solid var(--cyan);
+      text-align: center;
+      opacity: 0; transform: translateY(10px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .result-section.show { opacity: 1; transform: translateY(0); }
+
+    .result-context {
+      font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;
+      letter-spacing: 1px; margin-bottom: 10px; font-weight: 600;
+    }
+    .result-amount {
+      font-size: clamp(2.8rem, 10vw, 5rem); font-weight: 900;
+      color: var(--gold); line-height: 1;
+      transition: color 0.2s;
+    }
+    .result-hint {
+      font-size: 0.82rem; color: var(--text-dim); margin-top: 8px;
+    }
+
+    /* ===== INFO BOX ===== */
+    .info-box {
+      margin-top: 28px; padding: 22px;
+      background: rgba(255,215,0,0.05);
+      border-radius: 12px; border: 1px solid rgba(255,215,0,0.18);
+    }
+    .info-box h3 { color: var(--gold); margin-bottom: 12px; font-size: 0.95rem; }
+    .info-box p { color: var(--text-muted); line-height: 1.65; font-size: 0.88rem; margin-bottom: 8px; }
+    .info-box p:last-child { margin-bottom: 0; }
+
+    /* ===== BACK TO TOP ===== */
+    .back-to-top {
+      position: fixed; bottom: 24px; right: 20px;
+      width: 44px; height: 44px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      border: none; border-radius: 50%; color: #000;
+      font-size: 1.1rem; cursor: pointer;
+      opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 999;
+    }
+    .back-to-top.show { opacity: 1; visibility: visible; }
+    .back-to-top:hover { transform: translateY(-3px); }
+
+    /* ===== FOOTER ===== */
+    footer { background: #000; padding: 50px 20px 32px; text-align: center; border-top: 1px solid #1e1e1e; margin-top: 60px; }
+    .footer-content { max-width: 1200px; margin: 0 auto; }
+    .footer-brand { margin-bottom: 24px; }
+    .footer-brand h3 { color: var(--gold); font-size: 1.3rem; margin-bottom: 10px; }
+    .footer-brand p { color: var(--text-muted); max-width: 560px; margin: 0 auto; font-size: 0.9rem; }
+    .footer-social { display: flex; gap: 16px; justify-content: center; margin: 24px 0; }
+    .social-link { width: 44px; height: 44px; background: #111; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; transition: all 0.25s; text-decoration: none; color: var(--gold); }
+    .social-link:hover { background: var(--gold); color: #000; transform: scale(1.1); }
+    .footer-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 24px; margin: 32px 0; text-align: left; }
+    .footer-column h4 { color: var(--cyan); margin-bottom: 12px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .footer-column a { display: block; color: var(--text-muted); margin: 6px 0; text-decoration: none; transition: color 0.2s; font-size: 0.85rem; }
+    .footer-column a:hover { color: var(--gold); }
+    .footer-column p { color: var(--text-muted); font-size: 0.85rem; margin: 6px 0; }
+    .footer-bottom { color: var(--text-dim); margin-top: 32px; padding-top: 16px; border-top: 1px solid #1a1a1a; font-size: 0.8rem; }
+
+    @media (max-width: 860px) {
+      .nav-links { display: none; }
+      .mobile-menu-btn { display: block; }
+      .mobile-nav { display: block; }
+    }
+    @media print {
+      nav, .mobile-nav, .back-to-top, footer { display: none !important; }
+      body { background: white; color: black; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-container">
+    <a href="index.html" class="logo">WORLDBANKFX × PROFESSOR</a>
+    <ul class="nav-links">
+      <li><a href="index.html#home">Home</a></li>
+      <li class="dropdown">
+        <a href="#services">Services</a>
+        <div class="dropdown-content">
+          <a href="services.html">All Services</a>
+          <a href="services.html#masterclass">Forex Masterclass</a>
+          <a href="services.html#tech-tutoring">Tech Tutoring</a>
+          <a href="services.html#remote-support">Remote Support</a>
+        </div>
+      </li>
+      <li class="dropdown">
+        <a href="#tools">Tools</a>
+        <div class="dropdown-content">
+          <a href="pip-calculator.html">Pip Calculator</a>
+          <a href="trading-growth-calculator.html">Growth Calculator</a>
+          <a href="tools.html">All Tools</a>
+        </div>
+      </li>
+      <li class="dropdown">
+        <a href="traders-playground.html">Games</a>
+        <div class="dropdown-content">
+          <a href="patience-test.html">Patience Test</a>
+          <a href="revenge-breaker.html">Revenge Breaker</a>
+          <a href="traders-playground.html">All Games</a>
+        </div>
+      </li>
+      <li><a href="shop.html">Shop</a></li>
+      <li class="dropdown">
+        <a href="#content">Content</a>
+        <div class="dropdown-content">
+          <a href="blog.html">Blog</a>
+          <a href="news.html">Forex News</a>
+          <a href="articles.html">Articles</a>
+        </div>
+      </li>
+      <li><a href="journal.html">Trading Journal</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <button class="mobile-menu-btn" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button>
+  </div>
+</nav>
+
+<div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-nav-close" onclick="toggleMobileMenu()"><i class="fas fa-times"></i></button>
+  <ul class="mobile-nav-links">
+    <li><a href="index.html#home" onclick="toggleMobileMenu()">Home</a></li>
+    <li>
+      <div class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(this)"><span>Services</span><i class="fas fa-chevron-down"></i></div>
+      <div class="mobile-dropdown-content">
+        <a href="services.html" onclick="toggleMobileMenu()">All Services</a>
+        <a href="services.html#masterclass" onclick="toggleMobileMenu()">Forex Masterclass</a>
+        <a href="services.html#tech-tutoring" onclick="toggleMobileMenu()">Tech Tutoring</a>
+      </div>
+    </li>
+    <li>
+      <div class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(this)"><span>Tools</span><i class="fas fa-chevron-down"></i></div>
+      <div class="mobile-dropdown-content">
+        <a href="pip-calculator.html" onclick="toggleMobileMenu()">Pip Calculator</a>
+        <a href="trading-growth-calculator.html" onclick="toggleMobileMenu()">Growth Calculator</a>
+        <a href="tools.html" onclick="toggleMobileMenu()">All Tools</a>
+      </div>
+    </li>
+    <li>
+      <div class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(this)"><span>Games</span><i class="fas fa-chevron-down"></i></div>
+      <div class="mobile-dropdown-content">
+        <a href="patience-test.html" onclick="toggleMobileMenu()">Patience Test</a>
+        <a href="revenge-breaker.html" onclick="toggleMobileMenu()">Revenge Breaker</a>
+        <a href="traders-playground.html" onclick="toggleMobileMenu()">All Games</a>
+      </div>
+    </li>
+    <li><a href="shop.html" onclick="toggleMobileMenu()">Shop</a></li>
+    <li>
+      <div class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(this)"><span>Content</span><i class="fas fa-chevron-down"></i></div>
+      <div class="mobile-dropdown-content">
+        <a href="blog.html" onclick="toggleMobileMenu()">Blog</a>
+        <a href="news.html" onclick="toggleMobileMenu()">Forex News</a>
+      </div>
+    </li>
+    <li><a href="journal.html" onclick="toggleMobileMenu()">Trading Journal</a></li>
+    <li><a href="contact.html" onclick="toggleMobileMenu()">Contact</a></li>
+  </ul>
+</div>
+
+<!-- MAIN -->
+<div class="container">
+  <div class="header">
+    <div class="logo-text">WORLDBANKFX × PROFESSOR</div>
+    <h1>Pip Calculator</h1>
+    <p class="subtitle">Select your pair, type your lots and pips — see your profit or loss instantly</p>
+  </div>
+
+  <div class="calculator-card">
+
+    <div class="live-badge"><div class="live-dot"></div> Live — updates as you type</div>
+
+    <!-- INPUTS -->
+    <div class="inputs-row">
+      <div class="form-group">
+        <label>Pair</label>
+        <select id="currencyPair" onchange="calculateLive()">
+          <optgroup label="── Majors ──">
+            <option value="EURUSD">EUR/USD</option>
+            <option value="GBPUSD">GBP/USD</option>
+            <option value="USDJPY">USD/JPY</option>
+            <option value="USDCHF">USD/CHF</option>
+            <option value="AUDUSD">AUD/USD</option>
+            <option value="USDCAD">USD/CAD</option>
+            <option value="NZDUSD">NZD/USD</option>
+          </optgroup>
+          <optgroup label="── Crosses ──">
+            <option value="EURGBP">EUR/GBP</option>
+            <option value="EURJPY">EUR/JPY</option>
+            <option value="GBPJPY">GBP/JPY</option>
+            <option value="AUDJPY">AUD/JPY</option>
+            <option value="CADJPY">CAD/JPY</option>
+            <option value="CHFJPY">CHF/JPY</option>
+            <option value="EURAUD">EUR/AUD</option>
+            <option value="EURCHF">EUR/CHF</option>
+            <option value="GBPAUD">GBP/AUD</option>
+            <option value="GBPCAD">GBP/CAD</option>
+          </optgroup>
+          <optgroup label="── Exotics ──">
+            <option value="USDZAR">USD/ZAR</option>
+            <option value="USDTRY">USD/TRY</option>
+            <option value="USDMXN">USD/MXN</option>
+            <option value="USDSEK">USD/SEK</option>
+            <option value="USDNOK">USD/NOK</option>
+            <option value="USDSGD">USD/SGD</option>
+          </optgroup>
+          <optgroup label="── Metals & Crypto ──">
+            <option value="XAUUSD">XAU/USD — Gold</option>
+            <option value="XAGUSD">XAG/USD — Silver</option>
+            <option value="BTCUSD">BTC/USD — Bitcoin</option>
+            <option value="ETHUSD">ETH/USD — Ethereum</option>
+          </optgroup>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Lot Size</label>
+        <input type="number" id="lotSize" step="0.01" min="0.01" value="1.00" placeholder="e.g. 0.10" oninput="calculateLive()">
+      </div>
+      <div class="form-group">
+        <label id="pipsLabel">Pips</label>
+        <input type="number" id="pipsInput" step="0.01" min="0.01" value="100" placeholder="e.g. 10.05" oninput="calculateLive()">
+      </div>
+    </div>
+
+    <!-- RESULT -->
+    <div id="resultSection" class="result-section">
+      <div class="result-context" id="resultContext">1 lot · 100 pips · EUR/USD</div>
+      <div class="result-amount" id="resultAmount">$1,000.00</div>
+      <div class="result-hint" id="resultHint">profit / loss on this move</div>
+    </div>
+
+  </div><!-- end calculator-card -->
+
+  <div class="info-box">
+    <h3>How to use this calculator</h3>
+    <p>Select your pair, enter your lot size and the number of pips your trade moved (or your stop / target distance) — the dollar value shows instantly.</p>
+    <p>On Gold (XAU/USD), "pips" means the number of whole dollar moves. So if gold moves from $2,000 to $2,100, that's 100 pips. At 1 lot that's $10,000.</p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-content">
+    <div class="footer-brand">
+      <h3>WorldBankFx × Professor</h3>
+      <p>Empowering traders worldwide with knowledge, tools, and discipline. Your journey to financial freedom starts here.</p>
+    </div>
+    <div class="footer-social">
+      <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+      <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+      <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+      <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    <div class="footer-links">
+      <div class="footer-column">
+        <h4>Quick Links</h4>
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="shop.html">Shop</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-column">
+        <h4>Tools</h4>
+        <a href="pip-calculator.html">Pip Calculator</a>
+        <a href="trading-growth-calculator.html">Growth Calculator</a>
+        <a href="traders-playground.html">Trading Games</a>
+      </div>
+      <div class="footer-column">
+        <h4>Resources</h4>
+        <a href="blog.html">Blog</a>
+        <a href="news.html">Forex News</a>
+        <a href="journal.html">Trading Journal</a>
+      </div>
+      <div class="footer-column">
+        <h4>Contact</h4>
+        <p>+256 783 354 348</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 WorldBankFx × Professor. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<button class="back-to-top" id="backToTop" onclick="scrollToTop()">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<script>
+  // ===== NAV =====
+  function toggleMobileMenu() {
+    document.getElementById('mobileNav').classList.toggle('active');
+    document.getElementById('mobileOverlay').classList.toggle('active');
+  }
+  function toggleMobileDropdown(el) {
+    const content = el.nextElementSibling;
+    const wasActive = content.classList.contains('active');
+    document.querySelectorAll('.mobile-dropdown-content').forEach(c => c.classList.remove('active'));
+    document.querySelectorAll('.mobile-dropdown-toggle i').forEach(i => i.style.transform = '');
+    if (!wasActive) {
+      content.classList.add('active');
+      el.querySelector('i').style.transform = 'rotate(180deg)';
+    }
+  }
+
+  // ===== PAIR DATA =====
+  // baseCcy = left currency, quoteCcy = right currency
+  // For USD-base pairs (USDJPY, USDCHF etc): pip value = (pip × units) / rate
+  // For USD-quote pairs (EURUSD, GBPUSD etc): pip value = pip × units  (always $10/pip at 1 lot)
+  // For cross pairs (neither is USD): pip value = pip × units × quoteToUSD[quoteCcy]
+  const pairData = {
+    // Majors — USD is quote → fixed $10/pip per lot
+    EURUSD: { pip: 0.0001, contract: 100000, baseCcy: 'EUR', quoteCcy: 'USD' },
+    GBPUSD: { pip: 0.0001, contract: 100000, baseCcy: 'GBP', quoteCcy: 'USD' },
+    AUDUSD: { pip: 0.0001, contract: 100000, baseCcy: 'AUD', quoteCcy: 'USD' },
+    NZDUSD: { pip: 0.0001, contract: 100000, baseCcy: 'NZD', quoteCcy: 'USD' },
+    // Majors — USD is base → divide by rate
+    USDJPY: { pip: 0.01,   contract: 100000, baseCcy: 'USD', quoteCcy: 'JPY' },
+    USDCHF: { pip: 0.0001, contract: 100000, baseCcy: 'USD', quoteCcy: 'CHF' },
+    USDCAD: { pip: 0.0001, contract: 100000, baseCcy: 'USD', quoteCcy: 'CAD' },
+    // Crosses — neither is USD → multiply by quoteToUSD rate
+    EURGBP: { pip: 0.0001, contract: 100000, baseCcy: 'EUR', quoteCcy: 'GBP' },
+    EURJPY: { pip: 0.01,   contract: 100000, baseCcy: 'EUR', quoteCcy: 'JPY' },
+    GBPJPY: { pip: 0.01,   contract: 100000, baseCcy: 'GBP', quoteCcy: 'JPY' },
+    AUDJPY: { pip: 0.01,   contract: 100000, baseCcy: 'AUD', quoteCcy: 'JPY' },
+    CADJPY: { pip: 0.01,   contract: 100000, baseCcy: 'CAD', quoteCcy: 'JPY' },
+    CHFJPY: { pip: 0.01,   contract: 100000, baseCcy: 'CHF', quoteCcy: 'JPY' },
+    EURAUD: { pip: 0.0001, contract: 100000, baseCcy: 'EUR', quoteCcy: 'AUD' },
+    EURCHF: { pip: 0.0001, contract: 100000, baseCcy: 'EUR', quoteCcy: 'CHF' },
+    GBPAUD: { pip: 0.0001, contract: 100000, baseCcy: 'GBP', quoteCcy: 'AUD' },
+    GBPCAD: { pip: 0.0001, contract: 100000, baseCcy: 'GBP', quoteCcy: 'CAD' },
+    // Exotics — USD is base → divide by rate
+    USDZAR: { pip: 0.0001, contract: 100000, baseCcy: 'USD', quoteCcy: 'ZAR' },
+    USDTRY: { pip: 0.0001, contract: 100000, baseCcy: 'USD', quoteCcy: 'TRY' },
+    USDMXN: { pip: 0.0001, contract: 100000, baseCcy: 'USD', quoteCcy: 'MXN' },
+    USDSEK: { pip: 0.0001, contract: 100000, baseCcy: 'USD', quoteCcy: 'SEK' },
+    USDNOK: { pip: 0.0001, contract: 100000, baseCcy: 'USD', quoteCcy: 'NOK' },
+    USDSGD: { pip: 0.0001, contract: 100000, baseCcy: 'USD', quoteCcy: 'SGD' },
+    // Metals & Crypto — all USD-quoted, special contract sizes
+    XAUUSD: { pip: 1,     contract: 100,   baseCcy: 'XAU', quoteCcy: 'USD' },
+    XAGUSD: { pip: 0.01,  contract: 500,   baseCcy: 'XAG', quoteCcy: 'USD' },
+    BTCUSD: { pip: 1,     contract: 1,     baseCcy: 'BTC', quoteCcy: 'USD' },
+    ETHUSD: { pip: 0.01,  contract: 1,     baseCcy: 'ETH', quoteCcy: 'USD' },
+  };
+
+  // Approximate rates: how much 1 unit of this currency is worth in USD
+  // Used for: (a) cross pair quote conversion, (b) USD-base pair division
+  const quoteToUSD = {
+    USD: 1,
+    JPY: 1/149.5,   // 1 JPY = 0.0067 USD  →  pip value / rate
+    CHF: 1/0.885,   // 1 CHF ≈ 1.13 USD
+    CAD: 1/1.355,   // 1 CAD ≈ 0.738 USD
+    GBP: 1.265,
+    AUD: 0.655,
+    NZD: 0.605,
+    EUR: 1.085,
+    ZAR: 1/18.5,
+    TRY: 1/32.5,
+    MXN: 1/17.2,
+    SEK: 1/10.4,
+    NOK: 1/10.6,
+    SGD: 1/1.34,
+  };
+
+  // ===== CALCULATE =====
+  function calculateLive() {
+    const pair     = document.getElementById('currencyPair').value;
+    const lotSize  = parseFloat(document.getElementById('lotSize').value);
+    const pips     = parseFloat(document.getElementById('pipsInput').value);
+
+    if (!pair || isNaN(lotSize) || lotSize <= 0 || isNaN(pips) || pips <= 0) return;
+
+    const data = pairData[pair];
+    if (!data) return;
+
+    const units = lotSize * data.contract;
+
+    // ── Core pip value logic (USD account) ──────────────────────────────
+    // Rule 1: USD is the quote  (EURUSD, GBPUSD, XAUUSD…)
+    //         pip value = pip × units  →  always $10/pip per std lot
+    // Rule 2: USD is the base   (USDJPY, USDCHF, USDCAD…)
+    //         pip value = (pip × units) × quoteToUSD[quoteCcy]
+    //         i.e. divide the raw result by the pair's exchange rate
+    // Rule 3: Cross pair        (EURGBP, EURJPY, GBPJPY…)
+    //         pip value = pip × units × quoteToUSD[quoteCcy]
+    //         i.e. convert the quote currency result to USD
+    // Rules 2 & 3 share the same formula: pip × units × quoteToUSD[quoteCcy]
+    // Rule 1 is just Rule 3 when quoteCcy = 'USD' (quoteToUSD['USD'] = 1)
+    // So one unified formula covers all cases:
+    const conversionRate = quoteToUSD[data.quoteCcy] ?? 1;
+    const pipValueUSD    = units * data.pip * conversionRate;
+
+    // total dollar amount for N pips
+    const totalUSD = pipValueUSD * pips;
+
+    // Label — gold/silver/crypto say "points", forex say "pips"
+    const isMetal  = ['XAUUSD','XAGUSD','BTCUSD','ETHUSD'].includes(pair);
+    const pipWord  = isMetal ? 'points' : 'pips';
+    const pairLabel = pair.slice(0,3) + '/' + pair.slice(3);
+
+    // Update pips label dynamically
+    document.getElementById('pipsLabel').textContent = isMetal ? 'Points' : 'Pips';
+
+    // Format output
+    document.getElementById('resultAmount').textContent = '$' + formatMoney(totalUSD);
+    document.getElementById('resultContext').textContent =
+      lotSize + ' lot' + (lotSize !== 1 ? 's' : '') + ' · ' + pips + ' ' + pipWord + ' · ' + pairLabel;
+    document.getElementById('resultHint').textContent = 'profit or loss on this move';
+
+    document.getElementById('resultSection').classList.add('show');
+  }
+
+  function formatMoney(n) {
+    if (n >= 1000000) return (n/1000000).toFixed(2) + 'M';
+    if (n >= 1000)    return n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    return n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+  function formatUnits(n) {
+    if (n >= 1e6) return (n/1e6).toFixed(2) + 'M';
+    if (n >= 1e3) return (n/1e3).toFixed(2) + 'K';
+    return n.toFixed(2);
+  }
+  function getCurrencySymbol(ccy) {
+    const s = { USD:'$', EUR:'€', GBP:'£', JPY:'¥', CHF:'Fr', AUD:'A$', CAD:'C$', NZD:'NZ$' };
+    return s[ccy] || ccy + ' ';
+  }
+
+  window.addEventListener('DOMContentLoaded', () => { calculateLive(); });
+  function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+  window.addEventListener('scroll', () => {
+    document.getElementById('backToTop').classList.toggle('show', window.pageYOffset > 300);
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" href="popup-ads.css">
+	<script src="popup-ads.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trader's Playground | WorldBankFx</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Navigation Styles */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+            left: 0;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #0f0f0f;
+            min-width: 220px;
+            border: 1px solid #ffd700;
+            border-radius: 8px;
+            margin-top: -2px;
+            padding: 10px 0;
+        }
+
+        .dropdown:hover .dropdown-content,
+        .dropdown-content:hover {
+            display: block;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 12px 20px;
+            border-bottom: 1px solid #333;
+            color: #fff;
+        }
+
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-content a:hover {
+            background: rgba(255, 215, 0, 0.1);
+            color: #ffd700;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            color: #ffd700;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 400px;
+            height: 100vh;
+            background: #0f0f0f;
+            z-index: 2000;
+            padding: 80px 30px 30px;
+            transition: right 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .mobile-nav.active {
+            right: 0;
+        }
+
+        .mobile-nav-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
+            color: #ffd700;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+        }
+
+        .mobile-nav-links li {
+            margin-bottom: 20px;
+        }
+
+        .mobile-nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: block;
+            padding: 10px 0;
+        }
+
+        .mobile-dropdown-toggle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 10px 0;
+        }
+
+        .mobile-dropdown-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding-left: 20px;
+        }
+
+        .mobile-dropdown-content.active {
+            max-height: 500px;
+        }
+
+        .mobile-dropdown-content a {
+            font-size: 1rem;
+            padding: 8px 0;
+            color: #aaa;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 100px 20px 40px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .header .logo-text {
+            font-size: 1.2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            color: #ffd700;
+            margin-bottom: 15px;
+        }
+        
+        .subtitle {
+            color: #aaa;
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .intro-section {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(0, 212, 255, 0.1));
+            border: 2px solid #ffd700;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 60px;
+            text-align: center;
+        }
+        
+        .intro-section h2 {
+            color: #00d4ff;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+        
+        .intro-section p {
+            color: #ccc;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .game-card {
+            background: #0f0f0f;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid #333;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-10px);
+            border-color: #ffd700;
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.3);
+        }
+        
+        .game-card.coming-soon {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .game-card.coming-soon:hover {
+            transform: none;
+            border-color: #333;
+            box-shadow: none;
+        }
+        
+        .game-banner {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .game-banner::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(0, 212, 255, 0.2));
+            z-index: 0;
+        }
+        
+        .game-banner span {
+            z-index: 1;
+            position: relative;
+        }
+        
+        .game-info {
+            padding: 30px;
+        }
+        
+        .game-title {
+            font-size: 1.8rem;
+            color: #ffd700;
+            margin-bottom: 10px;
+        }
+        
+        .game-purpose {
+            color: #00d4ff;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .game-description {
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .game-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+        }
+        
+        .difficulty {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .difficulty-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .difficulty-bars {
+            display: flex;
+            gap: 3px;
+        }
+        
+        .bar {
+            width: 8px;
+            height: 20px;
+            background: #333;
+            border-radius: 2px;
+        }
+        
+        .bar.active {
+            background: #ffd700;
+        }
+        
+        .bar.active.hard {
+            background: #ef4444;
+        }
+        
+        .play-btn {
+            padding: 10px 25px;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            border: none;
+            border-radius: 8px;
+            color: #000;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .play-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+        }
+        
+        .coming-soon-badge {
+            background: #666;
+            color: #fff;
+            padding: 10px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .stats-section {
+            background: #0f0f0f;
+            border-radius: 20px;
+            padding: 40px;
+            border: 2px solid #00d4ff;
+            text-align: center;
+        }
+        
+        .stats-section h2 {
+            color: #00d4ff;
+            font-size: 2rem;
+            margin-bottom: 30px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .stat-card {
+            background: #1a1a1a;
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid #333;
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #ffd700;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* PART 2 STYLES CONTINUE IN NEXT ARTIFACT */
+		/* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            border: none;
+            border-radius: 50%;
+            color: #000;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.5);
+        }
+
+        /* Footer Styles */
+        footer {
+            background: #000;
+            padding: 60px 20px 40px;
+            text-align: center;
+            border-top: 1px solid #333;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-brand {
+            margin-bottom: 30px;
+        }
+
+        .footer-brand h3 {
+            color: #ffd700;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .footer-brand p {
+            color: #aaa;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            background: #1a1a1a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #ffd700;
+        }
+
+        .social-link:hover {
+            background: #ffd700;
+            color: #000;
+            transform: scale(1.1);
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+            text-align: left;
+        }
+
+        .footer-column h4 {
+            color: #00d4ff;
+            margin-bottom: 15px;
+        }
+
+        .footer-column a {
+            display: block;
+            color: #aaa;
+            margin: 8px 0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: #ffd700;
+        }
+
+        .footer-column p {
+            color: #aaa;
+            font-size: 0.9rem;
+            margin: 8px 0;
+        }
+
+        .footer-bottom {
+            color: #666;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+        }
+        
+        @media (max-width: 968px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .mobile-nav {
+                display: block;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .intro-section {
+                padding: 25px;
+            }
+        }
+        
+        @media print {
+            nav, .mobile-nav, .back-to-top, footer {
+                display: none;
+            }
+
+            body {
+                background: white;
+                color: black;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">WORLDBANKFX × PROFESSOR</a>
+            
+            <ul class="nav-links">
+                <li><a href="index.html#home">Home</a></li>
+                <li class="dropdown">
+                    <a href="#services">Services</a>
+                    <div class="dropdown-content">
+                        <a href="services.html">All Services</a>
+                        <a href="services.html#masterclass">Forex Masterclass</a>
+                        <a href="services.html#tech-tutoring">Tech Tutoring</a>
+                        <a href="services.html#remote-support">Remote Support</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#tools">Tools</a>
+                    <div class="dropdown-content">
+                        <a href="pip-calculator.html">Pip Calculator</a>
+                        <a href="trading-growth-calculator.html">Growth Calculator</a>
+                        <a href="tools.html">All Tools</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="traders-playground.html">Games</a>
+                    <div class="dropdown-content">
+                        <a href="patience-test.html">Patience Test</a>
+                        <a href="revenge-breaker.html">Revenge Breaker</a>
+                        <a href="revenge-breaker.html">Probability Revealer</a>
+                        <a href="traders-playground.html">All Games</a>
+                    </div>
+                </li>
+                <li><a href="shop.html">Shop</a></li>
+                <li class="dropdown">
+                    <a href="#content">Content</a>
+                    <div class="dropdown-content">
+                        <a href="blog.html">Blog</a>
+                        <a href="news.html">Forex News</a>
+                        <a href="articles.html">Articles</a>
+                    </div>
+                </li>
+                <li><a href="journal.html">Trading Journal</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="mobile-nav" id="mobileNav">
+        <button class="mobile-nav-close" onclick="toggleMobileMenu()">
+            <i class="fas fa-times"></i>
+        </button>
+        
+        <ul class="mobile-nav-links">
+            <li><a href="index.html#home" onclick="toggleMobileMenu()">Home</a></li>
+            <li>
+                <div class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(this)">
+                    <span>Services</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="mobile-dropdown-content">
+                    <a href="services.html" onclick="toggleMobileMenu()">All Services</a>
+                    <a href="services.html#masterclass" onclick="toggleMobileMenu()">Forex Masterclass</a>
+                    <a href="services.html#tech-tutoring" onclick="toggleMobileMenu()">Tech Tutoring</a>
+                </div>
+            </li>
+            <li>
+                <div class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(this)">
+                    <span>Tools</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="mobile-dropdown-content">
+                    <a href="pip-calculator.html" onclick="toggleMobileMenu()">Pip Calculator</a>
+                    <a href="trading-growth-calculator.html" onclick="toggleMobileMenu()">Growth Calculator</a>
+                    <a href="tools.html" onclick="toggleMobileMenu()">All Tools</a>
+                </div>
+            </li>
+            <li>
+                <div class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(this)">
+                    <span>Games</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="mobile-dropdown-content">
+                    <a href="patience-test.html" onclick="toggleMobileMenu()">Patience Test</a>
+                    <a href="revenge-breaker.html" onclick="toggleMobileMenu()">Revenge Breaker</a>
+                    <a href="revenge-breaker.html" onclick="toggleMobileMenu()">Probability Revealer</a>
+                    <a href="traders-playground.html" onclick="toggleMobileMenu()">All Games</a>
+                </div>
+            </li>
+            <li><a href="shop.html" onclick="toggleMobileMenu()">Shop</a></li>
+            <li>
+                <div class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(this)">
+                    <span>Content</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="mobile-dropdown-content">
+                    <a href="blog.html" onclick="toggleMobileMenu()">Blog</a>
+                    <a href="news.html" onclick="toggleMobileMenu()">Forex News</a>
+                </div>
+            </li>
+            <li><a href="journal.html" onclick="toggleMobileMenu()">Trading Journal</a></li>
+            <li><a href="contact.html" onclick="toggleMobileMenu()">Contact</a></li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="logo-text">WORLDBANKFX × PROFESSOR</div>
+            <h1>🎮 Trader's Playground</h1>
+            <p class="subtitle">
+                Master your emotions, sharpen your skills, and break bad trading habits through interactive challenges
+            </p>
+        </div>
+
+        <div class="intro-section">
+            <h2>Why Games for Traders?</h2>
+            <p>
+                Trading is 80% psychology and 20% strategy. These games are designed to help you develop discipline, 
+                patience, and emotional control. Feeling the urge to overtrade? Complete the challenge first. 
+                Want revenge after a loss? Play the frustration breaker. Every game has a purpose - to make you a better trader.
+            </p>
+        </div>
+
+        <div class="games-grid">
+            <!-- Game 1: Patience Test -->
+            <div class="game-card" onclick="window.location.href='patience-test.html'">
+                <div class="game-banner" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                    <span>🎯</span>
+                </div>
+                <div class="game-info">
+                    <h3 class="game-title">Patience Test</h3>
+                    <div class="game-purpose">🚫 Overtrading Prevention</div>
+                    <p class="game-description">
+                        Can you resist clicking? Wait for the perfect moment when the target turns green. 
+                        One early click and you fail. 60 seconds of pure discipline testing.
+                    </p>
+                    <div class="game-meta">
+                        <div class="difficulty">
+                            <span class="difficulty-label">Difficulty:</span>
+                            <div class="difficulty-bars">
+                                <div class="bar active hard"></div>
+                                <div class="bar active hard"></div>
+                                <div class="bar active hard"></div>
+                                <div class="bar active hard"></div>
+                                <div class="bar"></div>
+                            </div>
+                        </div>
+                        <button class="play-btn">Play Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game 2: Revenge Breaker -->
+            <div class="game-card" onclick="window.location.href='revenge-breaker.html'">
+                <div class="game-banner" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+                    <span>😤</span>
+                </div>
+                <div class="game-info">
+                    <h3 class="game-title">Revenge Breaker</h3>
+                    <div class="game-purpose">💢 Revenge Trading Stopper</div>
+                    <p class="game-description">
+                        Designed to frustrate you, then teach control. Navigate a ball through obstacles - 
+                        hit a wall 3 times and restart. Gets harder when you fail. Can you stay calm?
+                    </p>
+                    <div class="game-meta">
+                        <div class="difficulty">
+                            <span class="difficulty-label">Difficulty:</span>
+                            <div class="difficulty-bars">
+                                <div class="bar active hard"></div>
+                                <div class="bar active hard"></div>
+                                <div class="bar active hard"></div>
+                                <div class="bar active hard"></div>
+                                <div class="bar active hard"></div>
+                            </div>
+                        </div>
+                        <button class="play-btn">Play Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game 3: Risk Manager Simulator -->
+            <div class="game-card coming-soon" onclick="playGame('risk-simulator')">
+                <div class="game-banner" style="background: linear-gradient(135deg, #fa709a, #fee140);">
+                    <span>📊</span>
+                </div>
+                <div class="game-info">
+                    <h3 class="game-title">Risk Manager Simulator</h3>
+                    <div class="game-purpose">🎓 Position Sizing Practice</div>
+                    <p class="game-description">
+                        Mini trading sim with $1000 starting capital. Reach $2000 by following proper risk management. 
+                        Break the 2% rule and it's game over. Learn by doing!
+                    </p>
+                    <div class="game-meta">
+                        <div class="difficulty">
+                            <span class="difficulty-label">Difficulty:</span>
+                            <div class="difficulty-bars">
+                                <div class="bar active"></div>
+                                <div class="bar active"></div>
+                                <div class="bar active"></div>
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                            </div>
+                        </div>
+                        <span class="coming-soon-badge">Coming Soon</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game 4: Chart Pattern Master -->
+            <div class="game-card coming-soon" onclick="playGame('pattern-master')">
+                <div class="game-banner" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
+                    <span>📈</span>
+                </div>
+                <div class="game-info">
+                    <h3 class="game-title">Chart Pattern Master</h3>
+                    <div class="game-purpose">🧠 Pattern Recognition Training</div>
+                    <p class="game-description">
+                        Fast-paced pattern identification game. Recognize Head & Shoulders, Double Tops, Triangles, 
+                        and more. 20 patterns in 60 seconds - can you do it?
+                    </p>
+                    <div class="game-meta">
+                        <div class="difficulty">
+                            <span class="difficulty-label">Difficulty:</span>
+                            <div class="difficulty-bars">
+                                <div class="bar active"></div>
+                                <div class="bar active"></div>
+                                <div class="bar active"></div>
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                            </div>
+                        </div>
+                        <span class="coming-soon-badge">Coming Soon</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game 5: Discipline Challenge -->
+            <div class="game-card coming-soon" onclick="playGame('discipline-challenge')">
+                <div class="game-banner" style="background: linear-gradient(135deg, #a8edea, #fed6e3);">
+                    <span>🧘</span>
+                </div>
+                <div class="game-info">
+                    <h3 class="game-title">Discipline Challenge</h3>
+                    <div class="game-purpose">🎯 Focus & Control Training</div>
+                    <p class="game-description">
+                        Navigate through moving obstacles for 2 minutes without touching the line. 
+                        Speed increases like market volatility. Stay focused, stay disciplined.
+                    </p>
+                    <div class="game-meta">
+                        <div class="difficulty">
+                            <span class="difficulty-label">Difficulty:</span>
+                            <div class="difficulty-bars">
+                                <div class="bar active"></div>
+                                <div class="bar active"></div>
+                                <div class="bar active"></div>
+                                <div class="bar active"></div>
+                                <div class="bar"></div>
+                            </div>
+                        </div>
+                        <span class="coming-soon-badge">Coming Soon</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-section">
+            <h2>Your Gaming Stats</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">0</div>
+                    <div class="stat-label">Games Completed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">0</div>
+                    <div class="stat-label">Challenges Passed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">0</div>
+                    <div class="stat-label">Total Playtime</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">-</div>
+                    <div class="stat-label">Best Score</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>WorldBankFx × Professor</h3>
+                <p>Empowering traders worldwide with knowledge, tools, and discipline. Your journey to financial freedom starts here.</p>
+            </div>
+            
+            <div class="footer-social">
+                <a href="#" class="social-link">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="social-link">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <a href="#" class="social-link">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="social-link">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+            </div>
+            
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <a href="index.html">Home</a>
+                    <a href="services.html">Services</a>
+                    <a href="shop.html">Shop</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Tools</h4>
+                    <a href="pip-calculator.html">Pip Calculator</a>
+                    <a href="trading-growth-calculator.html">Growth Calculator</a>
+                    <a href="traders-playground.html">Trading Games</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <a href="blog.html">Blog</a>
+                    <a href="news.html">Forex News</a>
+                    <a href="journal.html">Trading Journal</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact</h4>
+                    <p>unlimited.worldbankfx@gmail.com</p>
+                    <p>+256 783 354 348</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2025 WorldBankFx × Professor. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Mobile Menu Functions
+        function toggleMobileMenu() {
+            const mobileNav = document.getElementById('mobileNav');
+            mobileNav.classList.toggle('active');
+        }
+
+        function toggleMobileDropdown(element) {
+            const dropdownContent = element.nextElementSibling;
+            const isActive = dropdownContent.classList.contains('active');
+            
+            document.querySelectorAll('.mobile-dropdown-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            if (!isActive) {
+                dropdownContent.classList.add('active');
+            }
+            
+            const icon = element.querySelector('i');
+            icon.style.transform = dropdownContent.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0deg)';
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.addEventListener('scroll', function() {
+            const backToTop = document.getElementById('backToTop');
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+
+        document.addEventListener('click', function(event) {
+            const mobileNav = document.getElementById('mobileNav');
+            const mobileBtn = document.querySelector('.mobile-menu-btn');
+            
+            if (mobileNav.classList.contains('active') && 
+                !mobileNav.contains(event.target) && 
+                !mobileBtn.contains(event.target)) {
+                mobileNav.classList.remove('active');
+            }
+        });
+
+        // ORIGINAL GAME LOGIC - UNTOUCHED
+        function playGame(gameId) {
+            alert('🎮 This game is coming soon!\n\nStay tuned - we\'re building something awesome for you!');
+        }
+
+        function updateStats() {
+            const stats = JSON.parse(localStorage.getItem('worldbankfx_game_stats') || '{}');
+            
+            if (stats.gamesCompleted) {
+                document.querySelector('.stat-card:nth-child(1) .stat-value').textContent = stats.gamesCompleted;
+            }
+            if (stats.challengesPassed) {
+                document.querySelector('.stat-card:nth-child(2) .stat-value').textContent = stats.challengesPassed;
+            }
+            if (stats.totalPlaytime) {
+                document.querySelector('.stat-card:nth-child(3) .stat-value').textContent = 
+                    Math.floor(stats.totalPlaytime / 60) + ' mins';
+            }
+            if (stats.bestScore) {
+                document.querySelector('.stat-card:nth-child(4) .stat-value').textContent = stats.bestScore;
+            }
+        }
+
+        updateStats();
+    </script>
+</body>
+</html>

@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon | WorldBankFx x Professor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #0f0f0f;
+            min-width: 220px;
+            border: 1px solid #ffd700;
+            border-radius: 8px;
+            margin-top: -2px;
+            padding: 10px 0;
+        }
+
+        .dropdown:hover .dropdown-content,
+        .dropdown-content:hover {
+            display: block;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 12px 20px;
+            border-bottom: 1px solid #333;
+            color: #fff;
+        }
+
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-content a:hover {
+            background: rgba(255, 215, 0, 0.1);
+            color: #ffd700;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            color: #ffd700;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 400px;
+            height: 100vh;
+            background: #0f0f0f;
+            z-index: 2000;
+            padding: 80px 30px 30px;
+            transition: right 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .mobile-nav.active {
+            right: 0;
+        }
+
+        .mobile-nav-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
+            color: #ffd700;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+        }
+
+        .mobile-nav-links li {
+            margin-bottom: 20px;
+        }
+
+        .mobile-nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: block;
+            padding: 10px 0;
+        }
+
+        .mobile-dropdown-toggle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 10px 0;
+        }
+
+        .mobile-dropdown-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding-left: 20px;
+        }
+
+        .mobile-dropdown-content.active {
+            max-height: 500px;
+        }
+
+        .mobile-dropdown-content a {
+            font-size: 1rem;
+            padding: 8px 0;
+            color: #aaa;
+        }
+
+        .coming-soon-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 70px;
+            padding: 40px 20px;
+        }
+
+        .animated-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(255, 215, 0, 0.05) 0%, transparent 50%);
+            animation: bgFloat 20s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        @keyframes bgFloat {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(5deg); }
+        }
+
+        .coming-soon-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+        }
+
+        .coming-soon-title {
+            font-size: clamp(3rem, 12vw, 8rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, #ffd700, #ffed4e, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -3px;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            animation: shimmer 3s ease-in-out infinite;
+            background-size: 200% auto;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .lifeline-container {
+            width: 100%;
+            height: 120px;
+            position: relative;
+            overflow: hidden;
+            margin: 50px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .lifeline {
+            width: 200%;
+            height: 6px;
+            position: absolute;
+            left: 0;
+        }
+
+        .lifeline svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .lifeline-path {
+            fill: none;
+            stroke: url(#lifelineGradient);
+            stroke-width: 6;
+            stroke-linecap: round;
+            animation: lifelineMove 3s linear infinite;
+        }
+
+        @keyframes lifelineMove {
+            0% { stroke-dashoffset: 0; }
+            100% { stroke-dashoffset: -200; }
+        }
+
+        .pulse-dot {
+            fill: #00d4ff;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                r: 8;
+            }
+            50% {
+                opacity: 0.5;
+                r: 12;
+            }
+        }
+
+        .coming-soon-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: #00d4ff;
+            margin-top: 30px;
+            font-weight: 600;
+        }
+
+        .coming-soon-message {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: #aaa;
+            margin-top: 20px;
+            line-height: 1.8;
+        }
+
+        .back-home-btn {
+            margin-top: 50px;
+            padding: 18px 40px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            display: inline-block;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            color: #000;
+        }
+
+        .back-home-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
+        }
+
+        footer {
+            background: #000;
+            padding: 60px 20px 40px;
+            text-align: center;
+            border-top: 1px solid #333;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-brand {
+            margin-bottom: 30px;
+        }
+
+        .footer-brand h3 {
+            color: #ffd700;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .footer-brand p {
+            color: #aaa;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            background: #1a1a1a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #ffd700;
+        }
+
+        .social-link:hover {
+            background: #ffd700;
+            color: #000;
+            transform: scale(1.1);
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+            text-align: left;
+        }
+
+        .footer-column h4 {
+            color: #00d4ff;
+            margin-bottom: 15px;
+        }
+
+        .footer-column a {
+            display: block;
+            color: #aaa;
+            margin: 8px 0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: #ffd700;
+        }
+
+        .footer-column p {
+            color: #aaa;
+            font-size: 0.9rem;
+            margin: 8px 0;
+        }
+
+        .footer-bottom {
+            color: #666;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+        }
+
+        @media (max-width: 968px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .mobile-nav {
+                display: block;
+            }
+
+            .coming-soon-title {
+                letter-spacing: -2px;
+            }
+
+            .lifeline-container {
+                height: 80px;
+                margin: 30px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo" onclick="window.location.href='index.html'">WORLDBANKFX × PROFESSOR</div>
+            
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="#services">Services</a>
+                    <div class="dropdown-content">
+                        <a href="services.html">All Services</a>
+                        <a href="services.html#masterclass">Forex Masterclass</a>
+                        <a href="services.html#tech-tutoring">Tech Tutoring</a>
+                        <a href="services.html#remote-support">Remote Support</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#tools">Tools</a>
+                    <div class="dropdown-content">
+                        <a href="pip-calculator.html">Pip Calculator</a>
+                        <a href="trading-growth-calculator.html">Growth Calculator</a>
+                        <a href="tools.html">All Tools</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="traders-playground.html">Games</a>
+                    <div class="dropdown-content">
+                        <a href="patience-test.html">Patience Test</a>
+                        <a href="revenge-breaker.html">Revenge Breaker</a>
+                        <a href="revenge-breaker.html">Probability Revealer</a>
+                        <a href="traders-playground.html">All Games</a>
+                    </div>
+                </li>
+                <li><a href="shop.html">Shop</a></li>
+                <li class="dropdown">
+                    <a href="#content">Content</a>
+                    <div class="dropdown-content">
+                        <a href="blog.html">Blog</a>
+                        <a href="news.html">Forex News</a>
+                        <a href="articles.html">Articles</a>
+                    </div>
+                </li>
+                <li><a href="journal.html">Trading Journal</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="mobile-nav" id="mobileNav">
+        <button class="mobile-nav-close" onclick="toggleMobileMenu()">
+            <i class="fas fa-times"></i>
+        </button>
+        
+        <ul class="mobile-nav-links">
+            <li><a href="index.html" onclick="toggleMobileMenu()">Home</a></li>
+            <li>
+                <div class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(this)">
+                    <span>Services</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="mobile-dropdown-content">
+                    <a href="services.html" onclick="toggleMobileMenu()">All Services</a>
+                    <a href="services.html#masterclass" onclick="toggleMobileMenu()">Forex Masterclass</a>
+                    <a href="services.html#tech-tutoring" onclick="toggleMobileMenu()">Tech Tutoring</a>
+                </div>
+            </li>
+            <li>
+                <div class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(this)">
+                    <span>Tools</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="mobile-dropdown-content">
+                    <a href="pip-calculator.html" onclick="toggleMobileMenu()">Pip Calculator</a>
+                    <a href="trading-growth-calculator.html" onclick="toggleMobileMenu()">Growth Calculator</a>
+                    <a href="tools.html" onclick="toggleMobileMenu()">All Tools</a>
+                </div>
+            </li>
+            <li>
+                <div class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(this)">
+                    <span>Games</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="mobile-dropdown-content">
+                    <a href="patience-test.html" onclick="toggleMobileMenu()">Patience Test</a>
+                    <a href="revenge-breaker.html" onclick="toggleMobileMenu()">Revenge Breaker</a>
+                    <a href="revenge-breaker.html" onclick="toggleMobileMenu()">Probability Revealer</a>
+                    <a href="traders-playground.html" onclick="toggleMobileMenu()">All Games</a>
+                </div>
+            </li>
+            <li><a href="shop.html" onclick="toggleMobileMenu()">Shop</a></li>
+            <li>
+                <div class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(this)">
+                    <span>Content</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="mobile-dropdown-content">
+                    <a href="blog.html" onclick="toggleMobileMenu()">Blog</a>
+                    <a href="news.html" onclick="toggleMobileMenu()">Forex News</a>
+                </div>
+            </li>
+            <li><a href="journal.html" onclick="toggleMobileMenu()">Trading Journal</a></li>
+            <li><a href="contact.html" onclick="toggleMobileMenu()">Contact</a></li>
+        </ul>
+    </div>
+
+    <section class="coming-soon-section">
+        <div class="animated-bg"></div>
+        
+        <div class="coming-soon-content">
+            <h1 class="coming-soon-title">COMING SOON</h1>
+            
+            <div class="lifeline-container">
+                <div class="lifeline">
+                    <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                        <defs>
+                            <linearGradient id="lifelineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#ffd700;stop-opacity:1" />
+                                <stop offset="50%" style="stop-color:#00d4ff;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#ffd700;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <path class="lifeline-path" d="M 0 60 L 100 60 L 120 20 L 140 100 L 160 60 L 260 60 L 280 20 L 300 100 L 320 60 L 420 60 L 440 20 L 460 100 L 480 60 L 580 60 L 600 20 L 620 100 L 640 60 L 740 60 L 760 20 L 780 100 L 800 60 L 900 60 L 920 20 L 940 100 L 960 60 L 1060 60 L 1080 20 L 1100 100 L 1120 60 L 1200 60" 
+                              stroke-dasharray="200" 
+                              stroke-dashoffset="0" />
+                        <circle class="pulse-dot" cx="600" cy="60" r="8">
+                            <animate attributeName="cx" from="0" to="1200" dur="3s" repeatCount="indefinite" />
+                        </circle>
+                    </svg>
+                </div>
+            </div>
+            
+            <p class="coming-soon-subtitle">🚀 We're Building Something Amazing</p>
+            <p class="coming-soon-message">
+                This page is under construction. We're working hard to bring you an incredible experience.<br>
+                Stay tuned for updates!
+            </p>
+            
+            <a href="index.html" class="back-home-btn">Back to Home</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>WorldBankFx × Professor</h3>
+                <p>Empowering traders worldwide with knowledge, tools, and discipline. Your journey to financial freedom starts here.</p>
+            </div>
+            
+            <div class="footer-social">
+                <a href="#" class="social-link">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="social-link">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <a href="#" class="social-link">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="social-link">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+            </div>
+            
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <a href="index.html">Home</a>
+                    <a href="services.html">Services</a>
+                    <a href="shop.html">Shop</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Tools</h4>
+                    <a href="pip-calculator.html">Pip Calculator</a>
+                    <a href="trading-growth-calculator.html">Growth Calculator</a>
+                    <a href="traders-playground.html">Trading Games</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <a href="blog.html">Blog</a>
+                    <a href="news.html">Forex News</a>
+                    <a href="journal.html">Trading Journal</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact</h4>
+                    <p>unlimited.worldbankfx@gmail.com</p>
+                    <p>+256 783 354 348</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2025 WorldBankFx × Professor. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMobileMenu() {
+            const mobileNav = document.getElementById('mobileNav');
+            mobileNav.classList.toggle('active');
+        }
+
+        function toggleMobileDropdown(element) {
+            const dropdownContent = element.nextElementSibling;
+            const isActive = dropdownContent.classList.contains('active');
+            
+            document.querySelectorAll('.mobile-dropdown-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            if (!isActive) {
+                dropdownContent.classList.add('active');
+            }
+            
+            const icon = element.querySelector('i');
+            icon.style.transform = dropdownContent.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0deg)';
+        }
+
+        document.addEventListener('click', function(event) {
+            const mobileNav = document.getElementById('mobileNav');
+            const mobileBtn = document.querySelector('.mobile-menu-btn');
+            
+            if (mobileNav.classList.contains('active') && 
+                !mobileNav.contains(event.target) && 
+                !mobileBtn.contains(event.target)) {
+                mobileNav.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
