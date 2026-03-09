@@ -1,8 +1,9 @@
 // Pop-up Ad Manager
 (function() {
-    const POPUP_DELAY_FIRST = 3000; // 3 seconds after page load
-    const POPUP_INTERVAL = 180000; // 3 minutes (180000ms)
-    const STORAGE_KEY = 'worldbankfx_popup_shown';
+    const POPUP_DELAY_FIRST = 20000; // 20 seconds after page load
+    const POPUP_INTERVAL = 1800000;  // 30 minutes between repeat shows
+    const STORAGE_KEY = 'worldbankfx_popup_last_shown';
+    const COOLDOWN = 60 * 60 * 1000; // 1 hour cooldown between sessions
 
     function createPopup() {
         const popupHTML = `
@@ -17,14 +18,14 @@
 
                     <div class="popup-body">
                         <div class="broker-comparison">
-                            <a href="https://www.hfm.com/sv/en/?refid=374930" target="_blank" class="broker-card hfm" onclick="trackClick('HFM')">
+                            <a href="https://www.hfm.com/sv/en/?refid=374930" target="_blank" rel="noopener noreferrer" class="broker-card hfm" onclick="trackClick('HFM')">
                                 <div class="broker-icon">🏆</div>
                                 <div class="broker-name">HFM</div>
                                 <div class="broker-tagline">Award-Winning Broker</div>
                                 <span class="broker-btn">Trade Now →</span>
                             </a>
 
-                            <a href="https://one.exnessonelink.com/a/y7scclopum" target="_blank" class="broker-card exness" onclick="trackClick('Exness')">
+                            <a href="https://one.exnessonelink.com/a/y7scclopum" target="_blank" rel="noopener noreferrer" class="broker-card exness" onclick="trackClick('Exness')">
                                 <div class="broker-icon">⚡</div>
                                 <div class="broker-name">Exness</div>
                                 <div class="broker-tagline">Lightning-Fast Execution</div>
@@ -57,6 +58,10 @@
         }
     }
 
+    function hasSeenRecentlyThisSession() {
+        return window._popupShownThisSession === true;
+    }
+
     window.closeAdPopup = function() {
         hidePopup();
     };
@@ -77,13 +82,29 @@
     document.addEventListener('DOMContentLoaded', function() {
         createPopup();
 
-        // Show first popup after delay
-        setTimeout(function() {
-            showPopup();
-        }, POPUP_DELAY_FIRST);
+        // Check if shown recently (within cooldown period)
+        const lastShown = localStorage.getItem(STORAGE_KEY);
+        const now = Date.now();
 
-        // Show popup every 3 minutes
+        if (lastShown && (now - parseInt(lastShown)) < COOLDOWN) {
+            // Visited recently, wait longer before showing
+            setTimeout(function() {
+                showPopup();
+                localStorage.setItem(STORAGE_KEY, Date.now().toString());
+                window._popupShownThisSession = true;
+            }, POPUP_DELAY_FIRST * 2); // double delay for returning visitors
+        } else {
+            // Fresh visitor or been away a while
+            setTimeout(function() {
+                showPopup();
+                localStorage.setItem(STORAGE_KEY, Date.now().toString());
+                window._popupShownThisSession = true;
+            }, POPUP_DELAY_FIRST);
+        }
+
+        // Show again after interval, but only once more per session
         setInterval(function() {
+            if (!hasSeenRecentlyThisSession()) return;
             showPopup();
         }, POPUP_INTERVAL);
     });

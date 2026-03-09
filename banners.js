@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const bannerHTML = `
         <div class="banner-container">
             <div class="banner-slider" id="bannerSlider">
-                <a href="https://www.hfm.com/sv/en/?refid=374930" target="_blank" class="banner-slide banner-1">
+                <a href="https://www.hfm.com/sv/en/?refid=374930" target="_blank" rel="noopener noreferrer" class="banner-slide banner-1">
                     <div class="banner-content">
                         <div class="banner-icon">🏆</div>
                         <div class="banner-text">
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </a>
 
-                <a href="https://one.exnessonelink.com/a/y7scclopum" target="_blank" class="banner-slide banner-2">
+                <a href="https://one.exnessonelink.com/a/y7scclopum" target="_blank" rel="noopener noreferrer" class="banner-slide banner-2">
                     <div class="banner-content">
                         <div class="banner-icon">⚡</div>
                         <div class="banner-text">
