@@ -49,8 +49,11 @@
 	<meta name="robots" content="index, follow">
 	<link rel="canonical" href="https://worldbankfx.netlify.app/">
 
-	<!-- Open Graph / Facebook -->
-	<meta property="og:type" content="website">
+	<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%230a0a0a'/><rect width='100' height='100' rx='18' fill='none' stroke='%23ffd700' stroke-width='4'/><text x='50' y='38' font-family='Georgia,serif' font-size='22' font-weight='900' fill='%23ffd700' text-anchor='middle'>WB</text><text x='50' y='65' font-family='Georgia,serif' font-size='22' font-weight='900' fill='%23ffd700' text-anchor='middle'>FX</text></svg>">
+	<meta property="og:image" content="https://worldbankfx.netlify.app/og-image.jpg">
+	<meta property="og:image:width" content="1200">
+	<meta property="og:image:height" content="630">
+	<meta property="og:image:alt" content="WorldBankFx × Professor - Forex Trading & Tech Mastery">
 	<meta property="og:url" content="https://worldbankfx.netlify.app/">
 	<meta property="og:title" content="WorldBankFx × Professor | Forex Trading & Tech Mastery">
 	<meta property="og:description" content="Learn Forex Trading from 5 years of proven strategies. Free tools, custom indicators, professional mentorship, and tech tutoring. Start your journey to financial freedom.">
@@ -280,12 +283,10 @@
             z-index: 0;
         }
 
-        .hero-background video,
-        .hero-background img {
+        .hero-background canvas {
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            opacity: 0.4;
+            opacity: 0.5;
         }
 
         .hero-overlay {
@@ -955,9 +956,7 @@
 
     <section class="hero" id="home">
         <div class="hero-background">
-            <video autoplay muted loop playsinline>
-                <source src="hero-background.mp4" type="video/mp4">
-            </video>
+            <canvas id="forexCanvas"></canvas>
         </div>
         
         <div class="hero-overlay"></div>
@@ -1226,7 +1225,7 @@
             <div id="modalPrice" style="font-size: 2.5rem; color: #00d4ff; font-weight: 900; margin-bottom: 30px;">$0</div>
             
             <div style="display: flex; flex-direction: column; gap: 15px;">
-                <a href="mailto:neemacharles777@gmail.com" style="padding: 18px; border-radius: 12px; border: 2px solid #0070ba; font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; color: #fff; background: #0070ba;">
+                <a href="/cdn-cgi/l/email-protection#cfa1aaaaa2aeaca7aebda3aabcf8f8f88fa8a2aea6a3e1aca0a2" style="padding: 18px; border-radius: 12px; border: 2px solid #0070ba; font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; color: #fff; background: #0070ba;">
                     💳 Pay with PayPal
                 </a>
                 
@@ -1240,9 +1239,9 @@
             </div>
             
             <div style="margin-top: 20px; padding: 20px; background: rgba(255, 215, 0, 0.1); border-radius: 10px; border: 1px solid rgba(255, 215, 0, 0.3);">
-                <p style="font-size: 0.9rem; color: #aaa; margin: 5px 0;"><strong style="color: #ffd700;">PayPal:</strong> neemacharles777@gmail.com</p>
+                <p style="font-size: 0.9rem; color: #aaa; margin: 5px 0;"><strong style="color: #ffd700;">PayPal:</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ed838888808c8e858c9f81889edadadaad8a808c8481c38e8280">[email&#160;protected]</a></p>
                 <p style="font-size: 0.9rem; color: #aaa; margin: 5px 0;"><strong style="color: #ffd700;">WhatsApp:</strong> +256 783 354 348</p>
-                <p style="font-size: 0.9rem; color: #aaa; margin: 5px 0;"><strong style="color: #ffd700;">Email:</strong> unlimited.worldbankfx@gmail.com</p>
+                <p style="font-size: 0.9rem; color: #aaa; margin: 5px 0;"><strong style="color: #ffd700;">Email:</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0f7a61636662667b6a6b2178607d636b6d6e616469774f68626e6663216c6062">[email&#160;protected]</a></p>
                 <p style="margin-top: 15px; font-size: 0.85rem; color: #aaa;">Choose your preferred payment method above. I'll respond within 24 hours!</p>
             </div>
         </div>
@@ -1256,17 +1255,20 @@
             </div>
             
             <div class="footer-social">
-                <a href="#" class="social-link">
+                <a href="https://www.instagram.com/_thedigitalprofessor/" target="_blank" rel="noopener noreferrer" class="social-link">
                     <i class="fab fa-instagram"></i>
                 </a>
-                <a href="#" class="social-link">
+                <a href="https://www.youtube.com/@TheWorldBankProfessor" target="_blank" rel="noopener noreferrer" class="social-link">
                     <i class="fab fa-youtube"></i>
                 </a>
-                <a href="#" class="social-link">
+                <a href="https://x.com/DigitoProfessor" target="_blank" rel="noopener noreferrer" class="social-link">
                     <i class="fab fa-twitter"></i>
                 </a>
-                <a href="#" class="social-link">
+                <a href="https://wa.me/256783354348" target="_blank" rel="noopener noreferrer" class="social-link">
                     <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="https://www.facebook.com/TheDig1talProfessor" target="_blank" rel="noopener noreferrer" class="social-link">
+                    <i class="fab fa-facebook"></i>
                 </a>
             </div>
             
@@ -1292,13 +1294,13 @@
                 </div>
                 <div class="footer-column">
                     <h4>Contact</h4>
-                    <p>unlimited.worldbankfx@gmail.com</p>
+                    <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="81f4efede8ece8f5e4e5aff6eef3ede5e3e0efeae7f9c1e6ece0e8edafe2eeec">[email&#160;protected]</a></p>
                     <p>+256 783 354 348</p>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p>© 2025 WorldBankFx × Professor. All rights reserved.</p>
+                <p>© 2025–2026 WorldBankFx × Professor. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -1307,7 +1309,7 @@
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         function toggleMobileMenu() {
             const mobileNav = document.getElementById('mobileNav');
             mobileNav.classList.toggle('active');
@@ -1358,7 +1360,7 @@
             document.getElementById('newYorkDay').textContent = days[newYork.getDay()];
             const nyHour = newYork.getHours();
             const nyDay = newYork.getDay();
-            const nyOpen = nyDay !== 0 && nyDay !== 6 && nyHour >= 9 && nyHour < 17;
+            const nyOpen = nyDay !== 0 && nyDay !== 6 && nyHour >= 8 && nyHour < 17;
             const nyWeekend = nyDay === 0 || nyDay === 6;
             document.getElementById('newYorkStatus').textContent = nyWeekend ? 'Weekend - Opens Monday' : (nyOpen ? 'Open' : 'Closed');
             document.getElementById('newYorkStatus').className = 'clock-status ' + (nyOpen ? 'open' : 'closed');
@@ -1429,19 +1431,129 @@
         });
 
         function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        document.addEventListener('click', function(event) {
-            const mobileNav = document.getElementById('mobileNav');
-            const mobileBtn = document.querySelector('.mobile-menu-btn');
-            
-            if (mobileNav.classList.contains('active') && 
-                !mobileNav.contains(event.target) && 
-                !mobileBtn.contains(event.target)) {
-                mobileNav.classList.remove('active');
+        // Forex Canvas Animation
+        (function() {
+            const canvas = document.getElementById('forexCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+
+            function resize() {
+                canvas.width = canvas.offsetWidth;
+                canvas.height = canvas.offsetHeight;
             }
-        });
+            resize();
+            window.addEventListener('resize', resize);
+
+            // Candlestick data
+            const candles = [];
+            const numCandles = 30;
+            let basePrice = 1.2500;
+
+            for (let i = 0; i < numCandles * 2; i++) {
+                const change = (Math.random() - 0.48) * 0.003;
+                basePrice += change;
+                const open = basePrice;
+                const close = open + (Math.random() - 0.5) * 0.002;
+                const high = Math.max(open, close) + Math.random() * 0.001;
+                const low = Math.min(open, close) - Math.random() * 0.001;
+                candles.push({ open, close, high, low });
+            }
+
+            // Floating currency pairs
+            const pairs = ['EUR/USD', 'GBP/JPY', 'USD/CHF', 'AUD/USD', 'NZD/USD', 'USD/CAD', 'EUR/GBP', 'XAU/USD'];
+            const floaters = pairs.map((pair, i) => ({
+                text: pair,
+                x: Math.random() * 100,
+                y: Math.random() * 100,
+                speed: 0.01 + Math.random() * 0.02,
+                opacity: 0.1 + Math.random() * 0.15,
+                size: 10 + Math.random() * 8,
+                dir: Math.random() > 0.5 ? 1 : -1
+            }));
+
+            // Grid lines
+            function drawGrid() {
+                ctx.strokeStyle = 'rgba(255, 215, 0, 0.04)';
+                ctx.lineWidth = 1;
+                const cols = 12, rows = 8;
+                for (let i = 0; i <= cols; i++) {
+                    ctx.beginPath();
+                    ctx.moveTo((canvas.width / cols) * i, 0);
+                    ctx.lineTo((canvas.width / cols) * i, canvas.height);
+                    ctx.stroke();
+                }
+                for (let i = 0; i <= rows; i++) {
+                    ctx.beginPath();
+                    ctx.moveTo(0, (canvas.height / rows) * i);
+                    ctx.lineTo(canvas.width, (canvas.height / rows) * i);
+                    ctx.stroke();
+                }
+            }
+
+            // Draw candlesticks
+            function drawCandles(offset) {
+                const w = canvas.width;
+                const h = canvas.height;
+                const visibleCandles = candles.slice(0, numCandles);
+                const prices = visibleCandles.flatMap(c => [c.high, c.low]);
+                const minP = Math.min(...prices);
+                const maxP = Math.max(...prices);
+                const range = maxP - minP || 0.01;
+
+                const candleW = (w * 0.7) / numCandles;
+                const startX = w * 0.15;
+
+                visibleCandles.forEach((c, i) => {
+                    const x = startX + i * candleW + (offset % candleW);
+                    const bullish = c.close >= c.open;
+                    const color = bullish ? 'rgba(16, 185, 129, 0.7)' : 'rgba(239, 68, 68, 0.7)';
+
+                    const toY = p => h * 0.75 - ((p - minP) / range) * (h * 0.55);
+
+                    const openY = toY(c.open);
+                    const closeY = toY(c.close);
+                    const highY = toY(c.high);
+                    const lowY = toY(c.low);
+
+                    ctx.strokeStyle = color;
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.moveTo(x + candleW / 2, highY);
+                    ctx.lineTo(x + candleW / 2, lowY);
+                    ctx.stroke();
+
+                    ctx.fillStyle = color;
+                    const bodyTop = Math.min(openY, closeY);
+                    const bodyH = Math.abs(openY - closeY) || 1;
+                    ctx.fillRect(x + 1, bodyTop, candleW - 4, bodyH);
+                });
+            }
+
+            // Draw floating pairs
+            function drawFloaters(t) {
+                floaters.forEach(f => {
+                    f.y -= f.speed;
+                    if (f.y < -5) f.y = 105;
+                    ctx.font = `${f.size}px 'Courier New', monospace`;
+                    ctx.fillStyle = `rgba(255, 215, 0, ${f.opacity})`;
+                    ctx.fillText(f.text, (f.x / 100) * canvas.width, (f.y / 100) * canvas.height);
+                });
+            }
+
+            let offset = 0;
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                drawGrid();
+                drawCandles(offset);
+                drawFloaters(offset);
+                offset += 0.3;
+                requestAnimationFrame(animate);
+            }
+            animate();
+        })();
     </script>
 </body>
 </html>
