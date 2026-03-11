@@ -232,8 +232,8 @@
 </head>
 <body>
 
-<script src="banners.js"><\/script>
-<script src="popup-ads.js"><\/script>
+<script src="banners.js"></script>
+<script src="popup-ads.js"></script>
 
 <!-- NAV -->
 <nav>
@@ -750,6 +750,6 @@ function toast(m){const t=el('toast');t.textContent=m;t.classList.add('show');se
 function toggleMobileMenu(){document.getElementById('mobileNav').classList.toggle('active');}
 function toggleMobileDropdown(el2){const dc=el2.nextElementSibling,a=dc.classList.contains('active');document.querySelectorAll('.mobile-dropdown-content').forEach(c=>c.classList.remove('active'));if(!a)dc.classList.add('active');el2.querySelector('i').style.transform=dc.classList.contains('active')?'rotate(180deg)':'rotate(0deg)';}
 document.addEventListener('click',e=>{const n=document.getElementById('mobileNav'),b=document.querySelector('.mobile-menu-btn');if(n&&b&&!n.contains(e.target)&&!b.contains(e.target))n.classList.remove('active');});
-<\/script>
+</script>
 </body>
 </html>
