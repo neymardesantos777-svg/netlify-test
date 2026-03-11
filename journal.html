@@ -486,7 +486,7 @@
             <div class="footer-column"><h4>Quick Links</h4><a href="index.html">Home</a><a href="services.html">Services</a><a href="shop.html">Shop</a><a href="contact.html">Contact</a></div>
             <div class="footer-column"><h4>Tools</h4><a href="pip-calculator.html">Pip Calculator</a><a href="trading-growth-calculator.html">Growth Calculator</a><a href="traders-playground.html">Trading Games</a></div>
             <div class="footer-column"><h4>Resources</h4><a href="blog.html">Blog</a><a href="news.html">Forex News</a><a href="journal.html">Trading Journal</a></div>
-            <div class="footer-column"><h4>Contact</h4><p>unlimited.worldbankfx@gmail.com</p><p>+256 783 354 348</p></div>
+            <div class="footer-column"><h4>Contact</h4><p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4633282a2f2b2f322322683129342a222427282d203e06212b272f2a6825292b">[email&#160;protected]</a></p><p>+256 783 354 348</p></div>
         </div>
         <div class="footer-bottom"><p>&copy; 2025 WorldBankFx &times; Professor. All rights reserved.</p></div>
     </div>
@@ -494,7 +494,7 @@
 
 <div class="toast" id="toast"></div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const {createClient}=supabase;
 const sb=createClient('https://ssemqcoabqinyherbhbx.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNzZW1xY29hYnFpbnloZXJiaGJ4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjY3Mzk0NjAsImV4cCI6MjA4MjMxNTQ2MH0.kcXi4tMKwv2sXENKJETWNbzPKjkKjgMmcXtIqkg65lI');
 
@@ -504,11 +504,13 @@ document.getElementById('f-date').value=new Date().toISOString().split('T')[0];
 
 // INIT
 async function init(){
+    const timeout=setTimeout(()=>{if(!user)showAuth();},6000);
     try{
         const{data:{session}}=await sb.auth.getSession();
+        clearTimeout(timeout);
         if(session?.user){user=session.user;await boot();}
         else showAuth();
-    }catch(e){console.error(e);showAuth();}
+    }catch(e){clearTimeout(timeout);console.error(e);showAuth();}
 }
 sb.auth.onAuthStateChange(async(ev,sess)=>{
     if(ev==='SIGNED_IN'&&sess?.user){user=sess.user;await boot();}
@@ -601,14 +603,15 @@ async function doRegister(){
 }
 
 async function doLogout(){
-    try{await sb.auth.signOut();}catch(e){console.log(e);}
-    user=null;profile=null;trades=[];
-    if(chart){chart.destroy();chart=null;}
-    showAuth();
-    switchTab('login');
-    document.getElementById('loginEmail').value='';
-    document.getElementById('loginPass').value='';
-    toast('Signed out successfully');
+    try{
+        await sb.auth.signOut();
+    }catch(e){
+        console.log('Signout error (ignored):', e);
+    }finally{
+        // Hard reload — works 100% on all devices including mobile
+        // Clears all JS state, cached session, everything
+        window.location.href = window.location.pathname + '?logout=' + Date.now();
+    }
 }
 
 // TRADES
@@ -748,8 +751,4 @@ function toast(m){const t=el('toast');t.textContent=m;t.classList.add('show');se
 
 // NAV
 function toggleMobileMenu(){document.getElementById('mobileNav').classList.toggle('active');}
-function toggleMobileDropdown(el2){const dc=el2.nextElementSibling,a=dc.classList.contains('active');document.querySelectorAll('.mobile-dropdown-content').forEach(c=>c.classList.remove('active'));if(!a)dc.classList.add('active');el2.querySelector('i').style.transform=dc.classList.contains('active')?'rotate(180deg)':'rotate(0deg)';}
-document.addEventListener('click',e=>{const n=document.getElementById('mobileNav'),b=document.querySelector('.mobile-menu-btn');if(n&&b&&!n.contains(e.target)&&!b.contains(e.target))n.classList.remove('active');});
-</script>
-</body>
-</html>
+function toggleMobileDropdown(el2){const dc=el2.nextElementSibling,a=dc.classList.contains('active');document.querySelectorAll('.mobile-dropdown-content').forEach(c=>c.classList.remove('active'));if(!a)dc.classList.add('active');el2.querySelector('i').style.transform=dc.classList.contains('active')?'rotate(180deg)':'rotate(0deg)';
