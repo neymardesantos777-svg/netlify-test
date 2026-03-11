@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="banners.css">
     <link rel="stylesheet" href="popup-ads.css">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%230a0a0a'/><rect width='100' height='100' rx='18' fill='none' stroke='%23ffd700' stroke-width='4'/><text x='50' y='38' font-family='Georgia,serif' font-size='22' font-weight='900' fill='%23ffd700' text-anchor='middle'>WB</text><text x='50' y='65' font-family='Georgia,serif' font-size='22' font-weight='900' fill='%23ffd700' text-anchor='middle'>FX</text></svg>">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
         html{scroll-behavior:smooth}
@@ -304,7 +304,7 @@
 <div class="journal-wrapper">
 
 <!-- LOADING SCREEN -->
-<div id="loadingScreen" style="display:flex;align-items:center;justify-content:center;min-height:calc(100vh - 120px);flex-direction:column;gap:18px;">
+<div id="loadingScreen" style="display:flex;align-items:center;justify-content:center;min-height:calc(100vh - 120px);flex-direction:column;gap:18px;background:#0a0a0a;">
     <div style="font-size:1.5rem;font-weight:900;background:linear-gradient(135deg,#ffd700,#ffed4e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">WorldBankFx</div>
     <div class="dots"><span></span><span></span><span></span></div>
     <div style="font-size:0.75rem;color:#333;">Loading your journal...</div>
@@ -502,6 +502,15 @@
 <div class="toast" id="toast"></div>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// Safety net: if anything crashes before auth resolves, show auth instead of black screen
+window.onerror = function(){ 
+    const l=document.getElementById('loadingScreen');
+    const a=document.getElementById('authScreen');
+    if(l)l.style.display='none';
+    if(a)a.classList.add('visible');
+    return false;
+};
+try{
 const {createClient}=supabase;
 const sb=createClient('https://ssemqcoabqinyherbhbx.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNzZW1xY29hYnFpbnloZXJiaGJ4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjY3Mzk0NjAsImV4cCI6MjA4MjMxNTQ2MH0.kcXi4tMKwv2sXENKJETWNbzPKjkKjgMmcXtIqkg65lI');
 
@@ -803,4 +812,7 @@ function toast(m){const t=el('toast');t.textContent=m;t.classList.add('show');se
 
 // NAV
 function toggleMobileMenu(){document.getElementById('mobileNav').classList.toggle('active');}
-function toggleMobileDropdown(el2){const dc=el2.nextElementSibling,a=dc.classList.contains('active');document.querySelectorAll('.mobile-dropdown-content').forEach(c=>c.classList.remove('active'));if(!a)dc.classList.add('active');el2.querySelector('i').style.transform=dc.classList.contains('active')?'rotate(180deg)':'rotate(0deg)';
+function toggleMobileDropdown(el2){const dc=el2.nextElementSibling,a=dc.classList.contains('active');document.querySelectorAll('.mobile-dropdown-content').forEach(c=>c.classList.remove('active'));if(!a)dc.classList.add('active');el2.querySelector('i').style.transform=dc.classList.contains('active')?'rotate(180deg)':'rotate(0deg)';}
+}catch(e){console.error('Journal init error:',e);const l=document.getElementById('loadingScreen');const a=document.getElementById('authScreen');if(l)l.style.display='none';if(a)a.classList.add('visible');}
+</script>
+</body></html>
