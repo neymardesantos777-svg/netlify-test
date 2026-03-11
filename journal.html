@@ -525,7 +525,7 @@ function hideLoader(){const l=document.getElementById('loadingScreen');if(l)l.st
 let authReady=false;
 sb.auth.onAuthStateChange(async(ev,sess)=>{
     if(ev==='SIGNED_IN'&&sess?.user){
-        if(booting)return; // already handling
+        if(booting||user)return; // already handling
         user=sess.user;await boot();
     }else if(ev==='SIGNED_OUT'||ev==='USER_DELETED'){
         user=null;profile=null;trades=[];booting=false;
@@ -625,9 +625,9 @@ async function doLogin(){
     if(!email||!pass){setMsg('Please fill in all fields.','error');return;}
     const btn=document.getElementById('loginBtn');
     btn.disabled=true;btn.textContent='Signing in...';setMsg('','');
-    const{error}=await sb.auth.signInWithPassword({email,password:pass});
-    btn.disabled=false;btn.textContent='Sign In \u2192';
-    if(error)setMsg(error.message,'error');
+    const{data,error}=await sb.auth.signInWithPassword({email,password:pass});
+    if(error){btn.disabled=false;btn.textContent='Sign In →';setMsg(error.message,'error');return;}
+    if(data?.user){user=data.user;btn.textContent='Loading...';await boot();}
 }
 
 async function doRegister(){
