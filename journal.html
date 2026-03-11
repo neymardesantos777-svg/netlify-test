@@ -502,15 +502,6 @@
 <div class="toast" id="toast"></div>
 
 <script>
-// Safety net: if anything crashes before auth resolves, show auth instead of black screen
-window.onerror = function(){ 
-    const l=document.getElementById('loadingScreen');
-    const a=document.getElementById('authScreen');
-    if(l)l.style.display='none';
-    if(a)a.classList.add('visible');
-    return false;
-};
-try{
 const {createClient}=supabase;
 const sb=createClient('https://ssemqcoabqinyherbhbx.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNzZW1xY29hYnFpbnloZXJiaGJ4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjY3Mzk0NjAsImV4cCI6MjA4MjMxNTQ2MH0.kcXi4tMKwv2sXENKJETWNbzPKjkKjgMmcXtIqkg65lI');
 
@@ -812,7 +803,6 @@ function toast(m){const t=el('toast');t.textContent=m;t.classList.add('show');se
 
 // NAV
 function toggleMobileMenu(){document.getElementById('mobileNav').classList.toggle('active');}
-function toggleMobileDropdown(el2){const dc=el2.nextElementSibling,a=dc.classList.contains('active');document.querySelectorAll('.mobile-dropdown-content').forEach(c=>c.classList.remove('active'));if(!a)dc.classList.add('active');el2.querySelector('i').style.transform=dc.classList.contains('active')?'rotate(180deg)':'rotate(0deg)';}
-}catch(e){console.error('Journal init error:',e);const l=document.getElementById('loadingScreen');const a=document.getElementById('authScreen');if(l)l.style.display='none';if(a)a.classList.add('visible');}
+function toggleMobileDropdown(el2){const dc=el2.nextElementSibling,a=dc.classList.contains('active');document.querySelectorAll('.mobile-dropdown-content').forEach(c=>c.classList.remove('active'));if(!a)dc.classList.add('active');el2.querySelector('i').style.transform=dc.classList.contains('active')?'rotate(180deg)':'rotate(0deg)');}
 </script>
 </body></html>
