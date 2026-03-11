@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="banners.css">
     <link rel="stylesheet" href="popup-ads.css">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%230a0a0a'/><rect width='100' height='100' rx='18' fill='none' stroke='%23ffd700' stroke-width='4'/><text x='50' y='38' font-family='Georgia,serif' font-size='22' font-weight='900' fill='%23ffd700' text-anchor='middle'>WB</text><text x='50' y='65' font-family='Georgia,serif' font-size='22' font-weight='900' fill='%23ffd700' text-anchor='middle'>FX</text></svg>">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" defer></script>
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
         html{scroll-behavior:smooth}
@@ -303,6 +303,13 @@
 
 <div class="journal-wrapper">
 
+<!-- LOADING SCREEN -->
+<div id="loadingScreen" style="display:flex;align-items:center;justify-content:center;min-height:calc(100vh - 120px);flex-direction:column;gap:18px;">
+    <div style="font-size:1.5rem;font-weight:900;background:linear-gradient(135deg,#ffd700,#ffed4e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">WorldBankFx</div>
+    <div class="dots"><span></span><span></span><span></span></div>
+    <div style="font-size:0.75rem;color:#333;">Loading your journal...</div>
+</div>
+
 <!-- AUTH SCREEN -->
 <div class="auth-screen" id="authScreen">
     <div class="auth-bg"></div>
@@ -499,36 +506,65 @@ const {createClient}=supabase;
 const sb=createClient('https://ssemqcoabqinyherbhbx.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNzZW1xY29hYnFpbnloZXJiaGJ4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjY3Mzk0NjAsImV4cCI6MjA4MjMxNTQ2MH0.kcXi4tMKwv2sXENKJETWNbzPKjkKjgMmcXtIqkg65lI');
 
 const FREE_LIMIT=5;
-let user=null,profile=null,trades=[],chart=null;
+let user=null,profile=null,trades=[],chart=null,booting=false;
 document.getElementById('f-date').value=new Date().toISOString().split('T')[0];
 
-// INIT
+// INIT — wait for DOMContentLoaded + scripts via defer
+function hideLoader(){const l=document.getElementById('loadingScreen');if(l)l.style.display='none';}
+
+// Guard: skip if already booting to prevent double-boot on SIGNED_IN after manual init
+let authReady=false;
+sb.auth.onAuthStateChange(async(ev,sess)=>{
+    if(ev==='SIGNED_IN'&&sess?.user){
+        if(booting)return; // already handling
+        user=sess.user;await boot();
+    }else if(ev==='SIGNED_OUT'||ev==='USER_DELETED'){
+        user=null;profile=null;trades=[];booting=false;
+        hideLoader();showAuth();
+    }
+});
+
 async function init(){
-    const timeout=setTimeout(()=>{if(!user)showAuth();},6000);
+    // If we're here from a logout redirect, force clear and show auth immediately
+    if(window.location.search.includes('logout=')){
+        // wipe any lingering Supabase localStorage keys
+        Object.keys(localStorage).filter(k=>k.startsWith('sb-')).forEach(k=>localStorage.removeItem(k));
+        hideLoader();showAuth();
+        // clean URL without reload
+        history.replaceState(null,'',window.location.pathname);
+        return;
+    }
     try{
         const{data:{session}}=await sb.auth.getSession();
-        clearTimeout(timeout);
         if(session?.user){user=session.user;await boot();}
-        else showAuth();
-    }catch(e){clearTimeout(timeout);console.error(e);showAuth();}
+        else{hideLoader();showAuth();}
+    }catch(e){
+        console.error('Init error:',e);
+        hideLoader();showAuth();
+    }
 }
-sb.auth.onAuthStateChange(async(ev,sess)=>{
-    if(ev==='SIGNED_IN'&&sess?.user){user=sess.user;await boot();}
-    else if(ev==='SIGNED_OUT'){user=null;profile=null;trades=[];showAuth();}
-});
 init();
 
 function showAuth(){
+    document.getElementById('loadingScreen').style.display='none';
     document.getElementById('authScreen').classList.add('visible');
     document.getElementById('appShell').classList.remove('visible');
+    booting=false;
 }
 async function boot(){
+    if(booting)return;
+    booting=true;
+    document.getElementById('loadingScreen').style.display='none';
     document.getElementById('authScreen').classList.remove('visible');
     document.getElementById('appShell').classList.add('visible');
     await loadProfile();
     await loadTrades();
     renderDash();
     updateUI();
+    // Restore last active tab
+    const lastTab=sessionStorage.getItem('jtab')||'dashboard';
+    showTab(lastTab);
+    booting=false;
 }
 
 // PROFILE
@@ -604,12 +640,13 @@ async function doRegister(){
 
 async function doLogout(){
     try{
-        await sb.auth.signOut();
+        await sb.auth.signOut({scope:'local'}); // clear local session only (fast)
     }catch(e){
         console.log('Signout error (ignored):', e);
     }finally{
-        // Hard reload — works 100% on all devices including mobile
-        // Clears all JS state, cached session, everything
+        // Manually wipe all Supabase storage keys so next login starts clean
+        Object.keys(localStorage).filter(k=>k.startsWith('sb-')).forEach(k=>localStorage.removeItem(k));
+        Object.keys(sessionStorage).filter(k=>k.startsWith('sb-')).forEach(k=>sessionStorage.removeItem(k));
         window.location.href = window.location.pathname + '?logout=' + Date.now();
     }
 }
@@ -629,8 +666,13 @@ async function logTrade(){
     const{error}=await sb.from('trades').insert([t]);
     if(error){toast('\u274C '+error.message);return;}
     toast('\u2705 Trade saved to cloud!');
+    // Clear volatile fields (keep pair/session/direction as they often repeat)
     document.getElementById('f-pnl').value='';
+    document.getElementById('f-entry').value='';
+    document.getElementById('f-exit').value='';
+    document.getElementById('f-sl').value='';
     document.getElementById('f-notes').value='';
+    document.getElementById('f-date').value=new Date().toISOString().split('T')[0];
     await loadTrades();renderDash();updateUI();showTab('dashboard');
 }
 
@@ -722,21 +764,31 @@ async function genReport(){
     const prompt=`You are TradeIQ, an expert forex coach. The trader's name is ${name} and they use WorldBankFx x Professor platform. Analyze their trade log and write a professional, honest, actionable report.\n\nTRADE LOG:\n${summary}\n\nSTATS: Trades: ${trades.length} | Win rate: ${wr}% | Total P&L: $${totPnl.toFixed(2)} | Wins: ${wins.length} | Losses: ${trades.length-wins.length}\n\nWrite a comprehensive report:\n1. PERFORMANCE OVERVIEW\n2. PATTERN ANALYSIS (pairs, sessions, setups, emotions)\n3. PSYCHOLOGY ASSESSMENT\n4. CRITICAL WEAKNESSES (be direct)\n5. STRENGTHS TO BUILD ON\n6. 30-DAY IMPROVEMENT PLAN (3-5 specific steps)\n\nUse ${name}'s name occasionally. Reference their actual data. Be direct, specific, and encouraging.`;
     try{
         const res=await fetch('/.netlify/functions/ai-report',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt})});
-        if(!res.ok)throw new Error('Server returned '+res.status);
+        if(res.status===401||res.status===403){
+            out.innerHTML='<div class="rbody" style="color:#ff4757">Your session has expired. Please log out and log back in, then try again.</div>';
+            return;
+        }
+        if(!res.ok)throw new Error('Server error ('+res.status+'). Please try again in a moment.');
         const d=await res.json();
         out.innerHTML='<div class="rbody">'+(d.text||'No response generated.').replace(/\n/g,'<br/>')+'</div>';
     }catch(e){
-        out.innerHTML='<div class="rbody" style="color:#ff4757">Could not generate report.\n\nError: '+e.message+'\n\nContact us on WhatsApp: +256 783 354 348</div>';
+        out.innerHTML='<div class="rbody" style="color:#ff4757">Could not generate report. Please check your connection and try again.\n\nNeed help? WhatsApp: +256 783 354 348</div>';
     }
 }
 
 // TABS
 function showTab(id){
+    const validTabs=['dashboard','log','analysis','report'];
+    if(!validTabs.includes(id))id='dashboard';
     document.querySelectorAll('.jpage').forEach(p=>p.classList.remove('active'));
     document.querySelectorAll('.jtab').forEach(t=>t.classList.remove('active'));
-    el('tab-'+id).classList.add('active');
+    const page=el('tab-'+id);
+    if(!page)return;
+    page.classList.add('active');
     const m={dashboard:0,log:1,analysis:2,report:3};
-    document.querySelectorAll('.jtab')[m[id]].classList.add('active');
+    const tabEl=document.querySelectorAll('.jtab')[m[id]];
+    if(tabEl)tabEl.classList.add('active');
+    sessionStorage.setItem('jtab',id);
     if(id==='analysis')renderAnalysis();
 }
 
