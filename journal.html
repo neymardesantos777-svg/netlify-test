@@ -506,38 +506,59 @@ const {createClient}=supabase;
 const sb=createClient('https://ssemqcoabqinyherbhbx.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNzZW1xY29hYnFpbnloZXJiaGJ4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjY3Mzk0NjAsImV4cCI6MjA4MjMxNTQ2MH0.kcXi4tMKwv2sXENKJETWNbzPKjkKjgMmcXtIqkg65lI');
 
 const FREE_LIMIT=5;
-let user=null,profile=null,trades=[],chart=null,booting=false;
+let user=null,profile=null,trades=[],chart=null,booting=false,intentionalLogout=false;
 document.getElementById('f-date').value=new Date().toISOString().split('T')[0];
 
-// INIT — wait for DOMContentLoaded + scripts via defer
 function hideLoader(){const l=document.getElementById('loadingScreen');if(l)l.style.display='none';}
 
-// Guard: skip if already booting to prevent double-boot on SIGNED_IN after manual init
-let authReady=false;
+// Auth state listener — only fires for events we didn't trigger manually
 sb.auth.onAuthStateChange(async(ev,sess)=>{
+    // If we're doing an intentional logout, ignore all events — doLogout handles UI directly
+    if(intentionalLogout)return;
     if(ev==='SIGNED_IN'&&sess?.user){
-        if(booting||user)return; // already handling
-        user=sess.user;await boot();
+        // Only handle if init() hasn't already picked up the session
+        if(booting||user)return;
+        user=sess.user;
+        await boot();
     }else if(ev==='SIGNED_OUT'||ev==='USER_DELETED'){
+        // Session expired externally (not from our logout button)
         user=null;profile=null;trades=[];booting=false;
         hideLoader();showAuth();
     }
 });
 
+// Boot timeout safety net — if boot hangs for >8s, show auth instead of spinning forever
+let bootTimer=null;
+function startBootTimeout(){
+    bootTimer=setTimeout(()=>{
+        if(booting){
+            console.warn('Boot timeout — falling back to auth screen');
+            booting=false;
+            user=null;profile=null;trades=[];
+            hideLoader();showAuth();
+        }
+    },8000);
+}
+function clearBootTimeout(){if(bootTimer){clearTimeout(bootTimer);bootTimer=null;}}
+
 async function init(){
-    // If we're here from a logout redirect, force clear and show auth immediately
+    // Logout redirect: clear all storage and show auth cleanly
     if(window.location.search.includes('logout=')){
-        // wipe any lingering Supabase localStorage keys
         Object.keys(localStorage).filter(k=>k.startsWith('sb-')).forEach(k=>localStorage.removeItem(k));
+        Object.keys(sessionStorage).filter(k=>k.startsWith('sb-')).forEach(k=>sessionStorage.removeItem(k));
         hideLoader();showAuth();
-        // clean URL without reload
         history.replaceState(null,'',window.location.pathname);
         return;
     }
     try{
-        const{data:{session}}=await sb.auth.getSession();
-        if(session?.user){user=session.user;await boot();}
-        else{hideLoader();showAuth();}
+        const{data:{session},error}=await sb.auth.getSession();
+        if(error)throw error;
+        if(session?.user){
+            user=session.user;
+            await boot();
+        }else{
+            hideLoader();showAuth();
+        }
     }catch(e){
         console.error('Init error:',e);
         hideLoader();showAuth();
@@ -550,21 +571,33 @@ function showAuth(){
     document.getElementById('authScreen').classList.add('visible');
     document.getElementById('appShell').classList.remove('visible');
     booting=false;
+    // Reset login button state in case it got stuck
+    const btn=document.getElementById('loginBtn');
+    if(btn){btn.disabled=false;btn.textContent='Sign In \u2192';}
 }
+
 async function boot(){
     if(booting)return;
     booting=true;
-    document.getElementById('loadingScreen').style.display='none';
-    document.getElementById('authScreen').classList.remove('visible');
-    document.getElementById('appShell').classList.add('visible');
-    await loadProfile();
-    await loadTrades();
-    renderDash();
-    updateUI();
-    // Restore last active tab
-    const lastTab=sessionStorage.getItem('jtab')||'dashboard';
-    showTab(lastTab);
-    booting=false;
+    startBootTimeout();
+    try{
+        document.getElementById('loadingScreen').style.display='none';
+        document.getElementById('authScreen').classList.remove('visible');
+        document.getElementById('appShell').classList.add('visible');
+        await loadProfile();
+        await loadTrades();
+        renderDash();
+        updateUI();
+        const lastTab=sessionStorage.getItem('jtab')||'dashboard';
+        showTab(lastTab);
+    }catch(e){
+        console.error('Boot failed:',e);
+        user=null;profile=null;trades=[];
+        hideLoader();showAuth();
+    }finally{
+        clearBootTimeout();
+        booting=false;
+    }
 }
 
 // PROFILE
@@ -616,9 +649,21 @@ async function doLogin(){
     if(!email||!pass){setMsg('Please fill in all fields.','error');return;}
     const btn=document.getElementById('loginBtn');
     btn.disabled=true;btn.textContent='Signing in...';setMsg('','');
-    const{data,error}=await sb.auth.signInWithPassword({email,password:pass});
-    if(error){btn.disabled=false;btn.textContent='Sign In →';setMsg(error.message,'error');return;}
-    if(data?.user){user=data.user;btn.textContent='Loading...';await boot();}
+    try{
+        const{data,error}=await sb.auth.signInWithPassword({email,password:pass});
+        if(error){
+            btn.disabled=false;btn.textContent='Sign In →';
+            let msg=error.message;
+            if(msg.includes('Invalid login')||msg.includes('invalid_credentials'))msg='Incorrect email or password. Please try again.';
+            else if(msg.includes('Email not confirmed'))msg='Please verify your email first — check your inbox for the confirmation link.';
+            setMsg(msg,'error');return;
+        }
+        if(data?.user){user=data.user;btn.textContent='Loading...';await boot();}
+        else{btn.disabled=false;btn.textContent='Sign In →';setMsg('Login failed. Please try again.','error');}
+    }catch(e){
+        btn.disabled=false;btn.textContent='Sign In →';
+        setMsg('Connection error. Check your internet and try again.','error');
+    }
 }
 
 async function doRegister(){
@@ -632,23 +677,42 @@ async function doRegister(){
     if(pass.length<6){setMsg('Password must be at least 6 characters.','error');return;}
     const btn=document.getElementById('regBtn');
     btn.disabled=true;btn.textContent='Creating account...';setMsg('','');
-    const{data,error}=await sb.auth.signUp({email,password:pass,options:{data:{display_name:name}}});
-    btn.disabled=false;btn.textContent='Create Free Account \u2192';
-    if(error){setMsg(error.message,'error');return;}
-    if(!data?.session)setMsg('Account created! Check your email to verify, then sign in.','success');
+    try{
+        const{data,error}=await sb.auth.signUp({email,password:pass,options:{data:{display_name:name}}});
+        btn.disabled=false;btn.textContent='Create Free Account →';
+        if(error){setMsg(error.message,'error');return;}
+        if(data?.session&&data?.user){
+            user=data.user;btn.textContent='Loading...';await boot();
+        }else{
+            setMsg('✅ Account created! Check your email for a confirmation link, then sign in.','success');
+            switchTab('login');
+            document.getElementById('loginEmail').value=email;
+        }
+    }catch(e){
+        btn.disabled=false;btn.textContent='Create Free Account →';
+        setMsg('Connection error. Check your internet and try again.','error');
+    }
 }
 
 async function doLogout(){
+    // Set flag BEFORE signOut so the auth listener ignores the SIGNED_OUT event
+    intentionalLogout=true;
+    const logoutBtn=document.querySelector('.btn-logout');
+    if(logoutBtn){logoutBtn.disabled=true;logoutBtn.textContent='Signing out...';}
     try{
-        await sb.auth.signOut({scope:'local'}); // clear local session only (fast)
+        await sb.auth.signOut({scope:'local'});
     }catch(e){
-        console.log('Signout error (ignored):', e);
-    }finally{
-        // Manually wipe all Supabase storage keys so next login starts clean
-        Object.keys(localStorage).filter(k=>k.startsWith('sb-')).forEach(k=>localStorage.removeItem(k));
-        Object.keys(sessionStorage).filter(k=>k.startsWith('sb-')).forEach(k=>sessionStorage.removeItem(k));
-        window.location.href = window.location.pathname + '?logout=' + Date.now();
+        console.log('Signout error (non-fatal):',e);
     }
+    // Wipe all Supabase storage
+    Object.keys(localStorage).filter(k=>k.startsWith('sb-')).forEach(k=>localStorage.removeItem(k));
+    Object.keys(sessionStorage).filter(k=>k.startsWith('sb-')).forEach(k=>sessionStorage.removeItem(k));
+    // Reset state and show auth cleanly (no redirect needed)
+    user=null;profile=null;trades=[];booting=false;intentionalLogout=false;
+    document.getElementById('loginEmail').value='';
+    document.getElementById('loginPass').value='';
+    setMsg('','');
+    hideLoader();showAuth();
 }
 
 // TRADES
@@ -763,7 +827,10 @@ async function genReport(){
     const summary=trades.map((t,i)=>`Trade ${i+1}: ${t.pair} ${t.direction} | P&L: $${t.pnl} | Session: ${t.session} | Emotion: ${t.emotion} | Setup: ${t.setup} | Notes: ${(t.notes||'').substring(0,80)}`).join('\n');
     const prompt=`You are TradeIQ, an expert forex coach. The trader's name is ${name} and they use WorldBankFx x Professor platform. Analyze their trade log and write a professional, honest, actionable report.\n\nTRADE LOG:\n${summary}\n\nSTATS: Trades: ${trades.length} | Win rate: ${wr}% | Total P&L: $${totPnl.toFixed(2)} | Wins: ${wins.length} | Losses: ${trades.length-wins.length}\n\nWrite a comprehensive report:\n1. PERFORMANCE OVERVIEW\n2. PATTERN ANALYSIS (pairs, sessions, setups, emotions)\n3. PSYCHOLOGY ASSESSMENT\n4. CRITICAL WEAKNESSES (be direct)\n5. STRENGTHS TO BUILD ON\n6. 30-DAY IMPROVEMENT PLAN (3-5 specific steps)\n\nUse ${name}'s name occasionally. Reference their actual data. Be direct, specific, and encouraging.`;
     try{
-        const res=await fetch('/.netlify/functions/ai-report',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt})});
+        // Get current session token to authenticate the request
+        const{data:{session:sess}}=await sb.auth.getSession();
+        const jwt=sess?.access_token||'';
+        const res=await fetch('/.netlify/functions/ai-report',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+jwt},body:JSON.stringify({prompt})});
         if(res.status===401||res.status===403){
             out.innerHTML='<div class="rbody" style="color:#ff4757">Your session has expired. Please log out and log back in, then try again.</div>';
             return;
@@ -803,6 +870,6 @@ function toast(m){const t=el('toast');t.textContent=m;t.classList.add('show');se
 
 // NAV
 function toggleMobileMenu(){document.getElementById('mobileNav').classList.toggle('active');}
-function toggleMobileDropdown(el2){const dc=el2.nextElementSibling,a=dc.classList.contains('active');document.querySelectorAll('.mobile-dropdown-content').forEach(c=>c.classList.remove('active'));if(!a)dc.classList.add('active');el2.querySelector('i').style.transform=dc.classList.contains('active')?'rotate(180deg)':'rotate(0deg)');}
+function toggleMobileDropdown(el2){const dc=el2.nextElementSibling,a=dc.classList.contains('active');document.querySelectorAll('.mobile-dropdown-content').forEach(c=>c.classList.remove('active'));if(!a)dc.classList.add('active');el2.querySelector('i').style.transform=dc.classList.contains('active')?'rotate(180deg)':'rotate(0deg)';}
 </script>
 </body></html>
