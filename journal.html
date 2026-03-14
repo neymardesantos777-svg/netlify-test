@@ -986,14 +986,14 @@ function updateNavAvatar() {
   el('navPlanBadge').className = 'nav-plan-badge ' + (profile?.plan === 'pro' ? 'pro' : 'free');
 }
 
-// ── AUTH STATE ──
+// ── AUTH STATE (handles token refresh and logout only — init handles first load) ──
 sb.auth.onAuthStateChange(async (event, session) => {
   if (intentionalLogout) return;
-  if (event === 'SIGNED_IN' && session?.user) {
+  if (event === 'TOKEN_REFRESHED' && session?.user) {
     user = session.user;
-    if (!booting) await boot();
-  } else if (event === 'SIGNED_OUT') {
-    if (!intentionalLogout) showAuth();
+  } else if (event === 'SIGNED_OUT' && !intentionalLogout) {
+    user = null; profile = null; trades = [];
+    showAuth();
   }
 });
 
@@ -1458,11 +1458,55 @@ document.addEventListener('keydown', e => {
 
 // ── INIT ──
 (async function init() {
-  const { data: { session } } = await sb.auth.getSession();
-  if (session?.user) { user = session.user; await boot(); }
-  else { showAuth(); }
-  const savedTab = sessionStorage.getItem('jtab');
-  if (savedTab) showTab(savedTab);
+  // Give Supabase a moment to rehydrate session from localStorage
+  // then fall back to onAuthStateChange which fires reliably
+  let resolved = false;
+
+  // Safety timeout — if nothing resolves in 4 seconds, show auth
+  const timeout = setTimeout(() => {
+    if (!resolved) {
+      resolved = true;
+      showAuth();
+    }
+  }, 4000);
+
+  // Primary: try getSession directly
+  try {
+    const { data: { session } } = await sb.auth.getSession();
+    if (session?.user) {
+      resolved = true;
+      clearTimeout(timeout);
+      user = session.user;
+      await boot();
+      const savedTab = sessionStorage.getItem('jtab');
+      if (savedTab) showTab(savedTab);
+      return;
+    }
+  } catch(e) {
+    console.warn('getSession failed:', e);
+  }
+
+  // Secondary: wait for onAuthStateChange to fire
+  // (handles the rehydration case where getSession returns null too early)
+  const unsub = sb.auth.onAuthStateChange(async (event, session) => {
+    if (resolved) return;
+    if (event === 'SIGNED_IN' && session?.user) {
+      resolved = true;
+      clearTimeout(timeout);
+      unsub.data?.subscription?.unsubscribe();
+      user = session.user;
+      if (!booting) await boot();
+      const savedTab = sessionStorage.getItem('jtab');
+      if (savedTab) showTab(savedTab);
+    } else if (event === 'SIGNED_OUT' || event === 'INITIAL_SESSION') {
+      if (!session?.user) {
+        resolved = true;
+        clearTimeout(timeout);
+        unsub.data?.subscription?.unsubscribe();
+        if (!intentionalLogout) showAuth();
+      }
+    }
+  });
 })();
 </script>
 </body>
