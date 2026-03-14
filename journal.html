@@ -304,6 +304,24 @@ body{font-family:var(--font-head);background:var(--bg);color:var(--text);min-hei
 .fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--gold)}
 .fg select option{background:var(--bg2)}
 .fg textarea{resize:vertical;min-height:80px;line-height:1.7}
+
+/* ── DATE PICKER DARK THEME ── */
+.fg input[type="date"]{
+  cursor:pointer;
+  color-scheme:dark;
+}
+.fg input[type="date"]::-webkit-calendar-picker-indicator{
+  filter:invert(0.8) sepia(1) saturate(3) hue-rotate(5deg);
+  cursor:pointer;
+  padding:2px;
+  border-radius:4px;
+  opacity:0.7;
+  transition:opacity 0.2s;
+}
+.fg input[type="date"]::-webkit-calendar-picker-indicator:hover{
+  opacity:1;
+  background:rgba(255,215,0,0.1);
+}
 .factions{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
 .bsub{
   padding:11px 26px;background:var(--gold);color:#000;border:none;border-radius:8px;
@@ -413,13 +431,38 @@ body{font-family:var(--font-head);background:var(--bg);color:var(--text);min-hei
   .j-tabs{padding:0 16px}
   .pricing-cards{grid-template-columns:1fr}
 }
+@media(max-width:600px){
+  .site-nav{padding:0 14px}
+  /* Hide the text name and plan badge in nav pill on small screens — just show avatar */
+  .nav-user-name{display:none}
+  .nav-plan-badge{display:none}
+  .nav-user-pill{padding:4px}
+  /* Hide "Main Site" text, keep icon only */
+  .nav-home-link span{display:none}
+  /* Make signout more compact */
+  .btn-signout{padding:5px 8px;font-size:0.58rem}
+}
 @media(max-width:480px){
   .stats-grid{grid-template-columns:1fr 1fr}
   .fgrid{grid-template-columns:1fr}
   .auth-body{padding:18px 14px}
   .modal-box{padding:26px 16px}
   .emotion-picker{grid-template-columns:1fr 1fr}
-  .site-nav{padding:0 16px}
+  .app-bar{flex-wrap:nowrap;gap:6px}
+  .app-bar-left{min-width:0;flex:1}
+  .app-name{font-size:0.7rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .trade-count-pill{display:none}
+  .app-bar-right{flex-shrink:0}
+  /* Compact trial bar on mobile */
+  .trial-bar-track{width:40px}
+  .trial-label{font-size:0.52rem}
+  .btn-upgrade{padding:5px 10px;font-size:0.6rem}
+  /* Profile modal full width on mobile */
+  .profile-modal{padding:24px 16px}
+  .pricing-cards{grid-template-columns:1fr}
+  /* Nav home link icon only */
+  .nav-home-link{font-size:0}
+  .nav-home-link i{font-size:0.9rem}
 }
 </style>
 </head>
@@ -539,7 +582,9 @@ body{font-family:var(--font-head);background:var(--bg);color:var(--text);min-hei
         <div class="trial-bar-track"><div class="trial-bar-fill" id="trialFill"></div></div>
         <span class="trial-label" id="trialLabel"></span>
       </div>
-      <button class="btn-upgrade" id="btnUpgrade" onclick="showModal()" style="display:none">⚡ Upgrade to Pro</button>
+      <button class="btn-upgrade" id="btnUpgrade" onclick="showModal()" style="display:none">⚡ Pro</button>
+      <!-- Always visible signout on mobile -->
+      <button class="btn-signout" id="appBarSignout" onclick="doLogout()" style="display:none">↩ Out</button>
     </div>
   </div>
 
@@ -1053,6 +1098,8 @@ function showApp() {
   el('appShell').classList.add('visible');
   el('navUserPill').classList.add('show');
   el('logoutBtn').style.display = 'block';
+  // Show signout in app bar on mobile (always visible regardless of nav crowding)
+  el('appBarSignout').style.display = window.innerWidth <= 600 ? 'block' : 'none';
   updateNavAvatar();
 }
 
