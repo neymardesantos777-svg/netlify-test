@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChartMate Pricing | WorldBankFx × Professor</title>
+  <meta name="description" content="Upgrade your trading journal. Unlock unlimited trades, advanced analysis and companion insights with ChartMate Pro.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%230a0a0a'/><rect width='100' height='100' rx='18' fill='none' stroke='%23ffd700' stroke-width='4'/><text x='50' y='38' font-family='Georgia,serif' font-size='22' font-weight='900' fill='%23ffd700' text-anchor='middle'>CM</text><text x='50' y='65' font-family='Georgia,serif' font-size='18' font-weight='900' fill='%23ffd700' text-anchor='middle'>FX</text></svg>">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0a0a0a;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; width: 100%;
+      background: rgba(10,10,10,0.95); backdrop-filter: blur(10px);
+      z-index: 1000; border-bottom: 1px solid rgba(255,215,0,0.2);
+    }
+    .nav-container {
+      max-width: 1400px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 15px 30px;
+    }
+    .logo {
+      font-size: 1.3rem; font-weight: 900;
+      background: linear-gradient(135deg, #ffd700, #ffed4e);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .nav-links { display: flex; gap: 24px; list-style: none; align-items: center; }
+    .nav-links a { color: #fff; text-decoration: none; font-weight: 600; transition: color 0.3s; }
+    .nav-links a:hover { color: #ffd700; }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 140px 20px 80px;
+      text-align: center;
+      background: linear-gradient(180deg, #0a0a0a 0%, #0f0f1a 100%);
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,215,0,0.08); border: 1px solid rgba(255,215,0,0.2);
+      padding: 6px 16px; border-radius: 20px; margin-bottom: 24px;
+      font-size: 0.75rem; color: #ffd700; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; line-height: 1.15;
+      margin-bottom: 18px; letter-spacing: -1px;
+    }
+    .hero h1 span { color: #ffd700; }
+    .hero-sub {
+      font-size: 1.05rem; color: #aaa; max-width: 520px;
+      margin: 0 auto 40px; line-height: 1.8;
+    }
+    .free-note {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(0,230,118,0.07); border: 1px solid rgba(0,230,118,0.18);
+      padding: 8px 20px; border-radius: 8px; color: #00e676; font-size: 0.8rem; font-weight: 600;
+    }
+
+    /* ── PLAN TOGGLE ── */
+    .billing-toggle {
+      display: flex; align-items: center; justify-content: center;
+      gap: 14px; margin: 56px auto 40px; flex-wrap: wrap;
+    }
+    .billing-toggle span { color: #aaa; font-size: 0.9rem; font-weight: 600; }
+    .billing-toggle span.active { color: #fff; }
+    .toggle-track {
+      width: 52px; height: 28px; background: #1a1a1a;
+      border: 1px solid #333; border-radius: 14px;
+      cursor: pointer; position: relative; transition: background 0.3s;
+    }
+    .toggle-track.yearly { background: rgba(255,215,0,0.2); border-color: rgba(255,215,0,0.4); }
+    .toggle-thumb {
+      position: absolute; top: 3px; left: 3px;
+      width: 20px; height: 20px; background: #555; border-radius: 50%;
+      transition: all 0.3s; pointer-events: none;
+    }
+    .toggle-track.yearly .toggle-thumb { left: 27px; background: #ffd700; }
+    .save-badge {
+      background: rgba(0,230,118,0.1); border: 1px solid rgba(0,230,118,0.25);
+      color: #00e676; font-size: 0.72rem; font-weight: 700;
+      padding: 3px 10px; border-radius: 20px; letter-spacing: 0.05em;
+    }
+
+    /* ── CARDS GRID ── */
+    .plans-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 20px; max-width: 960px; margin: 0 auto; padding: 0 20px;
+    }
+    .plan-card {
+      background: #0f0f0f; border: 1px solid #222;
+      border-radius: 18px; padding: 30px 26px;
+      position: relative; transition: border-color 0.3s, transform 0.3s;
+      cursor: pointer;
+    }
+    .plan-card:hover { border-color: rgba(255,215,0,0.3); transform: translateY(-4px); }
+    .plan-card.featured {
+      border-color: #ffd700;
+      background: linear-gradient(180deg, rgba(255,215,0,0.06) 0%, #0f0f0f 100%);
+    }
+    .featured-badge {
+      position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+      background: linear-gradient(135deg, #ffd700, #ffe94d);
+      color: #000; font-size: 0.65rem; font-weight: 800;
+      padding: 4px 16px; border-radius: 20px; letter-spacing: 0.08em; text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .plan-name {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: #777; margin-bottom: 14px;
+    }
+    .plan-price {
+      font-size: 2.8rem; font-weight: 900; letter-spacing: -2px;
+      line-height: 1; margin-bottom: 4px;
+    }
+    .plan-price .currency { font-size: 1.4rem; vertical-align: super; font-weight: 700; }
+    .plan-price .per { font-size: 0.85rem; font-weight: 400; color: #555; letter-spacing: 0; }
+    .plan-billed { font-size: 0.72rem; color: #555; margin-bottom: 6px; }
+    .plan-savings { font-size: 0.72rem; color: #00e676; font-weight: 700; min-height: 18px; margin-bottom: 22px; }
+    .plan-cta {
+      width: 100%; padding: 13px;
+      background: #1a1a1a; border: 1px solid #333;
+      color: #fff; font-weight: 700; font-size: 0.9rem;
+      border-radius: 10px; cursor: pointer; transition: all 0.25s;
+      margin-bottom: 22px;
+    }
+    .plan-card.featured .plan-cta {
+      background: linear-gradient(135deg, #ffd700, #ffe94d);
+      color: #000; border-color: transparent;
+    }
+    .plan-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,215,0,0.2); }
+    .plan-features { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .plan-features li {
+      display: flex; align-items: flex-start; gap: 9px;
+      font-size: 0.82rem; color: #bbb; line-height: 1.45;
+    }
+    .plan-features li i { color: #00e676; font-size: 0.72rem; margin-top: 3px; flex-shrink: 0; }
+    .plan-features li.muted { color: #444; }
+    .plan-features li.muted i { color: #333; }
+
+    /* ── FREE PLAN ── */
+    .free-plan-wrap {
+      max-width: 960px; margin: 20px auto 0; padding: 0 20px;
+    }
+    .free-plan {
+      background: #0f0f0f; border: 1px solid #1e1e1e;
+      border-radius: 14px; padding: 20px 26px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 14px;
+    }
+    .free-plan-left { display: flex; align-items: center; gap: 14px; }
+    .free-plan-icon { font-size: 1.6rem; }
+    .free-plan-text h4 { font-size: 1rem; font-weight: 800; margin-bottom: 3px; }
+    .free-plan-text p { font-size: 0.78rem; color: #666; }
+    .free-plan-cta {
+      padding: 10px 24px; background: none; border: 1px solid #333;
+      color: #aaa; font-size: 0.82rem; font-weight: 600;
+      border-radius: 8px; cursor: pointer; transition: all 0.2s; text-decoration: none;
+      display: inline-block;
+    }
+    .free-plan-cta:hover { border-color: #ffd700; color: #ffd700; }
+
+    /* ── PAYMENT MODAL ── */
+    .modal-bg {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.92); z-index: 9999;
+      align-items: center; justify-content: center; padding: 20px;
+    }
+    .modal-bg.show { display: flex; animation: fadeUp 0.2s ease; }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+    .modal-box {
+      background: #0f0f0f; border: 1px solid rgba(255,215,0,0.25);
+      border-radius: 20px; max-width: 480px; width: 100%;
+      padding: 36px 30px; position: relative;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.7);
+    }
+    .modal-x {
+      position: absolute; top: 14px; right: 16px;
+      background: none; border: none; color: #555; font-size: 1.4rem;
+      cursor: pointer; transition: color 0.2s; line-height: 1;
+    }
+    .modal-x:hover { color: #ff3d57; }
+    .modal-plan-label {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,215,0,0.08); border: 1px solid rgba(255,215,0,0.2);
+      padding: 4px 14px; border-radius: 20px; margin-bottom: 16px;
+      font-size: 0.68rem; color: #ffd700; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .modal-box h2 {
+      font-size: 1.6rem; font-weight: 900; margin-bottom: 6px; letter-spacing: -0.5px;
+    }
+    .modal-price-display {
+      font-size: 2.4rem; font-weight: 900; color: #ffd700;
+      letter-spacing: -1px; margin-bottom: 6px;
+    }
+    .modal-price-note { font-size: 0.75rem; color: #555; margin-bottom: 24px; }
+    .modal-divider {
+      text-align: center; font-size: 0.68rem; color: #444;
+      margin: 6px 0; letter-spacing: 0.1em; text-transform: uppercase;
+      position: relative;
+    }
+    .modal-divider::before, .modal-divider::after {
+      content: ''; position: absolute; top: 50%; width: 38%; height: 1px; background: #1e1e1e;
+    }
+    .modal-divider::before { left: 0; }
+    .modal-divider::after { right: 0; }
+    .pay-btns { display: flex; flex-direction: column; gap: 11px; }
+    .pay-btn {
+      width: 100%; padding: 14px; border: none; border-radius: 10px;
+      font-weight: 700; font-size: 0.92rem; cursor: pointer; transition: all 0.2s;
+      display: flex; align-items: center; justify-content: center;
+      gap: 10px; text-decoration: none; color: #fff;
+    }
+    .pay-btn:hover { transform: translateY(-2px); filter: brightness(1.08); }
+    .pay-btn-pp { background: #003087; }
+    .pay-btn-wa { background: #25D366; }
+    .pay-btn-em { background: #ea4335; }
+    .modal-ref {
+      margin-top: 20px; padding: 16px;
+      background: rgba(255,215,0,0.04); border: 1px solid rgba(255,215,0,0.12);
+      border-radius: 10px;
+    }
+    .modal-ref p { font-size: 0.78rem; color: #777; margin: 4px 0; line-height: 1.6; }
+    .modal-ref strong { color: #ffd700; }
+    .modal-note { font-size: 0.7rem; color: #444; text-align: center; margin-top: 14px; line-height: 1.7; }
+
+    /* ── FEATURES TABLE ── */
+    .features-section {
+      max-width: 860px; margin: 80px auto 0; padding: 0 20px;
+    }
+    .features-section h2 {
+      text-align: center; font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 900; margin-bottom: 40px; color: #ffd700;
+    }
+    .feat-table { width: 100%; border-collapse: collapse; }
+    .feat-table th {
+      padding: 12px 18px; text-align: center; font-size: 0.72rem;
+      color: #555; letter-spacing: 0.1em; text-transform: uppercase;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    .feat-table th:first-child { text-align: left; }
+    .feat-table td {
+      padding: 13px 18px; border-bottom: 1px solid #111;
+      font-size: 0.85rem; color: #bbb; vertical-align: middle;
+    }
+    .feat-table td:not(:first-child) { text-align: center; }
+    .feat-table tr:hover td { background: rgba(255,255,255,0.015); }
+    .feat-yes { color: #00e676; font-size: 1rem; }
+    .feat-no { color: #333; font-size: 1rem; }
+    .feat-cat { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #ffd700; padding-top: 22px !important; }
+
+    /* ── FAQ ── */
+    .faq-section {
+      max-width: 700px; margin: 80px auto 0; padding: 0 20px;
+    }
+    .faq-section h2 {
+      text-align: center; font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 900; margin-bottom: 36px;
+    }
+    .faq-item { border-bottom: 1px solid #1a1a1a; }
+    .faq-q {
+      width: 100%; background: none; border: none; color: #fff;
+      text-align: left; padding: 18px 0; font-size: 0.92rem; font-weight: 700;
+      cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+      gap: 14px; transition: color 0.2s;
+    }
+    .faq-q:hover { color: #ffd700; }
+    .faq-q i { color: #555; font-size: 0.8rem; transition: transform 0.25s; flex-shrink: 0; }
+    .faq-item.open .faq-q i { transform: rotate(180deg); color: #ffd700; }
+    .faq-a {
+      max-height: 0; overflow: hidden; transition: max-height 0.3s ease;
+      font-size: 0.85rem; color: #777; line-height: 1.9;
+    }
+    .faq-item.open .faq-a { max-height: 400px; padding-bottom: 18px; }
+
+    /* ── GUARANTEE ── */
+    .guarantee {
+      max-width: 640px; margin: 72px auto 0; padding: 0 20px;
+      text-align: center;
+    }
+    .guarantee-box {
+      background: #0f0f0f; border: 1px solid rgba(0,230,118,0.2);
+      border-radius: 16px; padding: 36px 30px;
+    }
+    .guarantee-box .gico { font-size: 2.8rem; margin-bottom: 14px; }
+    .guarantee-box h3 { font-size: 1.3rem; font-weight: 900; margin-bottom: 10px; }
+    .guarantee-box p { font-size: 0.85rem; color: #777; line-height: 1.9; }
+
+    /* ── FOOTER ── */
+    footer {
+      margin-top: 100px; padding: 50px 20px 36px;
+      background: #000; border-top: 1px solid #1a1a1a;
+      text-align: center;
+    }
+    footer p { color: #444; font-size: 0.82rem; margin: 6px 0; }
+    footer a { color: #ffd700; text-decoration: none; }
+
+    @media (max-width: 768px) {
+      .plans-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .billing-toggle { margin-top: 40px; }
+      .modal-box { padding: 28px 18px; }
+    }
+    @media (max-width: 480px) {
+      .nav-container { padding: 14px 16px; }
+      .logo { font-size: 0.9rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-container">
+    <a href="index.html" class="logo" style="text-decoration:none">WORLDBANKFX × PROFESSOR</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="journal.html">Open ChartMate</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">⚡ ChartMate Journal — Pricing</div>
+  <h1>Simple, honest pricing.<br><span>No hidden fees.</span></h1>
+  <p class="hero-sub">Start free with 10 trade logs — no card needed. Upgrade when you're ready to go unlimited.</p>
+  <div class="free-note"><i class="fas fa-check-circle"></i> Free forever plan available</div>
+</section>
+
+<!-- BILLING TOGGLE -->
+<div class="billing-toggle">
+  <span id="lbl-monthly" class="active">Monthly</span>
+  <div class="toggle-track" id="billingToggle" onclick="toggleBilling()">
+    <div class="toggle-thumb"></div>
+  </div>
+  <span id="lbl-yearly">Annual</span>
+  <span class="save-badge" id="saveBadge" style="display:none">Save up to 50% 🔥</span>
+</div>
+
+<!-- PLAN CARDS -->
+<div class="plans-grid">
+  <!-- Monthly -->
+  <div class="plan-card" id="card-monthly">
+    <div class="plan-name">Monthly</div>
+    <div class="plan-price"><span class="currency">$</span><span id="price-monthly">14</span><span class="per" id="per-monthly">.99/mo</span></div>
+    <div class="plan-billed" id="billed-monthly">Billed monthly</div>
+    <div class="plan-savings" id="save-monthly"></div>
+    <button class="plan-cta" onclick="openModal('monthly')">Get Pro — Monthly</button>
+    <ul class="plan-features">
+      <li><i class="fas fa-check-circle"></i> Unlimited trade logs</li>
+      <li><i class="fas fa-check-circle"></i> Full equity curve</li>
+      <li><i class="fas fa-check-circle"></i> Session, pair &amp; emotion analysis</li>
+      <li><i class="fas fa-check-circle"></i> Companion insights</li>
+      <li><i class="fas fa-check-circle"></i> Psychology tracker</li>
+      <li><i class="fas fa-check-circle"></i> Cancel anytime</li>
+    </ul>
+  </div>
+
+  <!-- Quarterly (featured) -->
+  <div class="plan-card featured" id="card-quarterly">
+    <div class="featured-badge">Most Popular 🔥</div>
+    <div class="plan-name">3-Month Bundle</div>
+    <div class="plan-price"><span class="currency">$</span><span id="price-quarterly">29</span><span class="per" id="per-quarterly">.99</span></div>
+    <div class="plan-billed" id="billed-quarterly">One payment, 3 months access</div>
+    <div class="plan-savings" id="save-quarterly">Save 33% vs monthly</div>
+    <button class="plan-cta" onclick="openModal('quarterly')">Get Pro — 3 Months</button>
+    <ul class="plan-features">
+      <li><i class="fas fa-check-circle"></i> Everything in Monthly</li>
+      <li><i class="fas fa-check-circle"></i> Priority support</li>
+      <li><i class="fas fa-check-circle"></i> Early access to new features</li>
+      <li><i class="fas fa-check-circle"></i> 33% savings</li>
+    </ul>
+  </div>
+
+  <!-- Annual -->
+  <div class="plan-card" id="card-yearly">
+    <div class="plan-name">Annual</div>
+    <div class="plan-price"><span class="currency">$</span><span id="price-yearly">89</span><span class="per" id="per-yearly">.99/yr</span></div>
+    <div class="plan-billed" id="billed-yearly">~$7.50/month, billed yearly</div>
+    <div class="plan-savings" id="save-yearly">Best value — save 50%</div>
+    <button class="plan-cta" onclick="openModal('yearly')">Get Pro — Annual</button>
+    <ul class="plan-features">
+      <li><i class="fas fa-check-circle"></i> Everything in Monthly</li>
+      <li><i class="fas fa-check-circle"></i> Priority support</li>
+      <li><i class="fas fa-check-circle"></i> All future features included</li>
+      <li><i class="fas fa-check-circle"></i> 50% savings vs monthly</li>
+    </ul>
+  </div>
+</div>
+
+<!-- FREE PLAN -->
+<div class="free-plan-wrap">
+  <div class="free-plan">
+    <div class="free-plan-left">
+      <div class="free-plan-icon">🎁</div>
+      <div class="free-plan-text">
+        <h4>Free Plan — Always Free</h4>
+        <p>10 trade logs · Basic dashboard · Companion insights after 3 trades</p>
+      </div>
+    </div>
+    <a href="journal.html" class="free-plan-cta">Start Free →</a>
+  </div>
+</div>
+
+<!-- FEATURES TABLE -->
+<section class="features-section">
+  <h2>Everything you get</h2>
+  <table class="feat-table">
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>Free</th>
+        <th>Pro</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="feat-cat" colspan="3">Journal</td></tr>
+      <tr><td>Trade logs</td><td>10 trades</td><td style="color:#00e676;font-weight:700">Unlimited</td></tr>
+      <tr><td>Currency pairs supported</td><td><i class="fas fa-check feat-yes"></i></td><td><i class="fas fa-check feat-yes"></i></td></tr>
+      <tr><td>Emotion tagging</td><td><i class="fas fa-check feat-yes"></i></td><td><i class="fas fa-check feat-yes"></i></td></tr>
+      <tr><td>Strategy / setup tagging</td><td><i class="fas fa-check feat-yes"></i></td><td><i class="fas fa-check feat-yes"></i></td></tr>
+      <tr><td>Trade notes</td><td><i class="fas fa-check feat-yes"></i></td><td><i class="fas fa-check feat-yes"></i></td></tr>
+
+      <tr><td class="feat-cat" colspan="3">Analytics</td></tr>
+      <tr><td>Win rate, P&amp;L, Profit Factor, Avg R:R</td><td><i class="fas fa-check feat-yes"></i></td><td><i class="fas fa-check feat-yes"></i></td></tr>
+      <tr><td>Equity curve chart</td><td><i class="fas fa-check feat-yes"></i></td><td><i class="fas fa-check feat-yes"></i></td></tr>
+      <tr><td>Win rate by session</td><td><i class="fas fa-times feat-no"></i></td><td><i class="fas fa-check feat-yes"></i></td></tr>
+      <tr><td>Win rate by currency pair</td><td><i class="fas fa-times feat-no"></i></td><td><i class="fas fa-check feat-yes"></i></td></tr>
+      <tr><td>Win rate by emotion</td><td><i class="fas fa-times feat-no"></i></td><td><i class="fas fa-check feat-yes"></i></td></tr>
+      <tr><td>Win rate by setup / strategy</td><td><i class="fas fa-times feat-no"></i></td><td><i class="fas fa-check feat-yes"></i></td></tr>
+
+      <tr><td class="feat-cat" colspan="3">Companion</td></tr>
+      <tr><td>Basic pattern insights (3+ trades)</td><td><i class="fas fa-check feat-yes"></i></td><td><i class="fas fa-check feat-yes"></i></td></tr>
+      <tr><td>Full companion analysis</td><td><i class="fas fa-times feat-no"></i></td><td><i class="fas fa-check feat-yes"></i></td></tr>
+      <tr><td>Psychology warnings</td><td><i class="fas fa-times feat-no"></i></td><td><i class="fas fa-check feat-yes"></i></td></tr>
+      <tr><td>Streak tracking</td><td><i class="fas fa-times feat-no"></i></td><td><i class="fas fa-check feat-yes"></i></td></tr>
+
+      <tr><td class="feat-cat" colspan="3">Account</td></tr>
+      <tr><td>Profile &amp; avatar</td><td><i class="fas fa-check feat-yes"></i></td><td><i class="fas fa-check feat-yes"></i></td></tr>
+      <tr><td>Cloud sync across devices</td><td><i class="fas fa-check feat-yes"></i></td><td><i class="fas fa-check feat-yes"></i></td></tr>
+      <tr><td>Priority support</td><td><i class="fas fa-times feat-no"></i></td><td><i class="fas fa-check feat-yes"></i></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- GUARANTEE -->
+<div class="guarantee">
+  <div class="guarantee-box">
+    <div class="gico">🛡️</div>
+    <h3>No risk. No tricks.</h3>
+    <p>If you've paid and aren't satisfied within 7 days, message us on WhatsApp or email and we'll sort it out. We want happy traders, not locked-in customers.</p>
+  </div>
+</div>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <h2>Common questions</h2>
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggleFaq(this)">
+      Do I need a credit card to start? <i class="fas fa-chevron-down"></i>
+    </button>
+    <div class="faq-a">No card needed at all. Create a free account and start logging up to 10 trades immediately. You only pay when you decide to upgrade.</div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggleFaq(this)">
+      How do I pay? <i class="fas fa-chevron-down"></i>
+    </button>
+    <div class="faq-a">You can pay via PayPal (fastest, instant confirmation), WhatsApp Money Transfer, or email us to arrange another method. Once payment is confirmed, your account is upgraded within 24 hours — usually much faster.</div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggleFaq(this)">
+      Will my free trades be lost if I don't upgrade? <i class="fas fa-chevron-down"></i>
+    </button>
+    <div class="faq-a">No. Your existing 10 trades are stored safely in your account forever. You simply won't be able to add new trades until you upgrade. All your data, analysis and insights remain accessible.</div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggleFaq(this)">
+      Can I cancel at any time? <i class="fas fa-chevron-down"></i>
+    </button>
+    <div class="faq-a">Monthly plans can be cancelled at any time — just message us before your next billing date. Quarterly and annual plans are one-time payments, so there's nothing to cancel; access simply continues for the full period.</div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggleFaq(this)">
+      Is my data private and secure? <i class="fas fa-chevron-down"></i>
+    </button>
+    <div class="faq-a">Yes. Your trade data is stored securely in your personal Supabase account. Nobody else can access it. We don't sell or share your data.</div>
+  </div>
+</section>
+
+<!-- PAYMENT MODAL -->
+<div class="modal-bg" id="payModal">
+  <div class="modal-box">
+    <button class="modal-x" onclick="closeModal()">×</button>
+    <div class="modal-plan-label" id="modalPlanLabel">⚡ ChartMate Pro</div>
+    <h2>Complete your upgrade</h2>
+    <div class="modal-price-display" id="modalPriceDisplay">$14.99</div>
+    <div class="modal-price-note" id="modalPriceNote">Monthly plan</div>
+
+    <div class="pay-btns">
+      <!-- PayPal FIRST -->
+      <a id="ppBtn" href="https://paypal.me/worldbankfx" target="_blank" class="pay-btn pay-btn-pp" onclick="trackPayment('paypal')">
+        <i class="fab fa-paypal"></i> Pay with PayPal
+      </a>
+      <div class="modal-divider">or</div>
+      <a id="waBtn" href="#" target="_blank" class="pay-btn pay-btn-wa" onclick="trackPayment('whatsapp')">
+        <i class="fab fa-whatsapp"></i> Pay via WhatsApp
+      </a>
+      <a id="emBtn" href="#" class="pay-btn pay-btn-em" onclick="trackPayment('email')">
+        <i class="fas fa-envelope"></i> Arrange via Email
+      </a>
+    </div>
+
+    <div class="modal-ref">
+      <p><strong>PayPal:</strong> unlimited.worldbankfx@gmail.com</p>
+      <p><strong>WhatsApp:</strong> +256 783 354 348</p>
+      <p><strong>Email:</strong> unlimited.worldbankfx@gmail.com</p>
+    </div>
+    <div class="modal-note">
+      Include your <strong style="color:#ffd700">registered email</strong> in your payment message.<br>
+      Account upgraded within 24 hours of confirmation. ✓
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025–2026 <a href="index.html">WorldBankFx × Professor</a>. All rights reserved.</p>
+  <p style="margin-top:10px"><a href="journal.html">Open ChartMate</a> · <a href="index.html">Main Site</a> · <a href="contact.html">Contact</a></p>
+</footer>
+
+<script>
+  // ── State
+  let billingYearly = false;
+  let activePlan = 'quarterly';
+
+  const plans = {
+    monthly:   { monthly: { price: '$14.99', note: 'per month, billed monthly', save: '' },
+                  yearly:  { price: '$9.99',  note: 'per month, billed $119.88/yr', save: 'Save 33% vs monthly' } },
+    quarterly: { monthly: { price: '$29.99', note: 'one payment · 3 months access', save: 'Save 33% vs monthly' },
+                  yearly:  { price: '$24.99', note: 'one payment · 3 months access', save: 'Save 44% vs monthly' } },
+    yearly:    { monthly: { price: '$89.99', note: '~$7.50/month, billed yearly',   save: 'Best value — save 50%' },
+                  yearly:  { price: '$59.99', note: '~$5.00/month, billed yearly',   save: 'Mega deal — save 67% 🔥' } },
+  };
+
+  const waMsg = (plan, price) =>
+    encodeURIComponent(`Hi! I want to upgrade my ChartMate Journal to PRO.\n\nPlan: ${plan}\nAmount: ${price}\n\nPlease confirm payment instructions. Thank you!`);
+
+  const emHref = (plan, price) =>
+    `mailto:unlimited.worldbankfx@gmail.com?subject=${encodeURIComponent('ChartMate Pro Upgrade — ' + plan)}&body=${encodeURIComponent(`Hi WorldBankFx,\n\nI want to upgrade my ChartMate Journal to Pro.\n\nPlan: ${plan}\nAmount: ${price}\n\nPlease send payment instructions.\n\nThank you!`)}`;
+
+  function toggleBilling() {
+    billingYearly = !billingYearly;
+    document.getElementById('billingToggle').classList.toggle('yearly', billingYearly);
+    document.getElementById('lbl-monthly').classList.toggle('active', !billingYearly);
+    document.getElementById('lbl-yearly').classList.toggle('active', billingYearly);
+    document.getElementById('saveBadge').style.display = billingYearly ? 'inline-flex' : 'none';
+    // (card prices not shown dynamically in cards to keep it clean — modal shows correct price)
+  }
+
+  function openModal(plan) {
+    activePlan = plan;
+    const mode = billingYearly ? 'yearly' : 'monthly';
+    const p = plans[plan][mode];
+    const labels = { monthly: 'Monthly Plan', quarterly: '3-Month Bundle', yearly: 'Annual Plan' };
+
+    document.getElementById('modalPlanLabel').innerHTML = '⚡ ChartMate Pro — ' + labels[plan];
+    document.getElementById('modalPriceDisplay').textContent = p.price;
+    document.getElementById('modalPriceNote').textContent = p.note;
+
+    document.getElementById('waBtn').href = `https://wa.me/256783354348?text=${waMsg(labels[plan] + ' (' + (billingYearly ? 'Annual billing' : 'Monthly billing') + ')', p.price)}`;
+    document.getElementById('emBtn').href = emHref(labels[plan], p.price);
+
+    document.getElementById('payModal').classList.add('show');
+  }
+
+  function closeModal() {
+    document.getElementById('payModal').classList.remove('show');
+  }
+
+  function trackPayment(method) {
+    // Close modal after tiny delay so link fires
+    setTimeout(closeModal, 300);
+  }
+
+  document.getElementById('payModal').addEventListener('click', e => {
+    if (e.target === document.getElementById('payModal')) closeModal();
+  });
+
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  }
+
+  // Handle ?plan= query param from index.html button
+  const urlPlan = new URLSearchParams(window.location.search).get('plan');
+  if (urlPlan && ['monthly','quarterly','yearly'].includes(urlPlan)) {
+    window.addEventListener('DOMContentLoaded', () => openModal(urlPlan));
+  }
+</script>
+</body>
+</html>

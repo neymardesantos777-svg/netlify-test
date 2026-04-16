@@ -5,9 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ChartMate Journal | WorldBankFx x Professor</title>
 <meta name="description" content="ChartMate — Your intelligent trading journal. Log trades, track patterns, grow consistently.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -19,7 +16,7 @@
   --bg:#080808;--bg2:#0f0f0f;--bg3:#161616;
   --border:rgba(255,255,255,0.06);--border-gold:rgba(255,215,0,0.18);
   --text:#eeeee4;--text-dim:#3a3a3a;--text-mid:#777;
-  --font-head:'Syne',sans-serif;--font-mono:'Space Mono',monospace;
+  --font-head:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;--font-mono:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
   --nav-h:58px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
@@ -536,7 +533,7 @@ body{font-family:var(--font-head);background:var(--bg);color:var(--text);min-hei
             <input type="password" id="loginPass" placeholder="••••••••" autocomplete="current-password">
           </div>
           <button class="btn-gold" id="loginBtn" onclick="doLogin()">Sign In →</button>
-          <div class="auth-note">Forgot password? <a href="mailto:unlimited.worldbankfx@gmail.com" style="color:var(--gold)">Contact support</a></div>
+          <div class="auth-note">Forgot password? <a href="/cdn-cgi/l/email-protection#9ce9f2f0f5f1f5e8f9f8b2ebf3eef0f8fefdf2f7fae4dcfbf1fdf5f0b2fff3f1" style="color:var(--gold)">Contact support</a></div>
         </div>
 
         <!-- REGISTER -->
@@ -871,10 +868,13 @@ body{font-family:var(--font-head);background:var(--bg);color:var(--text);min-hei
     </div>
 
     <div class="modal-pay-btns">
-      <a id="waUpgradeBtn" href="#" target="_blank" class="pay-btn pay-btn-wa" onclick="closeModal()">
-        <i class="fab fa-whatsapp"></i> Pay via WhatsApp (+256 783 354 348)
+      <a id="ppUpgradeBtn" href="https://paypal.me/worldbankfx" target="_blank" class="pay-btn pay-btn-pp" onclick="closeModal()">
+        <i class="fab fa-paypal"></i> Pay with PayPal (paypal.me/worldbankfx)
       </a>
-      <a href="mailto:unlimited.worldbankfx@gmail.com" target="_blank" class="pay-btn pay-btn-pp" onclick="closeModal()">
+      <a id="waUpgradeBtn" href="#" target="_blank" class="pay-btn pay-btn-wa" onclick="closeModal()">
+        <i class="fab fa-whatsapp"></i> WhatsApp (+256 783 354 348)
+      </a>
+      <a id="emailUpgradeBtn" href="#" class="pay-btn" style="background:#ea4335;color:#fff;" onclick="closeModal()">
         <i class="fas fa-envelope"></i> Email to Arrange Payment
       </a>
     </div>
@@ -888,7 +888,7 @@ body{font-family:var(--font-head);background:var(--bg);color:var(--text);min-hei
 <!-- ── TOAST ── -->
 <div class="toast" id="toast"></div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ═══════════════════════════════════════════
 // CONFIG — Replace with your actual Supabase values
 // ═══════════════════════════════════════════
@@ -1550,10 +1550,55 @@ document.addEventListener('keydown', e => {
         resolved = true;
         clearTimeout(timeout);
         unsub.data?.subscription?.unsubscribe();
-        if (!intentionalLogout) showAuth();
+        showAuth();
       }
     }
   });
+})();
+
+// ── DEMO MODE (local testing — append ?demo=true to URL) ──
+(function checkDemoMode() {
+  if (!new URLSearchParams(window.location.search).has('demo')) return;
+  // Patch Supabase calls to use fake local data
+  user = { id: 'demo-user', email: 'demo@worldbankfx.test' };
+  profile = { id: 'demo-user', display_name: 'Demo Trader', plan: 'pro', avatar_url: null };
+  trades = [
+    { id: 't1', user_id: 'demo-user', pair: 'EUR/USD', direction: 'BUY', entry_price: 1.0820, exit_price: 1.0860, stop_loss: 1.0790, pnl: 40, session: 'London', emotion: 'Calm & Focused', setup: 'Break of Structure', trade_date: '2025-11-01', notes: 'Clean BOS on H1, entered on retest.', win: true },
+    { id: 't2', user_id: 'demo-user', pair: 'GBP/JPY', direction: 'SELL', entry_price: 189.50, exit_price: 189.10, stop_loss: 189.90, pnl: 55, session: 'London', emotion: 'Confident', setup: 'Order Block', trade_date: '2025-11-03', notes: 'OB respected perfectly.', win: true },
+    { id: 't3', user_id: 'demo-user', pair: 'XAU/USD', direction: 'BUY', entry_price: 1980, exit_price: 1965, stop_loss: 1972, pnl: -38, session: 'New York', emotion: 'Anxious / FOMO', setup: 'News Trade', trade_date: '2025-11-05', notes: 'FOMO entry before NFP — stupid.', win: false },
+    { id: 't4', user_id: 'demo-user', pair: 'EUR/USD', direction: 'SELL', entry_price: 1.0880, exit_price: 1.0845, stop_loss: 1.0910, pnl: 35, session: 'London', emotion: 'Patient', setup: 'Fair Value Gap', trade_date: '2025-11-07', notes: 'FVG fill on 15m.', win: true },
+    { id: 't5', user_id: 'demo-user', pair: 'GBP/USD', direction: 'BUY', entry_price: 1.2540, exit_price: 1.2510, stop_loss: 1.2520, pnl: -30, session: 'Asian', emotion: 'Bored / Random', setup: 'Scalp', trade_date: '2025-11-09', notes: 'Low-quality scalp, Asian session.', win: false },
+    { id: 't6', user_id: 'demo-user', pair: 'EUR/USD', direction: 'BUY', entry_price: 1.0810, exit_price: 1.0855, stop_loss: 1.0790, pnl: 45, session: 'London', emotion: 'Calm & Focused', setup: 'Break of Structure', trade_date: '2025-11-11', notes: 'Textbook BOS. Held to TP.', win: true },
+  ];
+
+  // Override Supabase methods with stubs
+  window._demoLogTrade = logTrade;
+  sb.from = () => ({
+    select: () => ({ eq: () => ({ single: async () => ({ data: profile, error: null }), order: async () => ({ data: trades, error: null }) }) }),
+    insert: async (rows) => {
+      const t = { ...rows[0], id: 't' + Date.now(), win: rows[0].pnl > 0 };
+      trades.push(t); trades.sort((a,b) => a.trade_date.localeCompare(b.trade_date));
+      return { error: null };
+    },
+    update: () => ({ eq: async () => ({ error: null }) }),
+    delete: () => ({ eq: () => ({ eq: async () => {
+      const id = trades.findIndex(t => t.id === arguments[0]);
+      if (id > -1) trades.splice(id, 1);
+      return { error: null };
+    }}) }),
+  });
+  sb.storage = { from: () => ({ upload: async () => ({ error: null }), getPublicUrl: () => ({ data: { publicUrl: '' } }) }) };
+  sb.auth.updateUser = async () => ({});
+
+  // Show demo banner
+  const banner = document.createElement('div');
+  banner.style.cssText = 'position:fixed;bottom:0;left:0;right:0;background:#1a1a0a;border-top:1px solid rgba(255,215,0,0.3);padding:8px 20px;text-align:center;font-size:0.7rem;color:#ffd700;z-index:99999;font-family:-apple-system,sans-serif;';
+  banner.innerHTML = '🧪 <strong>DEMO MODE</strong> — Running with local fake data. No Supabase calls. <a href="journal.html" style="color:#00d4ff;margin-left:12px;">Exit Demo →</a>';
+  document.body.appendChild(banner);
+
+  // Boot with demo data
+  clearTimeout(window._initTimeout);
+  renderDash(); renderFullHistory(); renderAnalysis(); renderCompanion(); updateUI(); showApp();
 })();
 </script>
 </body>
