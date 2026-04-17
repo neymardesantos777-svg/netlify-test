@@ -45,6 +45,9 @@ nav{position:fixed;top:0;width:100%;background:rgba(10,10,10,0.97);backdrop-filt
 .nav-progress-bar{width:120px;height:4px;background:rgba(255,255,255,.1);border-radius:2px;overflow:hidden;}
 .nav-progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--cyan));border-radius:2px;transition:width .5s ease;}
 
+/* ===== SCREEN INITIAL STATES ===== */
+#screen-lesson,#screen-quiz,#screen-results{display:none;}
+
 /* ===== LANDING ===== */
 #screen-landing{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:80px 20px 40px;position:relative;overflow:hidden;}
 .landing-bg{position:absolute;inset:0;background:radial-gradient(circle at 20% 50%,rgba(255,215,0,.08) 0,transparent 50%),radial-gradient(circle at 80% 30%,rgba(0,212,255,.07) 0,transparent 50%);animation:bgpulse 8s ease-in-out infinite;}
@@ -78,7 +81,7 @@ nav{position:fixed;top:0;width:100%;background:rgba(10,10,10,0.97);backdrop-filt
 .landing-note span{color:var(--gold);}
 
 /* ===== LESSON SCREEN ===== */
-#screen-lesson{display:none;min-height:100vh;padding-top:70px;}
+#screen-lesson{min-height:100vh;padding-top:70px;}
 .lesson-layout{display:grid;grid-template-columns:300px 1fr;min-height:calc(100vh - 70px);}
 
 /* SIDEBAR */
@@ -489,7 +492,7 @@ nav{position:fixed;top:0;width:100%;background:rgba(10,10,10,0.97);backdrop-filt
 // SUPABASE CONFIG — replace with your actual keys
 // ============================================================
 const SUPABASE_URL = 'https://ssemqcoabqinyherbhbx.supabase.co';
-const SUPABASE_ANON_KEY = 'sb_publishable_1TJa1uvWKiJL08ZXueX9oA_VbGRiEoJ';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNzZW1xY29hYnFpbnloZXJiaGJ4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjY3Mzk0NjAsImV4cCI6MjA4MjMxNTQ2MH0.kcXi4tMKwv2sXENKJETWNbzPKjkKjgMmcXtIqkg65lI';
 
 async function sbFetch(endpoint, options = {}) {
   const res = await fetch(`${SUPABASE_URL}/rest/v1/${endpoint}`, {
@@ -1837,10 +1840,10 @@ function showScreen(name) {
   document.getElementById('screen-quiz').style.display = 'none';
   document.getElementById('screen-results').style.display = 'none';
   document.getElementById('nav-progress-wrap').style.display = 'none';
-  if(name === 'landing') document.getElementById('screen-landing').style.display = '';
-  if(name === 'lesson') { document.getElementById('screen-lesson').style.display = ''; document.getElementById('nav-progress-wrap').style.display = 'flex'; }
-  if(name === 'quiz') document.getElementById('screen-quiz').style.display = '';
-  if(name === 'results') document.getElementById('screen-results').style.display = '';
+  if(name === 'landing') document.getElementById('screen-landing').style.display = 'flex';
+  if(name === 'lesson') { document.getElementById('screen-lesson').style.display = 'block'; document.getElementById('nav-progress-wrap').style.display = 'flex'; }
+  if(name === 'quiz') document.getElementById('screen-quiz').style.display = 'block';
+  if(name === 'results') document.getElementById('screen-results').style.display = 'block';
   window.scrollTo(0,0);
 }
 
@@ -2056,8 +2059,8 @@ function renderQuestion() {
   `;
 
   const isLast = i === qs.length - 1;
-  document.getElementById('quiz-next-btn').style.display = (answered!==undefined && !isLast) ? '' : 'none';
-  document.getElementById('quiz-submit-btn').style.display = (answered!==undefined && isLast) ? '' : 'none';
+  document.getElementById('quiz-next-btn').style.display = (answered!==undefined && !isLast) ? 'inline-block' : 'none';
+  document.getElementById('quiz-submit-btn').style.display = (answered!==undefined && isLast) ? 'inline-block' : 'none';
 }
 
 function selectAnswer(optIdx) {
@@ -2092,10 +2095,10 @@ async function submitQuiz() {
   document.getElementById('rb-pct').textContent = pct+'%';
 
   const hasNext = quizState.track !== 'expert';
-  document.getElementById('results-next-track').style.display = (passed && hasNext) ? '' : 'none';
+  document.getElementById('results-next-track').style.display = (passed && hasNext) ? 'inline-block' : 'none';
 
   if(passed) {
-    document.getElementById('cert-section').style.display = '';
+    document.getElementById('cert-section').style.display = 'block';
     document.getElementById('fail-section').style.display = 'none';
     const t = CURRICULUM[quizState.track];
     document.getElementById('cert-student-name').textContent = currentUser?.user_metadata?.full_name || currentUser?.email?.split('@')[0] || 'Trader';
@@ -2106,12 +2109,12 @@ async function submitQuiz() {
     if(currentUser) saveResultToDb(quizState.track, pct, correct, qs.length);
   } else {
     document.getElementById('cert-section').style.display = 'none';
-    document.getElementById('fail-section').style.display = '';
+    document.getElementById('fail-section').style.display = 'block';
   }
 }
 
 async function saveResultToDb(track, score, correct, total) {
-  if(!currentUser || SUPABASE_URL.includes('YOUR_PROJECT')) return;
+  if(!currentUser || isDemo()) return;
   try {
     await sbFetch('forex_course_results', {
       method:'POST',
@@ -2181,13 +2184,13 @@ function closeAuth() {
 }
 
 function showLogin() {
-  document.getElementById('auth-login-view').style.display = '';
+  document.getElementById('auth-login-view').style.display = 'block';
   document.getElementById('auth-register-view').style.display = 'none';
 }
 
 function showRegister() {
   document.getElementById('auth-login-view').style.display = 'none';
-  document.getElementById('auth-register-view').style.display = '';
+  document.getElementById('auth-register-view').style.display = 'block';
 }
 
 async function doLogin() {
@@ -2196,7 +2199,7 @@ async function doLogin() {
   if(!email || !password) { document.getElementById('login-error').textContent = 'Please fill all fields.'; return; }
   document.getElementById('login-btn-text').innerHTML = '<span class="loading-spinner"></span>';
 
-  if(SUPABASE_URL.includes('YOUR_PROJECT')) {
+  if(isDemo()) {
     // Demo mode
     currentUser = { id:'demo-1', email, user_metadata:{full_name: email.split('@')[0]} };
     currentToken = 'demo';
@@ -2229,7 +2232,7 @@ async function doRegister() {
   if(password.length < 6) { document.getElementById('reg-error').textContent = 'Password must be at least 6 characters.'; return; }
   document.getElementById('reg-btn-text').innerHTML = '<span class="loading-spinner"></span>';
 
-  if(SUPABASE_URL.includes('YOUR_PROJECT')) {
+  if(isDemo()) {
     currentUser = { id:'demo-1', email, user_metadata:{full_name:name} };
     currentToken = 'demo';
     localStorage.setItem('wbfx_user', JSON.stringify({user:currentUser, token:currentToken}));
