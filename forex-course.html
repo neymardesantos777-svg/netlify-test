@@ -1,0 +1,2302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WorldBankFx × The Teaser Class | Forex Refresher Course</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   WORLDBANKFX TEASER CLASS - CORE STYLES
+   Theme: Dark #0a0a0a | Gold #ffd700 | Cyan #00d4ff
+============================================ */
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+:root{
+  --bg:#0a0a0a;
+  --bg2:#0f0f0f;
+  --bg3:#141414;
+  --bg4:#1a1a1a;
+  --gold:#ffd700;
+  --gold2:#ffed4e;
+  --cyan:#00d4ff;
+  --green:#10b981;
+  --red:#ef4444;
+  --text:#fff;
+  --muted:#aaa;
+  --border:rgba(255,215,0,0.2);
+}
+body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:var(--bg2);}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px;}
+
+/* ===== NAV ===== */
+nav{position:fixed;top:0;width:100%;background:rgba(10,10,10,0.97);backdrop-filter:blur(10px);z-index:1000;border-bottom:1px solid var(--border);}
+.nav-container{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:14px 30px;}
+.nav-logo{font-size:1.2rem;font-weight:800;background:linear-gradient(135deg,#ffd700,#ffed4e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none;}
+.nav-right{display:flex;align-items:center;gap:20px;}
+.nav-back{color:var(--muted);text-decoration:none;font-size:.9rem;transition:color .3s;}
+.nav-back:hover{color:var(--gold);}
+.nav-progress-label{font-size:.8rem;color:var(--muted);font-family:'Space Mono',monospace;}
+.nav-progress-bar{width:120px;height:4px;background:rgba(255,255,255,.1);border-radius:2px;overflow:hidden;}
+.nav-progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--cyan));border-radius:2px;transition:width .5s ease;}
+
+/* ===== LANDING ===== */
+#screen-landing{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:80px 20px 40px;position:relative;overflow:hidden;}
+.landing-bg{position:absolute;inset:0;background:radial-gradient(circle at 20% 50%,rgba(255,215,0,.08) 0,transparent 50%),radial-gradient(circle at 80% 30%,rgba(0,212,255,.07) 0,transparent 50%);animation:bgpulse 8s ease-in-out infinite;}
+@keyframes bgpulse{0%,100%{opacity:1;}50%{opacity:.6;}}
+.landing-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,215,0,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,215,0,.03) 1px,transparent 1px);background-size:60px 60px;}
+.landing-content{position:relative;z-index:2;text-align:center;max-width:900px;}
+.landing-badge{display:inline-block;background:rgba(255,215,0,.1);border:1px solid var(--border);color:var(--gold);font-size:.8rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:8px 20px;border-radius:50px;margin-bottom:30px;font-family:'Space Mono',monospace;}
+.landing-title{font-size:clamp(2.8rem,7vw,5.5rem);font-weight:800;line-height:1.05;margin-bottom:20px;}
+.landing-title span.gold{background:linear-gradient(135deg,#ffd700,#ffed4e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.landing-title span.cyan{color:var(--cyan);}
+.landing-sub{font-size:clamp(1rem,2.5vw,1.3rem);color:var(--muted);margin-bottom:40px;max-width:600px;margin-left:auto;margin-right:auto;line-height:1.7;}
+.landing-stats{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;margin-bottom:50px;}
+.lstat{text-align:center;}
+.lstat-num{font-size:2.2rem;font-weight:800;color:var(--gold);font-family:'Space Mono',monospace;}
+.lstat-lbl{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:2px;}
+.landing-tracks{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-bottom:50px;text-align:left;}
+.track-card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:28px;cursor:pointer;transition:all .3s;position:relative;overflow:hidden;}
+.track-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--track-color,var(--gold));}
+.track-card:hover{transform:translateY(-4px);border-color:var(--track-color,var(--gold));box-shadow:0 16px 40px rgba(0,0,0,.4);}
+.track-card.beginner{--track-color:#10b981;}
+.track-card.intermediate{--track-color:#ffd700;}
+.track-card.expert{--track-color:#ff6b35;}
+.track-icon{font-size:2rem;margin-bottom:14px;}
+.track-title{font-size:1.2rem;font-weight:700;margin-bottom:6px;}
+.track-desc{font-size:.85rem;color:var(--muted);line-height:1.6;margin-bottom:14px;}
+.track-meta{display:flex;gap:12px;flex-wrap:wrap;}
+.track-tag{font-size:.72rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:3px 10px;color:var(--muted);font-family:'Space Mono',monospace;}
+.track-btn{width:100%;padding:12px;background:linear-gradient(135deg,var(--track-color,var(--gold)),transparent);border:1px solid var(--track-color,var(--gold));color:#fff;border-radius:8px;font-family:'Syne',sans-serif;font-weight:700;cursor:pointer;margin-top:16px;transition:all .3s;font-size:.9rem;}
+.track-btn:hover{background:var(--track-color,var(--gold));color:#000;}
+.landing-note{font-size:.82rem;color:var(--muted);font-family:'Space Mono',monospace;}
+.landing-note span{color:var(--gold);}
+
+/* ===== LESSON SCREEN ===== */
+#screen-lesson{display:none;min-height:100vh;padding-top:70px;}
+.lesson-layout{display:grid;grid-template-columns:300px 1fr;min-height:calc(100vh - 70px);}
+
+/* SIDEBAR */
+.sidebar{background:var(--bg2);border-right:1px solid var(--border);position:sticky;top:70px;height:calc(100vh - 70px);overflow-y:auto;padding:20px 0;}
+.sidebar-header{padding:16px 20px 12px;border-bottom:1px solid rgba(255,255,255,.05);}
+.sidebar-track-label{font-size:.72rem;font-family:'Space Mono',monospace;color:var(--muted);text-transform:uppercase;letter-spacing:2px;margin-bottom:4px;}
+.sidebar-track-name{font-size:1rem;font-weight:700;color:var(--gold);}
+.sidebar-progress-wrap{padding:12px 20px;border-bottom:1px solid rgba(255,255,255,.05);}
+.sidebar-progress-text{display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted);margin-bottom:6px;}
+.sidebar-progress-bar{height:5px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden;}
+.sidebar-progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--cyan));border-radius:3px;transition:width .5s;}
+.sidebar-modules{padding:10px 0;}
+.module-group{margin-bottom:4px;}
+.module-header{padding:10px 20px;font-size:.82rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:color .2s;}
+.module-header:hover,.module-header.active{color:var(--gold);}
+.module-header .chevron{transition:transform .3s;font-size:.7rem;}
+.module-header.open .chevron{transform:rotate(90deg);}
+.module-lessons{display:none;padding:0 0 6px;}
+.module-lessons.open{display:block;}
+.lesson-item{padding:8px 20px 8px 32px;font-size:.83rem;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:8px;color:var(--muted);position:relative;}
+.lesson-item:hover{color:#fff;background:rgba(255,255,255,.03);}
+.lesson-item.active{color:var(--gold);background:rgba(255,215,0,.05);}
+.lesson-item.active::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--gold);}
+.lesson-item.completed .li-icon{color:var(--green);}
+.lesson-item.locked{opacity:.4;cursor:not-allowed;}
+.li-icon{font-size:.75rem;width:14px;flex-shrink:0;}
+
+/* MAIN CONTENT */
+.lesson-main{padding:40px 50px;max-width:900px;}
+.lesson-breadcrumb{font-size:.8rem;color:var(--muted);font-family:'Space Mono',monospace;margin-bottom:20px;}
+.lesson-breadcrumb span{color:var(--gold);}
+.lesson-header{margin-bottom:30px;}
+.lesson-number{font-size:.75rem;font-family:'Space Mono',monospace;color:var(--cyan);text-transform:uppercase;letter-spacing:2px;margin-bottom:8px;}
+.lesson-title{font-size:clamp(1.8rem,3vw,2.4rem);font-weight:800;line-height:1.2;margin-bottom:12px;}
+.lesson-meta{display:flex;gap:16px;flex-wrap:wrap;}
+.lesson-meta-item{display:flex;align-items:center;gap:5px;font-size:.78rem;color:var(--muted);}
+.lesson-meta-item i{color:var(--gold);}
+.lesson-divider{height:1px;background:var(--border);margin:24px 0;}
+.lesson-body{line-height:1.85;color:rgba(255,255,255,.88);}
+.lesson-body h3{font-size:1.25rem;font-weight:700;color:var(--gold);margin:32px 0 12px;}
+.lesson-body h4{font-size:1rem;font-weight:700;color:var(--cyan);margin:22px 0 8px;}
+.lesson-body p{margin-bottom:16px;}
+.lesson-body ul,.lesson-body ol{padding-left:24px;margin-bottom:16px;}
+.lesson-body li{margin-bottom:8px;}
+.lesson-body strong{color:var(--gold);}
+.lesson-body em{color:var(--cyan);}
+.callout{background:rgba(255,215,0,.06);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:16px 20px;margin:20px 0;}
+.callout.cyan{background:rgba(0,212,255,.06);border-color:var(--cyan);}
+.callout.red{background:rgba(239,68,68,.06);border-color:var(--red);}
+.callout.green{background:rgba(16,185,129,.06);border-color:var(--green);}
+.callout-title{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
+.callout.cyan .callout-title{color:var(--cyan);}
+.callout .callout-title{color:var(--gold);}
+.callout.red .callout-title{color:var(--red);}
+.callout.green .callout-title{color:var(--green);}
+.definition-box{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:18px 20px;margin:16px 0;}
+.def-term{font-size:.78rem;font-family:'Space Mono',monospace;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
+.def-text{font-size:.9rem;line-height:1.7;}
+.formula-box{background:var(--bg4);border:1px solid rgba(0,212,255,.25);border-radius:8px;padding:16px 20px;margin:16px 0;font-family:'Space Mono',monospace;font-size:.9rem;color:var(--cyan);}
+.data-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:.85rem;}
+.data-table th{background:rgba(255,215,0,.08);color:var(--gold);padding:10px 14px;text-align:left;font-weight:700;border-bottom:1px solid var(--border);}
+.data-table td{padding:9px 14px;border-bottom:1px solid rgba(255,255,255,.05);}
+.data-table tr:hover td{background:rgba(255,255,255,.02);}
+.key-point{display:flex;align-items:flex-start;gap:10px;margin:10px 0;}
+.key-point-icon{color:var(--gold);margin-top:3px;flex-shrink:0;}
+.lesson-nav{display:flex;justify-content:space-between;align-items:center;margin-top:50px;padding-top:30px;border-top:1px solid var(--border);}
+.lesson-nav-btn{display:flex;align-items:center;gap:8px;padding:12px 24px;border-radius:8px;font-family:'Syne',sans-serif;font-weight:700;cursor:pointer;transition:all .3s;font-size:.9rem;border:none;}
+.lesson-nav-btn.prev{background:rgba(255,255,255,.06);color:#fff;}
+.lesson-nav-btn.prev:hover{background:rgba(255,255,255,.1);}
+.lesson-nav-btn.next{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;}
+.lesson-nav-btn.next:hover{box-shadow:0 8px 24px rgba(255,215,0,.3);transform:translateY(-2px);}
+.lesson-nav-btn:disabled{opacity:.3;cursor:not-allowed;transform:none!important;box-shadow:none!important;}
+.level-complete-banner{background:linear-gradient(135deg,rgba(16,185,129,.15),rgba(16,185,129,.05));border:1px solid rgba(16,185,129,.3);border-radius:12px;padding:24px;text-align:center;margin-top:40px;}
+.lcb-icon{font-size:2.5rem;margin-bottom:10px;}
+.lcb-title{font-size:1.2rem;font-weight:700;color:var(--green);margin-bottom:8px;}
+.lcb-text{font-size:.9rem;color:var(--muted);margin-bottom:16px;}
+.lcb-btn{padding:12px 30px;background:var(--green);color:#fff;border:none;border-radius:8px;font-family:'Syne',sans-serif;font-weight:700;cursor:pointer;font-size:.9rem;transition:all .3s;}
+.lcb-btn:hover{box-shadow:0 8px 24px rgba(16,185,129,.3);transform:translateY(-2px);}
+
+/* ===== QUIZ SCREEN ===== */
+#screen-quiz{display:none;min-height:100vh;padding-top:70px;background:var(--bg);}
+.quiz-container{max-width:800px;margin:0 auto;padding:40px 30px;}
+.quiz-header{text-align:center;margin-bottom:40px;}
+.quiz-level-badge{display:inline-block;padding:6px 16px;border-radius:20px;font-size:.75rem;font-weight:700;font-family:'Space Mono',monospace;text-transform:uppercase;letter-spacing:2px;margin-bottom:16px;}
+.quiz-title{font-size:2rem;font-weight:800;margin-bottom:8px;}
+.quiz-subtitle{color:var(--muted);font-size:.9rem;}
+.quiz-progress-section{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:30px;}
+.quiz-progress-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+.quiz-progress-label{font-family:'Space Mono',monospace;font-size:.8rem;color:var(--muted);}
+.quiz-progress-val{font-family:'Space Mono',monospace;font-size:.85rem;color:var(--gold);font-weight:700;}
+.quiz-bar{height:6px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden;}
+.quiz-bar-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--cyan));border-radius:3px;transition:width .4s;}
+.question-card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:32px;margin-bottom:24px;}
+.question-num{font-family:'Space Mono',monospace;font-size:.75rem;color:var(--muted);margin-bottom:12px;text-transform:uppercase;letter-spacing:1px;}
+.question-text{font-size:1.1rem;font-weight:700;line-height:1.6;margin-bottom:24px;}
+.options-grid{display:grid;gap:10px;}
+.option-btn{width:100%;padding:14px 18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;text-align:left;cursor:pointer;font-family:'Syne',sans-serif;font-size:.9rem;transition:all .25s;line-height:1.5;}
+.option-btn:hover:not(:disabled){background:rgba(255,215,0,.08);border-color:rgba(255,215,0,.4);}
+.option-btn.selected{background:rgba(255,215,0,.1);border-color:var(--gold);color:var(--gold);}
+.option-btn.correct{background:rgba(16,185,129,.15);border-color:var(--green);color:var(--green);}
+.option-btn.wrong{background:rgba(239,68,68,.1);border-color:var(--red);color:var(--red);}
+.option-btn:disabled{cursor:default;}
+.answer-feedback{margin-top:14px;padding:12px 16px;border-radius:8px;font-size:.85rem;line-height:1.6;}
+.answer-feedback.correct{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);color:var(--green);}
+.answer-feedback.wrong{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);color:#ff8080;}
+.quiz-action-row{display:flex;justify-content:center;gap:16px;margin-top:10px;}
+.quiz-btn{padding:12px 32px;border:none;border-radius:8px;font-family:'Syne',sans-serif;font-weight:700;cursor:pointer;font-size:.9rem;transition:all .3s;}
+.quiz-btn.primary{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;}
+.quiz-btn.primary:hover{box-shadow:0 8px 24px rgba(255,215,0,.3);}
+.quiz-btn.secondary{background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.1);}
+.quiz-btn.secondary:hover{background:rgba(255,255,255,.1);}
+
+/* ===== AUTH MODAL ===== */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:2000;display:none;align-items:center;justify-content:center;padding:20px;}
+.modal-overlay.open{display:flex;}
+.modal-box{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:40px;max-width:460px;width:100%;position:relative;}
+.modal-close{position:absolute;top:16px;right:16px;background:none;border:none;color:var(--muted);font-size:1.3rem;cursor:pointer;transition:color .2s;}
+.modal-close:hover{color:#fff;}
+.modal-title{font-size:1.5rem;font-weight:800;margin-bottom:6px;}
+.modal-sub{font-size:.85rem;color:var(--muted);margin-bottom:28px;line-height:1.6;}
+.form-group{margin-bottom:16px;}
+.form-label{display:block;font-size:.8rem;font-weight:700;color:var(--gold);margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;}
+.form-input{width:100%;background:var(--bg3);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:12px 14px;color:#fff;font-family:'Syne',sans-serif;font-size:.9rem;transition:border-color .2s;}
+.form-input:focus{outline:none;border-color:var(--gold);}
+.form-input::placeholder{color:rgba(255,255,255,.2);}
+.form-error{color:var(--red);font-size:.78rem;margin-top:5px;}
+.form-btn{width:100%;padding:14px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;border:none;border-radius:8px;font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;cursor:pointer;transition:all .3s;margin-top:8px;}
+.form-btn:hover{box-shadow:0 8px 24px rgba(255,215,0,.3);}
+.form-toggle{text-align:center;margin-top:16px;font-size:.85rem;color:var(--muted);}
+.form-toggle a{color:var(--gold);cursor:pointer;text-decoration:none;}
+.form-toggle a:hover{text-decoration:underline;}
+.auth-divider{display:flex;align-items:center;gap:12px;margin:18px 0;color:rgba(255,255,255,.2);font-size:.8rem;}
+.auth-divider::before,.auth-divider::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.08);}
+
+/* ===== RESULTS SCREEN ===== */
+#screen-results{display:none;min-height:100vh;padding-top:70px;background:var(--bg);}
+.results-container{max-width:700px;margin:0 auto;padding:40px 30px;text-align:center;}
+.results-icon{font-size:4rem;margin-bottom:20px;}
+.results-title{font-size:2rem;font-weight:800;margin-bottom:8px;}
+.results-sub{font-size:1rem;color:var(--muted);margin-bottom:30px;}
+.score-circle{width:160px;height:160px;border-radius:50%;border:4px solid var(--gold);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 30px;position:relative;overflow:hidden;}
+.score-circle::before{content:'';position:absolute;inset:0;background:radial-gradient(circle,rgba(255,215,0,.1),transparent 70%);}
+.score-pct{font-size:2.8rem;font-weight:800;color:var(--gold);font-family:'Space Mono',monospace;position:relative;}
+.score-label{font-size:.75rem;color:var(--muted);font-family:'Space Mono',monospace;position:relative;}
+.results-breakdown{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:30px;}
+.rb-item{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:16px;}
+.rb-num{font-size:1.6rem;font-weight:800;font-family:'Space Mono',monospace;}
+.rb-lbl{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
+.cert-box{background:linear-gradient(135deg,rgba(255,215,0,.08),rgba(255,215,0,.03));border:1px solid rgba(255,215,0,.3);border-radius:16px;padding:28px;margin-bottom:24px;}
+.cert-icon{font-size:2rem;margin-bottom:10px;}
+.cert-title{font-size:1.1rem;font-weight:700;color:var(--gold);margin-bottom:6px;}
+.cert-text{font-size:.85rem;color:var(--muted);margin-bottom:14px;}
+.cert-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.cert-btn{padding:10px 24px;border-radius:8px;font-family:'Syne',sans-serif;font-weight:700;cursor:pointer;font-size:.85rem;transition:all .3s;border:none;}
+.cert-btn.primary{background:var(--gold);color:#000;}
+.cert-btn.secondary{background:transparent;border:1px solid var(--border);color:#fff;}
+.results-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.results-btn{padding:12px 28px;border-radius:8px;font-family:'Syne',sans-serif;font-weight:700;cursor:pointer;font-size:.9rem;transition:all .3s;border:none;}
+.results-btn.gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;}
+.results-btn.outline{background:transparent;border:1px solid var(--border);color:#fff;}
+.results-btn:hover{opacity:.85;transform:translateY(-2px);}
+
+/* CERTIFICATE PAGE */
+#cert-display{background:var(--bg2);border:2px solid var(--gold);border-radius:20px;padding:40px;margin:30px 0;position:relative;overflow:hidden;}
+#cert-display::before{content:'';position:absolute;top:-50px;right:-50px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(255,215,0,.12),transparent 70%);}
+#cert-display::after{content:'';position:absolute;bottom:-50px;left:-50px;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(0,212,255,.08),transparent 70%);}
+.cert-watermark{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-30deg);font-size:6rem;opacity:.04;font-weight:900;white-space:nowrap;pointer-events:none;}
+.cert-org{font-size:.85rem;font-family:'Space Mono',monospace;color:var(--muted);letter-spacing:3px;text-transform:uppercase;margin-bottom:12px;}
+.cert-award{font-size:.95rem;color:var(--muted);margin-bottom:8px;}
+.cert-name{font-size:2rem;font-weight:800;color:var(--gold);margin-bottom:8px;}
+.cert-course{font-size:1.1rem;color:#fff;margin-bottom:4px;}
+.cert-level{font-size:.85rem;color:var(--cyan);margin-bottom:20px;font-family:'Space Mono',monospace;}
+.cert-score-display{font-size:1rem;color:var(--green);margin-bottom:20px;}
+.cert-date{font-size:.78rem;font-family:'Space Mono',monospace;color:var(--muted);}
+.cert-seal{display:inline-block;width:60px;height:60px;border:2px solid var(--gold);border-radius:50%;font-size:1.4rem;line-height:60px;color:var(--gold);margin:16px auto 0;}
+
+/* TOAST */
+.toast{position:fixed;bottom:30px;right:30px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px 20px;font-size:.9rem;z-index:9999;transform:translateY(100px);opacity:0;transition:all .4s;max-width:300px;}
+.toast.show{transform:translateY(0);opacity:1;}
+.toast.success{border-color:var(--green);}
+.toast.error{border-color:var(--red);}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .lesson-layout{grid-template-columns:1fr;}
+  .sidebar{position:fixed;left:-100%;top:70px;height:calc(100vh - 70px);width:280px;z-index:900;transition:left .3s;}
+  .sidebar.open{left:0;}
+  .lesson-main{padding:24px 20px;}
+  .sidebar-toggle{display:flex;}
+}
+.sidebar-toggle{display:none;align-items:center;gap:8px;padding:10px 20px;background:var(--bg2);border-bottom:1px solid var(--border);cursor:pointer;font-size:.85rem;font-weight:700;color:var(--gold);}
+.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:800;}
+.sidebar-overlay.open{display:block;}
+
+/* LOADING */
+.loading-spinner{display:inline-block;width:18px;height:18px;border:2px solid rgba(255,255,255,.1);border-top-color:var(--gold);border-radius:50%;animation:spin .6s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-container">
+    <a class="nav-logo" href="index.html">WorldBankFx × Professor</a>
+    <div class="nav-right">
+      <a href="index.html" class="nav-back"><i class="fas fa-arrow-left"></i> Main Site</a>
+      <div id="nav-progress-wrap" style="display:none;">
+        <div class="nav-progress-label" id="nav-progress-text">0% Complete</div>
+        <div class="nav-progress-bar"><div class="nav-progress-fill" id="nav-progress-fill" style="width:0%"></div></div>
+      </div>
+      <button id="user-btn" onclick="showAuth()" style="background:rgba(255,215,0,.1);border:1px solid var(--border);color:var(--gold);padding:8px 16px;border-radius:20px;cursor:pointer;font-family:'Syne',sans-serif;font-weight:700;font-size:.82rem;transition:all .3s;" onmouseover="this.style.background='rgba(255,215,0,.2)'" onmouseout="this.style.background='rgba(255,215,0,.1)'">
+        <i class="fas fa-user-circle"></i> <span id="user-btn-text">Sign In</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- ============ SCREEN: LANDING ============ -->
+<div id="screen-landing">
+  <div class="landing-bg"></div>
+  <div class="landing-grid"></div>
+  <div class="landing-content">
+    <div class="landing-badge">🎓 WorldBankFx × Professor</div>
+    <h1 class="landing-title">
+      The <span class="gold">Forex Teaser</span><br>& <span class="cyan">Refresher</span> Class
+    </h1>
+    <p class="landing-sub">Free, progressive forex education from absolute zero to expert-level thinking. Study freely. Test when ready. Earn your certificate.</p>
+    <div class="landing-stats">
+      <div class="lstat"><div class="lstat-num">120+</div><div class="lstat-lbl">Lessons</div></div>
+      <div class="lstat"><div class="lstat-num">3</div><div class="lstat-lbl">Levels</div></div>
+      <div class="lstat"><div class="lstat-num">15+</div><div class="lstat-lbl">Modules</div></div>
+      <div class="lstat"><div class="lstat-num">3</div><div class="lstat-lbl">Certificates</div></div>
+    </div>
+    <div class="landing-tracks">
+      <div class="track-card beginner" onclick="startTrack('beginner')">
+        <div class="track-icon">🌱</div>
+        <div class="track-title">Beginner Track</div>
+        <div class="track-desc">Zero to first trade. Understand what forex is, how markets work, currency pairs, pips, spreads, and the psychology of a new trader.</div>
+        <div class="track-meta">
+          <span class="track-tag">40 Lessons</span>
+          <span class="track-tag">5 Modules</span>
+          <span class="track-tag">Free</span>
+        </div>
+        <button class="track-btn">Start Beginner Track →</button>
+      </div>
+      <div class="track-card intermediate" onclick="startTrack('intermediate')">
+        <div class="track-icon">📈</div>
+        <div class="track-title">Intermediate Track</div>
+        <div class="track-desc">Technical analysis, candlestick patterns, support & resistance, indicators, risk management, and building your first trading plan.</div>
+        <div class="track-meta">
+          <span class="track-tag">50 Lessons</span>
+          <span class="track-tag">6 Modules</span>
+          <span class="track-tag">Free</span>
+        </div>
+        <button class="track-btn">Start Intermediate Track →</button>
+      </div>
+      <div class="track-card expert" onclick="startTrack('expert')">
+        <div class="track-icon">🧠</div>
+        <div class="track-title">Expert Track</div>
+        <div class="track-desc">Smart Money Concepts, ICT, order flow, institutional trading, liquidity hunts, FVGs, OBs, and professional execution models.</div>
+        <div class="track-meta">
+          <span class="track-tag">35 Lessons</span>
+          <span class="track-tag">4 Modules</span>
+          <span class="track-tag">Free</span>
+        </div>
+        <button class="track-btn">Start Expert Track →</button>
+      </div>
+    </div>
+    <p class="landing-note">📖 All content is <span>free to read</span>. Create an account only when you're ready to take the aptitude test and earn your certificate.</p>
+  </div>
+</div>
+
+<!-- ============ SCREEN: LESSON ============ -->
+<div id="screen-lesson">
+  <div class="sidebar-toggle" id="sidebar-toggle" onclick="toggleSidebar()">
+    <i class="fas fa-bars"></i> Course Menu
+  </div>
+  <div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar()"></div>
+  <div class="lesson-layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-track-label">Currently studying</div>
+        <div class="sidebar-track-name" id="sidebar-track-name">—</div>
+      </div>
+      <div class="sidebar-progress-wrap">
+        <div class="sidebar-progress-text">
+          <span>Progress</span>
+          <span id="sidebar-pct">0%</span>
+        </div>
+        <div class="sidebar-progress-bar"><div class="sidebar-progress-fill" id="sidebar-progress-fill" style="width:0%"></div></div>
+      </div>
+      <div class="sidebar-modules" id="sidebar-modules"></div>
+    </aside>
+    <main class="lesson-main" id="lesson-main">
+      <!-- Lesson content injected here -->
+    </main>
+  </div>
+</div>
+
+<!-- ============ SCREEN: QUIZ ============ -->
+<div id="screen-quiz">
+  <div class="quiz-container">
+    <div class="quiz-header">
+      <div class="quiz-level-badge" id="quiz-level-badge">Beginner</div>
+      <div class="quiz-title" id="quiz-title">Aptitude Test</div>
+      <div class="quiz-subtitle" id="quiz-subtitle">Sign in first to save your results and earn your certificate</div>
+    </div>
+    <div id="quiz-auth-prompt" style="background:rgba(255,215,0,.06);border:1px solid var(--border);border-radius:12px;padding:24px;text-align:center;margin-bottom:24px;">
+      <div style="font-size:1.5rem;margin-bottom:8px;">🔐</div>
+      <div style="font-weight:700;margin-bottom:6px;">Sign in to save your results</div>
+      <div style="font-size:.85rem;color:var(--muted);margin-bottom:14px;">Your score, progress, and certificate will be stored. You can still preview questions below.</div>
+      <button class="quiz-btn primary" onclick="showAuth('quiz')">Create Account / Sign In</button>
+    </div>
+    <div class="quiz-progress-section">
+      <div class="quiz-progress-row">
+        <span class="quiz-progress-label">Question</span>
+        <span class="quiz-progress-val" id="quiz-q-num">1 / 20</span>
+      </div>
+      <div class="quiz-bar"><div class="quiz-bar-fill" id="quiz-bar-fill" style="width:5%"></div></div>
+    </div>
+    <div id="quiz-questions-area"></div>
+    <div class="quiz-action-row" id="quiz-actions">
+      <button class="quiz-btn secondary" onclick="showScreen('lesson')">← Back to Study</button>
+      <button class="quiz-btn primary" id="quiz-next-btn" onclick="nextQuestion()" style="display:none">Next Question →</button>
+      <button class="quiz-btn primary" id="quiz-submit-btn" onclick="submitQuiz()" style="display:none">Submit Test</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SCREEN: RESULTS ============ -->
+<div id="screen-results">
+  <div class="results-container">
+    <div class="results-icon" id="results-icon">🏆</div>
+    <div class="results-title" id="results-title">Test Complete!</div>
+    <div class="results-sub" id="results-sub">Here are your results</div>
+    <div class="score-circle">
+      <div class="score-pct" id="results-pct">0%</div>
+      <div class="score-label">SCORE</div>
+    </div>
+    <div class="results-breakdown">
+      <div class="rb-item"><div class="rb-num" id="rb-correct" style="color:var(--green)">0</div><div class="rb-lbl">Correct</div></div>
+      <div class="rb-item"><div class="rb-num" id="rb-wrong" style="color:var(--red)">0</div><div class="rb-lbl">Wrong</div></div>
+      <div class="rb-item"><div class="rb-num" id="rb-pct" style="color:var(--gold)">0%</div><div class="rb-lbl">Score</div></div>
+    </div>
+    <div class="cert-box" id="cert-section" style="display:none">
+      <div id="cert-display">
+        <div class="cert-watermark">WORLDBANKFX</div>
+        <div class="cert-org">WorldBankFx × Professor</div>
+        <div class="cert-award">This is to certify that</div>
+        <div class="cert-name" id="cert-student-name">Student Name</div>
+        <div class="cert-award">has successfully completed</div>
+        <div class="cert-course">The Forex Teaser & Refresher Class</div>
+        <div class="cert-level" id="cert-level-text">BEGINNER LEVEL</div>
+        <div class="cert-score-display" id="cert-score-display">Score: 90% · Pass</div>
+        <div class="cert-seal">🏆</div>
+        <div class="cert-date" id="cert-date">Issued: —</div>
+      </div>
+      <div class="cert-btns" style="margin-top:16px;">
+        <button class="cert-btn primary" onclick="downloadCert()"><i class="fas fa-download"></i> Download Certificate</button>
+        <button class="cert-btn secondary" onclick="shareCert()"><i class="fas fa-share-alt"></i> Share</button>
+      </div>
+    </div>
+    <div id="fail-section" style="display:none;background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.25);border-radius:12px;padding:22px;margin-bottom:22px;">
+      <div style="font-size:1.5rem;margin-bottom:8px;">📚</div>
+      <div style="font-weight:700;color:var(--red);margin-bottom:6px;">Not quite there yet</div>
+      <div style="font-size:.88rem;color:var(--muted);margin-bottom:14px;">You need 70% to pass and earn your certificate. Review the material and try again — you've got this!</div>
+    </div>
+    <div class="results-actions">
+      <button class="results-btn gold" id="results-next-track" onclick="goNextTrack()" style="display:none">Continue to Next Level →</button>
+      <button class="results-btn outline" onclick="retakeTest()">Retake Test</button>
+      <button class="results-btn outline" onclick="showScreen('lesson')">Back to Study</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ AUTH MODAL ============ -->
+<div class="modal-overlay" id="auth-modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeAuth()"><i class="fas fa-times"></i></button>
+    <div id="auth-login-view">
+      <div class="modal-title">Welcome Back 👋</div>
+      <div class="modal-sub">Sign in to save your test results, track progress, and earn certificates.</div>
+      <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" id="login-email" placeholder="trader@email.com"></div>
+      <div class="form-group"><label class="form-label">Password</label><input type="password" class="form-input" id="login-password" placeholder="••••••••"></div>
+      <div class="form-error" id="login-error" style="margin-bottom:8px;"></div>
+      <button class="form-btn" onclick="doLogin()"><span id="login-btn-text">Sign In</span></button>
+      <div class="form-toggle">Don't have an account? <a onclick="showRegister()">Create one free</a></div>
+    </div>
+    <div id="auth-register-view" style="display:none">
+      <div class="modal-title">Join The Class 🎓</div>
+      <div class="modal-sub">Free forever. Create your account to take tests and earn certificates.</div>
+      <div class="form-group"><label class="form-label">Full Name</label><input type="text" class="form-input" id="reg-name" placeholder="Your full name"></div>
+      <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" id="reg-email" placeholder="trader@email.com"></div>
+      <div class="form-group"><label class="form-label">Password</label><input type="password" class="form-input" id="reg-password" placeholder="Min. 6 characters"></div>
+      <div class="form-error" id="reg-error" style="margin-bottom:8px;"></div>
+      <button class="form-btn" onclick="doRegister()"><span id="reg-btn-text">Create Account</span></button>
+      <div class="form-toggle">Already have an account? <a onclick="showLogin()">Sign in</a></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// SUPABASE CONFIG — replace with your actual keys
+// ============================================================
+const SUPABASE_URL = 'https://ssemqcoabqinyherbhbx.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_1TJa1uvWKiJL08ZXueX9oA_VbGRiEoJ';
+
+async function sbFetch(endpoint, options = {}) {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/${endpoint}`, {
+    ...options,
+    headers: {
+      'apikey': SUPABASE_ANON_KEY,
+      'Authorization': `Bearer ${currentToken || SUPABASE_ANON_KEY}`,
+      'Content-Type': 'application/json',
+      'Prefer': 'return=representation',
+      ...(options.headers || {})
+    }
+  });
+  return res.json();
+}
+async function sbAuth(action, body) {
+  const res = await fetch(`${SUPABASE_URL}/auth/v1/${action}`, {
+    method: 'POST',
+    headers: { 'apikey': SUPABASE_ANON_KEY, 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  });
+  return res.json();
+}
+
+// ============================================================
+// STATE
+// ============================================================
+let currentTrack = 'beginner';
+let currentLessonIndex = 0;
+let currentUser = null;
+let currentToken = null;
+let quizAnswers = {};
+let currentQuizIndex = 0;
+let afterAuthAction = null;
+
+// Load user from localStorage
+const savedUser = localStorage.getItem('wbfx_user');
+if (savedUser) {
+  try {
+    const u = JSON.parse(savedUser);
+    currentUser = u.user;
+    currentToken = u.token;
+    updateUserBtn();
+  } catch(e) {}
+}
+
+function getProgress() {
+  try { return JSON.parse(localStorage.getItem('wbfx_progress') || '{}'); } catch(e) { return {}; }
+}
+function saveProgress(data) {
+  localStorage.setItem('wbfx_progress', JSON.stringify(data));
+}
+function markLessonComplete(trackId, lessonId) {
+  const p = getProgress();
+  if (!p[trackId]) p[trackId] = [];
+  if (!p[trackId].includes(lessonId)) p[trackId].push(lessonId);
+  saveProgress(p);
+  updateProgressUI(trackId);
+}
+
+// ============================================================
+// CURRICULUM DATA
+// ============================================================
+const CURRICULUM = {
+  beginner: {
+    name: 'Beginner Track',
+    color: '#10b981',
+    badge: '🌱 Beginner',
+    badgeColor: 'var(--green)',
+    modules: [
+      {
+        title: 'Module 1: What is Forex?',
+        lessons: [
+          {
+            id: 'b1-1',
+            title: 'Introduction to the Forex Market',
+            duration: '8 min',
+            content: `
+<h3>What is the Foreign Exchange Market?</h3>
+<p>The <strong>Foreign Exchange market</strong>, or <em>Forex (FX)</em>, is the world's largest and most liquid financial market. It is where currencies are bought and sold — and it operates <strong>24 hours a day, 5 days a week</strong>, across major financial centres around the globe.</p>
+<div class="callout">
+  <div class="callout-title">📊 Quick Fact</div>
+  The Forex market processes over <strong>$7.5 trillion USD</strong> in transactions every single day — that's more than all the world's stock markets combined.
+</div>
+<h3>Why Does Forex Exist?</h3>
+<p>Forex exists because of international trade and investment. When a company in Uganda buys goods from Japan, it must pay in Japanese Yen. To do that, it exchanges Ugandan Shillings for Yen — that's a forex transaction. Governments, banks, corporations, tourists, and traders all participate.</p>
+<h3>Who Are the Market Participants?</h3>
+<ul>
+  <li><strong>Central Banks</strong> — Set monetary policy and intervene in currency markets (e.g. Bank of Uganda, US Federal Reserve)</li>
+  <li><strong>Commercial Banks</strong> — Handle the bulk of forex volume between institutions</li>
+  <li><strong>Hedge Funds & Investment Firms</strong> — Trade for profit and portfolio management</li>
+  <li><strong>Corporations</strong> — Exchange currency for international business</li>
+  <li><strong>Retail Traders</strong> — That's us! We access the market through brokers</li>
+</ul>
+<h3>The Interbank Market</h3>
+<p>The top layer of the forex market is called the <strong>interbank market</strong>. This is where the world's largest banks trade directly with each other. Retail traders like us never access this directly — we go through a <em>broker</em> who routes our orders into the wider market.</p>
+<div class="callout cyan">
+  <div class="callout-title">💡 Key Insight</div>
+  Because there is no central exchange in forex (unlike stocks), prices can vary slightly between brokers. The market is <strong>decentralised</strong> — it runs across a global network.
+</div>
+<h3>Why Trade Forex?</h3>
+<ul>
+  <li>Extreme liquidity — you can enter and exit instantly</li>
+  <li>Low barriers to entry — start with a small account</li>
+  <li>Trade in both directions — profit from rising <em>and</em> falling markets</li>
+  <li>Leverage available — control large positions with small capital</li>
+  <li>Available almost around the clock</li>
+</ul>
+<div class="callout red">
+  <div class="callout-title">⚠️ Risk Warning</div>
+  The same leverage that multiplies profits also multiplies losses. Most new traders lose money. This course exists to help you be in the minority that doesn't.
+</div>`
+          },
+          {
+            id: 'b1-2',
+            title: 'Currency Pairs Explained',
+            duration: '10 min',
+            content: `
+<h3>What is a Currency Pair?</h3>
+<p>In forex, you never trade a single currency. You always trade one currency <strong>against</strong> another. This is called a <strong>currency pair</strong>.</p>
+<div class="definition-box">
+  <div class="def-term">Currency Pair</div>
+  <div class="def-text">A price quote of the exchange rate for two different currencies. The first currency is the <strong>base currency</strong>, and the second is the <strong>quote currency</strong>.</div>
+</div>
+<p>Example: <strong>EUR/USD = 1.0850</strong></p>
+<p>This means 1 Euro (base) costs 1.0850 US Dollars (quote). If you BUY EUR/USD, you are buying Euros and selling Dollars. If you SELL EUR/USD, you are selling Euros and buying Dollars.</p>
+<h3>The Three Categories of Pairs</h3>
+<table class="data-table">
+  <tr><th>Category</th><th>Description</th><th>Examples</th></tr>
+  <tr><td><strong>Majors</strong></td><td>Pairs that include USD. Most traded, most liquid.</td><td>EUR/USD, GBP/USD, USD/JPY, USD/CHF, AUD/USD, USD/CAD, NZD/USD</td></tr>
+  <tr><td><strong>Minors (Crosses)</strong></td><td>Pairs without USD. Still liquid.</td><td>EUR/GBP, EUR/JPY, GBP/JPY, AUD/JPY</td></tr>
+  <tr><td><strong>Exotics</strong></td><td>One major + one emerging market currency. Wider spreads.</td><td>USD/ZAR, USD/TRY, EUR/SEK, USD/UGX</td></tr>
+</table>
+<h3>Reading a Currency Pair</h3>
+<p>Always read it as: <em>"How much of the quote currency do I need to buy one unit of the base currency?"</em></p>
+<div class="formula-box">GBP/USD = 1.2700 → You need $1.27 to buy £1</div>
+<h3>The Most Traded Pairs</h3>
+<ul>
+  <li><strong>EUR/USD</strong> — Euro vs US Dollar. Most traded pair in the world (~23% of all volume)</li>
+  <li><strong>USD/JPY</strong> — Dollar vs Yen. Known for sharp, volatile moves</li>
+  <li><strong>GBP/USD</strong> — "Cable". Known for large pip movements</li>
+  <li><strong>AUD/USD</strong> — "Aussie". Often correlates with commodity prices</li>
+  <li><strong>XAU/USD</strong> — Gold vs Dollar. Technically a commodity but traded like a pair</li>
+</ul>
+<div class="callout green">
+  <div class="callout-title">✅ Beginner Tip</div>
+  As a beginner, focus on <strong>one or two major pairs</strong>. EUR/USD is a great starting point — it has the tightest spreads and the most analysis available.
+</div>`
+          },
+          {
+            id: 'b1-3',
+            title: 'Pips, Lots & Position Sizing',
+            duration: '12 min',
+            content: `
+<h3>What is a Pip?</h3>
+<p>A <strong>pip</strong> (percentage in point) is the smallest standard price move in forex. For most pairs, it's the 4th decimal place.</p>
+<div class="definition-box">
+  <div class="def-term">Pip</div>
+  <div class="def-text">The smallest standard increment of price change. For EUR/USD moving from 1.0850 to 1.0851 = <strong>1 pip move</strong>.</div>
+</div>
+<div class="formula-box">EUR/USD: 1.08<strong>50</strong> → 1.08<strong>51</strong> = 1 pip<br>USD/JPY: 149.<strong>50</strong> → 149.<strong>51</strong> = 1 pip (2nd decimal for JPY)</div>
+<h3>What is a Pipette?</h3>
+<p>Most brokers now quote prices to 5 decimal places (4 for JPY pairs). That 5th digit is a <strong>pipette</strong> or <em>fractional pip</em> — 1/10th of a pip.</p>
+<h3>Lot Sizes — How Much Are You Trading?</h3>
+<table class="data-table">
+  <tr><th>Lot Type</th><th>Units</th><th>Pip Value (EUR/USD)</th></tr>
+  <tr><td>Standard Lot</td><td>100,000</td><td>~$10 per pip</td></tr>
+  <tr><td>Mini Lot</td><td>10,000</td><td>~$1 per pip</td></tr>
+  <tr><td>Micro Lot</td><td>1,000</td><td>~$0.10 per pip</td></tr>
+  <tr><td>Nano Lot</td><td>100</td><td>~$0.01 per pip</td></tr>
+</table>
+<h3>Calculating Pip Value</h3>
+<div class="formula-box">Pip Value = (Pip / Exchange Rate) × Lot Size<br><br>Example (EUR/USD at 1.0850, 1 standard lot):<br>= (0.0001 / 1.0850) × 100,000 = $9.22 per pip</div>
+<h3>Why Lot Size Matters</h3>
+<p>If you trade 1 standard lot and the market moves 50 pips against you, you lose approximately $500. If you're on a micro lot, that same move costs you only $5. <strong>Position sizing is risk management</strong>.</p>
+<div class="callout">
+  <div class="callout-title">📌 Rule of Thumb</div>
+  Never risk more than 1–2% of your account on a single trade. With a $1,000 account, your max risk per trade should be <strong>$10–$20</strong>.
+</div>
+<h3>The Spread</h3>
+<p>Every currency pair has two prices: the <strong>Bid</strong> (sell price) and the <strong>Ask</strong> (buy price). The difference between them is the <strong>spread</strong> — this is the broker's fee.</p>
+<div class="formula-box">Spread = Ask − Bid<br>EUR/USD: Ask 1.08512 − Bid 1.08500 = 1.2 pip spread</div>
+<div class="callout red">
+  <div class="callout-title">⚠️ Cost to Trade</div>
+  You start every trade already slightly in the red by the spread. This is why frequent small trades are harder to profit from — the spread eats into each one.
+</div>`
+          },
+          {
+            id: 'b1-4',
+            title: 'Leverage & Margin',
+            duration: '10 min',
+            content: `
+<h3>What is Leverage?</h3>
+<p><strong>Leverage</strong> allows you to control a large position with a small amount of capital. It's expressed as a ratio.</p>
+<div class="definition-box">
+  <div class="def-term">Leverage</div>
+  <div class="def-text">A multiplier that allows you to control a position size larger than your actual deposit. 1:100 leverage means $100 controls $10,000 worth of currency.</div>
+</div>
+<table class="data-table">
+  <tr><th>Leverage</th><th>$1,000 Controls</th><th>1 pip on EUR/USD</th></tr>
+  <tr><td>1:10</td><td>$10,000</td><td>~$1</td></tr>
+  <tr><td>1:50</td><td>$50,000</td><td>~$5</td></tr>
+  <tr><td>1:100</td><td>$100,000</td><td>~$10</td></tr>
+  <tr><td>1:500</td><td>$500,000</td><td>~$50</td></tr>
+</table>
+<h3>What is Margin?</h3>
+<p><strong>Margin</strong> is the deposit your broker holds as collateral while your trade is open. It's not a fee — it's money from your account that gets "reserved."</p>
+<div class="formula-box">Required Margin = Trade Size / Leverage<br><br>$100,000 position at 1:100 leverage = $1,000 required margin</div>
+<h3>Margin Call & Stop Out</h3>
+<div class="callout red">
+  <div class="callout-title">🚨 Critical Concept</div>
+  If your losses reduce your free margin to a certain percentage (e.g. 100%), your broker issues a <strong>Margin Call</strong> — a warning to add funds or close trades. At <strong>Stop Out level</strong> (e.g. 50%), the broker automatically closes your trades to prevent further loss.
+</div>
+<h3>The Double-Edged Sword</h3>
+<div class="key-point"><i class="fas fa-arrow-up key-point-icon"></i><span>With 1:100 leverage, a 1% move in your favour = 100% gain on margin</span></div>
+<div class="key-point"><i class="fas fa-arrow-down key-point-icon" style="color:var(--red)"></i><span>A 1% move against you = 100% loss of your margin (account blown)</span></div>
+<div class="callout green">
+  <div class="callout-title">✅ Smart Rule</div>
+  Professional traders rarely use more than 1:10 effective leverage, regardless of what their broker offers. The availability of high leverage doesn't mean you should use it.
+</div>`
+          },
+          {
+            id: 'b1-5',
+            title: 'Market Sessions & Trading Hours',
+            duration: '9 min',
+            content: `
+<h3>The 24-Hour Forex Market</h3>
+<p>Forex trades around the clock from Monday morning in Sydney to Friday evening in New York. The market is divided into four major <strong>trading sessions</strong>, each with different characteristics.</p>
+<table class="data-table">
+  <tr><th>Session</th><th>Open (UTC)</th><th>Close (UTC)</th><th>Pairs Most Active</th></tr>
+  <tr><td>🇦🇺 Sydney</td><td>22:00</td><td>07:00</td><td>AUD/USD, NZD/USD</td></tr>
+  <tr><td>🇯🇵 Tokyo (Asia)</td><td>00:00</td><td>09:00</td><td>USD/JPY, AUD/JPY, crosses</td></tr>
+  <tr><td>🇬🇧 London</td><td>08:00</td><td>17:00</td><td>EUR/USD, GBP/USD, EUR/GBP</td></tr>
+  <tr><td>🇺🇸 New York</td><td>13:00</td><td>22:00</td><td>EUR/USD, USD/CAD, USD/JPY</td></tr>
+</table>
+<h3>Session Overlaps — The Power Hours</h3>
+<div class="callout">
+  <div class="callout-title">⚡ High Volume Zones</div>
+  <strong>London–New York Overlap (13:00–17:00 UTC)</strong> is the most volatile and liquid period. Most big institutional moves happen here. This is where many traders focus their activity.
+</div>
+<h3>For East African Traders (EAT = UTC+3)</h3>
+<table class="data-table">
+  <tr><th>Session</th><th>EAT Open</th><th>EAT Close</th></tr>
+  <tr><td>Tokyo</td><td>03:00</td><td>12:00</td></tr>
+  <tr><td>London</td><td>11:00</td><td>20:00</td></tr>
+  <tr><td>New York</td><td>16:00</td><td>01:00</td></tr>
+  <tr><td><strong>Best overlap</strong></td><td><strong>16:00</strong></td><td><strong>20:00</strong></td></tr>
+</table>
+<div class="callout green">
+  <div class="callout-title">🌍 Uganda Traders</div>
+  The London–New York overlap runs <strong>4:00 PM to 8:00 PM EAT</strong>. This is your prime trading window. The Asian session (3 AM–12 PM EAT) is good for JPY pairs.
+</div>
+<h3>Low Activity Periods to Avoid</h3>
+<ul>
+  <li><strong>Friday 20:00+ UTC</strong> — Market winds down. Spreads widen.</li>
+  <li><strong>Sunday open</strong> — Gaps can occur from weekend news.</li>
+  <li><strong>Public holidays</strong> — Reduced liquidity, erratic moves.</li>
+</ul>`
+          }
+        ]
+      },
+      {
+        title: 'Module 2: Trading Psychology',
+        lessons: [
+          {
+            id: 'b2-1',
+            title: 'The Psychology of Trading',
+            duration: '11 min',
+            content: `
+<h3>Why Psychology is Your #1 Edge</h3>
+<p>Most trading courses focus on strategy. But here's the truth: <strong>you can give two traders the exact same strategy and get completely different results</strong>. The difference is psychology. It is estimated that <em>trading psychology</em> accounts for 80% of trading success, with strategy and risk management making up the remaining 20%.</p>
+<div class="callout">
+  <div class="callout-title">💭 Uncomfortable Truth</div>
+  The forex market does not care about your mortgage, your bills, or how long you've been trading. It is a neutral arena where your emotions will be weaponised against you — unless you understand them.
+</div>
+<h3>The Emotional Cycle of a New Trader</h3>
+<p>Most new traders go through this predictable emotional rollercoaster:</p>
+<ol>
+  <li><strong>Optimism</strong> — "This looks easy, I've read a few things"</li>
+  <li><strong>Excitement</strong> — First trades, maybe some quick wins</li>
+  <li><strong>Euphoria</strong> — "I'm a natural, I should go full time"</li>
+  <li><strong>Anxiety</strong> — Market starts going against them</li>
+  <li><strong>Denial</strong> — "It'll come back, I'll hold"</li>
+  <li><strong>Fear</strong> — Large losses accumulating</li>
+  <li><strong>Despair</strong> — Account blown or severely damaged</li>
+  <li><strong>Depression</strong> — "I'll never understand this market"</li>
+</ol>
+<p>The goal of this course is to help you skip steps 3–8 entirely.</p>
+<h3>The Two Enemies: Fear and Greed</h3>
+<div class="definition-box">
+  <div class="def-term">Fear in Trading</div>
+  <div class="def-text">Fear causes traders to exit winning trades too early, hesitate to enter valid setups, or freeze when they should act. It also causes the "fear of missing out" (FOMO) — entering late chasing a move.</div>
+</div>
+<div class="definition-box">
+  <div class="def-term">Greed in Trading</div>
+  <div class="def-text">Greed causes traders to remove take profit levels hoping for more, overtrade, increase position sizes after wins, and revenge trade after losses.</div>
+</div>
+<h3>Revenge Trading</h3>
+<p><strong>Revenge trading</strong> is one of the most destructive behaviours. It happens after a loss — you immediately open another trade (usually larger) to "get the money back." You're no longer trading the market; you're fighting it emotionally.</p>
+<div class="callout red">
+  <div class="callout-title">🚫 The Danger Rule</div>
+  After a losing trade, always take at least a 30-minute break before your next entry. Walk away from the screen. Your worst trades will almost always be revenge trades.
+</div>
+<h3>Building a Trader's Mindset</h3>
+<ul>
+  <li>Think in <strong>probabilities</strong>, not certainties. No single trade defines you.</li>
+  <li>Accept losses as the <strong>cost of doing business</strong>. Even the best traders lose 40–50% of trades.</li>
+  <li>Follow your plan. <strong>A bad trade following your plan</strong> is better than a winning trade that broke your rules.</li>
+  <li>Detach your self-worth from your P&L (profit and loss).</li>
+</ul>`
+          },
+          {
+            id: 'b2-2',
+            title: 'Discipline, Routine & Trading Plans',
+            duration: '10 min',
+            content: `
+<h3>What is a Trading Plan?</h3>
+<p>A <strong>trading plan</strong> is a written, structured set of rules that governs every aspect of your trading. It answers: <em>When do I trade? What do I trade? How much do I risk? When do I enter? When do I exit?</em></p>
+<div class="callout">
+  <div class="callout-title">📋 A Trading Plan Covers:</div>
+  Markets traded · Timeframes used · Entry criteria · Exit criteria · Maximum daily/weekly loss · Position sizing rules · Pre-market routine · Post-trade review process
+</div>
+<h3>Why You Must Write It Down</h3>
+<p>If your plan is only in your head, it doesn't exist as a plan — it's just a vague intention. When emotions hit (and they will), you will rationalise breaking the rules. A written, reviewed plan creates accountability.</p>
+<h3>The Professional Trader's Daily Routine</h3>
+<ol>
+  <li><strong>Pre-session analysis</strong> — Review higher timeframes, note key levels</li>
+  <li><strong>Check the economic calendar</strong> — Note any high-impact news</li>
+  <li><strong>Mark your zones</strong> — Support, resistance, liquidity pools</li>
+  <li><strong>Set your criteria</strong> — What conditions must be met before you trade today?</li>
+  <li><strong>Execute (or wait)</strong> — If no valid setup, do nothing</li>
+  <li><strong>Post-session journal</strong> — Record what you saw, what you did, why</li>
+</ol>
+<h3>The Trading Journal</h3>
+<p>A <strong>trading journal</strong> is the most underrated edge available to retail traders. By recording every trade — entry, exit, reason, result, and emotions felt — you build a database of your own behaviour. Patterns emerge. You see what works and what doesn't, specific to your psychology and style.</p>
+<div class="callout green">
+  <div class="callout-title">📖 WorldBankFx Tip</div>
+  Use the Trading Journal tool on this website to log all your trades. Review it weekly. The trader who reviews is the trader who grows.
+</div>
+<h3>Patience as a Strategy</h3>
+<p>Professional traders often describe their job as: <em>"I do nothing most of the time, and then I act decisively."</em> The market does not reward activity. It rewards <strong>accuracy</strong>. The urge to always be in a trade is one of the most expensive habits a retail trader can have.</p>`
+          },
+          {
+            id: 'b2-3',
+            title: 'Risk Management Fundamentals',
+            duration: '14 min',
+            content: `
+<h3>Risk Management: The Foundation of Every Profitable Trader</h3>
+<p>Here is the single most important truth in trading: <strong>Your job is not to be right. Your job is to survive long enough to let your edge play out.</strong></p>
+<p>Risk management is what keeps you in the game. Without it, even a profitable strategy will eventually destroy an account.</p>
+<h3>The 1–2% Rule</h3>
+<div class="definition-box">
+  <div class="def-term">The 1–2% Risk Rule</div>
+  <div class="def-text">Never risk more than 1–2% of your total account balance on any single trade. If your account is $1,000, your maximum loss per trade is $10–$20.</div>
+</div>
+<h3>Why This Rule Saves You</h3>
+<p>With 1% risk per trade, you would need to lose <strong>100 consecutive trades</strong> to blow your account. With 10% risk per trade, 10 consecutive losses wipe you out — and losing streaks of 10 happen to professional traders regularly.</p>
+<div class="formula-box">Account: $1,000 | Risk: 1% = $10 per trade<br>Stop Loss: 20 pips<br>Position Size = $10 / (20 pips × pip value)<br>If 1 pip = $0.10 → Position = $10 / ($0.10 × 20) = 5 micro lots</div>
+<h3>Risk-to-Reward Ratio (RRR)</h3>
+<div class="definition-box">
+  <div class="def-term">Risk-to-Reward Ratio</div>
+  <div class="def-text">The ratio between your potential loss (risk) and potential gain (reward) on a trade. A 1:2 RRR means if you risk $10, your target profit is $20.</div>
+</div>
+<table class="data-table">
+  <tr><th>RRR</th><th>Win Rate Needed to Break Even</th></tr>
+  <tr><td>1:1</td><td>50%</td></tr>
+  <tr><td>1:2</td><td>33%</td></tr>
+  <tr><td>1:3</td><td>25%</td></tr>
+  <tr><td>1:5</td><td>17%</td></tr>
+</table>
+<p>With a 1:3 RRR, you only need to be right <strong>25% of the time</strong> to be profitable. This is why high RRR setups are so powerful.</p>
+<h3>Stop Loss — Non-Negotiable</h3>
+<p>A <strong>stop loss</strong> is an order that automatically closes your trade at a predetermined loss level. It is not optional. <em>Every. Single. Trade. Has. A. Stop.</em></p>
+<div class="callout red">
+  <div class="callout-title">🚨 Never Trade Without a Stop Loss</div>
+  "I'll watch it manually" is how accounts get destroyed. Markets move fast. News hits. Spreads widen. Your stop loss is your insurance policy — pay the premium every trade.
+</div>
+<h3>Where to Place Your Stop Loss</h3>
+<ul>
+  <li>Below a recent swing low (for buy trades)</li>
+  <li>Above a recent swing high (for sell trades)</li>
+  <li>Behind a key support/resistance level</li>
+  <li>Behind a structure that, if broken, invalidates your trade idea</li>
+</ul>
+<div class="callout green">
+  <div class="callout-title">✅ Take Profit Strategy</div>
+  Set your take profit at a level where market structure gives you resistance (for buys) or support (for sells). Never just guess. Have a reason for your target.
+</div>`
+          }
+        ]
+      },
+      {
+        title: 'Module 3: How Brokers Work',
+        lessons: [
+          {
+            id: 'b3-1',
+            title: 'Choosing a Broker & Account Types',
+            duration: '9 min',
+            content: `
+<h3>What Does a Forex Broker Do?</h3>
+<p>A <strong>forex broker</strong> is the intermediary between you and the forex market. Without a broker, retail traders cannot access the market. Brokers provide the trading platform, execution of orders, leverage, and usually some educational tools.</p>
+<h3>Types of Brokers</h3>
+<table class="data-table">
+  <tr><th>Type</th><th>Description</th><th>Pros / Cons</th></tr>
+  <tr><td><strong>Market Maker (MM)</strong></td><td>The broker creates its own market and takes the other side of your trade</td><td>Fixed spreads, accessible. Potential conflict of interest.</td></tr>
+  <tr><td><strong>ECN</strong></td><td>Direct access to interbank liquidity. Variable spreads + commission.</td><td>True market prices. Better for large volume traders.</td></tr>
+  <tr><td><strong>STP</strong></td><td>Straight-through processing — passes orders to liquidity providers</td><td>No dealing desk. Transparent execution.</td></tr>
+</table>
+<h3>Key Things to Check Before Choosing a Broker</h3>
+<ul>
+  <li><strong>Regulation</strong> — Is the broker regulated by a credible authority? (FCA, FSCA, CySEC, ASIC). Regulation protects your funds.</li>
+  <li><strong>Spreads</strong> — Compare the typical spread on EUR/USD. Good ECN brokers offer under 1 pip.</li>
+  <li><strong>Leverage offered</strong> — Higher isn't better. Be cautious with brokers pushing very high leverage.</li>
+  <li><strong>Deposits/Withdrawals</strong> — How easy is it to get your money in and out? What methods are available (M-Pesa, bank transfer, crypto)?</li>
+  <li><strong>Platform</strong> — MT4, MT5, and cTrader are the industry standards. Proprietary platforms carry extra risk.</li>
+  <li><strong>Customer support</strong> — Test them before you fund the account.</li>
+</ul>
+<h3>Account Types</h3>
+<table class="data-table">
+  <tr><th>Account</th><th>Description</th></tr>
+  <tr><td>Demo Account</td><td>Virtual money. Practice trading in real market conditions with zero risk.</td></tr>
+  <tr><td>Micro Account</td><td>Real money, micro lots. Good for learning with small capital ($10–$100)</td></tr>
+  <tr><td>Standard Account</td><td>Full lot sizes. Typical minimum deposit $100–$500.</td></tr>
+  <tr><td>ECN/Pro Account</td><td>Raw spreads + commission. Better for experienced traders.</td></tr>
+  <tr><td>Islamic Account</td><td>Swap-free for traders who cannot pay/receive interest (riba).</td></tr>
+</table>
+<div class="callout">
+  <div class="callout-title">📌 Start Here</div>
+  Open a <strong>demo account</strong> and spend at least 2–3 months on it before trading real money. Master execution, learn your platform, test your strategy.
+</div>`
+          }
+        ]
+      },
+      {
+        title: 'Module 4: Reading Charts',
+        lessons: [
+          {
+            id: 'b4-1',
+            title: 'Candlestick Basics',
+            duration: '11 min',
+            content: `
+<h3>Why Candlesticks?</h3>
+<p>Candlestick charts are the most widely used chart type in forex. Developed by Japanese rice traders in the 1700s, they pack four pieces of data into one simple visual: <strong>Open, High, Low, Close (OHLC)</strong>.</p>
+<h3>Anatomy of a Candlestick</h3>
+<div class="formula-box">
+  BULLISH (Green/White) Candle:<br>
+  ─────── ← HIGH (wick/shadow)<br>
+  │     │<br>
+  │BODY │ ← CLOSE (top of body)<br>
+  │     │ ← OPEN (bottom of body)<br>
+  ─────── ← LOW (wick/shadow)<br><br>
+  BEARISH (Red/Black) Candle:<br>
+  ─────── ← HIGH<br>
+  │     │ ← OPEN (top of body)<br>
+  │BODY │ ← CLOSE (bottom of body)<br>
+  ─────── ← LOW
+</div>
+<h3>What Each Part Tells You</h3>
+<ul>
+  <li><strong>Body</strong> — The range between open and close. A large body = strong conviction. A small body = indecision.</li>
+  <li><strong>Wicks/Shadows</strong> — Price tested these levels but was rejected. Long wicks show failed attempts by buyers or sellers.</li>
+  <li><strong>Colour</strong> — Green/White = buyers won (price closed higher). Red/Black = sellers won (price closed lower).</li>
+</ul>
+<h3>Key Single-Candle Signals</h3>
+<table class="data-table">
+  <tr><th>Pattern</th><th>Shape</th><th>Meaning</th></tr>
+  <tr><td><strong>Doji</strong></td><td>Small body, equal wicks</td><td>Indecision. Battle between buyers and sellers.</td></tr>
+  <tr><td><strong>Hammer</strong></td><td>Small body top, long lower wick</td><td>Buyers rejected sellers. Potential bullish reversal.</td></tr>
+  <tr><td><strong>Shooting Star</strong></td><td>Small body bottom, long upper wick</td><td>Sellers rejected buyers. Potential bearish reversal.</td></tr>
+  <tr><td><strong>Marubozu</strong></td><td>Large body, no wicks</td><td>Strong momentum. One side completely dominated.</td></tr>
+  <tr><td><strong>Spinning Top</strong></td><td>Small body, small wicks</td><td>Indecision. Neither side in control.</td></tr>
+</table>
+<div class="callout cyan">
+  <div class="callout-title">💡 Context is Everything</div>
+  A hammer at the bottom of a downtrend is meaningful. A hammer in the middle of a range is noise. Always read candles in context of where they appear on the chart.
+</div>`
+          },
+          {
+            id: 'b4-2',
+            title: 'Timeframes & Multi-Timeframe Analysis',
+            duration: '10 min',
+            content: `
+<h3>Chart Timeframes Explained</h3>
+<p>Every candlestick represents a time period. A 1-hour candle shows the OHLC for one hour. A daily candle shows the full day. The timeframe you choose determines the "zoom level" of your analysis.</p>
+<table class="data-table">
+  <tr><th>Timeframe</th><th>Abbreviation</th><th>Best Used For</th></tr>
+  <tr><td>1 Minute</td><td>M1</td><td>Scalping (very short trades)</td></tr>
+  <tr><td>5 Minutes</td><td>M5</td><td>Scalping, short-term intraday</td></tr>
+  <tr><td>15 Minutes</td><td>M15</td><td>Intraday trading, entry refinement</td></tr>
+  <tr><td>1 Hour</td><td>H1</td><td>Intraday trading, trend following</td></tr>
+  <tr><td>4 Hours</td><td>H4</td><td>Swing trading, direction bias</td></tr>
+  <tr><td>Daily</td><td>D1</td><td>Swing/position trading, major levels</td></tr>
+  <tr><td>Weekly</td><td>W1</td><td>Long-term direction, macro view</td></tr>
+</table>
+<h3>Multi-Timeframe Analysis (MTF)</h3>
+<p>Professional traders always look at multiple timeframes. The higher timeframe gives you the <strong>direction and major levels</strong>. The lower timeframe gives you the <strong>entry trigger</strong>.</p>
+<div class="definition-box">
+  <div class="def-term">Top-Down Analysis</div>
+  <div class="def-text">Starting from the highest timeframe and working down to your entry timeframe. Example: Monthly → Weekly → Daily → H4 → H1 (entry).</div>
+</div>
+<h3>The "Three Timeframe" Rule</h3>
+<ol>
+  <li><strong>Higher Timeframe (HTF)</strong> — Establish the trend/bias. Where is price in the bigger picture?</li>
+  <li><strong>Intermediate Timeframe</strong> — Find key zones (support/resistance, order blocks)</li>
+  <li><strong>Lower Timeframe (LTF)</strong> — Time your entry. Wait for a trigger candle or pattern.</li>
+</ol>
+<div class="callout">
+  <div class="callout-title">📌 Example</div>
+  Daily chart shows EUR/USD in a downtrend. H4 shows price retracing to a key resistance zone. H1 shows a bearish rejection candle forming. → Your three confirmations align → You sell.
+</div>`
+          }
+        ]
+      },
+      {
+        title: 'Module 5: Fundamental Analysis Basics',
+        lessons: [
+          {
+            id: 'b5-1',
+            title: 'What Moves Currency Prices?',
+            duration: '11 min',
+            content: `
+<h3>Fundamental Analysis in Forex</h3>
+<p><strong>Fundamental analysis</strong> is studying the economic, political, and social forces that drive currency value. While technical analysis asks "where is price going?", fundamental analysis asks "why is it going there?"</p>
+<h3>Key Economic Drivers</h3>
+<table class="data-table">
+  <tr><th>Indicator</th><th>Impact</th><th>Currency Effect</th></tr>
+  <tr><td><strong>Interest Rates</strong></td><td>🔥 Very High</td><td>Higher rates = stronger currency (attracts investment)</td></tr>
+  <tr><td><strong>Inflation (CPI)</strong></td><td>🔥 Very High</td><td>High inflation → Rate hike expectations → Currency up (short term)</td></tr>
+  <tr><td><strong>GDP Growth</strong></td><td>High</td><td>Strong GDP = strong economy = stronger currency</td></tr>
+  <tr><td><strong>Employment (NFP, Unemployment Rate)</strong></td><td>High</td><td>More jobs = economic strength = currency up</td></tr>
+  <tr><td><strong>Trade Balance</strong></td><td>Medium</td><td>Trade surplus = demand for the currency = currency up</td></tr>
+  <tr><td><strong>Political Stability</strong></td><td>High</td><td>Instability → uncertainty → currency down</td></tr>
+</table>
+<h3>The Economic Calendar</h3>
+<p>An <strong>economic calendar</strong> lists all upcoming economic data releases, speeches by central bank officials, and major events. Every serious trader checks it daily.</p>
+<div class="callout red">
+  <div class="callout-title">🚨 High-Impact News Events</div>
+  During major releases (US Non-Farm Payrolls, Fed interest rate decision, CPI), spreads widen dramatically and markets can move 50–200+ pips in seconds. As a beginner, <strong>avoid trading during these events</strong> until you understand the risk.
+</div>
+<h3>The US Non-Farm Payrolls (NFP)</h3>
+<p>Released on the <strong>first Friday of every month</strong>, the NFP report shows how many jobs were added to the US economy (excluding farming). It is arguably the single most market-moving regular event in forex. EUR/USD, GBP/USD, and USD/JPY typically see their largest single-day moves around NFP.</p>
+<h3>Central Banks Are Everything</h3>
+<p>The most powerful force in any currency market is its <strong>central bank</strong>. The US Federal Reserve (Fed), European Central Bank (ECB), Bank of England (BoE), and Bank of Japan (BoJ) can move markets for weeks with a single statement about interest rate expectations.</p>
+<div class="callout cyan">
+  <div class="callout-title">💡 "Buy the Rumour, Sell the News"</div>
+  Markets often price in expected events before they happen. When the news actually confirms expectations, the currency may reverse — because there's nothing left to buy into.
+</div>`
+          }
+        ]
+      }
+    ]
+  },
+
+  intermediate: {
+    name: 'Intermediate Track',
+    color: '#ffd700',
+    badge: '📈 Intermediate',
+    badgeColor: 'var(--gold)',
+    modules: [
+      {
+        title: 'Module 1: Technical Analysis',
+        lessons: [
+          {
+            id: 'i1-1',
+            title: 'Support & Resistance',
+            duration: '13 min',
+            content: `
+<h3>The Foundation of Technical Analysis</h3>
+<p><strong>Support and Resistance</strong> are the most fundamental concepts in technical trading. They represent price levels where the market has historically reversed or paused — forming the "floor" and "ceiling" of price action.</p>
+<div class="definition-box">
+  <div class="def-term">Support</div>
+  <div class="def-text">A price level where demand is strong enough to stop price from falling further. Price has bounced up from this level in the past. Think of it as a floor.</div>
+</div>
+<div class="definition-box">
+  <div class="def-term">Resistance</div>
+  <div class="def-text">A price level where supply is strong enough to stop price from rising further. Price has reversed downward from this level in the past. Think of it as a ceiling.</div>
+</div>
+<h3>Why Support/Resistance Works</h3>
+<p>S/R levels are essentially <strong>areas of remembered price</strong>. At these levels, large numbers of traders have buy orders (support) or sell orders (resistance). When price returns to these levels, those orders are triggered again, causing the same reaction.</p>
+<h3>Role Reversal</h3>
+<p>One of the most powerful concepts in technical trading: when price breaks through a resistance level and closes above it, <strong>that resistance becomes support</strong>. And vice versa — broken support becomes resistance. This is called <em>role reversal</em> and is the basis for many high-probability trade setups.</p>
+<h3>Types of Support & Resistance</h3>
+<ul>
+  <li><strong>Horizontal S/R</strong> — Fixed price levels, strongest and most widely watched</li>
+  <li><strong>Dynamic S/R</strong> — Moving averages act as floating support and resistance</li>
+  <li><strong>Trendline S/R</strong> — Diagonal lines connecting swing highs or lows</li>
+  <li><strong>Fibonacci levels</strong> — Mathematical ratios derived from price swings</li>
+  <li><strong>Round numbers</strong> — 1.0800, 1.1000, 150.00 on USD/JPY — psychologically important</li>
+</ul>
+<h3>Zones, Not Lines</h3>
+<div class="callout">
+  <div class="callout-title">📌 Important Mindset Shift</div>
+  Support and resistance are <strong>zones</strong>, not exact price lines. Price often overshoots a level slightly before reversing. Draw them as boxes or bands, not single lines.
+</div>
+<h3>Testing & Retesting</h3>
+<p>The more times a level has been tested and held, the more significant it is. A level that has bounced price 5 times is far more powerful than one that has only been touched once. However, every test also <em>weakens</em> the level — if it gets tested too many times, it eventually breaks.`
+          },
+          {
+            id: 'i1-2',
+            title: 'Trend Analysis & Market Structure',
+            duration: '12 min',
+            content: `
+<h3>The Trend is Your Friend</h3>
+<p>The most repeated phrase in trading — and for good reason. Trading in the direction of the trend dramatically increases your probability of success. But what exactly <em>is</em> a trend?</p>
+<h3>Defining Trends Through Market Structure</h3>
+<div class="definition-box">
+  <div class="def-term">Uptrend (Bullish Structure)</div>
+  <div class="def-text">A series of <strong>Higher Highs (HH)</strong> and <strong>Higher Lows (HL)</strong>. Price makes a new high, then retraces but holds above the previous low, then makes an even higher high.</div>
+</div>
+<div class="definition-box">
+  <div class="def-term">Downtrend (Bearish Structure)</div>
+  <div class="def-text">A series of <strong>Lower Lows (LL)</strong> and <strong>Lower Highs (LH)</strong>. Price makes a new low, retraces but stays below the previous high, then makes an even lower low.</div>
+</div>
+<div class="definition-box">
+  <div class="def-term">Range / Consolidation</div>
+  <div class="def-text">Price moves sideways between a defined high and low. Neither bulls nor bears have clear control. Breakout traders watch these carefully.</div>
+</div>
+<h3>Break of Structure (BOS)</h3>
+<p>A <strong>Break of Structure</strong> occurs when price closes beyond the previous swing high (bullish BOS) or swing low (bearish BOS). This is the mechanism by which trends continue and establish themselves.</p>
+<h3>Change of Character (CHoCH)</h3>
+<p>A <strong>CHoCH</strong> is when the trend shifts. In a downtrend, for the first time price breaks above the most recent swing high — that's a CHoCH. It signals the potential beginning of a new uptrend.</p>
+<div class="callout cyan">
+  <div class="callout-title">💡 Smart Money Uses This</div>
+  Institutional traders wait for CHoCH to confirm a trend reversal before entering. Retailing traders often fight the trend hoping for a reversal — this is a major cause of losses.
+</div>
+<h3>Higher Timeframe Bias</h3>
+<p>Your trading entries should always align with the higher timeframe trend. If the daily chart shows a clear uptrend, you should only be looking to buy on lower timeframe pullbacks — not trying to short because the 15-minute chart looks bearish.`
+          },
+          {
+            id: 'i1-3',
+            title: 'Moving Averages & Indicators',
+            duration: '13 min',
+            content: `
+<h3>What Are Indicators?</h3>
+<p><strong>Technical indicators</strong> are mathematical calculations based on price and/or volume data. They're plotted on your chart to help visualise trends, momentum, and potential reversal points. The key word: <em>help</em>. No indicator is a standalone trading system.</p>
+<h3>Moving Averages</h3>
+<div class="definition-box">
+  <div class="def-term">Simple Moving Average (SMA)</div>
+  <div class="def-text">The average closing price over N periods. A 20 SMA sums the last 20 closes and divides by 20. Each bar it recalculates by dropping the oldest and adding the newest.</div>
+</div>
+<div class="definition-box">
+  <div class="def-term">Exponential Moving Average (EMA)</div>
+  <div class="def-text">Like SMA but gives more weight to recent prices. Reacts faster to price changes. Popular settings: 9, 20, 50, 200 EMA.</div>
+</div>
+<h3>Common MA Strategies</h3>
+<ul>
+  <li><strong>MA as dynamic S/R</strong> — Price often pulls back to the 50 EMA in a trend and bounces</li>
+  <li><strong>MA crossover</strong> — When the fast MA (e.g. 20 EMA) crosses above the slow MA (e.g. 50 EMA) = bullish signal</li>
+  <li><strong>The 200 EMA</strong> — The most watched indicator in the world. Price above 200 EMA = bullish bias. Below = bearish.</li>
+</ul>
+<h3>RSI — Relative Strength Index</h3>
+<div class="definition-box">
+  <div class="def-term">RSI</div>
+  <div class="def-text">A momentum oscillator that measures the speed and magnitude of price changes. Scaled 0–100. Above 70 = overbought. Below 30 = oversold.</div>
+</div>
+<div class="callout red">
+  <div class="callout-title">⚠️ Overbought ≠ Sell Signal</div>
+  In a strong trend, RSI can stay above 70 for extended periods. "Overbought" means the trend is strong, not that it's about to reverse. Use RSI divergence instead: when price makes a new high but RSI makes a lower high = bearish divergence.
+</div>
+<h3>MACD — Moving Average Convergence Divergence</h3>
+<p>Shows the relationship between two EMAs. The <strong>MACD line</strong> crossing above the <strong>signal line</strong> gives a bullish signal. When MACD crosses the <strong>zero line</strong>, it confirms trend direction. Great for momentum and trend confirmation.</p>
+<h3>Bollinger Bands</h3>
+<p>A volatility indicator with three lines: a middle SMA and two outer bands set 2 standard deviations away. When bands <strong>squeeze</strong>, it signals low volatility before a potential big move. When price touches the outer band in a trend, it can be a mean-reversion signal.</p>
+<h3>The Indicator Trap</h3>
+<div class="callout red">
+  <div class="callout-title">🚫 Indicator Overload</div>
+  Many new traders pile on 5–10 indicators and end up paralysed with contradictory signals. Professional traders often use 0–3 indicators max, with raw price action doing most of the work. Indicators are <em>confirmation tools</em>, not trade generators.
+</div>`
+          },
+          {
+            id: 'i1-4',
+            title: 'Candlestick Patterns — Multi-Candle',
+            duration: '12 min',
+            content: `
+<h3>Multi-Candle Patterns</h3>
+<p>Beyond single candles, certain <em>sequences</em> of candles form patterns that have predictable meanings. These are most powerful when they appear at key support/resistance zones.</p>
+<h3>Reversal Patterns</h3>
+<table class="data-table">
+  <tr><th>Pattern</th><th>Structure</th><th>Signal</th></tr>
+  <tr><td><strong>Engulfing</strong></td><td>Small candle followed by a larger candle that completely engulfs it</td><td>Bullish/Bearish reversal</td></tr>
+  <tr><td><strong>Harami</strong></td><td>Large candle followed by a small candle inside its body</td><td>Trend indecision/reversal</td></tr>
+  <tr><td><strong>Morning Star</strong></td><td>Large bearish → small indecision → large bullish</td><td>Bullish reversal at bottoms</td></tr>
+  <tr><td><strong>Evening Star</strong></td><td>Large bullish → small indecision → large bearish</td><td>Bearish reversal at tops</td></tr>
+  <tr><td><strong>Tweezer Tops/Bottoms</strong></td><td>Two candles with equal highs or lows</td><td>Rejection at key levels</td></tr>
+  <tr><td><strong>Three White Soldiers</strong></td><td>Three consecutive bullish candles, each closing higher</td><td>Strong bullish momentum</td></tr>
+  <tr><td><strong>Three Black Crows</strong></td><td>Three consecutive bearish candles, each closing lower</td><td>Strong bearish momentum</td></tr>
+</table>
+<h3>The Bullish Engulfing — Deep Dive</h3>
+<p>The <strong>Bullish Engulfing</strong> is one of the most powerful single-setup reversal signals:</p>
+<ol>
+  <li>You're in a downtrend</li>
+  <li>A bearish (red) candle forms</li>
+  <li>The next candle opens at or below the previous close</li>
+  <li>It closes above the previous candle's open, completely engulfing it</li>
+  <li>This shows sellers were overwhelmed by buyers</li>
+</ol>
+<div class="callout">
+  <div class="callout-title">📌 Context Rule</div>
+  Engulfing patterns at key support/resistance, after a significant move, with increasing volume = high probability. The same pattern in the middle of a range = low probability.
+</div>`
+          }
+        ]
+      },
+      {
+        title: 'Module 2: Chart Patterns',
+        lessons: [
+          {
+            id: 'i2-1',
+            title: 'Classic Chart Patterns',
+            duration: '14 min',
+            content: `
+<h3>Chart Patterns — Price Memory in Visual Form</h3>
+<p>Chart patterns are recurring formations in price that statistically tend to resolve in predictable directions. They represent the tug-of-war between buyers and sellers playing out over time.</p>
+<h3>Continuation Patterns</h3>
+<p>These suggest the prior trend will continue after a brief consolidation:</p>
+<table class="data-table">
+  <tr><th>Pattern</th><th>Shape</th><th>Signal</th></tr>
+  <tr><td><strong>Bull/Bear Flag</strong></td><td>Sharp move → parallel channel retracement</td><td>Continuation in trend direction</td></tr>
+  <tr><td><strong>Pennant</strong></td><td>Sharp move → symmetrical triangle consolidation</td><td>Breakout continuation</td></tr>
+  <tr><td><strong>Ascending/Descending Triangle</strong></td><td>Flat level + converging slope</td><td>Breakout in trend direction</td></tr>
+  <tr><td><strong>Rectangle</strong></td><td>Price bouncing between two parallel horizontal lines</td><td>Breakout expected eventually</td></tr>
+</table>
+<h3>Reversal Patterns</h3>
+<p>These suggest the trend is ending and reversing:</p>
+<table class="data-table">
+  <tr><th>Pattern</th><th>Description</th><th>Signal</th></tr>
+  <tr><td><strong>Head & Shoulders</strong></td><td>Three peaks, middle highest, neckline support</td><td>Bearish reversal (very reliable)</td></tr>
+  <tr><td><strong>Inverse H&S</strong></td><td>Three troughs, middle lowest</td><td>Bullish reversal</td></tr>
+  <tr><td><strong>Double Top</strong></td><td>Two equal highs, support breaks at neckline</td><td>Bearish reversal</td></tr>
+  <tr><td><strong>Double Bottom</strong></td><td>Two equal lows, resistance breaks at neckline</td><td>Bullish reversal</td></tr>
+  <tr><td><strong>Triple Top/Bottom</strong></td><td>Three tests of same level then breaks opposite</td><td>Stronger reversal signal</td></tr>
+</table>
+<h3>Head & Shoulders — Complete Trade Setup</h3>
+<ol>
+  <li>Identify the three peaks (left shoulder, head, right shoulder)</li>
+  <li>Draw the <strong>neckline</strong> connecting the two troughs between the shoulders and head</li>
+  <li>Wait for price to break and <strong>close below the neckline</strong></li>
+  <li>Enter short on retest of the neckline from below</li>
+  <li>Target: project the height of the head below the neckline</li>
+  <li>Stop Loss: above the right shoulder</li>
+</ol>
+<h3>Measuring Targets with Patterns</h3>
+<div class="formula-box">Pattern Target = Breakout Level ± Pattern Height<br><br>Example: Rectangle between 1.0800 – 1.0900 (100 pip range)<br>Bullish breakout above 1.0900 → Target: 1.0900 + 100 pips = 1.1000</div>`
+          }
+        ]
+      },
+      {
+        title: 'Module 3: Fibonacci & Confluences',
+        lessons: [
+          {
+            id: 'i3-1',
+            title: 'Fibonacci Retracement & Extension',
+            duration: '13 min',
+            content: `
+<h3>The Golden Ratio in Markets</h3>
+<p>Leonardo Fibonacci discovered a mathematical sequence (1, 1, 2, 3, 5, 8, 13...) where each number is the sum of the two preceding ones. The ratios between these numbers appear repeatedly in nature — and remarkably, in financial markets too.</p>
+<h3>Key Fibonacci Levels</h3>
+<table class="data-table">
+  <tr><th>Level</th><th>Type</th><th>Significance</th></tr>
+  <tr><td>23.6%</td><td>Retracement</td><td>Shallow pullback. Often seen in very strong trends.</td></tr>
+  <tr><td>38.2%</td><td>Retracement</td><td>Common pullback in strong trends</td></tr>
+  <tr><td><strong>50%</strong></td><td>Retracement</td><td>Not a true Fibonacci but psychologically powerful</td></tr>
+  <tr><td><strong>61.8%</strong></td><td>Retracement</td><td>The "Golden Ratio". Most powerful retracement level.</td></tr>
+  <tr><td>78.6%</td><td>Retracement</td><td>Deep retracement. Often last line before trend change.</td></tr>
+  <tr><td>127.2%</td><td>Extension</td><td>First common profit target beyond swing high</td></tr>
+  <tr><td>161.8%</td><td>Extension</td><td>The Golden Extension. Major profit target.</td></tr>
+</table>
+<h3>How to Draw Fibonacci Retracements</h3>
+<ol>
+  <li>Identify a <strong>clean swing move</strong> (swing low to swing high for uptrend)</li>
+  <li>Attach the Fibonacci tool from the <strong>swing low to the swing high</strong></li>
+  <li>The tool automatically draws the retracement levels between those two points</li>
+  <li>Watch for price to pull back to the 38.2%, 50%, or 61.8% levels</li>
+  <li>Look for a <strong>confluence</strong> — does another indicator or S/R level align with that Fibonacci level?</li>
+</ol>
+<h3>The Golden Zone</h3>
+<div class="callout">
+  <div class="callout-title">⭐ The Premium Zone</div>
+  The area between the <strong>61.8% and 78.6%</strong> retracement is called the "Golden Zone" or "OTE" (Optimal Trade Entry). This is where institutional traders often place their buy/sell orders in a trending market.
+</div>
+<h3>Confluence — The Secret Weapon</h3>
+<p><strong>Confluence</strong> is when multiple independent signals align at the same price level. A Fibonacci 61.8% level alone is noteworthy. But if that same level is also:</p>
+<ul>
+  <li>A previous support/resistance zone</li>
+  <li>Where a moving average is sitting</li>
+  <li>A round number (e.g. 1.0850)</li>
+  <li>Inside the London or NY session</li>
+</ul>
+<p>...then the probability of a reaction at that level increases significantly. <strong>Trade the confluences, not isolated signals.</strong>`
+          }
+        ]
+      },
+      {
+        title: 'Module 4: Advanced Risk Management',
+        lessons: [
+          {
+            id: 'i4-1',
+            title: 'Position Sizing & Portfolio Risk',
+            duration: '13 min',
+            content: `
+<h3>The Position Sizing Formula</h3>
+<p>Position sizing is not guesswork. It is a precise calculation that determines exactly how many lots to trade based on your account size, risk percentage, and stop loss distance.</p>
+<div class="formula-box">Position Size = Account Risk ÷ (Stop Loss in Pips × Pip Value)<br><br>Example:<br>Account: $5,000 | Risk: 1% = $50<br>Stop Loss: 25 pips | Pip value (mini lot): $1/pip<br>Position Size = $50 ÷ (25 × $1) = 2 mini lots</div>
+<h3>The Kelly Criterion</h3>
+<p>A mathematical formula used by professional bettors and traders to determine optimal bet sizing based on edge and win rate:</p>
+<div class="formula-box">Kelly % = Win Rate − (Loss Rate ÷ Win/Loss Ratio)<br><br>Example: Win rate 55%, avg win = avg loss<br>Kelly = 0.55 − (0.45/1) = 10% of account<br>Many traders use "Half Kelly" = 5% for safety</div>
+<h3>Correlation Risk</h3>
+<p>This is a critical and often missed concept: <strong>currency pairs are correlated</strong>. If you have positions open in EUR/USD, GBP/USD, and AUD/USD simultaneously, you are not in three separate trades — you're effectively three times long the USD. They will all move in the same direction when USD moves.</p>
+<table class="data-table">
+  <tr><th>Pairs</th><th>Correlation</th><th>Meaning</th></tr>
+  <tr><td>EUR/USD & GBP/USD</td><td>High Positive (~0.85)</td><td>Move in same direction</td></tr>
+  <tr><td>EUR/USD & USD/CHF</td><td>High Negative (~-0.90)</td><td>Move in opposite directions</td></tr>
+  <tr><td>AUD/USD & NZD/USD</td><td>High Positive (~0.80)</td><td>Move in same direction</td></tr>
+</table>
+<div class="callout red">
+  <div class="callout-title">⚠️ Don't Double Your Risk Unknowingly</div>
+  Trading two highly correlated pairs doubles your exposure. If you risk 1% on EUR/USD and 1% on GBP/USD, you effectively have 2% risk on USD. Adjust position sizes accordingly.
+</div>
+<h3>Maximum Drawdown Rules</h3>
+<p>Set hard rules for yourself:</p>
+<ul>
+  <li><strong>Daily loss limit</strong> — If you lose X% in a day, stop trading for the day (e.g. 3%)</li>
+  <li><strong>Weekly loss limit</strong> — If you lose X% in a week, step back and review (e.g. 5%)</li>
+  <li><strong>Maximum drawdown</strong> — If your account drops X% from peak, reduce size or stop (e.g. 10%)</li>
+</ul>
+<div class="callout green">
+  <div class="callout-title">🏆 Professional Standard</div>
+  Institutional traders are often fired if their portfolio draws down more than 10–15% from peak. Apply the same discipline to yourself.
+</div>`
+          }
+        ]
+      },
+      {
+        title: 'Module 5: Trading Strategies',
+        lessons: [
+          {
+            id: 'i5-1',
+            title: 'Common Trading Strategies Overview',
+            duration: '12 min',
+            content: `
+<h3>Finding Your Style</h3>
+<p>There is no single "best" trading strategy. The best strategy is one you can execute consistently, that fits your personality, your schedule, and your risk tolerance.</p>
+<h3>The Major Trading Styles</h3>
+<table class="data-table">
+  <tr><th>Style</th><th>Timeframe</th><th>Hold Time</th><th>Trades/Day</th><th>Best For</th></tr>
+  <tr><td><strong>Scalping</strong></td><td>M1–M5</td><td>Seconds–minutes</td><td>20–100+</td><td>Full-time, fast-decision traders</td></tr>
+  <tr><td><strong>Day Trading</strong></td><td>M15–H1</td><td>Minutes–hours</td><td>2–10</td><td>Part-time with dedicated sessions</td></tr>
+  <tr><td><strong>Swing Trading</strong></td><td>H4–D1</td><td>Days–weeks</td><td>1–5/week</td><td>Busy professionals, patience required</td></tr>
+  <tr><td><strong>Position Trading</strong></td><td>D1–W1</td><td>Weeks–months</td><td>1–5/month</td><td>Fundamentally driven, macro view</td></tr>
+</table>
+<h3>Strategy 1: Trend Following</h3>
+<p>Entry on pullbacks in the trend direction. Use moving averages for direction + Fibonacci or S/R for entries. High win rate in strong trending markets, poor performance in ranges.</p>
+<h3>Strategy 2: Breakout Trading</h3>
+<p>Enter when price breaks out of a consolidation zone (range, triangle, flag). Place stop below the breakout level. Target is the measured move. Requires patience to wait for genuine breakouts vs fakeouts.</p>
+<h3>Strategy 3: Reversal Trading</h3>
+<p>Counter-trend entries at extreme levels. Uses candlestick patterns + overbought/oversold indicators + key S/R. Higher risk, very high reward when correct. Not recommended for beginners.</p>
+<h3>Strategy 4: Range Trading</h3>
+<p>Buy at support, sell at resistance within a defined range. Works well in low-volatility, sideways markets. Stop below support (for longs) or above resistance (for shorts). Exit near the opposite boundary.</p>
+<h3>The Importance of Backtesting</h3>
+<div class="callout">
+  <div class="callout-title">📊 Before You Risk Real Money</div>
+  <strong>Backtest</strong> your strategy on at least 100 historical trades. What is the win rate? Average RRR? Maximum drawdown? Only deploy a strategy you've verified statistically.
+</div>`
+          },
+          {
+            id: 'i5-2',
+            title: 'Supply & Demand Zones',
+            duration: '13 min',
+            content: `
+<h3>Supply & Demand: The Raw Version of S/R</h3>
+<p><strong>Supply and Demand (S&D)</strong> trading is a more institutional approach to support and resistance. Instead of looking at where price bounced, you look at where <em>large orders were placed</em> that caused big moves.</p>
+<h3>The Core Logic</h3>
+<p>When price makes a sharp, explosive move away from a zone, it means large institutional orders were placed there. When price returns to that zone, those unfilled orders activate again, causing another reaction.</p>
+<div class="definition-box">
+  <div class="def-term">Demand Zone</div>
+  <div class="def-text">A price area where institutional buyers placed large orders, causing a strong bullish move away. When price returns here, expect buying again.</div>
+</div>
+<div class="definition-box">
+  <div class="def-term">Supply Zone</div>
+  <div class="def-text">A price area where institutional sellers placed large orders, causing a strong bearish move away. When price returns here, expect selling again.</div>
+</div>
+<h3>How to Identify Zones</h3>
+<p>Look for the <strong>base</strong> — the consolidation area just before the explosive move. That base is your zone.</p>
+<ul>
+  <li><strong>Rally-Base-Drop (RBD)</strong> = Supply zone (price rose, paused, then dropped explosively)</li>
+  <li><strong>Drop-Base-Rally (DBR)</strong> = Demand zone (price fell, paused, then rose explosively)</li>
+  <li><strong>Rally-Base-Rally (RBR)</strong> = Continuation demand zone within an uptrend</li>
+  <li><strong>Drop-Base-Drop (DBD)</strong> = Continuation supply zone within a downtrend</li>
+</ul>
+<h3>Zone Grading — Which Zones Are Strongest?</h3>
+<ul>
+  <li>The <strong>bigger the explosive move away</strong>, the stronger the zone</li>
+  <li>Zones that have <strong>never been retested</strong> are "fresh" and often most powerful</li>
+  <li>Zones from <strong>higher timeframes</strong> (Daily, H4) are more significant</li>
+  <li>The <strong>fewer times it's been retested</strong>, the stronger (each test uses up orders)</li>
+</ul>`
+          }
+        ]
+      },
+      {
+        title: 'Module 6: Building a Trading System',
+        lessons: [
+          {
+            id: 'i6-1',
+            title: 'Creating Your Personal Trading Plan',
+            duration: '11 min',
+            content: `
+<h3>Your Trading Plan Template</h3>
+<p>A professional trading plan is not a "strategy" — it's an entire operating manual for how you trade. Here is a complete template to fill in:</p>
+<div class="callout">
+  <div class="callout-title">📋 Trading Plan Components</div>
+  <strong>1. Market & Timeframes</strong><br>Which pairs? Which timeframes for analysis vs entry?<br><br>
+  <strong>2. Session</strong><br>Which hours will you trade? (London? NY? Overlap?)<br><br>
+  <strong>3. Pre-Market Routine</strong><br>What do you check before you trade? (Economic calendar, HTF levels, key zones)<br><br>
+  <strong>4. Entry Criteria</strong><br>What MUST be present before you enter? (Trend + S/R + Confirmation candle = entry)<br><br>
+  <strong>5. Entry Trigger</strong><br>Exactly what candle, pattern, or signal triggers entry?<br><br>
+  <strong>6. Stop Loss Rule</strong><br>Where does your stop always go? How do you calculate it?<br><br>
+  <strong>7. Take Profit Rule</strong><br>Where is your target? Fixed RRR? Structure? Multiple partials?<br><br>
+  <strong>8. Position Sizing Formula</strong><br>Exactly how do you calculate lot size each time?<br><br>
+  <strong>9. Risk Rules</strong><br>Max risk per trade? Daily loss limit? Weekly stop?<br><br>
+  <strong>10. Review Process</strong><br>How often do you review your journal? What do you look for?
+</div>
+<h3>The Edge Statement</h3>
+<p>Every trading plan should include an "edge statement" — a clear, one-paragraph description of exactly what advantage you have over random chance:</p>
+<div class="callout cyan">
+  <div class="callout-title">Example Edge Statement</div>
+  "I trade pullbacks in established H4 uptrends, entering at the 50–61.8% Fibonacci retracement zone when it coincides with a horizontal support level, confirmed by a bullish engulfing candle on the H1. My average RRR is 1:2.5 with a 47% win rate, giving a positive expectancy of +0.45R per trade over 200 backtested trades."
+</div>
+<h3>Consistency Over Perfection</h3>
+<p>The goal is not to have the perfect plan. The goal is to have a plan you follow consistently, then refine over time. A mediocre plan followed perfectly beats a perfect plan followed randomly every single time.`
+          }
+        ]
+      }
+    ]
+  },
+
+  expert: {
+    name: 'Expert Track',
+    color: '#ff6b35',
+    badge: '🧠 Expert',
+    badgeColor: '#ff6b35',
+    modules: [
+      {
+        title: 'Module 1: Smart Money Concepts (SMC)',
+        lessons: [
+          {
+            id: 'e1-1',
+            title: 'Introduction to Smart Money Concepts',
+            duration: '14 min',
+            content: `
+<h3>What is "Smart Money"?</h3>
+<p><strong>Smart Money</strong> refers to large institutional players — banks, hedge funds, central banks, and large proprietary trading firms — who move the market. Retail traders are the "dumb money." Smart Money Concepts (SMC) is a framework for reading institutional footprints in price action.</p>
+<div class="callout">
+  <div class="callout-title">💭 The Uncomfortable Reality</div>
+  The forex market is not a random walk. Institutional traders actively <em>hunt</em> retail trader stop losses and manipulate price to fill large orders. Understanding this transforms how you read charts.
+</div>
+<h3>The Institutional Model</h3>
+<p>Institutions cannot simply "buy" or "sell" millions of dollars of currency at a single price — there isn't enough liquidity. They must:</p>
+<ol>
+  <li><strong>Build positions</strong> — Accumulate orders over time, often disguised as ranging/choppy price action</li>
+  <li><strong>Manipulate price</strong> — Drive price to a level where enough retail traders have stops or orders to fill against</li>
+  <li><strong>Move price</strong> — The actual directional move after accumulation</li>
+  <li><strong>Distribute</strong> — Unload positions at the destination</li>
+</ol>
+<h3>ICT — Inner Circle Trader</h3>
+<p>Michael Huddleston, known as ICT, is the main proponent of SMC methodology. His framework includes concepts now used by a significant portion of serious retail traders globally. Many of the concepts in this module derive from or are inspired by his work.</p>
+<h3>The SMC Vocabulary</h3>
+<ul>
+  <li><strong>Liquidity</strong> — Where stop losses cluster. This is what institutions hunt.</li>
+  <li><strong>Order Block (OB)</strong> — The last opposing candle before a large move. Where institutions entered.</li>
+  <li><strong>Fair Value Gap (FVG)</strong> — An imbalance in price, a gap that markets are drawn to fill.</li>
+  <li><strong>Break of Structure (BOS)</strong> — Confirmation that smart money has committed to a direction.</li>
+  <li><strong>Change of Character (CHoCH)</strong> — The first sign of a potential trend reversal.</li>
+  <li><strong>Premium/Discount Zones</strong> — The upper 50% of a price range is "premium" (expensive to buy). Lower 50% is "discount" (cheap to buy). Smart money sells at premium, buys at discount.</li>
+</ul>`
+          },
+          {
+            id: 'e1-2',
+            title: 'Liquidity: The Fuel of the Market',
+            duration: '15 min',
+            content: `
+<h3>Understanding Liquidity</h3>
+<p>In SMC, <strong>liquidity</strong> refers to the concentration of stop-loss orders sitting in the market. Where retail traders place their stops, that's where institutional players need to trigger price to fill their large orders.</p>
+<h3>Where Does Liquidity Pool?</h3>
+<ul>
+  <li><strong>Above swing highs</strong> — Retail sellers place stop losses above recent highs. When price sweeps above a swing high and reverses, it's often a "liquidity grab."</li>
+  <li><strong>Below swing lows</strong> — Retail buyers place stops below recent lows. A dip below a swing low that quickly recovers = stop hunt.</li>
+  <li><strong>Equal highs / equal lows</strong> — When price creates two or more equal tops or bottoms, stop orders accumulate heavily at these levels. Institutions deliberately target these.</li>
+  <li><strong>Trendline-based stops</strong> — Many traders place stops just beyond trendlines</li>
+  <li><strong>Round numbers</strong> — Enormous stop concentration at 1.1000, 1.0500, 150.00, etc.</li>
+</ul>
+<h3>Buy-Side vs Sell-Side Liquidity</h3>
+<div class="definition-box">
+  <div class="def-term">Buy-Side Liquidity (BSL)</div>
+  <div class="def-text">Stop losses of short sellers sitting ABOVE swing highs and equal highs. When swept, it creates a sudden spike upward. Often the end of a bullish push.</div>
+</div>
+<div class="definition-box">
+  <div class="def-term">Sell-Side Liquidity (SSL)</div>
+  <div class="def-text">Stop losses of long buyers sitting BELOW swing lows and equal lows. When swept, it creates a sudden spike downward. Often the end of a bearish push.</div>
+</div>
+<h3>The Liquidity Hunt (Stop Hunt) Pattern</h3>
+<ol>
+  <li>Price approaches a key swing high (where BSL pools)</li>
+  <li>Price makes a slight new high — stops are triggered (appearing bullish to retail)</li>
+  <li>Price immediately reverses — the institution has filled their sell order using the buy-side liquidity</li>
+  <li>Price moves lower decisively</li>
+</ol>
+<div class="callout">
+  <div class="callout-title">⚡ The Trap</div>
+  This is why many retail traders get stopped out just before a big move in their direction. Their stop was the liquidity that an institution needed to enter.
+</div>
+<h3>Reading Liquidity Levels on Your Chart</h3>
+<p>Mark all equal highs, equal lows, prominent swing highs, and swing lows. These are your liquidity maps. Before any significant move, price will almost always sweep at least one significant liquidity level.`
+          },
+          {
+            id: 'e1-3',
+            title: 'Order Blocks (OBs)',
+            duration: '14 min',
+            content: `
+<h3>What is an Order Block?</h3>
+<p>An <strong>Order Block (OB)</strong> is the last bearish (or bullish) candle before a significant impulse move in the opposite direction. It represents the area where institutional traders placed their orders — and they are likely to add more orders when price returns there.</p>
+<div class="definition-box">
+  <div class="def-term">Bullish Order Block</div>
+  <div class="def-text">The last <em>bearish</em> (red) candle before a strong bullish impulse move. When price retraces to this candle's body, expect buying to resume.</div>
+</div>
+<div class="definition-box">
+  <div class="def-term">Bearish Order Block</div>
+  <div class="def-text">The last <em>bullish</em> (green) candle before a strong bearish impulse move. When price retraces to this candle's body, expect selling to resume.</div>
+</div>
+<h3>Why the Opposite Candle?</h3>
+<p>Institutions don't place buy orders in a bullish candle (everyone can see that). They hide their buying inside the last bearish candle — absorbing selling pressure before launching the move. That's why the last bearish candle before a big rally IS the institutional entry point.</p>
+<h3>Identifying High-Quality Order Blocks</h3>
+<ul>
+  <li>Followed by a <strong>strong impulse</strong> — the move away should be decisive, multiple candles</li>
+  <li><strong>Fresh / untested</strong> — OBs that have never been retested are stronger</li>
+  <li>From a <strong>higher timeframe</strong> — D1 OBs are more powerful than M5 OBs</li>
+  <li>Located in a <strong>discount zone</strong> (for bullish OBs) — you want to buy cheap, not expensive</li>
+  <li>Has a <strong>Fair Value Gap</strong> associated with it (covered next)</li>
+</ul>
+<h3>Trading the OB Retest</h3>
+<ol>
+  <li>Identify a strong move away from a zone</li>
+  <li>Find the last opposing candle before that move (the OB)</li>
+  <li>Wait for price to retrace back to the OB</li>
+  <li>Look for a reaction / confirmation candle at the OB</li>
+  <li>Enter with stop below/above the OB</li>
+  <li>Target the next liquidity pool</li>
+</ol>
+<div class="callout red">
+  <div class="callout-title">⚠️ OB Mitigation</div>
+  An Order Block is "mitigated" (used up) when price trades through it without reversing. A mitigated OB is no longer a valid trading zone.
+</div>`
+          }
+        ]
+      },
+      {
+        title: 'Module 2: ICT Concepts',
+        lessons: [
+          {
+            id: 'e2-1',
+            title: 'Fair Value Gaps (FVGs) & Imbalances',
+            duration: '13 min',
+            content: `
+<h3>What is a Fair Value Gap?</h3>
+<p>A <strong>Fair Value Gap (FVG)</strong> — also known as an imbalance or inefficiency — occurs when price moves so rapidly in one direction that the market skips over an area, leaving a "gap" of untraded price. Markets are drawn to fill these gaps.</p>
+<h3>The Three-Candle Structure</h3>
+<p>An FVG is identified by three candles:</p>
+<div class="formula-box">Candle 1 → Candle 2 (large impulse) → Candle 3<br><br>Bullish FVG: Gap between Candle 1's HIGH and Candle 3's LOW<br>Bearish FVG: Gap between Candle 1's LOW and Candle 3's HIGH</div>
+<p>For a <strong>Bullish FVG</strong>: Candle 2 moves up so aggressively that the high of Candle 1 doesn't overlap with the low of Candle 3. That gap between them is the FVG.</p>
+<h3>Why Do Markets Fill FVGs?</h3>
+<p>When price moves rapidly, it leaves behind unfilled orders from market participants who couldn't react fast enough. These orders remain pending in that price zone. When price returns, those orders fill, creating the appearance of price being "drawn" to the FVG.</p>
+<h3>Trading FVGs</h3>
+<ul>
+  <li><strong>Bullish FVG</strong> — Forms during a strong upward move. Price often retraces to fill the gap before continuing higher. Buy when price enters the FVG, stop below it.</li>
+  <li><strong>Bearish FVG</strong> — Forms during a strong downward move. Price retraces to fill it before continuing lower. Sell when price enters the FVG, stop above it.</li>
+</ul>
+<h3>FVG Quality Factors</h3>
+<ul>
+  <li>Larger gap = stronger imbalance = stronger magnet</li>
+  <li>Higher timeframe FVGs pull price more reliably</li>
+  <li>FVG that coincides with an Order Block = very high probability zone</li>
+  <li>"Consequent Encroachment" — 50% of the FVG is the key reaction level</li>
+</ul>
+<div class="callout cyan">
+  <div class="callout-title">💡 FVG + OB Confluence</div>
+  When a Fair Value Gap sits inside or overlaps with an Order Block, this is one of the highest-probability trade setups in ICT methodology. The two concepts together represent a premium entry zone.
+</div>`
+          },
+          {
+            id: 'e2-2',
+            title: 'Market Structure Shifts & The Killzones',
+            duration: '12 min',
+            content: `
+<h3>Refined Market Structure</h3>
+<p>In ICT/SMC, market structure analysis goes deeper than basic higher highs and higher lows. We look specifically for <strong>inducement</strong> before the real move.</p>
+<h3>Inducement</h3>
+<p><strong>Inducement</strong> is a false swing high or low created to collect liquidity before the real move. Smart money creates a small structure break in one direction to trap retail traders, then moves decisively in the opposite direction.</p>
+<h3>The Killzones</h3>
+<p>ICT defines specific high-probability time windows called <strong>Killzones</strong>, when institutional trading is most active:</p>
+<table class="data-table">
+  <tr><th>Killzone</th><th>Time (UTC)</th><th>EAT (UTC+3)</th><th>Focus Pairs</th></tr>
+  <tr><td><strong>Asian Killzone</strong></td><td>20:00–00:00</td><td>23:00–03:00</td><td>AUD/USD, NZD/USD, USD/JPY</td></tr>
+  <tr><td><strong>London Open KZ</strong></td><td>02:00–05:00</td><td>05:00–08:00</td><td>GBP/USD, EUR/USD</td></tr>
+  <tr><td><strong>NY AM Killzone</strong></td><td>07:00–10:00</td><td>10:00–13:00</td><td>EUR/USD, GBP/USD</td></tr>
+  <tr><td><strong>NY Lunch</strong></td><td>12:00–13:00</td><td>15:00–16:00</td><td>Lower volume, avoid</td></tr>
+</table>
+<h3>The London Manipulation</h3>
+<p>A classic ICT concept: during the Asian session, price establishes a range (the "Asian range"). At the London open, price often <strong>sweeps below the Asian low first</strong> (collecting sell-side liquidity) before reversing and heading higher for the day — or vice versa.</p>
+<div class="callout">
+  <div class="callout-title">📌 The London Setup</div>
+  1. Mark the Asian session high and low<br>
+  2. Wait for London to open<br>
+  3. Watch for a sweep of the Asian range<br>
+  4. Look for rejection + CHoCH on LTF<br>
+  5. Enter in the direction of the manipulation reverse
+</div>
+<h3>ICT Silver Bullet</h3>
+<p>A specific strategy using FVGs during killzones: identify a bearish or bullish FVG formed during the London or NY killzone and trade back into it in the premium/discount model. Specifically: 10:00–11:00 UTC (AM session) and 14:00–15:00 UTC (PM session) are considered the "silver bullet" windows.`
+          },
+          {
+            id: 'e2-3',
+            title: 'IPDA & Monthly/Weekly Profiles',
+            duration: '13 min',
+            content: `
+<h3>Interbank Price Delivery Algorithm (IPDA)</h3>
+<p>ICT's concept of the <strong>IPDA</strong> is that price delivery in forex is algorithmically driven — the market moves to specific targets in a predictable sequence to engineer liquidity and rebalance imbalances.</p>
+<h3>The IPDA Lookback Periods</h3>
+<p>Price constantly references three lookback periods:</p>
+<ul>
+  <li><strong>20 trading days</strong> — ~1 month</li>
+  <li><strong>40 trading days</strong> — ~2 months</li>
+  <li><strong>60 trading days</strong> — ~3 months</li>
+</ul>
+<p>The highs and lows of these periods act as significant reference points. Price will regularly be drawn to take out these highs/lows before establishing new direction.</p>
+<h3>Weekly Profiles</h3>
+<p>ICT teaches that every trading week follows one of several archetypal price delivery patterns:</p>
+<table class="data-table">
+  <tr><th>Weekly Profile</th><th>Description</th></tr>
+  <tr><td><strong>Classic Weekly</strong></td><td>Forms high or low Mon/Tue, opposite extreme Wed, reversal Thu/Fri</td></tr>
+  <tr><td><strong>Bearish Week</strong></td><td>Monday high formed, continuous sell through week</td></tr>
+  <tr><td><strong>Bullish Week</strong></td><td>Monday low formed, continuous buy through week</td></tr>
+  <tr><td><strong>Consolidation</strong></td><td>Choppy range with no clear directional commitment</td></tr>
+</table>
+<h3>Power of Three (AMD)</h3>
+<p>Accumulation → Manipulation → Distribution. Every significant price move follows this three-phase structure:</p>
+<ol>
+  <li><strong>Accumulation</strong> — Institutions build positions during low-volatility sideways movement (often overnight/Asian session)</li>
+  <li><strong>Manipulation</strong> — False breakout in the wrong direction to hunt liquidity and fill remaining orders</li>
+  <li><strong>Distribution</strong> — The true directional move begins, carrying price to the actual target</li>
+</ol>`
+          }
+        ]
+      },
+      {
+        title: 'Module 3: Volume Profile & Order Flow',
+        lessons: [
+          {
+            id: 'e3-1',
+            title: 'Volume Profile Analysis',
+            duration: '13 min',
+            content: `
+<h3>What is Volume Profile?</h3>
+<p><strong>Volume Profile</strong> is a charting tool that shows the amount of trading activity at each price level over a specified time period, displayed as a horizontal histogram on the chart.</p>
+<div class="definition-box">
+  <div class="def-term">Point of Control (POC)</div>
+  <div class="def-text">The price level with the highest traded volume. This is the "fairest" price — where the most business was done. Price has a magnetic attraction to the POC.</div>
+</div>
+<div class="definition-box">
+  <div class="def-term">Value Area (VA)</div>
+  <div class="def-text">The range of prices where 70% of all volume was traded. The upper boundary is VAH (Value Area High) and lower is VAL (Value Area Low).</div>
+</div>
+<div class="definition-box">
+  <div class="def-term">High Volume Node (HVN)</div>
+  <div class="def-text">Areas of high volume = price acceptance. Markets tend to slow and consolidate at HVNs.</div>
+</div>
+<div class="definition-box">
+  <div class="def-term">Low Volume Node (LVN)</div>
+  <div class="def-text">Areas of low volume = price rejection. Markets tend to move through LVNs quickly — they represent areas of disagreement.</div>
+</div>
+<h3>Trading with Volume Profile</h3>
+<ul>
+  <li>Buy at VAL with target at POC or VAH</li>
+  <li>Sell at VAH with target at POC or VAL</li>
+  <li>LVNs act as acceleration zones — price moves fast through them</li>
+  <li>If price breaks above a VA and holds, the old VAH becomes new support</li>
+</ul>
+<h3>VWAP — Volume Weighted Average Price</h3>
+<div class="definition-box">
+  <div class="def-term">VWAP</div>
+  <div class="def-text">The average price weighted by volume. Institutional traders' benchmark — they buy below VWAP and sell above it. Price above VWAP = bullish day. Price below VWAP = bearish day.</div>
+</div>`
+          }
+        ]
+      },
+      {
+        title: 'Module 4: Advanced Execution & Professional Mindset',
+        lessons: [
+          {
+            id: 'e4-1',
+            title: 'Trade Execution Models',
+            duration: '12 min',
+            content: `
+<h3>From Analysis to Execution</h3>
+<p>Having the right analysis means nothing if your execution is poor. Professional traders follow a strict <strong>execution model</strong> — a framework that governs exactly how they get in and out of trades.</p>
+<h3>The Confirmation Model</h3>
+<p>Wait for multiple confirmations before executing:</p>
+<ol>
+  <li><strong>Higher Timeframe Context</strong> — Is the HTF trend aligned?</li>
+  <li><strong>POI Reached</strong> — Has price arrived at your point of interest (OB, FVG, S/R)?</li>
+  <li><strong>Liquidity Swept</strong> — Has price taken out a nearby liquidity level first?</li>
+  <li><strong>CHoCH on LTF</strong> — Does the entry timeframe show a change of character in your favour?</li>
+  <li><strong>Entry Candle</strong> — Is there a confirming candlestick signal at the POI?</li>
+</ol>
+<h3>Entries: Limit vs Market Orders</h3>
+<table class="data-table">
+  <tr><th>Order Type</th><th>Description</th><th>Best Used When</th></tr>
+  <tr><td><strong>Market Order</strong></td><td>Buy/sell at current price immediately</td><td>Strong momentum entry, avoid missing a move</td></tr>
+  <tr><td><strong>Limit Order</strong></td><td>Buy/sell at a specific better price (pending)</td><td>Waiting for retest of OB/FVG/S&R</td></tr>
+  <tr><td><strong>Stop Order</strong></td><td>Buy above or sell below current price on breakout</td><td>Breakout strategies, trend continuation</td></tr>
+</table>
+<h3>Scaling In & Out</h3>
+<p><strong>Scaling in</strong>: Adding to a winning position at predetermined levels. Increases exposure as the trade moves in your favour. Must be planned, never emotional.</p>
+<p><strong>Scaling out (partial take profit)</strong>: Taking 50% of your position off at 1:1 reward, moving stop to breakeven, then targeting the full objective with the remaining 50%. This secures profit while letting winners run.</p>
+<h3>The Breakeven Principle</h3>
+<p>Once a trade has moved in your favour by a meaningful amount (e.g. 1:1 reward), move your stop loss to entry price. You are now in a "risk-free" trade. The worst that can happen is you break even.</p>
+<div class="callout green">
+  <div class="callout-title">🏆 Professional Execution Mindset</div>
+  "I only control entry, stop, and target. Once in the trade, the market decides. My job is done — I don't touch the trade unless my plan says to."
+</div>`
+          },
+          {
+            id: 'e4-2',
+            title: 'The Funded Trader Model & Prop Firms',
+            duration: '10 min',
+            content: `
+<h3>What is a Prop Firm?</h3>
+<p>A <strong>proprietary trading firm (prop firm)</strong> provides traders with large amounts of capital in exchange for a share of profits. You trade their money, following their rules. If you're consistently profitable, you can manage hundreds of thousands of dollars without risking your own.</p>
+<h3>How It Works</h3>
+<ol>
+  <li><strong>Pay the challenge fee</strong> — Typically $100–$500 for a challenge account</li>
+  <li><strong>Pass Phase 1</strong> — Hit profit target (usually 8–10%) without exceeding drawdown limits</li>
+  <li><strong>Pass Phase 2</strong> — Verify consistency (usually 5% target)</li>
+  <li><strong>Get funded</strong> — Trade a real account ($10k–$200k) with your strategy</li>
+  <li><strong>Split profits</strong> — Typically 70–90% to you, 10–30% to the firm</li>
+</ol>
+<h3>Top Prop Firms (as of study)</h3>
+<ul>
+  <li><strong>FTMO</strong> — The most established. Strong reputation.</li>
+  <li><strong>MyForexFunds</strong> — Popular, multiple scaling options</li>
+  <li><strong>The Funded Trader</strong> — Flexible rules</li>
+  <li><strong>E8 Funding</strong> — Good consistency-focused rules</li>
+</ul>
+<h3>Prop Firm Rules You Must Follow</h3>
+<table class="data-table">
+  <tr><th>Rule</th><th>Typical Limit</th></tr>
+  <tr><td>Daily drawdown</td><td>5% of account balance</td></tr>
+  <tr><td>Max overall drawdown</td><td>10% from initial balance</td></tr>
+  <tr><td>News trading</td><td>Often restricted 2–5 min before/after high-impact news</td></tr>
+  <tr><td>Minimum trading days</td><td>10 days minimum</td></tr>
+  <tr><td>Consistency rule</td><td>No single day exceeding 40–50% of total profit</td></tr>
+</table>
+<div class="callout">
+  <div class="callout-title">🎯 The Path</div>
+  Demo → Live (small) → Prove consistency → Prop firm challenge → Scale. This is the modern retail trader's pathway to trading significant capital.
+</div>`
+          }
+        ]
+      }
+    ]
+  }
+};
+
+// ============================================================
+// QUIZ BANKS
+// ============================================================
+const QUIZZES = {
+  beginner: [
+    { q: "The forex market is open how many hours per day on weekdays?", opts: ["12 hours","16 hours","24 hours","8 hours"], a: 2, exp: "The forex market operates 24 hours a day from Sunday evening to Friday close, covering Sydney, Tokyo, London, and New York sessions." },
+    { q: "In the currency pair EUR/USD, which is the base currency?", opts: ["USD","EUR","Both equally","Neither"], a: 1, exp: "EUR is the base currency. The pair tells you how many USD (quote) it costs to buy 1 EUR (base)." },
+    { q: "What does a pip represent in EUR/USD?", opts: ["The 2nd decimal place","The 3rd decimal place","The 4th decimal place","The 5th decimal place"], a: 2, exp: "For most pairs, a pip is the 4th decimal place (0.0001). For JPY pairs, it's the 2nd decimal place." },
+    { q: "Which of these is NOT a major currency pair?", opts: ["EUR/USD","GBP/USD","USD/CHF","EUR/ZAR"], a: 3, exp: "EUR/ZAR is an exotic pair (one major + one emerging market currency). The majors all include USD and are the most liquid pairs." },
+    { q: "A standard lot in forex equals how many units of base currency?", opts: ["1,000","10,000","100,000","1,000,000"], a: 2, exp: "A standard lot = 100,000 units. A mini lot = 10,000. A micro lot = 1,000." },
+    { q: "If you have a $2,000 account and follow the 1% risk rule, your maximum loss per trade is:", opts: ["$20","$200","$50","$100"], a: 0, exp: "1% of $2,000 = $20. This is your maximum risk per trade to protect your account from drawdown." },
+    { q: "What does 'leverage' do in forex trading?", opts: ["Reduces trading costs","Allows you to control a larger position with less capital","Automatically sets your stop loss","Increases your spread"], a: 1, exp: "Leverage allows you to control positions larger than your deposit. 1:100 means $100 can control $10,000." },
+    { q: "The London-New York session overlap is considered the best time to trade because:", opts: ["Spreads are at their lowest only","It has the highest volume and volatility","Brokers offer better leverage","Technical analysis works less"], a: 1, exp: "The London-NY overlap (13:00-17:00 UTC) has the highest liquidity and volume, creating the best conditions for price movement and tighter spreads." },
+    { q: "What is 'revenge trading'?", opts: ["Trading against the trend","Immediately trading after a loss to recover money emotionally","Using high leverage","Trading during news events"], a: 1, exp: "Revenge trading is emotionally placing trades after a loss to recover it. It's one of the most destructive trading behaviours." },
+    { q: "Which of the following best describes a 'spread' in forex?", opts: ["The distance between your stop loss and entry","The broker's commission on each trade","The difference between the bid and ask price","The amount of leverage applied"], a: 2, exp: "The spread is the difference between the buy price (ask) and sell price (bid). It's effectively the broker's fee on each transaction." },
+    { q: "A bullish candlestick closes:", opts: ["Lower than it opened","Higher than it opened","At the same level it opened","At the day's high"], a: 1, exp: "A bullish (green/white) candle closes higher than it opened, showing buyers won that period." },
+    { q: "What does the 'wick' of a candlestick represent?", opts: ["The opening price","The range between open and close","The price range tested but not sustained","The average price"], a: 2, exp: "Wicks (shadows) show the highest and lowest prices reached during the period, but where price was rejected and returned." },
+    { q: "Which interest rate authority most impacts the US Dollar?", opts: ["Bank of England","European Central Bank","US Federal Reserve","Bank of Japan"], a: 2, exp: "The Federal Reserve (Fed) sets US monetary policy and interest rates, which is the primary driver of USD strength." },
+    { q: "A Doji candlestick pattern suggests:", opts: ["Strong bullish momentum","Strong bearish momentum","Indecision between buyers and sellers","A definitive reversal"], a: 2, exp: "A Doji has a very small body (close near open), showing that neither buyers nor sellers dominated that period — indecision." },
+    { q: "The NFP report is released:", opts: ["Every Monday","First Friday of each month","Last trading day of each month","Every Wednesday"], a: 1, exp: "US Non-Farm Payrolls (NFP) is released on the first Friday of every month and is one of the most market-moving regular events." },
+    { q: "What is a 'margin call'?", opts: ["A broker asking you to close all positions","A notification that your free margin is critically low","The minimum trade size required","A fee charged on overnight positions"], a: 1, exp: "A margin call is a warning from your broker that your equity has fallen to the margin call level and you need to add funds or close trades." },
+    { q: "In a trade setup, a 1:3 Risk-to-Reward ratio means:", opts: ["You risk $3 to make $1","You risk $1 to make $3","Win rate must be 75%","You need 3 confirmations to enter"], a: 1, exp: "1:3 RRR means for every $1 you risk, your profit target is $3. With this ratio, you only need a 25% win rate to be profitable." },
+    { q: "Which pairs are considered 'cross pairs' or 'minors'?", opts: ["Pairs that include USD","Pairs without USD, but with major currencies","Only pairs involving GBP","Pairs from emerging markets"], a: 1, exp: "Cross pairs (minors) are pairs that don't include USD but involve major currencies like EUR, GBP, JPY. Example: EUR/GBP, GBP/JPY." },
+    { q: "What does 'going long' mean in forex?", opts: ["Holding a position for a long time","Buying the base currency, expecting price to rise","Selling with a large lot size","Trading on a long timeframe"], a: 1, exp: "Going long means buying — you buy the base currency expecting it to appreciate against the quote currency." },
+    { q: "An ECN broker differs from a Market Maker in that:", opts: ["ECN has higher spreads always","ECN routes orders to real market liquidity without taking the other side","ECN only accepts large deposits","ECN doesn't offer leverage"], a: 1, exp: "ECN (Electronic Communication Network) brokers connect you directly to interbank liquidity. Market Makers create their own market and take the other side of your trade." }
+  ],
+  intermediate: [
+    { q: "In market structure, a 'Higher High' followed by a 'Lower Low' suggests:", opts: ["Continuation of uptrend","Trend reversal signal (bearish)","Continuation of downtrend","Consolidation range"], a: 1, exp: "When price can no longer make a Higher High and instead makes a Lower Low, it signals the uptrend structure may be breaking down — a bearish warning." },
+    { q: "The 61.8% Fibonacci retracement level is also called:", opts: ["The Golden Ratio","The Silver Ratio","The Premium Zone","The Equilibrium Level"], a: 0, exp: "61.8% is the Golden Ratio (derived from dividing a Fibonacci number by the next one), and is considered the most powerful retracement level." },
+    { q: "What is 'confluence' in technical analysis?", opts: ["When two indicators always disagree","When multiple independent signals align at the same price level","Using more than 5 indicators","Trading during multiple sessions simultaneously"], a: 1, exp: "Confluence is when multiple independent factors (Fibonacci + S/R + moving average + time) all point to the same price level, increasing probability." },
+    { q: "A 'Break and Retest' trade setup involves:", opts: ["Breaking a level and immediately entering","Price breaking a key level, then returning to test it from the other side before continuing","Price failing to break a level twice","Using a breakout indicator"], a: 1, exp: "After price breaks through a key level, it often returns to 'retest' that level (now reversed — resistance becomes support or vice versa). This retest is the entry." },
+    { q: "In a strong uptrend, the 50 EMA most commonly acts as:", opts: ["A resistance level","Dynamic support where price bounces","A signal to sell","An overbought indicator"], a: 1, exp: "In strong uptrends, the 50 EMA acts as dynamic support. Institutional traders add to positions when price pulls back to test it." },
+    { q: "RSI Bearish Divergence occurs when:", opts: ["RSI is below 30","Price makes a higher high but RSI makes a lower high","Price makes a lower low but RSI makes a higher low","RSI crosses below 50"], a: 1, exp: "Bearish divergence: price achieves a new high but the RSI indicator makes a lower high — showing weakening momentum even as price rises." },
+    { q: "A Head and Shoulders pattern's 'neckline' is:", opts: ["The top of the head","The line connecting the two troughs between shoulders","The moving average on the pattern","The resistance level above the head"], a: 1, exp: "The neckline connects the two troughs (lows) between the left shoulder-head and head-right shoulder. A break below this line is the trade entry signal." },
+    { q: "What is the primary risk of trading correlated pairs simultaneously?", opts: ["Higher spreads","Unknowingly doubling your directional risk","Missing out on better setups","Technical indicators become less reliable"], a: 1, exp: "Highly correlated pairs (like EUR/USD and GBP/USD) move together. Trading both with the same directional bias doubles your effective risk on USD movement." },
+    { q: "In a 'Supply and Demand' trading context, a Drop-Base-Rally (DBR) zone is:", opts: ["A supply zone where selling is expected","A demand zone where buying is expected","A neutral consolidation area","A breakout continuation signal"], a: 1, exp: "DBR = price dropped, created a base (consolidated), then rallied strongly. The base represents where institutional buy orders were placed — a demand zone." },
+    { q: "The Bollinger Band 'squeeze' signals:", opts: ["Immediate trend reversal","High volatility about to decrease","A period of low volatility before a potential large move","The price is overbought"], a: 2, exp: "When Bollinger Bands squeeze together, volatility is very low. This compression often precedes a significant directional expansion (big move). Direction is unconfirmed by the squeeze alone." },
+    { q: "In top-down analysis, which timeframe do you use FIRST?", opts: ["The entry timeframe","The lowest timeframe available","The highest timeframe for overall bias","The timeframe with the clearest pattern"], a: 2, exp: "Top-down analysis begins with the highest timeframe (monthly or weekly) to establish directional bias and key levels, then works down to execution timeframes." },
+    { q: "An 'ascending triangle' is generally considered a:", opts: ["Bearish reversal pattern","Bullish continuation pattern","Neutral pattern only","Bearish continuation pattern"], a: 1, exp: "An ascending triangle has a flat upper resistance and rising lows — showing buyers progressively stepping in higher. It typically resolves with a bullish breakout." },
+    { q: "What does 'backtesting' a strategy mean?", opts: ["Testing a strategy on a demo account in real time","Reviewing a strategy's performance on historical price data","Getting feedback from other traders","Testing with small real-money trades"], a: 1, exp: "Backtesting involves applying your strategy rules to historical chart data to measure its statistical performance (win rate, RRR, drawdown) before risking real capital." },
+    { q: "MACD crossover above the zero line indicates:", opts: ["Overbought conditions","Bullish momentum and trend direction confirmed","Bearish divergence","Volatility spike"], a: 1, exp: "When the MACD line crosses above the zero line, the fast EMA is above the slow EMA — confirming bullish trend direction and momentum." },
+    { q: "In a range-bound market, the optimal strategy is typically:", opts: ["Trend following with the 200 EMA","Buying at support and selling at resistance","Trading breakouts only","Avoiding trading entirely"], a: 1, exp: "Range trading involves buying near the range's support level and selling near resistance, targeting the opposite boundary with a stop outside the range." },
+    { q: "What is the purpose of a 'trailing stop loss'?", opts: ["To lock in profits as price moves in your favour","To automatically increase position size","To reduce spread costs","To set a fixed take profit level"], a: 0, exp: "A trailing stop adjusts your stop loss upward (for buys) as price moves in your favour, locking in an increasing amount of profit while still allowing further upside." },
+    { q: "The 'role reversal' concept in technical analysis states:", opts: ["All support becomes resistance after any price touch","Broken support becomes resistance and broken resistance becomes support","Price always returns to broken levels","Moving averages change their function over time"], a: 1, exp: "Role reversal: when price breaks through a resistance level and closes above it, that former resistance now acts as support on any return visit, and vice versa." },
+    { q: "A position trader's typical holding period is:", opts: ["Seconds to minutes","Minutes to a few hours","Days to a few weeks","Weeks to months"], a: 3, exp: "Position traders hold for weeks to months, using weekly and monthly charts. They're primarily driven by fundamental analysis and major technical trends." },
+    { q: "When is the highest risk/lowest quality time to trade EUR/USD?", opts: ["London open","New York open","London-New York overlap","Friday evening (after 20:00 UTC)"], a: 3, exp: "Friday evenings see reduced liquidity as the week closes. Spreads widen and erratic moves are more common. Most professional traders avoid this window." },
+    { q: "What does 'drawdown' mean in trading performance?", opts: ["The spread cost paid on all trades","The peak-to-trough decline in account value from its highest point","The total number of losing trades","The daily volatility of your account"], a: 1, exp: "Drawdown measures the percentage decline from a performance peak to the subsequent trough. Maximum drawdown is a key metric for evaluating strategy risk." }
+  ],
+  expert: [
+    { q: "In Smart Money Concepts, 'Buy-Side Liquidity' refers to:", opts: ["Orders to buy currency","Stop losses of short sellers sitting above swing highs","Institutional buy orders in the market","High volume buying zones"], a: 1, exp: "Buy-side liquidity consists of stop-loss orders from short sellers that are placed above swing highs and equal highs. When price sweeps these, it triggers those stops, providing liquidity for institutional sellers." },
+    { q: "An 'Order Block' in ICT methodology is defined as:", opts: ["A large volume bar","The last opposing candle before a significant impulsive move","Any consolidation area","A zone of equal highs or lows"], a: 1, exp: "An Order Block is specifically the last bearish candle before a bullish impulse (bullish OB) or the last bullish candle before a bearish impulse (bearish OB) — where institutions hid their entry orders." },
+    { q: "A Fair Value Gap (FVG) is identified by:", opts: ["A single large candle with no wicks","A gap between the high of candle 1 and low of candle 3 in a three-candle sequence","Two candles with equal closes","A volume divergence on the chart"], a: 1, exp: "An FVG forms when three candles create an imbalance: the gap between candle 1's high and candle 3's low (bullish FVG) represents an area of inefficiency that price is drawn to fill." },
+    { q: "The 'Power of Three' (AMD model) stands for:", opts: ["Accumulation, Manipulation, Distribution","Analysis, Market, Delivery","Asian, Morning, Daily","Anticipation, Movement, Done"], a: 0, exp: "Accumulation (institutions build positions in sideways price) → Manipulation (false move to hunt stops) → Distribution (true directional move and profit taking)." },
+    { q: "The 'consequent encroachment' of an FVG refers to:", opts: ["Price completely filling the FVG","The 50% midpoint of the Fair Value Gap","The opening of the FVG range","Price breaking above/below the FVG"], a: 1, exp: "Consequent encroachment is the 50% midpoint of an FVG. Price often reacts strongly at this level, making it the key entry zone within the FVG." },
+    { q: "In the IPDA framework, what are the three lookback periods ICT references?", opts: ["10, 20, 30 days","15, 30, 60 days","20, 40, 60 trading days","7, 14, 21 days"], a: 2, exp: "ICT's IPDA uses 20, 40, and 60 trading day lookback periods. The highs and lows of these periods act as institutional reference points for price delivery." },
+    { q: "In Volume Profile, the 'Point of Control' (POC) represents:", opts: ["The opening price of the session","The price level with the highest traded volume","The average of high and low","The closing price weighted by volume"], a: 1, exp: "The POC is the price level where the most volume was traded. It represents the 'fairest price' and acts as a strong magnetic level — price frequently returns to test it." },
+    { q: "VWAP is primarily used by institutional traders as:", opts: ["A leading indicator of reversals","A benchmark — buy below VWAP, sell above it","A momentum oscillator","A volume divergence signal"], a: 1, exp: "VWAP is the institutional benchmark. Large funds measure execution quality against it. Price above VWAP = buyers have advantage; below = sellers. Traders aim to buy below and sell above." },
+    { q: "The 'London Manipulation' pattern involves:", opts: ["London always trending in one direction","Price sweeping the Asian session range before reversing during London","Institutions manipulating news releases","The spread always being highest at London open"], a: 1, exp: "Classic London Manipulation: during the Asian session a range forms. At London open, price sweeps one side (hunting stops), then reverses and moves in the true intended direction for the day." },
+    { q: "A 'Change of Character (CHoCH)' differs from a 'Break of Structure (BOS)' in that:", opts: ["CHoCH breaks with the trend, BOS continues it","They are identical concepts","BOS always means reversal, CHoCH means continuation","CHoCH happens only on higher timeframes"], a: 0, exp: "BOS is a structure break that confirms trend continuation (price breaks in the trend direction). CHoCH is the first break AGAINST the trend, signalling a potential reversal." },
+    { q: "In prop firm trading, what is typically the maximum allowed daily drawdown?", opts: ["1% of account","3% of account","5% of account","10% of account"], a: 2, exp: "Most prop firms set a 5% daily drawdown limit. If you lose 5% of the account balance in one day, you breach the rules and the challenge/funded account is terminated." },
+    { q: "A 'Low Volume Node' (LVN) in Volume Profile analysis suggests:", opts: ["Price will slow and consolidate here","Price will likely move quickly through this area","High institutional activity at this level","Strong support or resistance"], a: 1, exp: "LVNs represent price areas where little trading occurred — areas of disagreement. Price tends to move through them rapidly, unlike HVNs where it consolidates." },
+    { q: "The 'Optimal Trade Entry (OTE)' in ICT refers to:", opts: ["Entering at the open of the London session","The 61.8%–78.6% Fibonacci retracement zone in a trend","Any entry with confirmation from three timeframes","Entering exactly at the POC"], a: 1, exp: "OTE is the zone between the 61.8% and 78.6% Fibonacci retracement of a swing — where institutions re-enter after creating a pullback, offering the 'best' risk-to-reward entry." },
+    { q: "Equal highs on a chart in SMC are considered:", opts: ["Strong resistance to avoid","A sign of trend strength","A pool of Buy-Side Liquidity that institutions will target","A pattern that never resolves"], a: 2, exp: "Equal highs create a concentration of stop-loss orders from short sellers just above them. This makes them a liquidity target — institutions will drive price above equal highs to trigger these stops before reversing." },
+    { q: "The ICT 'Silver Bullet' strategy is primarily executed during:", opts: ["The Asian session","Specific one-hour windows during London AM and NY AM sessions","Any time an FVG appears","The London-NY overlap only"], a: 1, exp: "The Silver Bullet uses FVGs during specific killzone windows: 10:00-11:00 UTC and 14:00-15:00 UTC (NY sessions). These time-specific FVGs tend to be highly reliable." }
+  ]
+};
+
+// ============================================================
+// SCREEN MANAGEMENT
+// ============================================================
+function showScreen(name) {
+  document.getElementById('screen-landing').style.display = 'none';
+  document.getElementById('screen-lesson').style.display = 'none';
+  document.getElementById('screen-quiz').style.display = 'none';
+  document.getElementById('screen-results').style.display = 'none';
+  document.getElementById('nav-progress-wrap').style.display = 'none';
+  if(name === 'landing') document.getElementById('screen-landing').style.display = '';
+  if(name === 'lesson') { document.getElementById('screen-lesson').style.display = ''; document.getElementById('nav-progress-wrap').style.display = 'flex'; }
+  if(name === 'quiz') document.getElementById('screen-quiz').style.display = '';
+  if(name === 'results') document.getElementById('screen-results').style.display = '';
+  window.scrollTo(0,0);
+}
+
+// ============================================================
+// COURSE NAVIGATION
+// ============================================================
+function startTrack(trackId) {
+  currentTrack = trackId;
+  currentLessonIndex = 0;
+  buildSidebar(trackId);
+  showScreen('lesson');
+  showLesson(0);
+}
+
+function getAllLessons(trackId) {
+  const t = CURRICULUM[trackId];
+  const all = [];
+  t.modules.forEach(m => m.lessons.forEach(l => all.push(l)));
+  return all;
+}
+
+function buildSidebar(trackId) {
+  const t = CURRICULUM[trackId];
+  document.getElementById('sidebar-track-name').textContent = t.name;
+  const container = document.getElementById('sidebar-modules');
+  const progress = getProgress();
+  const completedIds = progress[trackId] || [];
+  let html = '';
+  let lessonCount = 0;
+  t.modules.forEach((m, mi) => {
+    html += `<div class="module-group">
+      <div class="module-header open" onclick="toggleModule(this)">
+        <span>${m.title}</span><i class="fas fa-chevron-right chevron"></i>
+      </div>
+      <div class="module-lessons open">`;
+    m.lessons.forEach((l, li) => {
+      const isComplete = completedIds.includes(l.id);
+      const globalIdx = lessonCount;
+      html += `<div class="lesson-item${isComplete?' completed':''}" id="li-${l.id}" onclick="showLesson(${globalIdx})">
+        <i class="fas ${isComplete?'fa-check-circle':'fa-circle'} li-icon"></i>
+        <span>${l.title}</span>
+      </div>`;
+      lessonCount++;
+    });
+    html += `</div></div>`;
+  });
+  container.innerHTML = html;
+  updateProgressUI(trackId);
+}
+
+function toggleModule(el) {
+  el.classList.toggle('open');
+  el.nextElementSibling.classList.toggle('open');
+}
+
+function showLesson(idx) {
+  const all = getAllLessons(currentTrack);
+  if(idx < 0 || idx >= all.length) return;
+  currentLessonIndex = idx;
+  const lesson = all[idx];
+  const t = CURRICULUM[currentTrack];
+
+  // Find module name
+  let modName = '';
+  let globalCount = 0;
+  for(const m of t.modules) {
+    for(const l of m.lessons) {
+      if(globalCount === idx) { modName = m.title; break; }
+      globalCount++;
+    }
+    if(modName) break;
+  }
+
+  const isLast = idx === all.length - 1;
+  const progress = getProgress();
+  const completedIds = progress[currentTrack] || [];
+  const completedCount = completedIds.length;
+  const pct = Math.round(completedCount / all.length * 100);
+
+  document.getElementById('lesson-main').innerHTML = `
+    <div class="lesson-breadcrumb">${t.name} <span>›</span> ${modName}</div>
+    <div class="lesson-header">
+      <div class="lesson-number">Lesson ${idx+1} of ${all.length}</div>
+      <div class="lesson-title">${lesson.title}</div>
+      <div class="lesson-meta">
+        <span class="lesson-meta-item"><i class="fas fa-clock"></i> ${lesson.duration} read</span>
+        <span class="lesson-meta-item"><i class="fas fa-check-circle"></i> ${completedCount}/${all.length} completed</span>
+      </div>
+    </div>
+    <div class="lesson-divider"></div>
+    <div class="lesson-body">${lesson.content}</div>
+    <div class="lesson-nav">
+      <button class="lesson-nav-btn prev" onclick="prevLesson()" ${idx===0?'disabled':''}>← Previous</button>
+      ${isLast
+        ? `<button class="lesson-nav-btn next" onclick="markAndShowQuizOption()">Complete & Test →</button>`
+        : `<button class="lesson-nav-btn next" onclick="nextLesson()">Next Lesson →</button>`
+      }
+    </div>
+    ${isLast ? `<div class="level-complete-banner" style="margin-top:30px;">
+      <div class="lcb-icon">🎉</div>
+      <div class="lcb-title">You've reached the end of the ${t.name}!</div>
+      <div class="lcb-text">You can revisit any lesson, or take the aptitude test to earn your <strong>${t.name} Certificate</strong>. Results and certificates require a free account.</div>
+      <button class="lcb-btn" onclick="showQuizScreen()">Take the Aptitude Test →</button>
+    </div>` : ''}
+  `;
+
+  // Mark lesson active in sidebar
+  document.querySelectorAll('.lesson-item').forEach(el => el.classList.remove('active'));
+  const liEl = document.getElementById(`li-${lesson.id}`);
+  if(liEl) { liEl.classList.add('active'); liEl.scrollIntoView({block:'nearest',behavior:'smooth'}); }
+
+  // Auto-mark this lesson as seen after 3 seconds (free reading)
+  setTimeout(() => markLessonComplete(currentTrack, lesson.id), 3000);
+}
+
+function nextLesson() {
+  const all = getAllLessons(currentTrack);
+  if(currentLessonIndex < all.length - 1) showLesson(currentLessonIndex + 1);
+}
+
+function prevLesson() {
+  if(currentLessonIndex > 0) showLesson(currentLessonIndex - 1);
+}
+
+function markAndShowQuizOption() {
+  showLesson(currentLessonIndex); // re-render with end state
+}
+
+function updateProgressUI(trackId) {
+  const all = getAllLessons(trackId);
+  const p = getProgress();
+  const done = (p[trackId]||[]).length;
+  const pct = Math.round(done/all.length*100);
+  const fill = document.getElementById('sidebar-progress-fill');
+  const pctEl = document.getElementById('sidebar-pct');
+  const navFill = document.getElementById('nav-progress-fill');
+  const navText = document.getElementById('nav-progress-text');
+  if(fill) fill.style.width = pct+'%';
+  if(pctEl) pctEl.textContent = pct+'%';
+  if(navFill) navFill.style.width = pct+'%';
+  if(navText) navText.textContent = pct+'% Complete';
+
+  // Update sidebar checkmarks
+  const allLessons = getAllLessons(trackId);
+  allLessons.forEach(l => {
+    const el = document.getElementById(`li-${l.id}`);
+    if(el && (p[trackId]||[]).includes(l.id)) {
+      el.classList.add('completed');
+      el.querySelector('.li-icon').classList.remove('fa-circle');
+      el.querySelector('.li-icon').classList.add('fa-check-circle');
+    }
+  });
+}
+
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('sidebar-overlay').classList.toggle('open');
+}
+
+// ============================================================
+// QUIZ SYSTEM
+// ============================================================
+let quizState = { questions:[], currentQ:0, answers:{}, track:'' };
+
+function showQuizScreen() {
+  const t = CURRICULUM[currentTrack];
+  quizState = { questions: QUIZZES[currentTrack], currentQ:0, answers:{}, track:currentTrack };
+
+  document.getElementById('quiz-level-badge').textContent = t.badge;
+  document.getElementById('quiz-level-badge').style.background = t.color+'22';
+  document.getElementById('quiz-level-badge').style.color = t.color;
+  document.getElementById('quiz-level-badge').style.border = `1px solid ${t.color}44`;
+  document.getElementById('quiz-title').textContent = t.name + ' — Aptitude Test';
+  document.getElementById('quiz-subtitle').textContent = `${quizState.questions.length} questions. Pass with 70%+ to earn your certificate.`;
+
+  if(!currentUser) {
+    document.getElementById('quiz-auth-prompt').style.display = '';
+  } else {
+    document.getElementById('quiz-auth-prompt').style.display = 'none';
+  }
+
+  renderQuestion();
+  showScreen('quiz');
+}
+
+function renderQuestion() {
+  const qs = quizState.questions;
+  const i = quizState.currentQ;
+  const q = qs[i];
+  const pct = Math.round((i/qs.length)*100);
+
+  document.getElementById('quiz-q-num').textContent = `${i+1} / ${qs.length}`;
+  document.getElementById('quiz-bar-fill').style.width = `${Math.max(pct,3)}%`;
+
+  const area = document.getElementById('quiz-questions-area');
+  const answered = quizState.answers[i];
+  area.innerHTML = `
+    <div class="question-card">
+      <div class="question-num">Question ${i+1}</div>
+      <div class="question-text">${q.q}</div>
+      <div class="options-grid">
+        ${q.opts.map((opt,oi)=>`
+          <button class="option-btn${answered!==undefined?(oi===q.a?' correct':(oi===answered&&answered!==q.a?' wrong':'')):''}${answered===oi?' selected':''}"
+            onclick="selectAnswer(${oi})" ${answered!==undefined?'disabled':''}>
+            <strong>${String.fromCharCode(65+oi)}.</strong> ${opt}
+          </button>
+        `).join('')}
+      </div>
+      ${answered!==undefined?`<div class="answer-feedback ${answered===q.a?'correct':'wrong'}">
+        ${answered===q.a?'✅ Correct!':'❌ Incorrect.'} ${q.exp}
+      </div>`:''}
+    </div>
+  `;
+
+  const isLast = i === qs.length - 1;
+  document.getElementById('quiz-next-btn').style.display = (answered!==undefined && !isLast) ? '' : 'none';
+  document.getElementById('quiz-submit-btn').style.display = (answered!==undefined && isLast) ? '' : 'none';
+}
+
+function selectAnswer(optIdx) {
+  if(quizState.answers[quizState.currentQ] !== undefined) return;
+  quizState.answers[quizState.currentQ] = optIdx;
+  renderQuestion();
+}
+
+function nextQuestion() {
+  if(quizState.currentQ < quizState.questions.length - 1) {
+    quizState.currentQ++;
+    renderQuestion();
+  }
+}
+
+async function submitQuiz() {
+  const qs = quizState.questions;
+  let correct = 0;
+  qs.forEach((q,i) => { if(quizState.answers[i] === q.a) correct++; });
+  const pct = Math.round(correct/qs.length*100);
+  const passed = pct >= 70;
+
+  showScreen('results');
+  document.getElementById('results-icon').textContent = passed ? '🏆' : '📚';
+  document.getElementById('results-title').textContent = passed ? 'Well Done!' : 'Keep Studying!';
+  document.getElementById('results-sub').textContent = passed
+    ? `You passed the ${CURRICULUM[quizState.track].name} aptitude test!`
+    : `You scored ${pct}%. You need 70% to pass. Review the material and try again!`;
+  document.getElementById('results-pct').textContent = pct+'%';
+  document.getElementById('rb-correct').textContent = correct;
+  document.getElementById('rb-wrong').textContent = qs.length - correct;
+  document.getElementById('rb-pct').textContent = pct+'%';
+
+  const hasNext = quizState.track !== 'expert';
+  document.getElementById('results-next-track').style.display = (passed && hasNext) ? '' : 'none';
+
+  if(passed) {
+    document.getElementById('cert-section').style.display = '';
+    document.getElementById('fail-section').style.display = 'none';
+    const t = CURRICULUM[quizState.track];
+    document.getElementById('cert-student-name').textContent = currentUser?.user_metadata?.full_name || currentUser?.email?.split('@')[0] || 'Trader';
+    document.getElementById('cert-level-text').textContent = t.badge + ' LEVEL';
+    document.getElementById('cert-score-display').textContent = `Score: ${pct}% · Pass`;
+    document.getElementById('cert-date').textContent = `Issued: ${new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}`;
+    // Save to Supabase
+    if(currentUser) saveResultToDb(quizState.track, pct, correct, qs.length);
+  } else {
+    document.getElementById('cert-section').style.display = 'none';
+    document.getElementById('fail-section').style.display = '';
+  }
+}
+
+async function saveResultToDb(track, score, correct, total) {
+  if(!currentUser || SUPABASE_URL.includes('YOUR_PROJECT')) return;
+  try {
+    await sbFetch('forex_course_results', {
+      method:'POST',
+      body: JSON.stringify({
+        user_id: currentUser.id,
+        user_email: currentUser.email,
+        user_name: currentUser.user_metadata?.full_name || '',
+        track_id: track,
+        score_pct: score,
+        correct_answers: correct,
+        total_questions: total,
+        passed: score >= 70,
+        taken_at: new Date().toISOString()
+      })
+    });
+    showToast('Results saved! ✅','success');
+  } catch(e) {
+    console.log('DB save failed:',e);
+  }
+}
+
+function retakeTest() {
+  quizState.answers = {};
+  quizState.currentQ = 0;
+  showQuizScreen();
+}
+
+function goNextTrack() {
+  const order = ['beginner','intermediate','expert'];
+  const next = order[order.indexOf(quizState.track)+1];
+  if(next) startTrack(next);
+}
+
+function downloadCert() {
+  const el = document.getElementById('cert-display');
+  const certContent = el.innerText;
+  const blob = new Blob([
+    `WORLDBANKFX × PROFESSOR\n${'='.repeat(50)}\n${certContent}\n${'='.repeat(50)}\nVisit: worldbankfx.netlify.app`
+  ], {type:'text/plain'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `WBFx_Certificate_${quizState.track}_${Date.now()}.txt`;
+  a.click();
+  showToast('Certificate downloaded! 🎓','success');
+}
+
+function shareCert() {
+  const t = CURRICULUM[quizState.track];
+  const text = `I just passed the ${t.name} Aptitude Test at WorldBankFx Professor's Forex Teaser Class! 🏆 Check out the course at worldbankfx.netlify.app`;
+  if(navigator.share) navigator.share({title:'My Forex Certificate',text});
+  else { navigator.clipboard.writeText(text); showToast('Share text copied!','success'); }
+}
+
+// ============================================================
+// AUTH SYSTEM
+// ============================================================
+function showAuth(context) {
+  afterAuthAction = context;
+  document.getElementById('auth-modal').classList.add('open');
+  showLogin();
+}
+
+function closeAuth() {
+  document.getElementById('auth-modal').classList.remove('open');
+  document.getElementById('login-error').textContent = '';
+  document.getElementById('reg-error').textContent = '';
+}
+
+function showLogin() {
+  document.getElementById('auth-login-view').style.display = '';
+  document.getElementById('auth-register-view').style.display = 'none';
+}
+
+function showRegister() {
+  document.getElementById('auth-login-view').style.display = 'none';
+  document.getElementById('auth-register-view').style.display = '';
+}
+
+async function doLogin() {
+  const email = document.getElementById('login-email').value.trim();
+  const password = document.getElementById('login-password').value;
+  if(!email || !password) { document.getElementById('login-error').textContent = 'Please fill all fields.'; return; }
+  document.getElementById('login-btn-text').innerHTML = '<span class="loading-spinner"></span>';
+
+  if(SUPABASE_URL.includes('YOUR_PROJECT')) {
+    // Demo mode
+    currentUser = { id:'demo-1', email, user_metadata:{full_name: email.split('@')[0]} };
+    currentToken = 'demo';
+    localStorage.setItem('wbfx_user', JSON.stringify({user:currentUser, token:currentToken}));
+    document.getElementById('login-btn-text').textContent = 'Sign In';
+    closeAuth();
+    updateUserBtn();
+    showToast('Signed in (demo mode) ✅','success');
+    if(afterAuthAction==='quiz') { document.getElementById('quiz-auth-prompt').style.display='none'; }
+    return;
+  }
+
+  const res = await sbAuth('token?grant_type=password', {email, password});
+  document.getElementById('login-btn-text').textContent = 'Sign In';
+  if(res.error) { document.getElementById('login-error').textContent = res.error.message || 'Login failed.'; return; }
+  currentUser = res.user;
+  currentToken = res.access_token;
+  localStorage.setItem('wbfx_user', JSON.stringify({user:currentUser, token:currentToken}));
+  closeAuth();
+  updateUserBtn();
+  showToast('Welcome back! ✅','success');
+  if(afterAuthAction==='quiz') { document.getElementById('quiz-auth-prompt').style.display='none'; }
+}
+
+async function doRegister() {
+  const name = document.getElementById('reg-name').value.trim();
+  const email = document.getElementById('reg-email').value.trim();
+  const password = document.getElementById('reg-password').value;
+  if(!name || !email || !password) { document.getElementById('reg-error').textContent = 'Please fill all fields.'; return; }
+  if(password.length < 6) { document.getElementById('reg-error').textContent = 'Password must be at least 6 characters.'; return; }
+  document.getElementById('reg-btn-text').innerHTML = '<span class="loading-spinner"></span>';
+
+  if(SUPABASE_URL.includes('YOUR_PROJECT')) {
+    currentUser = { id:'demo-1', email, user_metadata:{full_name:name} };
+    currentToken = 'demo';
+    localStorage.setItem('wbfx_user', JSON.stringify({user:currentUser, token:currentToken}));
+    document.getElementById('reg-btn-text').textContent = 'Create Account';
+    closeAuth();
+    updateUserBtn();
+    showToast('Account created (demo mode) 🎓','success');
+    if(afterAuthAction==='quiz') { document.getElementById('quiz-auth-prompt').style.display='none'; }
+    return;
+  }
+
+  const res = await sbAuth('signup', {email, password, data:{full_name:name}});
+  document.getElementById('reg-btn-text').textContent = 'Create Account';
+  if(res.error) { document.getElementById('reg-error').textContent = res.error.message || 'Registration failed.'; return; }
+  currentUser = res.user;
+  currentToken = res.access_token;
+  localStorage.setItem('wbfx_user', JSON.stringify({user:currentUser, token:currentToken}));
+  closeAuth();
+  updateUserBtn();
+  showToast('Welcome to the class! 🎓','success');
+  if(afterAuthAction==='quiz') { document.getElementById('quiz-auth-prompt').style.display='none'; }
+}
+
+function updateUserBtn() {
+  const btn = document.getElementById('user-btn');
+  const txt = document.getElementById('user-btn-text');
+  if(currentUser) {
+    const name = currentUser.user_metadata?.full_name || currentUser.email?.split('@')[0] || 'User';
+    txt.textContent = name;
+    btn.onclick = logout;
+  } else {
+    txt.textContent = 'Sign In';
+    btn.onclick = showAuth;
+  }
+}
+
+function logout() {
+  if(!confirm('Sign out?')) return;
+  currentUser = null;
+  currentToken = null;
+  localStorage.removeItem('wbfx_user');
+  updateUserBtn();
+  showToast('Signed out.','success');
+}
+
+// ============================================================
+// TOAST
+// ============================================================
+function showToast(msg, type='success') {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = `toast show ${type}`;
+  setTimeout(()=>el.classList.remove('show'), 3500);
+}
+
+// ============================================================
+// KEYBOARD NAV
+// ============================================================
+document.addEventListener('keydown', e => {
+  if(document.getElementById('screen-lesson').style.display !== 'none') {
+    if(e.key==='ArrowRight') nextLesson();
+    if(e.key==='ArrowLeft') prevLesson();
+  }
+});
+
+// Init
+showScreen('landing');
+</script>
+</body>
+</html>
