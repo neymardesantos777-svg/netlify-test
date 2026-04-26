@@ -23,25 +23,113 @@
 html{scroll-behavior:smooth}
 body{font-family:var(--font-head);background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
 
-/* ── NAV ── */
-.site-nav{
-  position:fixed;top:0;left:0;right:0;z-index:200;
-  background:rgba(8,8,8,0.97);backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--border);
-  height:var(--nav-h);display:flex;align-items:center;
-  padding:0 28px;justify-content:space-between;
+/* ── NAV (standard WorldBankFx) ── */
+nav{position:fixed;top:0;width:100%;background:rgba(10,10,10,0.97);backdrop-filter:blur(12px);z-index:1000;border-bottom:1px solid rgba(255,215,0,0.2);}
+.nav-container{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:15px 30px;}
+.logo{font-size:1.2rem;font-weight:900;background:linear-gradient(135deg,var(--gold),#ffed4e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;cursor:pointer;text-decoration:none;white-space:nowrap;}
+.nav-links{display:flex;gap:28px;list-style:none;align-items:center;}
+.nav-links a{color:#fff;text-decoration:none;font-weight:600;font-size:0.9rem;transition:color 0.3s;}
+.nav-links a:hover{color:var(--gold);}
+.dropdown{position:relative;}
+.dropdown-content{display:none;position:absolute;top:100%;left:0;background:#0f0f0f;min-width:220px;border:1px solid var(--gold);border-radius:10px;margin-top:4px;padding:8px 0;z-index:200;box-shadow:0 10px 40px rgba(0,0,0,0.6);}
+.dropdown:hover .dropdown-content,.dropdown-content:hover{display:block;}
+.dropdown-content a{display:block;padding:11px 20px;border-bottom:1px solid #222;color:#ccc;font-size:0.88rem;}
+.dropdown-content a:last-child{border-bottom:none;}
+.dropdown-content a:hover{background:rgba(255,215,0,0.08);color:var(--gold);}
+.nav-cta{background:linear-gradient(135deg,var(--gold),#ffed4e);color:#000 !important;padding:9px 22px;border-radius:25px;font-weight:800 !important;font-size:0.85rem !important;transition:all 0.3s ease !important;cursor:pointer;border:none;}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(255,215,0,0.35);color:#000 !important;}
+.mobile-menu-btn{display:none;font-size:1.5rem;color:var(--gold);cursor:pointer;background:none;border:none;}
+/* Mobile nav */
+.mobile-nav{display:none;position:fixed;top:0;right:-100%;width:80%;max-width:380px;height:100vh;background:#0d0d0d;z-index:2000;padding:80px 30px 30px;transition:right 0.3s ease;overflow-y:auto;border-left:1px solid rgba(255,215,0,0.15);}
+.mobile-nav.active{right:0;}
+.mobile-nav-close{position:absolute;top:20px;right:20px;font-size:2rem;color:var(--gold);cursor:pointer;background:none;border:none;}
+.mobile-nav-links{list-style:none;}
+.mobile-nav-links li{margin-bottom:6px;}
+.mobile-nav-links>li>a{color:#fff;text-decoration:none;font-size:1.05rem;font-weight:700;display:block;padding:12px 0;border-bottom:1px solid #1a1a1a;}
+.mobile-dropdown-toggle{display:flex;justify-content:space-between;align-items:center;cursor:pointer;color:#fff;font-size:1.05rem;font-weight:700;padding:12px 0;border-bottom:1px solid #1a1a1a;}
+.mobile-dropdown-content{max-height:0;overflow:hidden;transition:max-height 0.3s ease;padding-left:16px;}
+.mobile-dropdown-content.active{max-height:400px;}
+.mobile-dropdown-content a{font-size:0.95rem;padding:9px 0;color:#aaa;display:block;text-decoration:none;border-bottom:1px solid #161616;}
+.mobile-dropdown-content a:hover{color:var(--gold);}
+.mobile-nav-cta{display:block;margin-top:24px;padding:15px;background:linear-gradient(135deg,var(--gold),#ffed4e);color:#000;text-align:center;border-radius:10px;font-weight:800;font-size:1rem;text-decoration:none;cursor:pointer;border:none;width:100%;}
+/* Journal user pill — kept in nav */
+.nav-user-pill{display:none;align-items:center;gap:8px;background:rgba(255,215,0,0.08);border:1px solid rgba(255,215,0,0.2);padding:4px 12px 4px 4px;border-radius:20px;cursor:pointer;transition:border-color 0.2s;}
+.nav-user-pill:hover{border-color:var(--gold);}
+.nav-user-pill.show{display:flex;}
+.nav-avatar{width:28px;height:28px;border-radius:50%;border:1px solid rgba(255,215,0,0.3);background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:0.7rem;color:var(--gold);font-weight:700;flex-shrink:0;}
+.nav-avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover;}
+.nav-user-name{font-size:0.75rem;color:#ccc;}
+.nav-plan-badge{font-size:0.6rem;font-weight:700;padding:2px 7px;border-radius:10px;letter-spacing:0.06em;text-transform:uppercase;}
+.nav-plan-badge.free{background:rgba(255,153,0,0.12);color:#ff9900;border:1px solid rgba(255,153,0,0.2);}
+.nav-plan-badge.pro{background:rgba(0,230,118,0.12);color:#00e676;border:1px solid rgba(0,230,118,0.2);}
+.btn-signout-nav{padding:6px 14px;background:none;border:1px solid rgba(255,255,255,0.1);border-radius:20px;color:#888;font-size:0.78rem;font-weight:600;cursor:pointer;transition:all 0.2s;font-family:inherit;}
+.btn-signout-nav:hover{border-color:rgba(255,61,87,0.5);color:#ff3d57;}
+/* Footer */
+footer{background:#000;padding:60px 20px 36px;border-top:1px solid #222;}
+.footer-content{max-width:1200px;margin:0 auto;}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:40px;margin-bottom:50px;}
+.footer-brand h3{color:var(--gold);font-size:1.3rem;margin-bottom:12px;}
+.footer-brand p{color:#aaa;font-size:0.88rem;line-height:1.7;max-width:280px;margin-bottom:20px;}
+.footer-social{display:flex;gap:12px;flex-wrap:wrap;}
+.social-link{width:42px;height:42px;background:#1a1a1a;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;transition:all 0.3s ease;text-decoration:none;color:var(--gold);border:1px solid #2a2a2a;}
+.social-link:hover{background:var(--gold);color:#000;transform:scale(1.1);border-color:var(--gold);}
+.footer-col h4{color:#00d4ff;margin-bottom:16px;font-size:0.88rem;text-transform:uppercase;letter-spacing:1px;}
+.footer-col a{display:block;color:#aaa;margin:8px 0;text-decoration:none;font-size:0.88rem;transition:color 0.3s;}
+.footer-col a:hover{color:var(--gold);}
+.footer-col p{color:#aaa;font-size:0.88rem;margin:8px 0;}
+.footer-bottom{text-align:center;color:#444;padding-top:24px;border-top:1px solid #1a1a1a;font-size:0.85rem;}
+/* Back to top */
+.back-to-top{position:fixed;bottom:28px;right:28px;width:46px;height:46px;background:linear-gradient(135deg,var(--gold),#ffed4e);border:none;border-radius:50%;color:#000;font-size:1.2rem;cursor:pointer;opacity:0;visibility:hidden;transition:all 0.3s ease;z-index:999;box-shadow:0 4px 15px rgba(255,215,0,0.3);}
+.back-to-top.show{opacity:1;visibility:visible;}
+.back-to-top:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(255,215,0,0.5);}
+/* Brokers modal */
+#brokersModal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:10000;align-items:center;justify-content:center;}
+.brokers-inner{background:#1a1a2e;padding:38px 36px;border-radius:20px;max-width:400px;width:90%;border:2px solid var(--gold);position:relative;box-shadow:0 20px 60px rgba(0,0,0,0.8);text-align:center;}
+.brokers-close{position:absolute;top:14px;right:18px;font-size:1.8rem;color:#fff;background:none;border:none;cursor:pointer;line-height:1;transition:color 0.2s;}
+.brokers-close:hover{color:var(--gold);}
+.brokers-eyebrow{font-size:0.7rem;color:#00d4ff;font-family:monospace;text-transform:uppercase;letter-spacing:0.15em;margin-bottom:10px;}
+.brokers-title{font-size:1.5rem;font-weight:900;color:var(--gold);margin-bottom:8px;}
+.brokers-sub{color:#aaa;font-size:0.87rem;margin-bottom:28px;line-height:1.65;}
+.broker-options{display:flex;flex-direction:column;gap:14px;}
+.broker-btn{padding:18px 24px;border-radius:12px;font-weight:800;font-size:1rem;cursor:pointer;transition:all 0.3s ease;text-decoration:none;display:flex;align-items:center;justify-content:space-between;}
+.broker-btn.exness{background:linear-gradient(135deg,var(--gold),#ffed4e);color:#000;}
+.broker-btn.exness:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,215,0,0.4);}
+.broker-btn.hfm{background:linear-gradient(135deg,#00d4ff,#0099bb);color:#000;}
+.broker-btn.hfm:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,212,255,0.4);}
+.broker-btn-left{text-align:left;}
+.broker-btn-name{font-size:1.05rem;font-weight:900;display:block;}
+.broker-btn-note{font-size:0.72rem;font-weight:600;opacity:0.65;}
+.broker-btn-icon{font-size:1.2rem;}
+.brokers-disclaimer{margin-top:18px;font-size:0.75rem;color:#444;line-height:1.6;}
+/* Payment modal */
+#paymentModal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:10000;align-items:center;justify-content:center;}
+.payment-inner{background:#1a1a2e;padding:40px;border-radius:20px;max-width:500px;width:90%;border:2px solid var(--gold);position:relative;box-shadow:0 20px 60px rgba(0,0,0,0.8);}
+.payment-close{position:absolute;top:16px;right:20px;font-size:1.8rem;color:#fff;background:none;border:none;cursor:pointer;line-height:1;}
+.payment-product{font-size:1.6rem;font-weight:900;color:var(--gold);margin-bottom:6px;}
+.payment-price{font-size:2.2rem;color:#00d4ff;font-weight:900;margin-bottom:28px;}
+.payment-methods{display:flex;flex-direction:column;gap:12px;}
+.pay-btn{padding:16px;border-radius:10px;font-weight:700;font-size:1rem;cursor:pointer;transition:all 0.3s ease;display:flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;color:#fff;border:none;}
+.pay-btn:hover{transform:translateY(-2px);filter:brightness(1.1);}
+.pay-paypal{background:#0070ba;}
+.pay-whatsapp{background:#25D366;}
+.pay-email{background:#ea4335;}
+.payment-details{margin-top:20px;padding:18px;background:rgba(255,215,0,0.07);border-radius:10px;border:1px solid rgba(255,215,0,0.2);}
+.payment-details p{font-size:0.88rem;color:#aaa;margin:5px 0;}
+.payment-details strong{color:var(--gold);}
+.payment-details small{display:block;margin-top:12px;font-size:0.82rem;color:#666;}
+/* Scrollbar */
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:#0f0f0f;}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px;}
+/* Responsive nav */
+@media(max-width:900px){
+  .nav-links{display:none;}
+  .mobile-menu-btn{display:block;}
 }
-.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
-.nav-logo-mark{
-  width:34px;height:34px;background:var(--gold);border-radius:8px;
-  display:flex;align-items:center;justify-content:center;
-  font-family:var(--font-mono);font-size:0.65rem;font-weight:700;color:#000;letter-spacing:0.05em;
+@media(max-width:600px){
+  .footer-top{grid-template-columns:1fr 1fr;}
+  .footer-brand{grid-column:1/-1;}
 }
-.nav-brand-text{font-family:var(--font-mono);font-size:0.72rem;color:var(--gold);letter-spacing:0.12em;text-transform:uppercase;line-height:1.2}
-.nav-brand-sub{font-size:0.54rem;color:var(--text-mid);letter-spacing:0.08em}
-.nav-right{display:flex;align-items:center;gap:14px}
-.nav-home-link{display:flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:0.66rem;color:var(--text-mid);text-decoration:none;letter-spacing:0.06em;transition:color 0.2s}
-.nav-home-link:hover{color:var(--gold)}
 .nav-user-pill{display:none;align-items:center;gap:8px;background:var(--bg2);border:1px solid var(--border);padding:4px 12px 4px 4px;border-radius:20px;cursor:pointer;transition:border-color 0.2s}
 .nav-user-pill:hover{border-color:var(--border-gold)}
 .nav-user-pill.show{display:flex}
@@ -90,7 +178,7 @@ body{font-family:var(--font-head);background:var(--bg);color:var(--text);min-hei
 .btn-signout:hover{border-color:var(--red);color:var(--red)}
 
 /* ── PAGE WRAP ── */
-.page-wrap{padding-top:var(--nav-h);min-height:100vh}
+.page-wrap{padding-top:60px;min-height:100vh}
 
 /* ── LOADING ── */
 #loadingScreen{
@@ -120,7 +208,7 @@ body{font-family:var(--font-head);background:var(--bg);color:var(--text);min-hei
 .auth-logo-icon{font-size:1.4rem}
 .auth-logo-name{font-family:var(--font-mono);font-size:0.85rem;font-weight:700;color:var(--gold);letter-spacing:0.1em}
 .auth-logo-sub{font-family:var(--font-mono);font-size:0.52rem;color:var(--text-mid);letter-spacing:0.08em}
-.auth-hero h1{font-size:1.9rem;font-weight:800;letter-spacing:-0.02em;line-height:1.2;margin-bottom:10px}
+.auth-hero h1{font-size:1.45rem;font-weight:800;letter-spacing:-0.02em;line-height:1.2;margin-bottom:10px;white-space:nowrap;}
 .auth-hero h1 em{font-style:normal;color:var(--gold)}
 .auth-hero p{font-family:var(--font-mono);font-size:0.68rem;color:var(--text-mid);letter-spacing:0.04em;line-height:1.8}
 .auth-features{display:flex;gap:10px;justify-content:center;margin:14px 0 0;flex-wrap:wrap}
@@ -429,15 +517,10 @@ body{font-family:var(--font-head);background:var(--bg);color:var(--text);min-hei
   .pricing-cards{grid-template-columns:1fr}
 }
 @media(max-width:600px){
-  .site-nav{padding:0 14px}
   /* Hide the text name and plan badge in nav pill on small screens — just show avatar */
   .nav-user-name{display:none}
   .nav-plan-badge{display:none}
   .nav-user-pill{padding:4px}
-  /* Hide "Main Site" text, keep icon only */
-  .nav-home-link span{display:none}
-  /* Make signout more compact */
-  .btn-signout{padding:5px 8px;font-size:0.58rem}
 }
 @media(max-width:480px){
   .stats-grid{grid-template-columns:1fr 1fr}
@@ -457,33 +540,91 @@ body{font-family:var(--font-head);background:var(--bg);color:var(--text);min-hei
   /* Profile modal full width on mobile */
   .profile-modal{padding:24px 16px}
   .pricing-cards{grid-template-columns:1fr}
-  /* Nav home link icon only */
-  .nav-home-link{font-size:0}
-  .nav-home-link i{font-size:0.9rem}
 }
 </style>
 </head>
 <body>
 
 <!-- ── SITE NAV ── -->
-<nav class="site-nav">
-  <a href="index.html" class="nav-brand">
-    <div class="nav-logo-mark">CM</div>
-    <div>
-      <div class="nav-brand-text">ChartMate</div>
-      <div class="nav-brand-sub">by WorldBankFx</div>
-    </div>
-  </a>
-    <div class="nav-right">
-      <div class="nav-user-pill" id="navUserPill" onclick="openProfileModal()" title="Edit profile">
-        <div class="nav-avatar" id="navAvatar">?</div>
-        <span class="nav-user-name" id="navUserName"></span>
-        <span class="nav-plan-badge free" id="navPlanBadge">FREE</span>
-      </div>
-      <a href="index.html" class="nav-home-link"><i class="fas fa-arrow-left"></i>&nbsp;Main Site</a>
-      <button class="btn-signout" id="logoutBtn" onclick="doLogout()" style="display:none">Sign Out</button>
-    </div>
+<nav id="main-nav">
+  <div class="nav-container">
+    <a href="index.html" class="logo">WORLDBANKFX × PROFESSOR</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li class="dropdown">
+        <a href="index.html#services">Offers ▾</a>
+        <div class="dropdown-content">
+          <a href="journal.html" style="color:var(--gold);">📓 ChartMate Journal</a>
+          <a href="forex-course.html">📈 Free Forex Course</a>
+          <a href="#" onclick="openPayment('Trading Playbook PDF — 5 Pages','$49.99'); return false;">📄 Trading Playbook PDF</a>
+          <a href="https://t.me/w0rldbank07" target="_blank" rel="noopener noreferrer">🔐 Trade Daily with Me</a>
+        </div>
+      </li>
+      <li class="dropdown">
+        <a href="index.html#tools">Tools ▾</a>
+        <div class="dropdown-content">
+          <a href="pip-calculator.html">🧮 Pip Calculator</a>
+          <a href="trading-growth-calculator.html">📈 Growth Calculator</a>
+        </div>
+      </li>
+      <li class="dropdown">
+        <a href="index.html#games">Games ▾</a>
+        <div class="dropdown-content">
+          <a href="patience-test.html">⏳ Patience Test</a>
+          <a href="revenge-breaker.html">🎲 Probability Revealer</a>
+        </div>
+      </li>
+      <li><a href="forex-course.html">Fx Course</a></li>
+      <li><a href="journal.html" style="color:var(--gold);">ChartMate</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li style="display:flex;align-items:center;gap:10px;">
+        <div class="nav-user-pill" id="navUserPill" onclick="openProfileModal()" title="Edit profile">
+          <div class="nav-avatar" id="navAvatar">?</div>
+          <span class="nav-user-name" id="navUserName"></span>
+          <span class="nav-plan-badge free" id="navPlanBadge">FREE</span>
+        </div>
+        <button class="btn-signout-nav" id="logoutBtn" onclick="doLogout()" style="display:none">↩ Sign Out</button>
+        <button class="nav-cta" onclick="openBrokers()">Our Brokers</button>
+      </li>
+    </ul>
+    <button class="mobile-menu-btn" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button>
+  </div>
 </nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-nav-close" onclick="toggleMobileMenu()"><i class="fas fa-times"></i></button>
+  <ul class="mobile-nav-links">
+    <li><a href="index.html" onclick="toggleMobileMenu()">Home</a></li>
+    <li>
+      <div class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(this)"><span>Offers</span><i class="fas fa-chevron-down"></i></div>
+      <div class="mobile-dropdown-content">
+        <a href="journal.html" onclick="toggleMobileMenu()">📓 ChartMate Journal</a>
+        <a href="forex-course.html" onclick="toggleMobileMenu()">📈 Free Forex Course</a>
+        <a href="#" onclick="toggleMobileMenu(); openPayment('Trading Playbook PDF — 5 Pages','$49.99')">📄 Trading Playbook PDF</a>
+        <a href="https://t.me/w0rldbank07" target="_blank" rel="noopener noreferrer" onclick="toggleMobileMenu()">🔐 Trade Daily with Me</a>
+      </div>
+    </li>
+    <li>
+      <div class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(this)"><span>Tools</span><i class="fas fa-chevron-down"></i></div>
+      <div class="mobile-dropdown-content">
+        <a href="pip-calculator.html" onclick="toggleMobileMenu()">🧮 Pip Calculator</a>
+        <a href="trading-growth-calculator.html" onclick="toggleMobileMenu()">📈 Growth Calculator</a>
+      </div>
+    </li>
+    <li>
+      <div class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(this)"><span>Games</span><i class="fas fa-chevron-down"></i></div>
+      <div class="mobile-dropdown-content">
+        <a href="patience-test.html" onclick="toggleMobileMenu()">⏳ Patience Test</a>
+        <a href="revenge-breaker.html" onclick="toggleMobileMenu()">🎲 Probability Revealer</a>
+      </div>
+    </li>
+    <li><a href="forex-course.html" onclick="toggleMobileMenu()">Fx Course</a></li>
+    <li><a href="journal.html" onclick="toggleMobileMenu()">ChartMate Journal</a></li>
+    <li><a href="contact.html" onclick="toggleMobileMenu()">Contact</a></li>
+    <button class="mobile-nav-cta" onclick="toggleMobileMenu(); openBrokers()">🏦 Our Brokers</button>
+  </ul>
+</div>
 
 <div class="page-wrap">
 
@@ -504,7 +645,7 @@ body{font-family:var(--font-head);background:var(--bg);color:var(--text);min-hei
           <div class="auth-logo-sub">Your Trading Companion</div>
         </div>
       </div>
-      <h1>Trade Smarter.<br><em>Reflect Deeper.</em></h1>
+      <h1><span style="-webkit-text-fill-color:#fff">Trade Smarter.</span> <em>Reflect Deeper.</em></h1>
       <p>Log every trade. Understand your edge.<br>Let your data tell the story.</p>
       <div class="auth-features">
         <span class="auth-feat"><i class="fas fa-check-circle"></i> Equity Curve</span>
@@ -1600,6 +1741,128 @@ document.addEventListener('keydown', e => {
   clearTimeout(window._initTimeout);
   renderDash(); renderFullHistory(); renderAnalysis(); renderCompanion(); updateUI(); showApp();
 })();
+</script>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-content">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <h3>WorldBankFx × Professor</h3>
+        <p>Empowering traders with knowledge, tools, and live daily trading. Your journey to financial freedom starts here.</p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/_thedigitalprofessor/" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@TheWorldBankProfessor" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-youtube"></i></a>
+          <a href="https://x.com/DigitoProfessor" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-twitter"></i></a>
+          <a href="https://t.me/w0rldbank07" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-telegram"></i></a>
+          <a href="https://wa.me/256783354348" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-whatsapp"></i></a>
+          <a href="https://www.facebook.com/TheDig1talProfessor" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-facebook"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Offers</h4>
+        <a href="journal.html">ChartMate Journal</a>
+        <a href="forex-course.html">Free Forex Course</a>
+        <a href="#" onclick="openPayment('Trading Playbook PDF — 5 Pages','$49.99'); return false;">Trading Playbook PDF</a>
+        <a href="https://t.me/w0rldbank07" target="_blank" rel="noopener noreferrer">Trade Daily with Me</a>
+      </div>
+      <div class="footer-col">
+        <h4>Tools</h4>
+        <a href="pip-calculator.html">Pip Calculator</a>
+        <a href="trading-growth-calculator.html">Growth Calculator</a>
+        <a href="journal.html">ChartMate Journal</a>
+        <a href="pricing.html">ChartMate Pricing</a>
+      </div>
+      <div class="footer-col">
+        <h4>Games</h4>
+        <a href="patience-test.html">Patience Test</a>
+        <a href="revenge-breaker.html">Probability Revealer</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="contact.html">Contact Page</a>
+        <a href="https://t.me/w0rldbank07" target="_blank" rel="noopener noreferrer">Telegram</a>
+        <a href="https://wa.me/256783354348" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        <a href="mailto:unlimited.worldbankfx@gmail.com">unlimited.worldbankfx@gmail.com</a>
+        <p>+256 783 354 348</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025–2026 WorldBankFx × Professor. All rights reserved. | Built with discipline.</p>
+    </div>
+  </div>
+</footer>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-arrow-up"></i></button>
+
+<!-- BROKERS MODAL -->
+<div id="brokersModal">
+  <div class="brokers-inner">
+    <button class="brokers-close" onclick="closeBrokers()">×</button>
+    <div class="brokers-eyebrow">Recommended Partners</div>
+    <div class="brokers-title">Our Brokers</div>
+    <p class="brokers-sub">Open your account under my referral and trade knowing you've got a mentor behind you.</p>
+    <div class="broker-options">
+      <a href="https://one.exnesstrack.org/a/y7scclopum" target="_blank" rel="noopener noreferrer" class="broker-btn exness" onclick="closeBrokers()">
+        <div class="broker-btn-left"><span class="broker-btn-name">Exness</span><span class="broker-btn-note">Open under my referral link</span></div>
+        <span class="broker-btn-icon">→</span>
+      </a>
+      <a href="https://register.hfm.com/sv/en/new-live-account/?refid=374930" target="_blank" rel="noopener noreferrer" class="broker-btn hfm" onclick="closeBrokers()">
+        <div class="broker-btn-left"><span class="broker-btn-name">HFM</span><span class="broker-btn-note">Open under my referral link</span></div>
+        <span class="broker-btn-icon">→</span>
+      </a>
+    </div>
+    <p class="brokers-disclaimer">Clicking a link takes you to the broker's official website. Forex trading involves risk.</p>
+  </div>
+</div>
+
+<!-- PAYMENT MODAL -->
+<div id="paymentModal">
+  <div class="payment-inner">
+    <button class="payment-close" onclick="closePayment()">×</button>
+    <div class="payment-product" id="modalProductName">Product</div>
+    <div class="payment-price" id="modalPrice">$0</div>
+    <div class="payment-methods">
+      <a href="https://paypal.me/neemacharles777" target="_blank" rel="noopener noreferrer" class="pay-btn pay-paypal">💳 Pay via PayPal</a>
+      <a id="whatsappBtn" href="#" target="_blank" rel="noopener noreferrer" class="pay-btn pay-whatsapp">💬 Order via WhatsApp</a>
+      <a id="emailBtn" href="#" class="pay-btn pay-email">📧 Order via Email</a>
+    </div>
+    <div class="payment-details">
+      <p><strong>PayPal:</strong> neemacharles777@gmail.com</p>
+      <p><strong>WhatsApp:</strong> +256 783 354 348</p>
+      <p><strong>Email:</strong> <a href="mailto:unlimited.worldbankfx@gmail.com" style="color:var(--gold)">unlimited.worldbankfx@gmail.com</a></p>
+      <small>After payment, send your screenshot to WhatsApp or email. I'll respond within 24 hours with your product.</small>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Standard Nav JS ──
+function toggleMobileMenu() {
+  document.getElementById('mobileNav').classList.toggle('active');
+}
+function toggleMobileDropdown(el) {
+  const content = el.nextElementSibling;
+  const isActive = content.classList.contains('active');
+  document.querySelectorAll('.mobile-dropdown-content').forEach(c => c.classList.remove('active'));
+  if (!isActive) content.classList.add('active');
+  el.querySelector('i').style.transform = content.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0)';
+}
+function openBrokers() { document.getElementById('brokersModal').style.display = 'flex'; }
+function closeBrokers() { document.getElementById('brokersModal').style.display = 'none'; }
+document.getElementById('brokersModal').addEventListener('click', e => { if(e.target === document.getElementById('brokersModal')) closeBrokers(); });
+function openPayment(product, price) {
+  document.getElementById('modalProductName').textContent = product;
+  document.getElementById('modalPrice').textContent = price;
+  document.getElementById('paymentModal').style.display = 'flex';
+  document.getElementById('whatsappBtn').href = `https://wa.me/256783354348?text=${encodeURIComponent('Hi! I want to purchase: '+product+' ('+price+'). Please send payment details.')}`;
+  document.getElementById('emailBtn').href = `mailto:unlimited.worldbankfx@gmail.com?subject=${encodeURIComponent('Purchase: '+product)}&body=${encodeURIComponent('Hi,\n\nI would like to purchase:\n'+product+' — '+price+'\n\nPlease confirm payment details.\n\nThank you!')}`;
+}
+function closePayment() { document.getElementById('paymentModal').style.display = 'none'; }
+document.getElementById('paymentModal').addEventListener('click', e => { if(e.target === document.getElementById('paymentModal')) closePayment(); });
+window.addEventListener('scroll', () => {
+  document.getElementById('backToTop').classList.toggle('show', window.pageYOffset > 300);
+});
 </script>
 </body>
 </html>
