@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patience Test | WorldBankFx × Professor</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%230a0a0a'/><rect width='100' height='100' rx='18' fill='none' stroke='%23ffd700' stroke-width='4'/><text x='50' y='38' font-family='Georgia,serif' font-size='22' font-weight='900' fill='%23ffd700' text-anchor='middle'>WB</text><text x='50' y='65' font-family='Georgia,serif' font-size='22' font-weight='900' fill='%23ffd700' text-anchor='middle'>FX</text></svg>">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Barlow+Condensed:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      /* ── Standard palette (index.html) ── */
+      --gold: #ffd700; --gold2: #ffed4e; --cyan: #00d4ff;
+      --green: #10b981; --red: #ef4444;
+      --bg: #0a0a0a; --bg2: #0f0f0f; --bg3: #1a1a1a; --bg4: #1a1a2e;
+      --border: rgba(255,215,0,0.15); --text: #fff; --muted: #aaa;
+      /* ── Game-specific vars ── */
+      --gold-dim: rgba(255,215,0,0.15);
+      --orange: #ff8c00;
+      --surface: #0d1117;
+      --surface2: #161b22;
+      --mono: 'Space Mono', monospace;
+      --disp: 'Barlow Condensed', sans-serif;
+    }
+
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; min-height: 100vh; }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg2); }
+    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+    /* ── NAV ── */
+    nav { position: fixed; top: 0; width: 100%; background: rgba(10,10,10,0.97); backdrop-filter: blur(12px); z-index: 1000; border-bottom: 1px solid rgba(255,215,0,0.2); }
+    .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 15px 30px; }
+    .logo { font-size: 1.2rem; font-weight: 900; background: linear-gradient(135deg, var(--gold), var(--gold2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; cursor: pointer; text-decoration: none; white-space: nowrap; }
+    .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
+    .nav-links a { color: #fff; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: color 0.3s; }
+    .nav-links a:hover { color: var(--gold); }
+    .dropdown { position: relative; }
+    .dropdown-content { display: none; position: absolute; top: 100%; left: 0; background: #0f0f0f; min-width: 220px; border: 1px solid var(--gold); border-radius: 10px; margin-top: 4px; padding: 8px 0; z-index: 200; box-shadow: 0 10px 40px rgba(0,0,0,0.6); }
+    .dropdown:hover .dropdown-content, .dropdown-content:hover { display: block; }
+    .dropdown-content a { display: block; padding: 11px 20px; border-bottom: 1px solid #222; color: #ccc; font-size: 0.88rem; }
+    .dropdown-content a:last-child { border-bottom: none; }
+    .dropdown-content a:hover { background: rgba(255,215,0,0.08); color: var(--gold); }
+    .nav-cta { background: linear-gradient(135deg, var(--gold), var(--gold2)); color: #000 !important; padding: 9px 22px; border-radius: 25px; font-weight: 800 !important; font-size: 0.85rem !important; transition: all 0.3s ease !important; cursor: pointer; border: none; }
+    .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,215,0,0.35); color: #000 !important; }
+    .mobile-menu-btn { display: none; font-size: 1.5rem; color: var(--gold); cursor: pointer; background: none; border: none; }
+    .mobile-nav { display: none; position: fixed; top: 0; right: -100%; width: 80%; max-width: 380px; height: 100vh; background: #0d0d0d; z-index: 2000; padding: 80px 30px 30px; transition: right 0.3s ease; overflow-y: auto; border-left: 1px solid rgba(255,215,0,0.15); }
+    .mobile-nav.active { right: 0; }
+    .mobile-nav-close { position: absolute; top: 20px; right: 20px; font-size: 2rem; color: var(--gold); cursor: pointer; background: none; border: none; }
+    .mobile-nav-links { list-style: none; }
+    .mobile-nav-links li { margin-bottom: 6px; }
+    .mobile-nav-links > li > a { color: #fff; text-decoration: none; font-size: 1.05rem; font-weight: 700; display: block; padding: 12px 0; border-bottom: 1px solid #1a1a1a; }
+    .mobile-dropdown-toggle { display: flex; justify-content: space-between; align-items: center; cursor: pointer; color: #fff; font-size: 1.05rem; font-weight: 700; padding: 12px 0; border-bottom: 1px solid #1a1a1a; }
+    .mobile-dropdown-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; padding-left: 16px; }
+    .mobile-dropdown-content.active { max-height: 400px; }
+    .mobile-dropdown-content a { font-size: 0.95rem; padding: 9px 0; color: #aaa; display: block; text-decoration: none; border-bottom: 1px solid #161616; }
+    .mobile-dropdown-content a:hover { color: var(--gold); }
+    .mobile-nav-cta { display: block; margin-top: 24px; padding: 15px; background: linear-gradient(135deg,var(--gold),var(--gold2)); color: #000; text-align: center; border-radius: 10px; font-weight: 800; font-size: 1rem; text-decoration: none; cursor: pointer; border: none; width: 100%; }
+
+    /* ── GAME LAYOUT ── */
+    .page { max-width: 1200px; margin: 0 auto; padding: 72px 24px 40px; }
+    .page-header { text-align: center; margin-bottom: 18px; }
+    .tag { display: inline-block; font-family: var(--mono); font-size: 0.6rem; letter-spacing: 3px; color: var(--cyan); border: 1px solid rgba(0,212,255,0.3); border-radius: 3px; padding: 3px 10px; margin-bottom: 6px; }
+    h1 { font-family: var(--disp); font-size: clamp(1.8rem,4vw,2.8rem); font-weight: 900; line-height: 1; text-transform: uppercase; color: var(--gold); white-space: nowrap; }
+    .sub { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); margin-top: 5px; line-height: 1.5; }
+
+    /* SCREENS */
+    .screen { display: none; }
+    .screen.active { display: block; }
+    #sGame.active { display: grid; grid-template-columns: 1fr 340px; gap: 14px; align-items: start; }
+
+    /* WELCOME */
+    .welcome-box { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 24px; max-width: 700px; margin: 0 auto; }
+    .trait-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 18px; }
+    .trait { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 12px; }
+    .trait .ti { font-size: 1.15rem; margin-bottom: 4px; }
+    .trait .tn { font-family: var(--disp); font-size: 0.82rem; font-weight: 700; }
+    .trait .td { font-family: var(--mono); font-size: 0.64rem; color: var(--muted); margin-top: 2px; line-height: 1.4; }
+    .lvl-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 18px; }
+    .lvl-btn { background: var(--surface2); border: 2px solid var(--border); border-radius: 10px; padding: 12px 8px; cursor: pointer; text-align: center; transition: all .2s; }
+    .lvl-btn:hover, .lvl-btn.sel { border-color: var(--gold); background: var(--gold-dim); }
+    .lvl-btn .ln { font-family: var(--disp); font-size: 0.85rem; font-weight: 700; color: var(--text); }
+    .lvl-btn .li { font-family: var(--mono); font-size: 0.6rem; color: var(--muted); margin-top: 3px; }
+    .start-btn { width: 100%; padding: 14px; background: var(--gold); color: #000; border: none; border-radius: 10px; font-family: var(--disp); font-size: 1.1rem; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all .2s; }
+    .start-btn:hover { background: var(--gold2); transform: translateY(-1px); }
+
+    /* ── TWO-COLUMN GAME LAYOUT ── */
+    .game-left { display: flex; flex-direction: column; gap: 10px; }
+    .game-right { display: flex; flex-direction: column; gap: 10px; position: sticky; top: 72px; }
+
+    /* HUD */
+    .hud { display: grid; grid-template-columns: repeat(4,1fr); gap: 6px; }
+    .hud-cell { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 8px; text-align: center; }
+    .hud-cell .hl { font-family: var(--mono); font-size: 0.52rem; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; }
+    .hud-cell .hv { font-family: var(--mono); font-size: 1rem; font-weight: 700; color: var(--text); margin-top: 2px; }
+    #hTimerCell.danger .hv { color: var(--red); }
+    #hTimerCell.warn .hv   { color: var(--orange); }
+    .hud-cell.success .hv  { color: var(--green); }
+    .hud-cell.danger  .hv  { color: var(--red); }
+
+    /* CHART */
+    .chart-zone { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+    .chart-header { display: flex; justify-content: space-between; align-items: center; padding: 12px 18px; border-bottom: 1px solid var(--border); }
+    .pair-row { display: flex; align-items: center; gap: 10px; }
+    .pair-name { font-family: var(--disp); font-size: 1.05rem; font-weight: 700; letter-spacing: 1px; }
+    .lamp { width: 9px; height: 9px; border-radius: 50%; background: #333; transition: all .3s; }
+    .lamp.waiting { background: #444; }
+    .lamp.forming { background: var(--gold); box-shadow: 0 0 10px var(--gold); animation: pg .7s infinite alternate; }
+    .lamp.entry   { background: var(--green); box-shadow: 0 0 14px var(--green); animation: pp .4s infinite alternate; }
+    .lamp.trap    { background: var(--red); box-shadow: 0 0 10px var(--red); }
+    @keyframes pg { from{opacity:.5} to{opacity:1} }
+    @keyframes pp { from{transform:scale(1)} to{transform:scale(1.5)} }
+    .tf-tag { font-family: var(--mono); font-size: 0.65rem; color: var(--muted); border: 1px solid var(--border); border-radius: 4px; padding: 3px 8px; }
+    #chartSVG { display: block; width: 100%; height: 200px; }
+    .market-strip { padding: 12px 18px; display: flex; align-items: center; gap: 10px; border-top: 1px solid var(--border); }
+    .ms-lbl { font-family: var(--mono); font-size: 0.6rem; color: var(--muted); text-transform: uppercase; letter-spacing: 2px; white-space: nowrap; }
+    .ms-msg { font-family: var(--disp); font-size: 0.95rem; font-weight: 600; flex: 1; }
+    .ms-msg.noise   { color: var(--muted); }
+    .ms-msg.forming { color: var(--gold); }
+    .ms-msg.entry   { color: var(--green); }
+    .ms-msg.fake    { color: var(--red); }
+
+    /* PROGRESS */
+    .prog-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; }
+    .prog-top { display: flex; justify-content: space-between; margin-bottom: 7px; }
+    .prog-top span { font-family: var(--mono); font-size: 0.62rem; color: var(--muted); }
+    .prog-track { background: #1e2630; border-radius: 4px; height: 5px; overflow: hidden; }
+    .prog-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg,var(--cyan),var(--green)); transition: width .4s ease; }
+    .dots { display: flex; gap: 5px; margin-top: 10px; flex-wrap: wrap; }
+    .dot { width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--border); background: var(--surface2); display: flex; align-items: center; justify-content: center; font-size: 0.55rem; transition: all .3s; }
+    .dot.ok   { background: var(--green); border-color: var(--green); color: #000; }
+    .dot.bad  { background: var(--red);   border-color: var(--red); }
+    .dot.skip { background: var(--gold);  border-color: var(--gold); color: #000; }
+
+    /* FEEDBACK */
+    .fb-box { display: none; padding: 16px 20px; border-radius: 10px; text-align: center; font-family: var(--disp); font-size: 1.25rem; font-weight: 700; margin-bottom: 14px; }
+    .fb-box.win  { display: block; background: rgba(16,185,129,.12); border: 1px solid var(--green); color: var(--green); }
+    .fb-box.miss { display: block; background: rgba(239,68,68,.12);  border: 1px solid var(--red);   color: var(--red); }
+    .fb-box.wait { display: block; background: rgba(255,215,0,.1);   border: 1px solid var(--gold);  color: var(--gold); }
+
+    /* DECISIONS */
+    .dec-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .dec-skip-row { margin-top: 6px; }
+    .dec-btn { padding: 12px 8px; border: 2px solid var(--border); border-radius: 12px; background: var(--surface2); font-family: var(--disp); font-size: 0.9rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text); cursor: pointer; transition: all .18s; text-align: center; width: 100%; }
+    .dec-btn .di { font-size: 1.1rem; display: block; margin-bottom: 2px; }
+    .dec-btn .ds { font-family: var(--mono); font-size: 0.52rem; color: var(--muted); display: block; margin-top: 2px; font-weight: 400; }
+    .dec-btn.buy  { border-color: rgba(16,185,129,0.4); color: var(--green); }
+    .dec-btn.buy:hover  { border-color: var(--green); background: rgba(16,185,129,.15); box-shadow: 0 0 16px rgba(16,185,129,.2); }
+    .dec-btn.sell { border-color: rgba(239,68,68,0.4); color: var(--red); }
+    .dec-btn.sell:hover { border-color: var(--red); background: rgba(239,68,68,.12); box-shadow: 0 0 16px rgba(239,68,68,.2); }
+    .dec-btn.skip { border-color: rgba(255,215,0,0.25); color: var(--muted); font-size: 0.8rem; padding: 9px 8px; }
+    .dec-btn.skip:hover  { border-color: var(--gold); background: var(--gold-dim); color: var(--gold); }
+    .dec-btn:disabled { opacity: .25; pointer-events: none; }
+    .resolving-badge { display: none; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 8px; background: rgba(255,215,0,0.08); border: 1px solid rgba(255,215,0,0.25); }
+    .resolving-badge.show { display: flex; }
+    .resolving-badge .rb-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); animation: pg .5s infinite alternate; flex-shrink: 0; }
+    .resolving-badge .rb-txt { font-family: var(--mono); font-size: 0.62rem; color: var(--gold); letter-spacing: 1px; }
+
+    /* RESULT */
+    .result-box { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 36px; text-align: center; }
+    .grade { font-family: var(--disp); font-size: clamp(5rem,14vw,9rem); font-weight: 900; line-height: 1; }
+    .grade.S { color: var(--gold); text-shadow: 0 0 50px rgba(255,215,0,.4); }
+    .grade.A { color: var(--green); }
+    .grade.B { color: var(--cyan); }
+    .grade.C { color: var(--orange); }
+    .grade.F { color: var(--red); }
+    .res-title { font-family: var(--disp); font-size: 1.6rem; font-weight: 700; margin: 6px 0; }
+    .res-verdict { font-family: var(--mono); font-size: 0.75rem; color: var(--muted); line-height: 1.8; max-width: 480px; margin: 0 auto 24px; }
+    .stats-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 24px; }
+    .stat { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+    .stat .sv { font-family: var(--mono); font-size: 1.4rem; font-weight: 700; }
+    .stat .sl { font-family: var(--mono); font-size: 0.6rem; color: var(--muted); letter-spacing: 1px; margin-top: 4px; text-transform: uppercase; }
+    .insight { background: var(--surface2); border-left: 3px solid var(--cyan); border-radius: 0 8px 8px 0; padding: 14px 16px; text-align: left; margin-bottom: 22px; }
+    .insight p { font-family: var(--mono); font-size: 0.73rem; color: var(--muted); line-height: 1.8; }
+    .insight p strong { color: var(--text); }
+    .retry-btn { padding: 14px 36px; background: transparent; border: 2px solid var(--gold); color: var(--gold); border-radius: 8px; font-family: var(--disp); font-size: 1.05rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all .2s; }
+    .retry-btn:hover { background: var(--gold); color: #000; }
+
+    /* ── FOOTER ── */
+    footer { background: #000; padding: 60px 20px 36px; border-top: 1px solid #222; }
+    .footer-content { max-width: 1200px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 50px; }
+    .footer-brand h3 { color: var(--gold); font-size: 1.3rem; margin-bottom: 12px; }
+    .footer-brand p { color: var(--muted); font-size: 0.88rem; line-height: 1.7; max-width: 280px; margin-bottom: 20px; }
+    .footer-social { display: flex; gap: 12px; flex-wrap: wrap; }
+    .social-link { width: 42px; height: 42px; background: #1a1a1a; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; transition: all 0.3s ease; text-decoration: none; color: var(--gold); border: 1px solid #2a2a2a; }
+    .social-link:hover { background: var(--gold); color: #000; transform: scale(1.1); border-color: var(--gold); }
+    .footer-col h4 { color: var(--cyan); margin-bottom: 16px; font-size: 0.88rem; text-transform: uppercase; letter-spacing: 1px; }
+    .footer-col a { display: block; color: var(--muted); margin: 8px 0; text-decoration: none; font-size: 0.88rem; transition: color 0.3s; }
+    .footer-col a:hover { color: var(--gold); }
+    .footer-col p { color: var(--muted); font-size: 0.88rem; margin: 8px 0; }
+    .footer-bottom { text-align: center; color: #444; padding-top: 24px; border-top: 1px solid #1a1a1a; font-size: 0.85rem; }
+
+    /* ── BACK TO TOP ── */
+    .back-to-top { position: fixed; bottom: 28px; right: 28px; width: 46px; height: 46px; background: linear-gradient(135deg,var(--gold),var(--gold2)); border: none; border-radius: 50%; color: #000; font-size: 1.2rem; cursor: pointer; opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 999; box-shadow: 0 4px 15px rgba(255,215,0,0.3); }
+    .back-to-top.show { opacity: 1; visibility: visible; }
+    .back-to-top:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(255,215,0,0.5); }
+
+    /* ── PAYMENT MODAL ── */
+    #paymentModal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 10000; align-items: center; justify-content: center; }
+    .payment-inner { background: #1a1a2e; padding: 40px; border-radius: 20px; max-width: 500px; width: 90%; border: 2px solid var(--gold); position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.8); }
+    .payment-close { position: absolute; top: 16px; right: 20px; font-size: 1.8rem; color: #fff; background: none; border: none; cursor: pointer; line-height: 1; }
+    .payment-product { font-size: 1.6rem; font-weight: 900; color: var(--gold); margin-bottom: 6px; }
+    .payment-price { font-size: 2.2rem; color: var(--cyan); font-weight: 900; margin-bottom: 28px; }
+    .payment-methods { display: flex; flex-direction: column; gap: 12px; }
+    .pay-btn { padding: 16px; border-radius: 10px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; color: #fff; border: none; }
+    .pay-btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
+    .pay-paypal { background: #0070ba; }
+    .pay-whatsapp { background: #25D366; }
+    .pay-email { background: #ea4335; }
+    .payment-details { margin-top: 20px; padding: 18px; background: rgba(255,215,0,0.07); border-radius: 10px; border: 1px solid rgba(255,215,0,0.2); }
+    .payment-details p { font-size: 0.88rem; color: var(--muted); margin: 5px 0; }
+    .payment-details strong { color: var(--gold); }
+    .payment-details small { display: block; margin-top: 12px; font-size: 0.82rem; color: #666; }
+
+    /* ── BROKERS MODAL ── */
+    #brokersModal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 10000; align-items: center; justify-content: center; }
+    .brokers-inner { background: #1a1a2e; padding: 38px 36px; border-radius: 20px; max-width: 400px; width: 90%; border: 2px solid var(--gold); position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.8); text-align: center; }
+    .brokers-close { position: absolute; top: 14px; right: 18px; font-size: 1.8rem; color: #fff; background: none; border: none; cursor: pointer; line-height: 1; transition: color 0.2s; }
+    .brokers-close:hover { color: var(--gold); }
+    .brokers-eyebrow { font-size: 0.7rem; color: var(--cyan); font-family: monospace; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 10px; }
+    .brokers-title { font-size: 1.5rem; font-weight: 900; color: var(--gold); margin-bottom: 8px; }
+    .brokers-sub { color: var(--muted); font-size: 0.87rem; margin-bottom: 28px; line-height: 1.65; }
+    .broker-options { display: flex; flex-direction: column; gap: 14px; }
+    .broker-btn { padding: 18px 24px; border-radius: 12px; font-weight: 800; font-size: 1rem; cursor: pointer; transition: all 0.3s ease; text-decoration: none; display: flex; align-items: center; justify-content: space-between; }
+    .broker-btn.exness { background: linear-gradient(135deg, var(--gold), var(--gold2)); color: #000; }
+    .broker-btn.exness:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,215,0,0.4); }
+    .broker-btn.hfm { background: linear-gradient(135deg, var(--cyan), #0099bb); color: #000; }
+    .broker-btn.hfm:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,212,255,0.4); }
+    .broker-btn-left { text-align: left; }
+    .broker-btn-name { font-size: 1.05rem; font-weight: 900; display: block; }
+    .broker-btn-note { font-size: 0.72rem; font-weight: 600; opacity: 0.65; }
+    .broker-btn-icon { font-size: 1.2rem; }
+    .brokers-disclaimer { margin-top: 18px; font-size: 0.75rem; color: #444; line-height: 1.6; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 30px; }
+      #sGame.active { grid-template-columns: 1fr; }
+      .game-right { position: static; }
+    }
+    @media (max-width: 900px) {
+      #sGame.active { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 968px) {
+      .nav-links { display: none; }
+      .mobile-menu-btn { display: block; }
+      .mobile-nav { display: block; }
+    }
+    @media (max-width: 640px) {
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .footer-brand { grid-column: 1 / -1; }
+      .nav-container { padding: 14px 16px; }
+      .logo { font-size: 0.95rem; }
+    }
+    @media (max-width: 560px) {
+      .hud { grid-template-columns: repeat(2,1fr); }
+      .dec-row { grid-template-columns: 1fr; }
+      .lvl-row { grid-template-columns: 1fr; }
+      .trait-grid { grid-template-columns: 1fr; }
+      .stats-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ NAV ══ -->
+  <nav>
+    <div class="nav-container">
+      <a href="index.html" class="logo">WORLDBANKFX × PROFESSOR</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li class="dropdown">
+          <a href="index.html#services">Offers ▾</a>
+          <div class="dropdown-content">
+            <a href="https://partially-top-moose.ngrok-free.app/trademate/login.php">📓 TradeMate Journal</a>
+            <a href="forex-course.html">📈 Free Forex Course</a>
+            <a href="#" onclick="openPayment('Trading Playbook PDF — 5 Pages','$49.99'); return false;">📄 Trading Playbook PDF</a>
+            <a href="https://t.me/w0rldbank07" target="_blank" rel="noopener noreferrer">🔐 Trade Daily with Me</a>
+          </div>
+        </li>
+        <li class="dropdown">
+          <a href="index.html#tools">Tools ▾</a>
+          <div class="dropdown-content">
+            <a href="pip-calculator.html">🧮 Pip Calculator</a>
+            <a href="trading-growth-calculator.html">📈 Growth Calculator</a>
+          </div>
+        </li>
+        <li class="dropdown">
+          <a href="index.html#games">Games ▾</a>
+          <div class="dropdown-content">
+            <a href="patience-test.html">⏳ Patience Test</a>
+            <a href="revenge-breaker.html">🎲 Probability Revealer</a>
+          </div>
+        </li>
+        <li><a href="forex-course.html">Fx Course</a></li>
+        <li><a href="https://partially-top-moose.ngrok-free.app/trademate/login.php">TradeMate</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><button class="nav-cta" onclick="openBrokers()">Our Brokers</button></li>
+      </ul>
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button>
+    </div>
+  </nav>
+
+  <!-- ══ MOBILE NAV ══ -->
+  <div class="mobile-nav" id="mobileNav">
+    <button class="mobile-nav-close" onclick="toggleMobileMenu()"><i class="fas fa-times"></i></button>
+    <ul class="mobile-nav-links">
+      <li><a href="index.html" onclick="toggleMobileMenu()">Home</a></li>
+      <li>
+        <div class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(this)"><span>Offers</span><i class="fas fa-chevron-down"></i></div>
+        <div class="mobile-dropdown-content">
+          <a href="https://partially-top-moose.ngrok-free.app/trademate/login.php" onclick="toggleMobileMenu()">📓 TradeMate Journal</a>
+          <a href="forex-course.html" onclick="toggleMobileMenu()">📈 Free Forex Course</a>
+          <a href="#" onclick="toggleMobileMenu(); openPayment('Trading Playbook PDF — 5 Pages','$49.99')">📄 Trading Playbook PDF</a>
+          <a href="https://t.me/w0rldbank07" target="_blank" rel="noopener noreferrer" onclick="toggleMobileMenu()">🔐 Trade Daily with Me</a>
+        </div>
+      </li>
+      <li>
+        <div class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(this)"><span>Tools</span><i class="fas fa-chevron-down"></i></div>
+        <div class="mobile-dropdown-content">
+          <a href="pip-calculator.html" onclick="toggleMobileMenu()">🧮 Pip Calculator</a>
+          <a href="trading-growth-calculator.html" onclick="toggleMobileMenu()">📈 Growth Calculator</a>
+        </div>
+      </li>
+      <li>
+        <div class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(this)"><span>Games</span><i class="fas fa-chevron-down"></i></div>
+        <div class="mobile-dropdown-content">
+          <a href="patience-test.html" onclick="toggleMobileMenu()">⏳ Patience Test</a>
+          <a href="revenge-breaker.html" onclick="toggleMobileMenu()">🎲 Probability Revealer</a>
+        </div>
+      </li>
+      <li><a href="forex-course.html" onclick="toggleMobileMenu()">Fx Course</a></li>
+      <li><a href="https://partially-top-moose.ngrok-free.app/trademate/login.php" onclick="toggleMobileMenu()">TradeMate Journal</a></li>
+      <li><a href="contact.html" onclick="toggleMobileMenu()">Contact</a></li>
+      <button class="mobile-nav-cta" onclick="toggleMobileMenu(); openBrokers()">🏦 Our Brokers</button>
+    </ul>
+  </div>
+
+  <!-- ══ GAME CONTENT ══ -->
+  <div class="page">
+    <div class="page-header">
+      <div class="tag">TRADER PSYCHOLOGY LAB</div>
+      <h1>Patience Test</h1>
+      <p class="sub">// Read the chart. Wait for the real entry. Don't get faked out.</p>
+    </div>
+
+    <!-- WELCOME SCREEN -->
+    <div class="screen active" id="sWelcome">
+      <div class="welcome-box">
+        <div class="trait-grid">
+          <div class="trait"><div class="ti">🎯</div><div class="tn">Setup Recognition</div><div class="td">Can you tell a real signal from noise?</div></div>
+          <div class="trait"><div class="ti">🧠</div><div class="tn">Impulse Control</div><div class="td">The market will fake you out. Will you fall?</div></div>
+          <div class="trait"><div class="ti">⏱️</div><div class="tn">Entry Timing</div><div class="td">Not just "wait" — wait for the exact moment.</div></div>
+          <div class="trait"><div class="ti">💀</div><div class="tn">Trap Resistance</div><div class="td">Fakeouts designed to look like real entries.</div></div>
+        </div>
+        <div class="lvl-row">
+          <div class="lvl-btn sel" onclick="pickLevel(this,'normal')">
+            <div class="ln">INSTITUTIONAL</div>
+            <div class="li">10 setups · 60s each</div>
+          </div>
+          <div class="lvl-btn" onclick="pickLevel(this,'fast')">
+            <div class="ln">SCALP MODE</div>
+            <div class="li">15 setups · 30s each</div>
+          </div>
+          <div class="lvl-btn" onclick="pickLevel(this,'brutal')">
+            <div class="ln">BRUTAL MARKET</div>
+            <div class="li">20 setups · 20s · mostly traps</div>
+          </div>
+        </div>
+        <button class="start-btn" onclick="startGame()">START SESSION →</button>
+      </div>
+    </div>
+
+    <!-- GAME SCREEN -->
+    <div class="screen" id="sGame">
+      <!-- LEFT: Chart -->
+      <div class="game-left">
+        <div class="chart-zone">
+          <div class="chart-header">
+            <div class="pair-row">
+              <span class="pair-name" id="cPair">XAUUSD</span>
+              <div class="lamp waiting" id="lamp"></div>
+            </div>
+            <span class="tf-tag" id="cTF">H1</span>
+          </div>
+          <canvas id="chartCanvas" width="800" height="260" style="display:block;width:100%;height:260px;"></canvas>
+          <div id="liveTicker" style="display:flex;align-items:center;gap:14px;padding:6px 18px;border-top:1px solid rgba(255,255,255,0.06);background:rgba(0,0,0,0.3);">
+            <span style="font-family:var(--mono);font-size:0.62rem;color:var(--muted);letter-spacing:2px;">LIVE</span>
+            <span style="width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:pp .6s infinite alternate;flex-shrink:0;" id="tickerDot"></span>
+            <span style="font-family:var(--mono);font-size:0.88rem;font-weight:700;" id="tickerPrice">0.00000</span>
+            <span style="font-family:var(--mono);font-size:0.72rem;" id="tickerChange">+0.00</span>
+            <span style="font-family:var(--mono);font-size:0.6rem;color:var(--muted);margin-left:auto;" id="tickerSpread">SPR: 0.8</span>
+          </div>
+          <div class="market-strip">
+            <span class="ms-lbl">Signal:</span>
+            <span class="ms-msg noise" id="mMsg">Reading market structure...</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Controls -->
+      <div class="game-right">
+        <div class="hud">
+          <div class="hud-cell"><div class="hl">Setup</div><div class="hv" id="hSetup">1/10</div></div>
+          <div class="hud-cell" id="hTimerCell"><div class="hl">Time</div><div class="hv" id="hTimer">60</div></div>
+          <div class="hud-cell success"><div class="hl">Correct</div><div class="hv" id="hCorrect">0</div></div>
+          <div class="hud-cell danger"><div class="hl">Mistakes</div><div class="hv" id="hMistakes">0</div></div>
+        </div>
+
+        <div class="dec-row">
+          <button class="dec-btn buy" id="btnBuy" onclick="doTrade('buy')">
+            <span class="di">▲</span>
+            BUY
+            <span class="ds">// Price goes up</span>
+          </button>
+          <button class="dec-btn sell" id="btnSell" onclick="doTrade('sell')">
+            <span class="di">▼</span>
+            SELL
+            <span class="ds">// Price goes down</span>
+          </button>
+        </div>
+        <div class="dec-skip-row">
+          <button class="dec-btn skip" id="btnSkip" onclick="doSkip()">
+            🧘&nbsp; WAIT / SKIP &nbsp;// No edge right now
+          </button>
+        </div>
+        <div class="resolving-badge" id="resolvingBadge">
+          <div class="rb-dot"></div>
+          <span class="rb-txt" id="resolvingTxt">RESOLVING TRADE...</span>
+        </div>
+
+        <div class="fb-box" id="fbBox"></div>
+
+        <div class="prog-wrap">
+          <div class="prog-top">
+            <span>SESSION PROGRESS</span>
+            <span id="progTxt">0 / 10</span>
+          </div>
+          <div class="prog-track"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
+          <div class="dots" id="dotsRow"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULT SCREEN -->
+    <div class="screen" id="sResult">
+      <div class="result-box">
+        <div class="grade" id="rGrade">S</div>
+        <div class="res-title" id="rTitle">Iron Patience</div>
+        <div class="res-verdict" id="rVerdict"></div>
+        <div class="stats-row">
+          <div class="stat"><div class="sv" id="rAcc">0%</div><div class="sl">Accuracy</div></div>
+          <div class="stat"><div class="sv" id="rCorrect">0</div><div class="sl">Correct</div></div>
+          <div class="stat"><div class="sv" id="rMistakes">0</div><div class="sl">Mistakes</div></div>
+        </div>
+        <div class="insight" id="rInsight"><p></p></div>
+        <button class="retry-btn" onclick="goWelcome()">↺ NEW SESSION</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ FOOTER ══ -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <h3>WorldBankFx × Professor</h3>
+          <p>Empowering traders with knowledge, tools, and live daily trading. Your journey to financial freedom starts here.</p>
+          <div class="footer-social">
+            <a href="https://www.instagram.com/_thedigitalprofessor/" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.youtube.com/@TheWorldBankProfessor" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-youtube"></i></a>
+            <a href="https://x.com/DigitoProfessor" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="https://t.me/w0rldbank07" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-telegram"></i></a>
+            <a href="https://wa.me/256783354348" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.facebook.com/TheDig1talProfessor" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-facebook"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Offers</h4>
+          <a href="https://partially-top-moose.ngrok-free.app/trademate/login.php">TradeMate Journal</a>
+          <a href="forex-course.html">Free Forex Course</a>
+          <a href="#" onclick="openPayment('Trading Playbook PDF — 5 Pages','$49.99'); return false;">Trading Playbook PDF</a>
+          <a href="https://t.me/w0rldbank07" target="_blank" rel="noopener noreferrer">Trade Daily with Me</a>
+        </div>
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <a href="pip-calculator.html">Pip Calculator</a>
+          <a href="trading-growth-calculator.html">Growth Calculator</a>
+          <a href="https://partially-top-moose.ngrok-free.app/trademate/login.php">TradeMate Journal</a>
+          <a href="https://partially-top-moose.ngrok-free.app/trademate/login.php">TradeMate Pricing</a>
+        </div>
+        <div class="footer-col">
+          <h4>Games</h4>
+          <a href="patience-test.html">Patience Test</a>
+          <a href="revenge-breaker.html">Probability Revealer</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <a href="contact.html">Contact Page</a>
+          <a href="https://t.me/w0rldbank07" target="_blank" rel="noopener noreferrer">Telegram</a>
+          <a href="https://wa.me/256783354348" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+          <a href="mailto:unlimited.worldbankfx@gmail.com">unlimited.worldbankfx@gmail.com</a>
+          <p>+256 783 354 348</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025–2026 WorldBankFx × Professor. All rights reserved. | Built with discipline.</p>
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <!-- ══ PAYMENT MODAL ══ -->
+  <div id="paymentModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:10000;align-items:center;justify-content:center;">
+    <div class="payment-inner">
+      <button class="payment-close" onclick="closePayment()">×</button>
+      <div class="payment-product" id="modalProductName">Product</div>
+      <div class="payment-price" id="modalPrice">$0</div>
+      <div class="payment-methods">
+        <a href="https://paypal.me/neemacharles777" target="_blank" rel="noopener noreferrer" class="pay-btn pay-paypal">
+          💳 Pay via PayPal
+        </a>
+        <a id="whatsappBtn" href="#" target="_blank" rel="noopener noreferrer" class="pay-btn pay-whatsapp">
+          💬 Order via WhatsApp
+        </a>
+        <a id="emailBtn" href="#" class="pay-btn pay-email">
+          📧 Order via Email
+        </a>
+      </div>
+      <div class="payment-details">
+        <p><strong>PayPal:</strong> neemacharles777@gmail.com</p>
+        <p><strong>WhatsApp:</strong> +256 783 354 348</p>
+        <p><strong>Email:</strong> <a href="mailto:unlimited.worldbankfx@gmail.com" style="color:var(--gold)">unlimited.worldbankfx@gmail.com</a></p>
+        <small>After payment, send your screenshot to WhatsApp or email. I'll respond within 24 hours with your product.</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ BROKERS MODAL ══ -->
+  <div id="brokersModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:10000;align-items:center;justify-content:center;">
+    <div class="brokers-inner">
+      <button class="brokers-close" onclick="closeBrokers()">×</button>
+      <div class="brokers-eyebrow">Recommended Partners</div>
+      <div class="brokers-title">Our Brokers</div>
+      <p class="brokers-sub">Open your account under my referral and trade knowing you've got a mentor behind you.</p>
+      <div class="broker-options">
+        <a href="https://one.exnesstrack.org/a/y7scclopum" target="_blank" rel="noopener noreferrer" class="broker-btn exness" onclick="closeBrokers()">
+          <div class="broker-btn-left">
+            <span class="broker-btn-name">Exness</span>
+            <span class="broker-btn-note">Open under my referral link</span>
+          </div>
+          <span class="broker-btn-icon">→</span>
+        </a>
+        <a href="https://register.hfm.com/sv/en/new-live-account/?refid=374930" target="_blank" rel="noopener noreferrer" class="broker-btn hfm" onclick="closeBrokers()">
+          <div class="broker-btn-left">
+            <span class="broker-btn-name">HFM</span>
+            <span class="broker-btn-note">Open under my referral link</span>
+          </div>
+          <span class="broker-btn-icon">→</span>
+        </a>
+      </div>
+      <p class="brokers-disclaimer">Clicking a link takes you to the broker's official website. Forex trading involves risk.</p>
+    </div>
+  </div>
+
+<script>
+// ── Mobile Nav ──
+function toggleMobileMenu() {
+  document.getElementById('mobileNav').classList.toggle('active');
+}
+function toggleMobileDropdown(el) {
+  var content = el.nextElementSibling;
+  var isActive = content.classList.contains('active');
+  document.querySelectorAll('.mobile-dropdown-content').forEach(function(c){ c.classList.remove('active'); });
+  if (!isActive) content.classList.add('active');
+  el.querySelector('i').style.transform = content.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0)';
+}
+
+// ── Payment Modal ──
+function openPayment(product, price) {
+  document.getElementById('modalProductName').textContent = product;
+  document.getElementById('modalPrice').textContent = price;
+  document.getElementById('paymentModal').style.display = 'flex';
+  document.getElementById('whatsappBtn').href = 'https://wa.me/256783354348?text=' + encodeURIComponent('Hi! I want to purchase: ' + product + ' (' + price + '). Please send payment details.');
+  document.getElementById('emailBtn').href = 'mailto:unlimited.worldbankfx@gmail.com?subject=' + encodeURIComponent('Purchase: ' + product) + '&body=' + encodeURIComponent('Hi,\n\nI would like to purchase:\n' + product + ' — ' + price + '\n\nPlease confirm payment details.\n\nThank you!');
+}
+function closePayment() {
+  document.getElementById('paymentModal').style.display = 'none';
+}
+document.getElementById('paymentModal').addEventListener('click', function(e) {
+  if (e.target === document.getElementById('paymentModal')) closePayment();
+});
+
+// ── Brokers Modal ──
+function openBrokers() {
+  document.getElementById('brokersModal').style.display = 'flex';
+}
+function closeBrokers() {
+  document.getElementById('brokersModal').style.display = 'none';
+}
+document.getElementById('brokersModal').addEventListener('click', function(e) {
+  if (e.target === document.getElementById('brokersModal')) closeBrokers();
+});
+
+// ── Back to Top ──
+window.addEventListener('scroll', function() {
+  document.getElementById('backToTop').classList.toggle('show', window.pageYOffset > 300);
+});
+
+// ── CONFIG ─────────────────────────────────────────────────────────────────────
+var LEVELS = {
+  normal: { setups:10, time:60, trapRate:0.35, pairs:['XAUUSD','EURUSD','GBPJPY','US30'],              tfs:['H1','H4','M15'] },
+  fast:   { setups:15, time:30, trapRate:0.45, pairs:['XAUUSD','EURUSD','GBPUSD','USDJPY','BTCUSD'],  tfs:['M5','M15','H1'] },
+  brutal: { setups:20, time:20, trapRate:0.62, pairs:['XAUUSD','BTCUSD','GBPJPY','NAS100','EURUSD'],  tfs:['M1','M5','M15'] },
+};
+
+// ── STATE ──────────────────────────────────────────────────────────────────────
+var cfg         = LEVELS.normal;
+var setupIdx    = 0;
+var correct     = 0;
+var mistakes    = 0;
+var timerSec    = 60;
+var timerInt    = null;
+var totalSec    = 60;
+var roundIsEntry = false;
+var signalShown = false;
+var acted       = false;
+var prices      = [];
+
+// ── HELPERS ───────────────────────────────────────────────────────────────────
+function show(id) {
+  document.querySelectorAll('.screen').forEach(function(s){ s.classList.remove('active'); });
+  document.getElementById(id).classList.add('active');
+}
+function pickLevel(el, key) {
+  document.querySelectorAll('.lvl-btn').forEach(function(b){ b.classList.remove('sel'); });
+  el.classList.add('sel');
+  cfg = LEVELS[key];
+}
+
+// ── START ─────────────────────────────────────────────────────────────────────
+function startGame() {
+  setupIdx = 0;
+  correct  = 0;
+  mistakes = 0;
+
+  var row = document.getElementById('dotsRow');
+  row.innerHTML = '';
+  for (var i = 0; i < cfg.setups; i++) {
+    var d = document.createElement('div');
+    d.className = 'dot';
+    d.id = 'dot' + i;
+    row.appendChild(d);
+  }
+  document.getElementById('hCorrect').textContent  = '0';
+  document.getElementById('hMistakes').textContent = '0';
+
+  show('sGame');
+  nextSetup();
+}
+
+// ── LIVE CHART ENGINE ─────────────────────────────────────────────────────────
+var liveChart = (function() {
+  var raf = null;
+  var canvas, ctx;
+  var W, H;
+  var candles = [];          // {o,h,l,c,vol}
+  var livePrice = 0;
+  var liveTick  = 0;
+  var basePrice = 0;
+  var tickCount = 0;
+  var entryLine = null;  // { price, dir } drawn after player acts
+
+  // pair decimal places
+  var DECIMALS = { XAUUSD:2, BTCUSD:1, US30:1, NAS100:1, EURUSD:5, GBPUSD:5, USDJPY:3, GBPJPY:3, AUDUSD:5 };
+
+  function dec(pair) { return DECIMALS[pair] || 5; }
+
+  function rand(min,max){ return min + Math.random()*(max-min); }
+
+  function seedCandles(pair) {
+    candles = [];
+    var p = ({ XAUUSD:2310, BTCUSD:62000, US30:38500, NAS100:17800,
+               EURUSD:1.0850, GBPUSD:1.2600, USDJPY:154.50, GBPJPY:195.00, AUDUSD:0.6500 })[pair] || 1.0850;
+    basePrice = p;
+    livePrice = p;
+    for (var i = 0; i < 40; i++) {
+      var o = livePrice;
+      var move = rand(-0.0008, 0.0008) * p;
+      var c = o + move;
+      var h = Math.max(o,c) + rand(0, 0.0004)*p;
+      var l = Math.min(o,c) - rand(0, 0.0004)*p;
+      candles.push({ o:o, h:h, l:l, c:c });
+      livePrice = c;
+    }
+  }
+
+  function draw() {
+    if (!canvas) return;
+    W = canvas.width = canvas.offsetWidth;
+    H = canvas.height;
+
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle = '#0d1117';
+    ctx.fillRect(0,0,W,H);
+
+    // grid
+    ctx.strokeStyle = 'rgba(255,255,255,0.04)';
+    ctx.lineWidth = 0.5;
+    for (var r = 1; r < 4; r++) {
+      ctx.beginPath(); ctx.moveTo(0, H*r/4); ctx.lineTo(W, H*r/4); ctx.stroke();
+    }
+    for (var c2 = 1; c2 < 8; c2++) {
+      ctx.beginPath(); ctx.moveTo(W*c2/8, 0); ctx.lineTo(W*c2/8, H); ctx.stroke();
+    }
+
+    if (candles.length < 2) return;
+
+    var all = candles.map(function(c){ return [c.h, c.l]; }).flat();
+    var hi = Math.max.apply(null, all);
+    var lo = Math.min.apply(null, all);
+    var range = hi - lo || 0.001;
+    var pad = 12;
+    var cw = Math.max(4, Math.floor((W - pad*2) / candles.length) - 1);
+    cw = Math.min(cw, 14);
+    var gap = Math.floor((W - pad*2) / candles.length);
+
+    function toY(v){ return pad + (1 - (v-lo)/range) * (H - pad*2); }
+
+    candles.forEach(function(cd, i) {
+      var x = pad + i * gap + gap/2;
+      var bull = cd.c >= cd.o;
+      var col = bull ? '#10b981' : '#ef4444';
+      ctx.strokeStyle = col;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(x, toY(cd.h));
+      ctx.lineTo(x, toY(cd.l));
+      ctx.stroke();
+      ctx.fillStyle = col;
+      var oy = toY(Math.max(cd.o,cd.c));
+      var ch = Math.max(1, Math.abs(toY(cd.o)-toY(cd.c)));
+      ctx.fillRect(x - cw/2, oy, cw, ch);
+    });
+
+    // live price line
+    var lastC = candles[candles.length-1].c;
+    var ly = toY(lastC);
+    ctx.strokeStyle = 'rgba(255,215,0,0.6)';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([4,6]);
+    ctx.beginPath(); ctx.moveTo(0,ly); ctx.lineTo(W,ly); ctx.stroke();
+    ctx.setLineDash([]);
+
+    // entry line (shown after player clicks Buy/Sell)
+    if (entryLine) {
+      var ely = toY(entryLine.price);
+      var eCol = entryLine.dir === 'buy' ? '#10b981' : '#ef4444';
+      ctx.strokeStyle = eCol;
+      ctx.lineWidth = 1.5;
+      ctx.setLineDash([6,4]);
+      ctx.beginPath(); ctx.moveTo(0, ely); ctx.lineTo(W, ely); ctx.stroke();
+      ctx.setLineDash([]);
+      // label
+      ctx.fillStyle = eCol;
+      ctx.fillRect(W - 62, ely - 10, 58, 18);
+      ctx.fillStyle = '#000';
+      ctx.font = 'bold 9px monospace';
+      ctx.textAlign = 'right';
+      ctx.fillText((entryLine.dir === 'buy' ? '▲ ENTRY' : '▼ ENTRY'), W - 6, ely + 4);
+      ctx.textAlign = 'left';
+    }
+  }
+
+  function tick() {
+    if (!canvas) return;
+    tickCount++;
+    var move = rand(-0.0006, 0.0006) * basePrice;
+    livePrice += move;
+    var last = candles[candles.length-1];
+    last.c = livePrice;
+    last.h = Math.max(last.h, livePrice);
+    last.l = Math.min(last.l, livePrice);
+
+    if (tickCount % 8 === 0) {
+      candles.push({ o:livePrice, h:livePrice, l:livePrice, c:livePrice });
+      if (candles.length > 50) candles.shift();
+    }
+
+    // update ticker
+    var change = livePrice - basePrice;
+    var dStr = livePrice.toFixed(dec(window._currentPair || 'EURUSD'));
+    var cStr = (change >= 0 ? '+' : '') + change.toFixed(dec(window._currentPair || 'EURUSD'));
+    var el = document.getElementById('tickerPrice');
+    if (el) el.textContent = dStr;
+    var cel = document.getElementById('tickerChange');
+    if (cel) { cel.textContent = cStr; cel.style.color = change >= 0 ? '#10b981' : '#ef4444'; }
+
+    draw();
+    raf = requestAnimationFrame(tick);
+  }
+
+  return {
+    lastClose: function() {
+      return candles.length ? candles[candles.length-1].c : livePrice;
+    },
+    drawEntryLine: function(price, dir) {
+      entryLine = { price: price, dir: dir };
+      draw();
+    },
+    resolveCandles: function(isEntry, playerDir, callback) {
+      // Stop normal tick animation
+      if (raf) { cancelAnimationFrame(raf); raf = null; }
+      var entryPrice = candles[candles.length-1].c;
+      var resolved = 0;
+      var totalResCandles = 2;
+      var delay = 800; // ms per candle
+
+      function addResolutionCandle(idx) {
+        var p = candles[candles.length-1].c;
+        var move, o, h, l, c;
+
+        if (isEntry) {
+          // Real signal: price moves in the correct direction
+          var correctDir = (playerDir === 'buy') ? 1 : -1;
+          // First candle moves correctly, second confirms
+          move = rand(0.0012, 0.0025) * basePrice * correctDir;
+          o = p;
+          c = o + move;
+          h = Math.max(o,c) + rand(0,0.0005)*basePrice;
+          l = Math.min(o,c) - rand(0,0.0003)*basePrice;
+        } else {
+          // Trap: price moves AGAINST player regardless of their direction
+          var wrongDir = (playerDir === 'buy') ? -1 : 1;
+          // Traps move against you
+          move = rand(0.001, 0.0022) * basePrice * wrongDir;
+          o = p;
+          c = o + move;
+          h = Math.max(o,c) + rand(0,0.0004)*basePrice;
+          l = Math.min(o,c) - rand(0,0.0005)*basePrice;
+        }
+
+        candles.push({ o:o, h:h, l:l, c:c, resolution: true });
+        if (candles.length > 52) candles.shift();
+        livePrice = c;
+        draw();
+
+        resolved++;
+        if (resolved < totalResCandles) {
+          setTimeout(function(){ addResolutionCandle(idx+1); }, delay);
+        } else {
+          // done — call back with final close
+          setTimeout(function(){
+            entryLine = null;
+            callback(candles[candles.length-1].c);
+          }, 300);
+        }
+      }
+
+      setTimeout(function(){ addResolutionCandle(0); }, 200);
+    },
+    start: function(pair) {
+      canvas = document.getElementById('chartCanvas');
+      if (!canvas) return;
+      ctx = canvas.getContext('2d');
+      seedCandles(pair);
+      entryLine = null;
+      tickCount = 0;
+      if (raf) cancelAnimationFrame(raf);
+      tick();
+    },
+    stop: function() {
+      if (raf) { cancelAnimationFrame(raf); raf = null; }
+      entryLine = null;
+    },
+    inject: function(type) {
+      // type: 'entry' | 'trap' | 'noise'
+      if (type === 'entry') {
+        // push a strong bullish candle
+        var p = livePrice;
+        var move = rand(0.0015, 0.003) * basePrice;
+        candles.push({ o:p, h:p+move*1.1, l:p-move*0.1, c:p+move });
+        livePrice = p + move;
+      } else if (type === 'trap') {
+        // spike up then reversal
+        var p2 = livePrice;
+        var spike = rand(0.001, 0.002) * basePrice;
+        candles.push({ o:p2, h:p2+spike, l:p2-spike*0.1, c:p2-spike*0.3 });
+        livePrice = p2 - spike * 0.3;
+      }
+      if (candles.length > 50) candles.shift();
+      draw();
+    }
+  };
+})();
+
+// ── NEXT SETUP ────────────────────────────────────────────────────────────────
+function nextSetup() {
+  if (setupIdx >= cfg.setups) { endGame(); return; }
+
+  clearInterval(timerInt);
+  if (window._liveInt) { clearInterval(window._liveInt); window._liveInt = null; }
+
+  acted = false;
+  signalShown = false;
+  playerDir = null;
+  document.getElementById('resolvingBadge').classList.remove('show');
+
+  // pick pair + TF
+  var pair = cfg.pairs[Math.floor(Math.random() * cfg.pairs.length)];
+  var tf   = cfg.tfs[Math.floor(Math.random() * cfg.tfs.length)];
+  window._currentPair = pair;
+  document.getElementById('cPair').textContent = pair;
+  document.getElementById('cTF').textContent   = tf;
+
+  // decide round type
+  roundIsEntry = Math.random() > cfg.trapRate;
+  var isTrap   = !roundIsEntry && Math.random() < 0.6;
+
+  document.getElementById('hSetup').textContent = (setupIdx + 1) + ' / ' + cfg.setups;
+
+  // reset timer display
+  timerSec = cfg.time;
+  totalSec = cfg.time;
+  document.getElementById('hTimer').textContent   = timerSec;
+  document.getElementById('hTimerCell').className = 'hud-cell';
+
+  setLamp('waiting');
+  setMsg('noise', 'Reading market structure...');
+  setBtns(false);
+  hideFb();
+
+  // start live chart
+  liveChart.start(pair);
+
+  // signal reveal timing
+  var signalDelay = Math.floor(Math.random() * (cfg.time * 0.4)) + Math.floor(cfg.time * 0.15);
+  signalDelay = Math.min(signalDelay, cfg.time - 6);
+
+  var setupTimer = 0;
+  window._liveInt = setInterval(function() {
+    setupTimer++;
+
+    // reveal signal
+    if (!signalShown && setupTimer >= signalDelay) {
+      signalShown = true;
+      if (roundIsEntry) {
+        setLamp('entry');
+        setMsg('entry', '✅ Structure confirmed — Entry zone forming');
+        liveChart.inject('entry');
+      } else if (isTrap) {
+        setLamp('trap');
+        setMsg('fake', '⚠️ Momentum spike — looks like a breakout...');
+        liveChart.inject('trap');
+      } else {
+        setLamp('forming');
+        setMsg('forming', '🔍 Pattern developing — stay alert...');
+      }
+      setBtns(true);
+    }
+
+    // countdown
+    timerSec--;
+    document.getElementById('hTimer').textContent = timerSec;
+    if (timerSec <= Math.floor(cfg.time * 0.25)) {
+      document.getElementById('hTimerCell').className = 'hud-cell danger';
+    } else if (timerSec <= Math.floor(cfg.time * 0.5)) {
+      document.getElementById('hTimerCell').className = 'hud-cell warn';
+    }
+
+    if (timerSec <= 0) {
+      clearInterval(window._liveInt);
+      window._liveInt = null;
+      if (!acted) {
+        // time out — counts as a miss if entry, or correct if noise
+        if (roundIsEntry && signalShown) {
+          score(false, 'timeout');
+        } else if (!roundIsEntry && !signalShown) {
+          // waited correctly through noise
+          score(true, 'noise-skip');
+        } else {
+          score(false, 'timeout');
+        }
+      }
+    }
+  }, 1000);
+}
+
+// ── DECISIONS ─────────────────────────────────────────────────────────────────
+// playerDir: 'buy' | 'sell' | null (skip)
+var playerDir = null;
+
+function doTrade(dir) {
+  if (acted) return;
+  acted = true;
+  playerDir = dir;
+  setBtns(false);
+  clearInterval(window._liveInt);
+  window._liveInt = null;
+  clearInterval(timerInt);
+
+  // Show resolving badge
+  document.getElementById('resolvingBadge').classList.add('show');
+  document.getElementById('resolvingTxt').textContent =
+    (dir === 'buy' ? '▲ BUY' : '▼ SELL') + ' — RESOLVING...';
+
+  // Draw entry line on chart at current last price
+  var entryPrice = liveChart.lastClose();
+  liveChart.drawEntryLine(entryPrice, dir);
+
+  // Animate 2 resolution candles, then judge
+  liveChart.resolveCandles(roundIsEntry, dir, function(exitPrice) {
+    document.getElementById('resolvingBadge').classList.remove('show');
+
+    var priceWon = (dir === 'buy')
+      ? (exitPrice > entryPrice)
+      : (exitPrice < entryPrice);
+
+    // Core logic: win only if BOTH direction correct AND it was a real entry
+    if (!signalShown) {
+      // jumped in with no signal — always wrong regardless of price
+      score(false, 'enter-no-signal');
+    } else if (roundIsEntry && priceWon) {
+      score(true, 'enter-entry');
+    } else if (roundIsEntry && !priceWon) {
+      // right to enter but wrong direction
+      score(false, 'wrong-direction');
+    } else {
+      // it was a trap — price may have gone their way briefly but setup was fake
+      score(false, 'enter-trap');
+    }
+  });
+}
+
+function doSkip() {
+  if (acted) return;
+  acted = true;
+  playerDir = null;
+  setBtns(false);
+  clearInterval(window._liveInt);
+  window._liveInt = null;
+
+  if (roundIsEntry && signalShown) {
+    score(false, 'skip-entry');
+  } else {
+    score(true, 'skip-noise');
+  }
+}
+
+// ── SCORING ───────────────────────────────────────────────────────────────────
+function score(isCorrect, type) {
+  var dot = document.getElementById('dot' + setupIdx);
+
+  if (isCorrect) {
+    correct++;
+    document.getElementById('hCorrect').textContent = correct;
+    dot.classList.add('ok');
+    dot.textContent = '✓';
+    if (type === 'enter-entry') {
+      var dirLabel = playerDir === 'buy' ? '▲ BUY' : '▼ SELL';
+      showFb('✅  ' + dirLabel + ' — Price moved your way. Perfect read.', 'win');
+    } else {
+      showFb('✅  CORRECTLY SKIPPED — Patience rewarded.', 'win');
+    }
+  } else {
+    mistakes++;
+    document.getElementById('hMistakes').textContent = mistakes;
+    if (type === 'skip-entry') {
+      dot.classList.add('skip');
+      dot.textContent = '?';
+      showFb('⏸  MISSED ENTRY — Signal was real. You hesitated.', 'wait');
+    } else {
+      dot.classList.add('bad');
+      dot.textContent = '✗';
+      if (type === 'enter-trap') {
+        showFb('❌  TRAPPED — Fakeout. Price reversed. That\'s a loss.', 'miss');
+      } else if (type === 'wrong-direction') {
+        var wrongDir = playerDir === 'buy' ? '▲ BUY' : '▼ SELL';
+        showFb('↔  WRONG DIRECTION — ' + wrongDir + ' but price went the other way.', 'miss');
+      } else {
+        showFb('⏱  MISSED ENTRY — That was real. You hesitated too long.', 'miss');
+      }
+    }
+  }
+
+  setupIdx++;
+  updateProg();
+
+  setTimeout(function(){
+    hideFb();
+    nextSetup();
+  }, 2000);
+}
+
+// ── PROGRESS / FEEDBACK / LAMP ────────────────────────────────────────────────
+function updateProg() {
+  var pct = (setupIdx / cfg.setups) * 100;
+  document.getElementById('progFill').style.width = pct + '%';
+  document.getElementById('progTxt').textContent  = setupIdx + ' / ' + cfg.setups;
+}
+
+function showFb(msg, cls) {
+  var fb = document.getElementById('fbBox');
+  fb.className = 'fb-box ' + cls;
+  fb.textContent = msg;
+}
+function hideFb() {
+  var fb = document.getElementById('fbBox');
+  fb.className = 'fb-box';
+  fb.textContent = '';
+}
+function setLamp(state) { document.getElementById('lamp').className = 'lamp ' + state; }
+function setMsg(cls, txt) {
+  var el = document.getElementById('mMsg');
+  el.className = 'ms-msg ' + cls;
+  el.textContent = txt;
+}
+function setBtns(on) {
+  document.getElementById('btnBuy').disabled  = !on;
+  document.getElementById('btnSell').disabled = !on;
+  document.getElementById('btnSkip').disabled = !on;
+}
+
+// ── END GAME ──────────────────────────────────────────────────────────────────
+function endGame() {
+  clearInterval(timerInt);
+  if (window._liveInt) { clearInterval(window._liveInt); window._liveInt = null; }
+  liveChart.stop();
+  var total = cfg.setups;
+  var acc   = Math.round((correct / total) * 100);
+
+  document.getElementById('rAcc').textContent     = acc + '%';
+  document.getElementById('rCorrect').textContent  = correct;
+  document.getElementById('rMistakes').textContent = mistakes;
+
+  var grade, title, verdict, insight;
+  if (acc >= 90) {
+    grade = 'S'; title = 'IRON PATIENCE';
+    verdict = 'Elite level. You trade like a sniper, not a gambler.';
+    insight = '<strong>Insight:</strong> At 90%+ accuracy, you only enter when the edge is undeniable. This is what separates consistently profitable traders from the 90% who blow accounts.';
+  } else if (acc >= 75) {
+    grade = 'A'; title = 'SHARP TRADER';
+    verdict = 'Strong discipline with occasional lapses. You\'d be profitable live.';
+    insight = '<strong>Insight:</strong> ' + mistakes + ' mistakes across ' + total + ' setups. Were you entering too early, or hesitating on clear setups? Fix one and your edge sharpens significantly.';
+  } else if (acc >= 60) {
+    grade = 'B'; title = 'DEVELOPING EDGE';
+    verdict = 'You have the instinct but need more filtering.';
+    insight = '<strong>Insight:</strong> Most traders at this level are profitable in trending markets but get wrecked in choppy ones. The traps that caught you are your blind spot.';
+  } else if (acc >= 45) {
+    grade = 'C'; title = 'OVERTRADING RISK';
+    verdict = 'You\'re seeing setups that aren\'t there. Classic overtrading pattern.';
+    insight = '<strong>Insight:</strong> With ' + acc + '% accuracy in a controlled test, your live edge is likely negative. The market adds spreads, slippage, and emotion on top. Work on selectivity.';
+  } else {
+    grade = 'F'; title = 'CHASING THE MARKET';
+    verdict = 'High impulsiveness. This pattern destroys accounts fast.';
+    insight = '<strong>Insight:</strong> ' + mistakes + ' mistakes from ' + total + ' setups. In a live account, this pattern means repeated stop-outs and account erosion. Slow down drastically.';
+  }
+
+  var el = document.getElementById('rGrade');
+  el.textContent = grade;
+  el.className   = 'grade ' + grade;
+  document.getElementById('rTitle').textContent   = title;
+  document.getElementById('rVerdict').textContent = verdict;
+  document.getElementById('rInsight').innerHTML   = '<p>' + insight + '</p>';
+
+  show('sResult');
+}
+
+function goWelcome() {
+  clearInterval(timerInt);
+  if (window._liveInt) { clearInterval(window._liveInt); window._liveInt = null; }
+  liveChart.stop();
+  setupIdx = 0; correct = 0; mistakes = 0;
+  acted = false; signalShown = false; playerDir = null;
+  document.getElementById('resolvingBadge').classList.remove('show');
+  document.getElementById('hCorrect').textContent  = '0';
+  document.getElementById('hMistakes').textContent = '0';
+  document.getElementById('hSetup').textContent    = '1 / ' + cfg.setups;
+  document.getElementById('hTimer').textContent    = cfg.time;
+  document.getElementById('hTimerCell').className  = 'hud-cell';
+  document.getElementById('progFill').style.width  = '0%';
+  document.getElementById('progTxt').textContent   = '0 / ' + cfg.setups;
+  document.getElementById('dotsRow').innerHTML     = '';
+  hideFb();
+  show('sWelcome');
+}
+</script>
+</body>
+</html>

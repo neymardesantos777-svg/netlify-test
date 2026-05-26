@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Revenge Breaker | WorldBankFx × Professor</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%230a0a0a'/><rect width='100' height='100' rx='18' fill='none' stroke='%23ffd700' stroke-width='4'/><text x='50' y='38' font-family='Georgia,serif' font-size='22' font-weight='900' fill='%23ffd700' text-anchor='middle'>WB</text><text x='50' y='65' font-family='Georgia,serif' font-size='22' font-weight='900' fill='%23ffd700' text-anchor='middle'>FX</text></svg>">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Barlow+Condensed:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #ffd700;
+      --gold2: #ffed4e;
+      --gold-dim: rgba(255,215,0,0.12);
+      --red: #ef4444;
+      --red-dim: rgba(239,68,68,0.12);
+      --green: #10b981;
+      --green-dim: rgba(16,185,129,0.1);
+      --cyan: #00d4ff;
+      --orange: #ff8c00;
+      --bg: #0a0a0f;
+      --bg2: #0d0d14;
+      --bg3: #13131e;
+      --surface: #0f0f1a;
+      --surface2: #161622;
+      --border: rgba(255,215,0,0.12);
+      --border2: rgba(255,255,255,0.06);
+      --text: #e8e8f0;
+      --muted: #7a7a94;
+      --mono: 'Space Mono', monospace;
+      --disp: 'Barlow Condensed', sans-serif;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html, body { height: 100%; overflow: hidden; }
+    body {
+      font-family: var(--mono);
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(255,215,0,0.3); border-radius: 2px; }
+
+    /* ── NAV ── */
+    nav { position: fixed; top: 0; width: 100%; background: rgba(10,10,10,0.97); backdrop-filter: blur(12px); z-index: 1000; border-bottom: 1px solid rgba(255,215,0,0.2); }
+    .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 15px 30px; }
+    .logo { font-size: 1.2rem; font-weight: 900; background: linear-gradient(135deg, var(--gold), var(--gold2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; cursor: pointer; text-decoration: none; white-space: nowrap; }
+    .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
+    .nav-links a { color: #fff; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: color 0.3s; }
+    .nav-links a:hover { color: var(--gold); }
+    .dropdown { position: relative; }
+    .dropdown-content { display: none; position: absolute; top: 100%; left: 0; background: #0f0f0f; min-width: 220px; border: 1px solid var(--gold); border-radius: 10px; margin-top: 4px; padding: 8px 0; z-index: 200; box-shadow: 0 10px 40px rgba(0,0,0,0.6); }
+    .dropdown:hover .dropdown-content, .dropdown-content:hover { display: block; }
+    .dropdown-content a { display: block; padding: 11px 20px; border-bottom: 1px solid #222; color: #ccc; font-size: 0.88rem; }
+    .dropdown-content a:last-child { border-bottom: none; }
+    .dropdown-content a:hover { background: rgba(255,215,0,0.08); color: var(--gold); }
+    .nav-cta { background: linear-gradient(135deg, var(--gold), var(--gold2)); color: #000 !important; padding: 9px 22px; border-radius: 25px; font-weight: 800 !important; font-size: 0.85rem !important; transition: all 0.3s ease !important; cursor: pointer; border: none; }
+    .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,215,0,0.35); color: #000 !important; }
+    .mobile-menu-btn { display: none; font-size: 1.5rem; color: var(--gold); cursor: pointer; background: none; border: none; }
+    .mobile-nav { display: none; position: fixed; top: 0; right: -100%; width: 80%; max-width: 380px; height: 100vh; background: #0d0d0d; z-index: 2000; padding: 80px 30px 30px; transition: right 0.3s ease; overflow-y: auto; border-left: 1px solid rgba(255,215,0,0.15); }
+    .mobile-nav.active { right: 0; }
+    .mobile-nav-close { position: absolute; top: 20px; right: 20px; font-size: 2rem; color: var(--gold); cursor: pointer; background: none; border: none; }
+    .mobile-nav-links { list-style: none; }
+    .mobile-nav-links li { margin-bottom: 6px; }
+    .mobile-nav-links > li > a { color: #fff; text-decoration: none; font-size: 1.05rem; font-weight: 700; display: block; padding: 12px 0; border-bottom: 1px solid #1a1a1a; }
+    .mobile-dropdown-toggle { display: flex; justify-content: space-between; align-items: center; cursor: pointer; color: #fff; font-size: 1.05rem; font-weight: 700; padding: 12px 0; border-bottom: 1px solid #1a1a1a; }
+    .mobile-dropdown-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; padding-left: 16px; }
+    .mobile-dropdown-content.active { max-height: 400px; }
+    .mobile-dropdown-content a { font-size: 0.95rem; padding: 9px 0; color: #aaa; display: block; text-decoration: none; border-bottom: 1px solid #161616; }
+    .mobile-dropdown-content a:hover { color: var(--gold); }
+    .mobile-nav-cta { display: block; margin-top: 24px; padding: 15px; background: linear-gradient(135deg,var(--gold),var(--gold2)); color: #000; text-align: center; border-radius: 10px; font-weight: 800; font-size: 1rem; text-decoration: none; cursor: pointer; border: none; width: 100%; }
+    @media (max-width: 968px) {
+      .nav-links { display: none; }
+      .mobile-menu-btn { display: block; }
+      .mobile-nav { display: block; }
+    }
+
+    /* ══════════════════════════════════════
+       SCREENS
+    ══════════════════════════════════════ */
+    .screen { display: none; position: fixed; inset: 51px 0 0 0; }
+    .screen.active { display: flex; flex-direction: column; }
+
+    /* ══════════════════════════════════════
+       WELCOME SCREEN
+    ══════════════════════════════════════ */
+    #screenWelcome {
+      align-items: center; justify-content: center;
+      background: var(--bg);
+      overflow-y: auto;
+    }
+    .welcome-inner {
+      max-width: 780px; width: 100%; padding: 32px 24px; text-align: center;
+    }
+    .welcome-badge {
+      font-size: 0.6rem; letter-spacing: 3px; color: var(--cyan);
+      border: 1px solid rgba(0,212,255,0.3); border-radius: 3px;
+      padding: 3px 10px; display: inline-block; margin-bottom: 10px; text-transform: uppercase;
+    }
+    .welcome-title {
+      font-family: var(--disp); font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 900; line-height: 0.95; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 6px;
+    }
+    .welcome-title span { color: var(--red); }
+    .welcome-sub {
+      font-size: 0.68rem; color: var(--muted); margin-bottom: 28px; line-height: 1.6;
+    }    .welcome-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px;
+    }
+    .info-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 16px; text-align: left;
+    }
+    .info-card h3 {
+      font-family: var(--disp); font-size: 0.85rem; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px;
+    }
+    .info-card.red h3 { color: var(--red); }
+    .info-card.green h3 { color: var(--green); }
+    .info-card.gold h3 { color: var(--gold); }
+    .info-card p { font-size: 0.7rem; color: var(--muted); line-height: 1.7; }
+    .info-card p strong { color: var(--text); }
+    .starts-btn {
+      width: 100%; padding: 16px;
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      color: #000; border: none; border-radius: 8px;
+      font-family: var(--disp); font-size: 1.1rem; font-weight: 900;
+      letter-spacing: 3px; text-transform: uppercase; cursor: pointer;
+      transition: all 0.2s;
+    }
+    .starts-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(255,215,0,0.3); }
+
+    /* ══════════════════════════════════════
+       GAME SCREEN — TERMINAL SPLIT
+    ══════════════════════════════════════ */
+    #screenGame {
+      flex-direction: row;
+    }
+
+    /* ── LEFT: CHART PANEL ── */
+    .panel-chart {
+      flex: 1 1 0;
+      min-width: 0;
+      display: flex; flex-direction: column;
+      border-right: 1px solid var(--border2);
+      background: var(--bg);
+      overflow: hidden;
+    }
+
+    /* Ticker bar */
+    .ticker-bar {
+      height: 38px; min-height: 38px;
+      display: flex; align-items: center; gap: 0;
+      border-bottom: 1px solid var(--border2);
+      background: var(--bg2);
+      padding: 0 14px;
+    }
+    .ticker-pair {
+      font-family: var(--disp); font-size: 1rem; font-weight: 900;
+      color: var(--text); letter-spacing: 1px; margin-right: 14px;
+    }
+    .ticker-price {
+      font-size: 1rem; font-weight: 700; color: var(--green);
+      margin-right: 10px; min-width: 72px;
+    }
+    .ticker-change {
+      font-size: 0.72rem; padding: 2px 8px; border-radius: 3px;
+      background: rgba(16,185,129,0.12); color: var(--green); margin-right: 14px;
+    }
+    .ticker-change.neg { background: var(--red-dim); color: var(--red); }
+    .ticker-sep { color: var(--border2); margin: 0 6px; font-size: 0.7rem; }
+    .ticker-meta { font-size: 0.65rem; color: var(--muted); display: flex; gap: 14px; align-items: center; }
+    .ticker-meta span b { color: var(--text); }
+
+    /* Chart area */
+    .chart-area {
+      flex: 1 1 0; position: relative; min-height: 0;
+    }
+    #mainChart { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+    /* Tilt overlay strip at top edge of chart */
+    .tilt-strip {
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      transition: background 0.6s ease;
+      background: var(--green);
+      z-index: 2;
+    }
+
+    /* Chart overlays */
+    .chart-overlay-tl {
+      position: absolute; top: 10px; left: 12px; z-index: 3;
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .co-badge {
+      font-size: 0.6rem; letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 3px 8px; border-radius: 3px; border: 1px solid;
+      backdrop-filter: blur(4px);
+    }
+    .co-badge.calm { color: var(--green); border-color: rgba(16,185,129,0.3); background: rgba(16,185,129,0.08); }
+    .co-badge.tilted { color: var(--orange); border-color: rgba(255,140,0,0.3); background: rgba(255,140,0,0.08); }
+    .co-badge.tilt2 { color: #ff6400; border-color: rgba(255,100,0,0.3); background: rgba(255,100,0,0.08); }
+    .co-badge.revenge { color: var(--red); border-color: rgba(239,68,68,0.4); background: rgba(239,68,68,0.1); }
+
+    .chart-overlay-tr {
+      position: absolute; top: 10px; right: 12px; z-index: 3;
+      text-align: right;
+    }
+    .co-pl {
+      font-family: var(--mono); font-size: 1rem; font-weight: 700;
+    }
+    .co-pl.up { color: var(--green); }
+    .co-pl.dn { color: var(--red); }
+    .co-pl-label { font-size: 0.58rem; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 2px; }
+
+    /* ── RIGHT: ACTION PANEL ── */
+    .panel-action {
+      width: 340px; min-width: 300px; max-width: 380px;
+      display: flex; flex-direction: column;
+      background: var(--bg2);
+      overflow: hidden;
+    }
+
+    /* HUD strip */
+    .hud-strip {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      border-bottom: 1px solid var(--border2);
+      flex-shrink: 0;
+    }
+    .hud-cell {
+      padding: 8px 10px; border-right: 1px solid var(--border2);
+      text-align: center;
+    }
+    .hud-cell:last-child { border-right: none; }
+    .h-label { font-size: 0.55rem; color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; }
+    .h-value { font-size: 0.85rem; font-weight: 700; color: var(--text); margin-top: 2px; line-height: 1; }
+    .hud-cell.up .h-value { color: var(--green); }
+    .hud-cell.dn .h-value { color: var(--red); }
+    .hud-cell.warn .h-value { color: var(--orange); }
+
+    /* Scrollable body */
+    .action-body {
+      flex: 1 1 0; overflow-y: auto; padding: 12px;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+
+    /* Scenario block */
+    .scenario-header-row {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 6px;
+    }
+    .sc-round { font-size: 0.6rem; color: var(--muted); letter-spacing: 1px; }
+    .sc-context-tag {
+      font-size: 0.58rem; padding: 2px 8px; border-radius: 3px; border: 1px solid;
+      letter-spacing: 1px; text-transform: uppercase;
+    }
+    .sc-context-tag.after-loss { color: var(--red); border-color: rgba(239,68,68,0.4); background: var(--red-dim); }
+    .sc-context-tag.normal { color: var(--cyan); border-color: rgba(0,212,255,0.25); background: rgba(0,212,255,0.07); }
+    .sc-context-tag.streak { color: var(--green); border-color: rgba(16,185,129,0.35); background: var(--green-dim); }
+
+    .situation-box {
+      background: var(--surface); border: 1px solid var(--border);
+      border-left: 2px solid var(--cyan);
+      border-radius: 0 8px 8px 0;
+      padding: 12px 14px;
+    }
+    .sit-label { font-size: 0.58rem; color: var(--cyan); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+    .sit-text { font-family: var(--disp); font-size: 0.95rem; font-weight: 500; color: var(--text); line-height: 1.45; }
+
+    /* Setup stats */
+    .setup-row {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;
+    }
+    .setup-stat {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 6px; padding: 8px; text-align: center;
+    }
+    .ss-label { font-size: 0.55rem; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
+    .ss-val { font-size: 0.95rem; font-weight: 700; margin-top: 2px; }
+    .setup-stat.good .ss-val { color: var(--green); }
+    .setup-stat.bad .ss-val { color: var(--red); }
+    .setup-stat.neutral .ss-val { color: var(--muted); }
+
+    /* Warning */
+    .warning-box {
+      background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.25);
+      border-radius: 6px; padding: 8px 12px;
+      font-size: 0.65rem; color: var(--red); line-height: 1.6;
+      display: none;
+    }
+    .warning-box.show { display: block; }
+
+    /* Decision buttons — 2×2 grid */
+    .decision-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 7px;
+    }
+    .dec-btn {
+      padding: 12px 8px; border: 1px solid var(--border2);
+      border-radius: 8px; background: var(--surface);
+      font-family: var(--disp); font-size: 0.85rem; font-weight: 700;
+      letter-spacing: 0.5px; text-transform: uppercase;
+      color: var(--muted); cursor: pointer; transition: all 0.15s;
+      text-align: center; display: flex; flex-direction: column;
+      align-items: center; gap: 3px;
+    }
+    .dec-btn .d-icon { font-size: 1.2rem; }
+    .dec-btn .d-sub { font-family: var(--mono); font-size: 0.58rem; color: var(--muted); font-weight: 400; }
+    .dec-btn.trade:hover { border-color: var(--orange); background: rgba(255,140,0,0.1); color: var(--orange); }
+    .dec-btn.wait-btn:hover { border-color: var(--green); background: var(--green-dim); color: var(--green); }
+    .dec-btn.size-up:hover { border-color: var(--red); background: var(--red-dim); color: var(--red); }
+    .dec-btn.reduce:hover { border-color: var(--cyan); background: rgba(0,212,255,0.07); color: var(--cyan); }
+    .dec-btn:disabled { opacity: 0.25; pointer-events: none; }
+
+    /* Outcome */
+    .outcome-area { display: none; }
+    .outcome-area.show { display: block; }
+    .outcome-card {
+      border-radius: 8px; padding: 12px 14px; border: 1px solid;
+      margin-bottom: 8px;
+    }
+    .outcome-card.profit { border-color: rgba(16,185,129,0.3); background: var(--green-dim); }
+    .outcome-card.loss { border-color: rgba(239,68,68,0.3); background: var(--red-dim); }
+    .outcome-card.neutral { border-color: var(--border); background: var(--surface); }
+    .outcome-main { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+    .outcome-result { font-family: var(--disp); font-size: 1.3rem; font-weight: 900; }
+    .outcome-result.green { color: var(--green); }
+    .outcome-result.red { color: var(--red); }
+    .outcome-result.gold { color: var(--gold); }
+    .outcome-change { font-size: 0.95rem; font-weight: 700; }
+    .outcome-teaching { font-size: 0.68rem; color: var(--muted); line-height: 1.65; }
+    .outcome-teaching strong { color: var(--text); }
+    .continue-btn {
+      width: 100%; padding: 10px;
+      background: transparent; border: 1px solid var(--border);
+      color: var(--muted); border-radius: 6px;
+      font-family: var(--disp); font-size: 0.9rem; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all 0.2s;
+    }
+    .continue-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ══════════════════════════════════════
+       RESULT SCREEN
+    ══════════════════════════════════════ */
+    #screenResult {
+      overflow-y: auto; align-items: center; justify-content: flex-start;
+      background: var(--bg); flex-direction: column;
+    }
+    .result-wrap {
+      max-width: 720px; width: 100%; padding: 32px 24px 48px;
+    }
+    .result-top { text-align: center; margin-bottom: 28px; }
+    .result-icon-big { font-size: 3.5rem; margin-bottom: 6px; }
+    .result-main-title {
+      font-family: var(--disp); font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 900; text-transform: uppercase;
+    }
+    .result-main-title.green { color: var(--green); }
+    .result-main-title.gold { color: var(--gold); }
+    .result-main-title.orange { color: var(--orange); }
+    .result-main-title.red { color: var(--red); }
+    .result-pl { font-family: var(--mono); font-size: 1.2rem; font-weight: 700; margin-top: 6px; }
+    .result-pl.up { color: var(--green); }
+    .result-pl.dn { color: var(--red); }
+    .result-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 24px;
+    }
+    .rg-cell {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; padding: 14px; text-align: center;
+    }
+    .rg-cell .rv { font-size: 1.1rem; font-weight: 700; }
+    .rg-cell .rl { font-size: 0.58rem; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; }
+    .psych-report {
+      background: var(--surface2); border-radius: 10px; padding: 20px; margin-bottom: 20px;
+    }
+    .psych-report h3 {
+      font-family: var(--disp); font-size: 0.9rem; font-weight: 700;
+      color: var(--gold); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;
+    }
+    .psych-item {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 8px 0; border-bottom: 1px solid var(--border);
+    }
+    .psych-item:last-child { border-bottom: none; }
+    .pi-label { font-size: 0.7rem; color: var(--muted); }
+    .pi-value { font-size: 0.76rem; font-weight: 700; }
+    .pi-value.good { color: var(--green); }
+    .pi-value.bad { color: var(--red); }
+    .pi-value.warn { color: var(--orange); }
+    .verdict-block {
+      background: var(--surface2); border-left: 3px solid;
+      border-radius: 0 8px 8px 0; padding: 16px 18px; margin-bottom: 20px;
+    }
+    .verdict-block.pos { border-color: var(--green); }
+    .verdict-block.neg { border-color: var(--red); }
+    .verdict-block.mid { border-color: var(--gold); }
+    .verdict-block p { font-size: 0.75rem; color: var(--muted); line-height: 1.8; }
+    .verdict-block p strong { color: var(--text); }
+
+    /* Result curve */
+    .result-curve-wrap {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 14px 16px; margin-bottom: 20px;
+    }
+    .result-curve-header {
+      display: flex; justify-content: space-between; margin-bottom: 8px;
+    }
+    .rc-label { font-size: 0.62rem; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; }
+    #resultCurveCanvas { width: 100%; height: 100px; display: block; }
+
+    .retry-btn {
+      padding: 14px 40px; background: transparent;
+      border: 2px solid var(--gold); color: var(--gold); border-radius: 8px;
+      font-family: var(--disp); font-size: 1.1rem; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase; cursor: pointer;
+      transition: all 0.2s; display: block; margin: 0 auto;
+    }
+    .retry-btn:hover { background: var(--gold); color: #000; }
+
+    /* ── FOOTER ── */
+    footer { background: #000; padding: 60px 20px 36px; border-top: 1px solid #222; }
+    .footer-content { max-width: 1200px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 50px; }
+    .footer-brand h3 { color: var(--gold); font-size: 1.3rem; margin-bottom: 12px; }
+    .footer-brand p { color: var(--muted); font-size: 0.88rem; line-height: 1.7; max-width: 280px; margin-bottom: 20px; }
+    .footer-social { display: flex; gap: 12px; flex-wrap: wrap; }
+    .social-link { width: 42px; height: 42px; background: #1a1a1a; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; transition: all 0.3s ease; text-decoration: none; color: var(--gold); border: 1px solid #2a2a2a; }
+    .social-link:hover { background: var(--gold); color: #000; transform: scale(1.1); border-color: var(--gold); }
+    .footer-col h4 { color: var(--cyan); margin-bottom: 16px; font-size: 0.88rem; text-transform: uppercase; letter-spacing: 1px; }
+    .footer-col a { display: block; color: var(--muted); margin: 8px 0; text-decoration: none; font-size: 0.88rem; transition: color 0.3s; }
+    .footer-col a:hover { color: var(--gold); }
+    .footer-col p { color: var(--muted); font-size: 0.88rem; margin: 8px 0; }
+    .footer-bottom { text-align: center; color: #444; padding-top: 24px; border-top: 1px solid #1a1a1a; font-size: 0.85rem; }
+
+    /* ── BACK TO TOP ── */
+    .back-to-top { position: fixed; bottom: 28px; right: 28px; width: 46px; height: 46px; background: linear-gradient(135deg,var(--gold),var(--gold2)); border: none; border-radius: 50%; color: #000; font-size: 1.2rem; cursor: pointer; opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 999; box-shadow: 0 4px 15px rgba(255,215,0,0.3); }
+    .back-to-top.show { opacity: 1; visibility: visible; }
+    .back-to-top:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(255,215,0,0.5); }
+
+    /* ── PAYMENT MODAL ── */
+    #paymentModal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 10000; align-items: center; justify-content: center; }
+    .payment-inner { background: #1a1a2e; padding: 40px; border-radius: 20px; max-width: 500px; width: 90%; border: 2px solid var(--gold); position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.8); }
+    .payment-close { position: absolute; top: 16px; right: 20px; font-size: 1.8rem; color: #fff; background: none; border: none; cursor: pointer; line-height: 1; }
+    .payment-product { font-size: 1.6rem; font-weight: 900; color: var(--gold); margin-bottom: 6px; }
+    .payment-price { font-size: 2.2rem; color: var(--cyan); font-weight: 900; margin-bottom: 28px; }
+    .payment-methods { display: flex; flex-direction: column; gap: 12px; }
+    .pay-btn { padding: 16px; border-radius: 10px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; color: #fff; border: none; }
+    .pay-btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
+    .pay-paypal { background: #0070ba; }
+    .pay-whatsapp { background: #25D366; }
+    .pay-email { background: #ea4335; }
+    .payment-details { margin-top: 20px; padding: 18px; background: rgba(255,215,0,0.07); border-radius: 10px; border: 1px solid rgba(255,215,0,0.2); }
+    .payment-details p { font-size: 0.88rem; color: var(--muted); margin: 5px 0; }
+    .payment-details strong { color: var(--gold); }
+    .payment-details small { display: block; margin-top: 12px; font-size: 0.82rem; color: #666; }
+
+    /* ── BROKERS MODAL ── */
+    #brokersModal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 10000; align-items: center; justify-content: center; }
+    .brokers-inner { background: #1a1a2e; padding: 38px 36px; border-radius: 20px; max-width: 400px; width: 90%; border: 2px solid var(--gold); position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.8); text-align: center; }
+    .brokers-close { position: absolute; top: 14px; right: 18px; font-size: 1.8rem; color: #fff; background: none; border: none; cursor: pointer; line-height: 1; transition: color 0.2s; }
+    .brokers-close:hover { color: var(--gold); }
+    .brokers-eyebrow { font-size: 0.7rem; color: var(--cyan); font-family: monospace; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 10px; }
+    .brokers-title { font-size: 1.5rem; font-weight: 900; color: var(--gold); margin-bottom: 8px; }
+    .brokers-sub { color: var(--muted); font-size: 0.87rem; margin-bottom: 28px; line-height: 1.65; }
+    .broker-options { display: flex; flex-direction: column; gap: 14px; }
+    .broker-btn { padding: 18px 24px; border-radius: 12px; font-weight: 800; font-size: 1rem; cursor: pointer; transition: all 0.3s ease; text-decoration: none; display: flex; align-items: center; justify-content: space-between; }
+    .broker-btn.exness { background: linear-gradient(135deg, var(--gold), var(--gold2)); color: #000; }
+    .broker-btn.exness:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,215,0,0.4); }
+    .broker-btn.hfm { background: linear-gradient(135deg, var(--cyan), #0099bb); color: #000; }
+    .broker-btn.hfm:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,212,255,0.4); }
+    .broker-btn-left { text-align: left; }
+    .broker-btn-name { font-size: 1.05rem; font-weight: 900; display: block; }
+    .broker-btn-note { font-size: 0.72rem; font-weight: 600; opacity: 0.65; }
+    .broker-btn-icon { font-size: 1.2rem; }
+    .brokers-disclaimer { margin-top: 18px; font-size: 0.75rem; color: #444; line-height: 1.6; }
+
+    /* Responsive */
+    @media (max-width: 700px) {
+      #screenGame { flex-direction: column; }
+      .panel-chart { flex: 0 0 42vh; border-right: none; border-bottom: 1px solid var(--border2); }
+      .panel-action { width: 100%; max-width: 100%; flex: 1 1 0; }
+      .hud-strip { grid-template-columns: repeat(4, 1fr); }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 20px; }
+      .footer-brand { grid-column: 1 / -1; }
+      .result-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .decision-grid { grid-template-columns: 1fr; }
+      .welcome-grid { grid-template-columns: 1fr; }
+      .setup-row { grid-template-columns: 1fr 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ NAV ══ -->
+  <nav>
+    <div class="nav-container">
+      <a href="index.html" class="logo">WORLDBANKFX × PROFESSOR</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li class="dropdown">
+          <a href="index.html#services">Offers ▾</a>
+          <div class="dropdown-content">
+            <a href="https://partially-top-moose.ngrok-free.app/trademate/login.php">📓 TradeMate Journal</a>
+            <a href="forex-course.html">📈 Free Forex Course</a>
+            <a href="#" onclick="openPayment('Trading Playbook PDF — 5 Pages','$49.99'); return false;">📄 Trading Playbook PDF</a>
+            <a href="https://t.me/w0rldbank07" target="_blank" rel="noopener noreferrer">🔐 Trade Daily with Me</a>
+          </div>
+        </li>
+        <li class="dropdown">
+          <a href="index.html#tools">Tools ▾</a>
+          <div class="dropdown-content">
+            <a href="pip-calculator.html">🧮 Pip Calculator</a>
+            <a href="trading-growth-calculator.html">📈 Growth Calculator</a>
+          </div>
+        </li>
+        <li class="dropdown">
+          <a href="index.html#games">Games ▾</a>
+          <div class="dropdown-content">
+            <a href="patience-test.html">⏳ Patience Test</a>
+            <a href="revenge-breaker.html">🎲 Probability Revealer</a>
+          </div>
+        </li>
+        <li><a href="forex-course.html">Fx Course</a></li>
+        <li><a href="https://partially-top-moose.ngrok-free.app/trademate/login.php">TradeMate</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><button class="nav-cta" onclick="openBrokers()">Our Brokers</button></li>
+      </ul>
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button>
+    </div>
+  </nav>
+
+  <!-- ══ MOBILE NAV ══ -->
+  <div class="mobile-nav" id="mobileNav">
+    <button class="mobile-nav-close" onclick="toggleMobileMenu()"><i class="fas fa-times"></i></button>
+    <ul class="mobile-nav-links">
+      <li><a href="index.html" onclick="toggleMobileMenu()">Home</a></li>
+      <li>
+        <div class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(this)"><span>Offers</span><i class="fas fa-chevron-down"></i></div>
+        <div class="mobile-dropdown-content">
+          <a href="https://partially-top-moose.ngrok-free.app/trademate/login.php" onclick="toggleMobileMenu()">📓 TradeMate Journal</a>
+          <a href="forex-course.html" onclick="toggleMobileMenu()">📈 Free Forex Course</a>
+          <a href="#" onclick="toggleMobileMenu(); openPayment('Trading Playbook PDF — 5 Pages','$49.99')">📄 Trading Playbook PDF</a>
+          <a href="https://t.me/w0rldbank07" target="_blank" rel="noopener noreferrer" onclick="toggleMobileMenu()">🔐 Trade Daily with Me</a>
+        </div>
+      </li>
+      <li>
+        <div class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(this)"><span>Tools</span><i class="fas fa-chevron-down"></i></div>
+        <div class="mobile-dropdown-content">
+          <a href="pip-calculator.html" onclick="toggleMobileMenu()">🧮 Pip Calculator</a>
+          <a href="trading-growth-calculator.html" onclick="toggleMobileMenu()">📈 Growth Calculator</a>
+        </div>
+      </li>
+      <li>
+        <div class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(this)"><span>Games</span><i class="fas fa-chevron-down"></i></div>
+        <div class="mobile-dropdown-content">
+          <a href="patience-test.html" onclick="toggleMobileMenu()">⏳ Patience Test</a>
+          <a href="revenge-breaker.html" onclick="toggleMobileMenu()">🎲 Probability Revealer</a>
+        </div>
+      </li>
+      <li><a href="forex-course.html" onclick="toggleMobileMenu()">Fx Course</a></li>
+      <li><a href="https://partially-top-moose.ngrok-free.app/trademate/login.php" onclick="toggleMobileMenu()">TradeMate Journal</a></li>
+      <li><a href="contact.html" onclick="toggleMobileMenu()">Contact</a></li>
+      <button class="mobile-nav-cta" onclick="toggleMobileMenu(); openBrokers()">🏦 Our Brokers</button>
+    </ul>
+  </div>
+
+  <!-- ══════════════════════════════
+       WELCOME SCREEN
+  ══════════════════════════════ -->
+  <div class="screen active" id="screenWelcome">
+    <div class="welcome-inner">
+      <div class="welcome-badge">Trader Psychology Lab</div>
+      <div class="welcome-title">Revenge <span>Breaker</span></div>
+      <p class="welcome-sub">// 20 rounds. Real scenarios. Your decisions shape your account curve.</p>
+      <div class="welcome-grid">
+        <div class="info-card red">
+          <h3>The Trap</h3>
+          <p>After a loss, your <strong>win rate drops</strong>. Not because the market changes — but because <strong>you</strong> change. Your risk sizing grows. Your entry quality drops. Your stops get loose. This game forces you to feel it.</p>
+        </div>
+        <div class="info-card green">
+          <h3>The Edge</h3>
+          <p>Professionals know: <strong>waiting is a position</strong>. Stepping away resets your psychological edge. The "Wait" button isn't weakness — it's the highest-EV move available after consecutive losses.</p>
+        </div>
+        <div class="info-card gold">
+          <h3>What This Tracks</h3>
+          <p><strong>Revenge trades:</strong> entering with compromised psychology.<br><strong>Sizing errors:</strong> doubling down to recover faster.<br><strong>Discipline score:</strong> how often you chose the right action regardless of emotion.</p>
+        </div>
+        <div class="info-card" style="border-color: rgba(0,212,255,0.3);">
+          <h3 style="color: var(--cyan);">Game Mechanics</h3>
+          <p>Your win rate is <strong>dynamic</strong>. It drops with each loss streak and rises when you wait. The game presents real trade scenarios — you decide: <strong>enter, size up, reduce size, or wait it out.</strong></p>
+        </div>
+      </div>
+      <button class="starts-btn" onclick="initGame()">ENTER SIMULATOR →</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       GAME SCREEN
+  ══════════════════════════════ -->
+  <div class="screen" id="screenGame">
+
+    <!-- LEFT: CHART -->
+    <div class="panel-chart">
+      <!-- Tilt color strip -->
+      <div class="tilt-strip" id="tiltStrip"></div>
+
+      <!-- Ticker bar -->
+      <div class="ticker-bar">
+        <span class="ticker-pair">XAUUSD</span>
+        <span class="ticker-price" id="tickerPrice">2,341.50</span>
+        <span class="ticker-change" id="tickerChange">+0.00%</span>
+        <span class="ticker-sep">|</span>
+        <div class="ticker-meta">
+          <span>O: <b id="tickO">—</b></span>
+          <span>H: <b id="tickH">—</b></span>
+          <span>L: <b id="tickL">—</b></span>
+          <span style="color: var(--muted);">5M · SIM</span>
+        </div>
+      </div>
+
+      <!-- Chart canvas -->
+      <div class="chart-area">
+        <canvas id="mainChart"></canvas>
+
+        <!-- Overlays -->
+        <div class="chart-overlay-tl">
+          <span class="co-badge calm" id="emodBadge">CALM & FOCUSED</span>
+        </div>
+        <div class="chart-overlay-tr">
+          <div class="co-pl-label">SESSION P&amp;L</div>
+          <div class="co-pl up" id="chartPL">+$0</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: ACTION PANEL -->
+    <div class="panel-action">
+
+      <!-- HUD strip -->
+      <div class="hud-strip">
+        <div class="hud-cell">
+          <div class="h-label">Balance</div>
+          <div class="h-value" id="hudBalance">$10,000</div>
+        </div>
+        <div class="hud-cell">
+          <div class="h-label">Round</div>
+          <div class="h-value" id="hudRound">1/20</div>
+        </div>
+        <div class="hud-cell dn">
+          <div class="h-label">Revenge</div>
+          <div class="h-value" id="hudRevenge">0</div>
+        </div>
+        <div class="hud-cell up">
+          <div class="h-label">Discipline</div>
+          <div class="h-value" id="hudDiscipline">0</div>
+        </div>
+      </div>
+
+      <!-- Scrollable body -->
+      <div class="action-body">
+
+        <!-- Scenario -->
+        <div>
+          <div class="scenario-header-row">
+            <span class="sc-round" id="scRound">Round 1 of 20</span>
+            <span class="sc-context-tag normal" id="scTag">NORMAL SESSION</span>
+          </div>
+          <div class="situation-box">
+            <div class="sit-label">Current Situation</div>
+            <div class="sit-text" id="scenarioText">Market opens flat. XAUUSD is at key support. Macro is neutral.</div>
+          </div>
+        </div>
+
+        <!-- Setup stats -->
+        <div class="setup-row">
+          <div class="setup-stat" id="statWinRate">
+            <div class="ss-label">Win Rate</div>
+            <div class="ss-val good" id="statWRVal">60%</div>
+          </div>
+          <div class="setup-stat neutral">
+            <div class="ss-label">Risk</div>
+            <div class="ss-val" id="statRisk">$500</div>
+          </div>
+          <div class="setup-stat neutral">
+            <div class="ss-label">Streak</div>
+            <div class="ss-val" id="statStreak">— —</div>
+          </div>
+        </div>
+
+        <!-- Warning -->
+        <div class="warning-box" id="warningBanner"></div>
+
+        <!-- Decisions -->
+        <div class="decision-grid" id="decisionRow">
+          <button class="dec-btn trade" id="btnTrade" onclick="decision('trade')">
+            <span class="d-icon">⚡</span>
+            ENTER TRADE
+            <span class="d-sub">Standard $500 risk</span>
+          </button>
+          <button class="dec-btn wait-btn" id="btnWait" onclick="decision('wait')">
+            <span class="d-icon">🧘</span>
+            WAIT / STEP AWAY
+            <span class="d-sub">Reset psychology</span>
+          </button>
+          <button class="dec-btn size-up" id="btnSizeUp" onclick="decision('sizeup')">
+            <span class="d-icon">🔥</span>
+            SIZE UP $1,000
+            <span class="d-sub">Double to recover faster</span>
+          </button>
+          <button class="dec-btn reduce" id="btnReduce" onclick="decision('reduce')">
+            <span class="d-icon">🛡️</span>
+            REDUCE $250
+            <span class="d-sub">Half risk, protect capital</span>
+          </button>
+        </div>
+
+        <!-- Outcome -->
+        <div class="outcome-area" id="outcomeArea">
+          <div class="outcome-card" id="outcomeCard">
+            <div class="outcome-main">
+              <div class="outcome-result" id="outcomeResult">WIN</div>
+              <div class="outcome-change" id="outcomeChange">+$500</div>
+            </div>
+            <div class="outcome-teaching" id="outcomeTeaching"></div>
+          </div>
+          <button class="continue-btn" onclick="nextRound()">NEXT ROUND →</button>
+        </div>
+
+      </div><!-- /action-body -->
+    </div><!-- /panel-action -->
+  </div><!-- /screenGame -->
+
+  <!-- ══════════════════════════════
+       RESULT SCREEN
+  ══════════════════════════════ -->
+  <div class="screen" id="screenResult">
+    <div class="result-wrap">
+      <div class="result-top">
+        <div class="result-icon-big" id="resIcon">🏆</div>
+        <div class="result-main-title green" id="resTitle">MASTER TRADER</div>
+        <div class="result-pl up" id="resPL">+$2,400 (+24%)</div>
+      </div>
+      <div class="result-grid">
+        <div class="rg-cell"><div class="rv" id="rBalance">$12,400</div><div class="rl">Final Balance</div></div>
+        <div class="rg-cell"><div class="rv" id="rRevenge">0</div><div class="rl">Revenge Trades</div></div>
+        <div class="rg-cell"><div class="rv" id="rDiscipline">0</div><div class="rl">Disciplined Waits</div></div>
+        <div class="rg-cell"><div class="rv" id="rDscore">0%</div><div class="rl">Discipline Score</div></div>
+      </div>
+
+      <!-- Account Curve -->
+      <div class="result-curve-wrap">
+        <div class="result-curve-header">
+          <span class="rc-label">Account Curve</span>
+          <span class="rc-label" id="rcPL">Final P&L</span>
+        </div>
+        <canvas id="resultCurveCanvas" height="100"></canvas>
+      </div>
+
+      <div class="psych-report">
+        <h3>Psychological Profile</h3>
+        <div class="psych-item"><span class="pi-label">Tilt Resistance</span><span class="pi-value good" id="piTilt">—</span></div>
+        <div class="psych-item"><span class="pi-label">Sizing Discipline</span><span class="pi-value good" id="piSizing">—</span></div>
+        <div class="psych-item"><span class="pi-label">Recovery Pattern</span><span class="pi-value good" id="piRecovery">—</span></div>
+        <div class="psych-item"><span class="pi-label">Biggest Weakness</span><span class="pi-value bad" id="piWeakness">—</span></div>
+      </div>
+      <div class="verdict-block mid" id="verdictBlock">
+        <p id="verdictText"></p>
+      </div>
+      <button class="retry-btn" onclick="resetGame()">↺ RUN AGAIN</button>
+    </div>
+  </div>
+
+  <!-- ══ FOOTER ══ -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <h3>WorldBankFx × Professor</h3>
+          <p>Empowering traders with knowledge, tools, and live daily trading. Your journey to financial freedom starts here.</p>
+          <div class="footer-social">
+            <a href="https://www.instagram.com/_thedigitalprofessor/" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.youtube.com/@TheWorldBankProfessor" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-youtube"></i></a>
+            <a href="https://x.com/DigitoProfessor" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="https://t.me/w0rldbank07" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-telegram"></i></a>
+            <a href="https://wa.me/256783354348" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.facebook.com/TheDig1talProfessor" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-facebook"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Offers</h4>
+          <a href="https://partially-top-moose.ngrok-free.app/trademate/login.php">TradeMate Journal</a>
+          <a href="forex-course.html">Free Forex Course</a>
+          <a href="#" onclick="openPayment('Trading Playbook PDF — 5 Pages','$49.99'); return false;">Trading Playbook PDF</a>
+          <a href="https://t.me/w0rldbank07" target="_blank" rel="noopener noreferrer">Trade Daily with Me</a>
+        </div>
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <a href="pip-calculator.html">Pip Calculator</a>
+          <a href="trading-growth-calculator.html">Growth Calculator</a>
+          <a href="https://partially-top-moose.ngrok-free.app/trademate/login.php">TradeMate Journal</a>
+          <a href="pricing.html">TradeMate Pricing</a>
+        </div>
+        <div class="footer-col">
+          <h4>Games</h4>
+          <a href="patience-test.html">Patience Test</a>
+          <a href="revenge-breaker.html">Probability Revealer</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <a href="contact.html">Contact Page</a>
+          <a href="https://t.me/w0rldbank07" target="_blank" rel="noopener noreferrer">Telegram</a>
+          <a href="https://wa.me/256783354348" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+          <a href="mailto:unlimited.worldbankfx@gmail.com">unlimited.worldbankfx@gmail.com</a>
+          <p>+256 783 354 348</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025–2026 WorldBankFx × Professor. All rights reserved. | Built with discipline.</p>
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <!-- ══ PAYMENT MODAL ══ -->
+  <div id="paymentModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:10000;align-items:center;justify-content:center;">
+    <div class="payment-inner">
+      <button class="payment-close" onclick="closePayment()">×</button>
+      <div class="payment-product" id="modalProductName">Product</div>
+      <div class="payment-price" id="modalPrice">$0</div>
+      <div class="payment-methods">
+        <a href="https://paypal.me/neemacharles777" target="_blank" rel="noopener noreferrer" class="pay-btn pay-paypal">
+          💳 Pay via PayPal
+        </a>
+        <a id="whatsappBtn" href="#" target="_blank" rel="noopener noreferrer" class="pay-btn pay-whatsapp">
+          💬 Order via WhatsApp
+        </a>
+        <a id="emailBtn" href="#" class="pay-btn pay-email">
+          📧 Order via Email
+        </a>
+      </div>
+      <div class="payment-details">
+        <p><strong>PayPal:</strong> neemacharles777@gmail.com</p>
+        <p><strong>WhatsApp:</strong> +256 783 354 348</p>
+        <p><strong>Email:</strong> <a href="mailto:unlimited.worldbankfx@gmail.com" style="color:var(--gold)">unlimited.worldbankfx@gmail.com</a></p>
+        <small>After payment, send your screenshot to WhatsApp or email. I'll respond within 24 hours with your product.</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ BROKERS MODAL ══ -->
+  <div id="brokersModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:10000;align-items:center;justify-content:center;">
+    <div class="brokers-inner">
+      <button class="brokers-close" onclick="closeBrokers()">×</button>
+      <div class="brokers-eyebrow">Recommended Partners</div>
+      <div class="brokers-title">Our Brokers</div>
+      <p class="brokers-sub">Open your account under my referral and trade knowing you've got a mentor behind you.</p>
+      <div class="broker-options">
+        <a href="https://one.exnesstrack.org/a/y7scclopum" target="_blank" rel="noopener noreferrer" class="broker-btn exness" onclick="closeBrokers()">
+          <div class="broker-btn-left">
+            <span class="broker-btn-name">Exness</span>
+            <span class="broker-btn-note">Open under my referral link</span>
+          </div>
+          <span class="broker-btn-icon">→</span>
+        </a>
+        <a href="https://register.hfm.com/sv/en/new-live-account/?refid=374930" target="_blank" rel="noopener noreferrer" class="broker-btn hfm" onclick="closeBrokers()">
+          <div class="broker-btn-left">
+            <span class="broker-btn-name">HFM</span>
+            <span class="broker-btn-note">Open under my referral link</span>
+          </div>
+          <span class="broker-btn-icon">→</span>
+        </a>
+      </div>
+      <p class="brokers-disclaimer">Clicking a link takes you to the broker's official website. Forex trading involves risk.</p>
+    </div>
+  </div>
+
+<script>
+// ─── SCENARIOS ────────────────────────────────────────────────────────────────
+const SCENARIOS_NORMAL = [
+  "XAUUSD consolidating at $2,340. London session opens. Price is testing yesterday's high with decent volume.",
+  "Clean pullback to 1H support on XAUUSD. RSI cooling from overbought. Confluence with 50 EMA.",
+  "Market is ranging. XAUUSD inside a 15-pip channel for 3 hours. A breakout attempt is forming.",
+  "Bullish momentum from Asia session. XAUUSD broke overnight high. First pullback to broken resistance.",
+  "XAUUSD at key weekly level: $2,320. Price has bounced here three times. Candle structure is clean.",
+  "US session opens. XAUUSD forming a flag after a 25-pip impulsive move. Measured target is clear.",
+  "Fresh 4H bullish engulfing on XAUUSD. Volume spike confirms. Entry risk is controlled at recent low.",
+  "Neutral macro day. XAUUSD trending cleanly on 1H. Setup ticks all your rules. No headline risk.",
+];
+const SCENARIOS_AFTER_LOSS = [
+  "You just got stopped out. Price literally reversed 5 pips after hitting your stop. Another setup is forming NOW.",
+  "Second loss in a row. Your account is down $1,000 in under an hour. Same pair is setting up again.",
+  "That loss felt preventable. You see what looks like the mirror-image setup on a different pair.",
+  "You've been stopped out twice. But the market is moving, and sitting out feels like losing more.",
+  "Down 3 trades. The urge to 'get it back' is strong. A setup on XAUUSD looks convincing.",
+  "Just blew a trade on a news spike. The chart is back at your original entry. 'I was right' you think.",
+];
+const SCENARIOS_STREAK = [
+  "3 wins in a row. You feel sharp. A new setup appears — lower quality than usual but you feel invincible.",
+  "On a hot streak. P&L is green. You consider doubling your next risk to capitalise on momentum.",
+  "4 consecutive wins. The market is 'easy' right now. You see a marginal setup and feel pulled to enter.",
+];
+
+// ─── STATE ────────────────────────────────────────────────────────────────────
+let balance = 10000;
+let round = 1;
+const MAX_ROUNDS = 20;
+let consecutiveLosses = 0;
+let consecutiveWins = 0;
+let revengeTrades = 0;
+let sizeUpCount = 0;
+let disciplineWaits = 0;
+let currentWinRate = 60;
+let currentRisk = 500;
+let balanceHistory = [10000];
+let actionLog = [];
+let chartCtx = null;
+let chartAnimFrame = null;
+
+// Simulated price data for visual chart
+let priceData = [];
+let basePrice = 2341.5;
+let priceAnimId = null;
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+function initGame() {
+  balance = 10000; round = 1;
+  consecutiveLosses = 0; consecutiveWins = 0;
+  revengeTrades = 0; sizeUpCount = 0; disciplineWaits = 0;
+  currentWinRate = 60; currentRisk = 500;
+  balanceHistory = [10000]; actionLog = [];
+
+  // Generate initial price series
+  basePrice = 2341.5;
+  priceData = generatePriceSeries(120, basePrice);
+
+  showScreen('screenGame');
+  initChartCanvas();
+  buildRound();
+  startPriceTick();
+}
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if (id === 'screenResult') {
+    stopPriceTick();
+    drawResultCurve();
+  }
+}
+
+// ─── PRICE SIMULATION ─────────────────────────────────────────────────────────
+function generatePriceSeries(n, start) {
+  const arr = [start];
+  for (let i = 1; i < n; i++) {
+    const prev = arr[i-1];
+    const move = (Math.random() - 0.48) * 0.8 + (Math.random() - 0.5) * 1.2;
+    arr.push(+(prev + move).toFixed(2));
+  }
+  return arr;
+}
+
+function startPriceTick() {
+  stopPriceTick();
+  (function tick() {
+    // Add a new price point
+    const last = priceData[priceData.length - 1];
+    // Bias based on emotional state (cosmetic only)
+    const bias = consecutiveLosses > 0 ? -0.1 : 0.05;
+    const newP = +(last + bias + (Math.random() - 0.49) * 1.4).toFixed(2);
+    priceData.push(newP);
+    if (priceData.length > 200) priceData.shift();
+
+    updateTickerBar();
+    drawMainChart();
+
+    priceAnimId = setTimeout(tick, 800 + Math.random() * 400);
+  })();
+}
+
+function stopPriceTick() {
+  if (priceAnimId) { clearTimeout(priceAnimId); priceAnimId = null; }
+}
+
+function updateTickerBar() {
+  const last = priceData[priceData.length - 1];
+  const open = priceData[Math.max(0, priceData.length - 60)];
+  const visible = priceData.slice(-60);
+  const hi = Math.max(...visible);
+  const lo = Math.min(...visible);
+  const chg = ((last - open) / open * 100).toFixed(2);
+  const chgSign = last >= open ? '+' : '';
+
+  document.getElementById('tickerPrice').textContent = last.toFixed(2);
+  document.getElementById('tickerPrice').style.color = last >= open ? 'var(--green)' : 'var(--red)';
+
+  const tcEl = document.getElementById('tickerChange');
+  tcEl.textContent = chgSign + chg + '%';
+  tcEl.className = 'ticker-change' + (last < open ? ' neg' : '');
+
+  document.getElementById('tickO').textContent = open.toFixed(2);
+  document.getElementById('tickH').textContent = hi.toFixed(2);
+  document.getElementById('tickL').textContent = lo.toFixed(2);
+}
+
+// ─── MAIN CHART ───────────────────────────────────────────────────────────────
+function initChartCanvas() {
+  const canvas = document.getElementById('mainChart');
+  const rect = canvas.parentElement.getBoundingClientRect();
+  canvas.width = rect.width;
+  canvas.height = rect.height;
+  chartCtx = canvas.getContext('2d');
+}
+
+function drawMainChart() {
+  const canvas = document.getElementById('mainChart');
+  if (!canvas) return;
+  const W = canvas.width, H = canvas.height;
+  const ctx = chartCtx;
+  if (!ctx) return;
+
+  ctx.clearRect(0, 0, W, H);
+
+  const visible = priceData.slice(-Math.min(priceData.length, 100));
+  if (visible.length < 2) return;
+
+  const minP = Math.min(...visible) - 2;
+  const maxP = Math.max(...visible) + 2;
+  const padL = 8, padR = 52, padT = 12, padB = 28;
+  const toX = i => padL + (i / (visible.length - 1)) * (W - padL - padR);
+  const toY = v => padT + (1 - (v - minP) / (maxP - minP)) * (H - padT - padB);
+
+  // Grid lines
+  ctx.strokeStyle = 'rgba(255,255,255,0.04)';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([4,6]);
+  for (let g = 0; g < 5; g++) {
+    const y = padT + (g / 4) * (H - padT - padB);
+    ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(W - padR, y); ctx.stroke();
+  }
+  for (let g = 0; g < 7; g++) {
+    const x = padL + (g / 6) * (W - padL - padR);
+    ctx.beginPath(); ctx.moveTo(x, padT); ctx.lineTo(x, H - padB); ctx.stroke();
+  }
+  ctx.setLineDash([]);
+
+  // Price labels right axis
+  ctx.fillStyle = 'rgba(120,120,148,0.7)';
+  ctx.font = '10px Space Mono, monospace';
+  ctx.textAlign = 'left';
+  for (let g = 0; g <= 4; g++) {
+    const pVal = minP + (g / 4) * (maxP - minP);
+    const y = toY(pVal);
+    ctx.fillText(pVal.toFixed(1), W - padR + 4, y + 3.5);
+  }
+
+  // Time labels bottom
+  ctx.fillStyle = 'rgba(120,120,148,0.5)';
+  ctx.font = '9px Space Mono, monospace';
+  ctx.textAlign = 'center';
+  const timeLabels = ['−8H', '−6H', '−4H', '−2H', 'NOW'];
+  timeLabels.forEach((t, idx) => {
+    const x = padL + (idx / (timeLabels.length-1)) * (W - padL - padR);
+    ctx.fillText(t, x, H - 6);
+  });
+
+  // Fill
+  const last = visible[visible.length - 1];
+  const first = visible[0];
+  const isUp = last >= first;
+  const fillColor = isUp ? 'rgba(16,185,129,0.07)' : 'rgba(239,68,68,0.07)';
+  const lineColor = isUp ? '#10b981' : '#ef4444';
+
+  ctx.beginPath();
+  ctx.moveTo(toX(0), toY(visible[0]));
+  visible.forEach((v, i) => ctx.lineTo(toX(i), toY(v)));
+  ctx.lineTo(toX(visible.length - 1), H - padB);
+  ctx.lineTo(toX(0), H - padB);
+  ctx.closePath();
+  ctx.fillStyle = fillColor;
+  ctx.fill();
+
+  // Gradient line
+  const grad = ctx.createLinearGradient(0, 0, W, 0);
+  grad.addColorStop(0, lineColor + '66');
+  grad.addColorStop(1, lineColor);
+  ctx.beginPath();
+  ctx.moveTo(toX(0), toY(visible[0]));
+  visible.forEach((v, i) => ctx.lineTo(toX(i), toY(v)));
+  ctx.strokeStyle = grad;
+  ctx.lineWidth = 1.5;
+  ctx.lineJoin = 'round';
+  ctx.stroke();
+
+  // Current price line
+  const curY = toY(last);
+  ctx.strokeStyle = lineColor + 'aa';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([3,4]);
+  ctx.beginPath(); ctx.moveTo(padL, curY); ctx.lineTo(W - padR, curY); ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Current price pill
+  ctx.fillStyle = lineColor;
+  const pillW = 44, pillH = 16, pillX = W - padR + 4, pillY = curY - pillH/2;
+  ctx.beginPath();
+  ctx.roundRect(pillX, pillY, pillW, pillH, 3);
+  ctx.fill();
+  ctx.fillStyle = '#000';
+  ctx.font = 'bold 9px Space Mono, monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText(last.toFixed(1), pillX + pillW/2, pillY + 11);
+
+  // Trade markers — dots at decision points
+  if (actionLog.length > 0 && balanceHistory.length > 1) {
+    // Plot entry dots along the price line for drama
+    actionLog.forEach((a, idx) => {
+      if (a.type === 'wait') return;
+      const xIdx = Math.round((idx / MAX_ROUNDS) * (visible.length - 1));
+      const xPos = toX(Math.min(xIdx, visible.length - 1));
+      const yPos = toY(visible[Math.min(xIdx, visible.length - 1)]);
+      ctx.beginPath();
+      ctx.arc(xPos, yPos, 4, 0, Math.PI * 2);
+      ctx.fillStyle = a.isWin ? 'var(--green)' : 'var(--red)';
+      ctx.fill();
+      ctx.strokeStyle = '#0a0a0f';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+    });
+  }
+}
+
+// ─── BUILD ROUND ──────────────────────────────────────────────────────────────
+function buildRound() {
+  updateEmoMeter();
+  updateHUD();
+
+  let scenarioPool, tag, tagClass;
+  if (consecutiveLosses >= 2) {
+    scenarioPool = SCENARIOS_AFTER_LOSS;
+    tag = 'AFTER ' + consecutiveLosses + ' LOSSES';
+    tagClass = 'after-loss';
+  } else if (consecutiveWins >= 3) {
+    scenarioPool = SCENARIOS_STREAK;
+    tag = 'WIN STREAK ×' + consecutiveWins;
+    tagClass = 'streak';
+  } else {
+    scenarioPool = SCENARIOS_NORMAL;
+    tag = 'NORMAL SESSION';
+    tagClass = 'normal';
+  }
+
+  const scenario = scenarioPool[Math.floor(Math.random() * scenarioPool.length)];
+  document.getElementById('scenarioText').textContent = scenario;
+  document.getElementById('scRound').textContent = 'Round ' + round + ' of ' + MAX_ROUNDS;
+  document.getElementById('scTag').textContent = tag;
+  document.getElementById('scTag').className = 'sc-context-tag ' + tagClass;
+
+  const wrEl = document.getElementById('statWRVal');
+  wrEl.textContent = currentWinRate + '%';
+  wrEl.parentElement.className = 'setup-stat ' + (currentWinRate >= 55 ? 'good' : currentWinRate >= 40 ? 'neutral' : 'bad');
+  wrEl.className = 'ss-val ' + (currentWinRate >= 55 ? 'good' : currentWinRate >= 40 ? 'warn' : 'bad');
+  document.getElementById('statRisk').textContent = '$' + currentRisk;
+  const streak = consecutiveLosses > 0 ? ('↓ ' + consecutiveLosses + ' Loss') : consecutiveWins > 0 ? ('↑ ' + consecutiveWins + ' Win') : '— —';
+  document.getElementById('statStreak').textContent = streak;
+
+  const warn = document.getElementById('warningBanner');
+  if (consecutiveLosses >= 2) {
+    warn.textContent = '⚠ TILT WARNING: Win rate now ' + currentWinRate + '%. You need 2.5× more wins to recover these losses. Consider waiting.';
+    warn.classList.add('show');
+  } else if (consecutiveLosses === 1) {
+    warn.textContent = 'ℹ One loss recorded. Win rate slightly impaired. Stay selective.';
+    warn.classList.add('show');
+  } else {
+    warn.classList.remove('show');
+  }
+
+  document.getElementById('outcomeArea').classList.remove('show');
+  document.querySelectorAll('.dec-btn').forEach(b => b.disabled = false);
+}
+
+// ─── EMOTIONAL METER ──────────────────────────────────────────────────────────
+function updateEmoMeter() {
+  const badge = document.getElementById('emodBadge');
+  const strip = document.getElementById('tiltStrip');
+
+  if (consecutiveLosses === 0) {
+    currentWinRate = consecutiveWins >= 3 ? 55 : 60;
+    const txt = consecutiveWins >= 3 ? 'OVERCONFIDENT' : 'CALM & FOCUSED';
+    badge.textContent = txt;
+    badge.className = 'co-badge calm';
+    strip.style.background = 'var(--green)';
+  } else if (consecutiveLosses === 1) {
+    currentWinRate = 48;
+    badge.textContent = 'SLIGHTLY TILTED';
+    badge.className = 'co-badge tilted';
+    strip.style.background = 'var(--orange)';
+  } else if (consecutiveLosses === 2) {
+    currentWinRate = 35;
+    badge.textContent = 'TILTED — CAUTION';
+    badge.className = 'co-badge tilt2';
+    strip.style.background = '#ff6400';
+  } else {
+    currentWinRate = 22;
+    badge.textContent = 'REVENGE MODE 🔴';
+    badge.className = 'co-badge revenge';
+    strip.style.background = 'var(--red)';
+  }
+  document.getElementById('hudWinRate') && (document.getElementById('hudWinRate').textContent = currentWinRate + '%');
+}
+
+// ─── DECISION ────────────────────────────────────────────────────────────────
+function decision(type) {
+  document.querySelectorAll('.dec-btn').forEach(b => b.disabled = true);
+
+  let riskAmt = 0;
+  let isRevenge = false;
+  let isSizeUp = false;
+  let isDiscipline = false;
+
+  if (type === 'wait') {
+    isDiscipline = (consecutiveLosses >= 1);
+    disciplineWaits++;
+    consecutiveLosses = 0;
+    consecutiveWins = 0;
+    currentRisk = 500;
+    showOutcome('wait', null, null, isDiscipline);
+    return;
+  }
+
+  if (type === 'trade') { riskAmt = currentRisk; }
+  if (type === 'sizeup') { riskAmt = 1000; isSizeUp = true; if (consecutiveLosses >= 1) isRevenge = true; }
+  if (type === 'reduce') { riskAmt = 250; }
+
+  if (consecutiveLosses >= 2 && type === 'trade') isRevenge = true;
+  if (isRevenge) revengeTrades++;
+  if (isSizeUp) sizeUpCount++;
+
+  const isWin = Math.random() * 100 < currentWinRate;
+  const profit = isWin ? riskAmt : -riskAmt;
+  balance += profit;
+  balanceHistory.push(balance);
+
+  if (isWin) { consecutiveLosses = 0; consecutiveWins++; }
+  else { consecutiveWins = 0; consecutiveLosses++; }
+
+  actionLog.push({ type, isWin, profit, wr: currentWinRate, isRevenge, isSizeUp });
+  showOutcome(type, isWin, profit, false);
+}
+
+function showOutcome(type, isWin, profit, isDisciplineWait) {
+  const area = document.getElementById('outcomeArea');
+  const card = document.getElementById('outcomeCard');
+  const resEl = document.getElementById('outcomeResult');
+  const changeEl = document.getElementById('outcomeChange');
+  const teachEl = document.getElementById('outcomeTeaching');
+
+  area.classList.add('show');
+
+  if (isDisciplineWait || type === 'wait') {
+    card.className = 'outcome-card neutral';
+    resEl.className = 'outcome-result gold';
+    resEl.textContent = '⏸ STEPPED AWAY';
+    changeEl.textContent = '$0';
+    changeEl.style.color = 'var(--gold)';
+    if (isDisciplineWait) {
+      teachEl.innerHTML = '<strong>Correct call.</strong> You were tilted and chose to wait. Psychology reset to baseline. This decision alone saves more accounts than any strategy.';
+    } else {
+      teachEl.innerHTML = 'You sat out. In a neutral market, missing this setup is a minor cost. Know when waiting is discipline vs avoidance.';
+    }
+  } else if (isWin) {
+    card.className = 'outcome-card profit';
+    resEl.className = 'outcome-result green';
+    resEl.textContent = type === 'sizeup' ? '✅ WIN (SIZED UP)' : '✅ WIN';
+    changeEl.textContent = '+$' + profit.toLocaleString();
+    changeEl.style.color = 'var(--green)';
+    if (type === 'sizeup' && consecutiveLosses === 0) {
+      teachEl.innerHTML = '<strong>You won — but understand the math.</strong> Sizing up "worked" this time. But at ' + actionLog[actionLog.length-1].wr + '% win rate, over 100 trades this pattern destroys accounts.';
+    } else {
+      teachEl.innerHTML = 'Win at ' + actionLog[actionLog.length-1].wr + '% win rate. ' + (actionLog[actionLog.length-1].wr < 50 ? 'Lucky outcome — the odds were against you.' : 'Expected outcome. Your edge was intact.');
+    }
+  } else {
+    card.className = 'outcome-card loss';
+    resEl.className = 'outcome-result red';
+    resEl.textContent = type === 'sizeup' ? '❌ LOSS (SIZED UP)' : '❌ LOSS';
+    changeEl.textContent = '-$' + Math.abs(profit).toLocaleString();
+    changeEl.style.color = 'var(--red)';
+    if (type === 'sizeup') {
+      teachEl.innerHTML = '<strong>Sized up and lost.</strong> At ' + actionLog[actionLog.length-1].wr + '% win rate, this single trade cost you $1,000. This is how accounts blow.';
+    } else if (actionLog[actionLog.length-1]?.isRevenge) {
+      teachEl.innerHTML = '<strong>Revenge trade — confirmed loss.</strong> The math was against you (' + actionLog[actionLog.length-1].wr + '% win rate). The emotional cost compounds the financial one. Walk away.';
+    } else {
+      teachEl.innerHTML = 'Loss at ' + actionLog[actionLog.length-1].wr + '% win rate. ' + (actionLog[actionLog.length-1].wr >= 50 ? 'Losses happen even with full edge. This is normal.' : 'Your edge was compromised — the odds reflected that.');
+    }
+  }
+
+  updateHUD();
+}
+
+function nextRound() {
+  round++;
+  if (round > MAX_ROUNDS || balance <= 0) { endGame(); return; }
+  buildRound();
+}
+
+// ─── HUD ─────────────────────────────────────────────────────────────────────
+function updateHUD() {
+  document.getElementById('hudBalance').textContent = '$' + balance.toLocaleString();
+  document.getElementById('hudRound').textContent = round + '/' + MAX_ROUNDS;
+  document.getElementById('hudRevenge').textContent = revengeTrades;
+  document.getElementById('hudDiscipline').textContent = disciplineWaits;
+
+  const pl = balance - 10000;
+  const plEl = document.getElementById('chartPL');
+  plEl.textContent = (pl >= 0 ? '+' : '') + '$' + pl.toLocaleString();
+  plEl.className = 'co-pl ' + (pl >= 0 ? 'up' : 'dn');
+}
+
+// ─── RESULT CURVE ─────────────────────────────────────────────────────────────
+function drawResultCurve() {
+  const canvas = document.getElementById('resultCurveCanvas');
+  if (!canvas) return;
+  canvas.width = canvas.parentElement.clientWidth;
+  const W = canvas.width, H = canvas.height;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  const data = balanceHistory;
+  if (data.length < 2) return;
+
+  ctx.clearRect(0, 0, W, H);
+
+  const minV = Math.min(...data) - 300;
+  const maxV = Math.max(...data) + 300;
+  const padL = 8, padR = 50, padT = 10, padB = 22;
+  const toY = v => padT + (1 - (v - minV) / (maxV - minV)) * (H - padT - padB);
+  const toX = i => padL + (i / (data.length - 1)) * (W - padL - padR);
+
+  // Grid
+  ctx.strokeStyle = 'rgba(255,255,255,0.04)';
+  ctx.lineWidth = 1; ctx.setLineDash([3,5]);
+  for (let g = 0; g < 4; g++) {
+    const y = padT + (g / 3) * (H - padT - padB);
+    ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(W - padR, y); ctx.stroke();
+  }
+  ctx.setLineDash([]);
+
+  // Baseline $10k
+  const baseY = toY(10000);
+  ctx.strokeStyle = 'rgba(255,215,0,0.15)';
+  ctx.lineWidth = 1; ctx.setLineDash([4,4]);
+  ctx.beginPath(); ctx.moveTo(padL, baseY); ctx.lineTo(W - padR, baseY); ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle = 'rgba(255,215,0,0.5)';
+  ctx.font = '9px Space Mono, monospace';
+  ctx.textAlign = 'left';
+  ctx.fillText('$10K', W - padR + 4, baseY + 3);
+
+  const last = data[data.length - 1];
+  const lineColor = last >= 10000 ? '#10b981' : '#ef4444';
+  const fillColor = last >= 10000 ? 'rgba(16,185,129,0.08)' : 'rgba(239,68,68,0.08)';
+
+  ctx.beginPath();
+  ctx.moveTo(toX(0), toY(data[0]));
+  data.forEach((v, i) => ctx.lineTo(toX(i), toY(v)));
+  ctx.lineTo(W - padR, H - padB); ctx.lineTo(padL, H - padB);
+  ctx.closePath();
+  ctx.fillStyle = fillColor; ctx.fill();
+
+  ctx.beginPath();
+  ctx.moveTo(toX(0), toY(data[0]));
+  data.forEach((v, i) => ctx.lineTo(toX(i), toY(v)));
+  ctx.strokeStyle = lineColor; ctx.lineWidth = 2; ctx.lineJoin = 'round'; ctx.stroke();
+
+  // Price labels
+  ctx.fillStyle = 'rgba(120,120,148,0.7)';
+  ctx.font = '9px Space Mono, monospace';
+  ctx.textAlign = 'left';
+  const labelVals = [minV + (maxV - minV) * 0.05, 10000, maxV - (maxV - minV) * 0.05];
+  labelVals.forEach(v => {
+    ctx.fillText('$' + Math.round(v/100)*100, W - padR + 4, toY(v) + 3);
+  });
+
+  // Update P&L display
+  const pl = balance - 10000;
+  document.getElementById('rcPL').textContent = 'Final: ' + (pl >= 0 ? '+' : '') + '$' + pl.toLocaleString();
+  document.getElementById('rcPL').style.color = pl >= 0 ? 'var(--green)' : 'var(--red)';
+}
+
+// ─── END GAME ─────────────────────────────────────────────────────────────────
+function endGame() {
+  const profit = balance - 10000;
+  const pPct = ((profit / 10000) * 100).toFixed(1);
+  const totalTrades = actionLog.filter(a => a.type !== 'wait').length;
+  const disciplineScore = Math.round(((disciplineWaits + (totalTrades - revengeTrades - sizeUpCount)) / MAX_ROUNDS) * 100);
+
+  document.getElementById('rBalance').textContent = '$' + balance.toLocaleString();
+  document.getElementById('rRevenge').textContent = revengeTrades;
+  document.getElementById('rDiscipline').textContent = disciplineWaits;
+  document.getElementById('rDscore').textContent = disciplineScore + '%';
+
+  const plEl = document.getElementById('resPL');
+  plEl.textContent = (profit >= 0 ? '+' : '') + '$' + profit.toLocaleString() + ' (' + (profit >= 0 ? '+' : '') + pPct + '%)';
+  plEl.className = 'result-pl ' + (profit >= 0 ? 'up' : 'dn');
+
+  const tiltCount = actionLog.filter(a => a.isRevenge).length;
+  document.getElementById('piTilt').textContent = tiltCount === 0 ? 'Excellent — No tilt entries' : tiltCount <= 2 ? 'Acceptable — ' + tiltCount + ' tilt trades' : 'Poor — ' + tiltCount + ' revenge entries';
+  document.getElementById('piTilt').className = 'pi-value ' + (tiltCount === 0 ? 'good' : tiltCount <= 2 ? 'warn' : 'bad');
+
+  document.getElementById('piSizing').textContent = sizeUpCount === 0 ? 'Disciplined — No oversize' : sizeUpCount <= 2 ? 'Borderline — ' + sizeUpCount + '× doubled up' : 'Reckless — ' + sizeUpCount + '× doubled risk';
+  document.getElementById('piSizing').className = 'pi-value ' + (sizeUpCount === 0 ? 'good' : sizeUpCount <= 2 ? 'warn' : 'bad');
+
+  document.getElementById('piRecovery').textContent = disciplineWaits >= 3 ? 'Strong — Reset pattern present' : disciplineWaits >= 1 ? 'Developing — Occasionally waits' : 'Absent — Never stepped away';
+  document.getElementById('piRecovery').className = 'pi-value ' + (disciplineWaits >= 3 ? 'good' : disciplineWaits >= 1 ? 'warn' : 'bad');
+
+  const weakness = tiltCount > sizeUpCount ? 'Entering while tilted' : sizeUpCount > 0 ? 'Doubling down to recover' : disciplineWaits === 0 ? 'Never stepping away from screen' : 'Marginal setups — too selective sometimes';
+  document.getElementById('piWeakness').textContent = weakness;
+
+  let icon, title, titleClass, verdict, verdictClass;
+  if (profit > 3000 && disciplineScore >= 70) {
+    icon = '🏆'; title = 'PROFESSIONAL MINDSET'; titleClass = 'green';
+    verdict = '<strong>You played like a pro.</strong> Your account grew, you stepped away when tilted, and you didn\'t chase losses with bigger size. This is the exact pattern that separates consistently profitable traders from the 90% who blow accounts.';
+    verdictClass = 'pos';
+  } else if (profit > 1000) {
+    icon = '📈'; title = 'PROFITABLE SESSION'; titleClass = 'gold';
+    verdict = 'You made money, but ' + (revengeTrades > 0 ? revengeTrades + ' revenge trade(s) and ' : '') + (sizeUpCount > 0 ? sizeUpCount + ' oversized trade(s) ' : '') + 'show room for improvement.';
+    verdictClass = 'mid';
+  } else if (profit > -1500) {
+    icon = '⚠️'; title = 'EMOTIONAL TRADING COST YOU'; titleClass = 'orange';
+    verdict = 'You scraped through but revenge trading and poor sizing held you back. ' + revengeTrades + ' revenge entries + ' + sizeUpCount + ' oversized trades. Run the math: if you\'d waited on those, your P&L would look very different.';
+    verdictClass = 'mid';
+  } else {
+    icon = '💥'; title = 'ACCOUNT DESTRUCTION PATTERN'; titleClass = 'red';
+    verdict = '<strong>This is how accounts blow.</strong> A pattern of ' + revengeTrades + ' revenge entries + ' + sizeUpCount + ' doubled-up losses. Every time you sized up after a loss, the math was brutally against you. In real trading, this pattern ends accounts.';
+    verdictClass = 'neg';
+  }
+
+  document.getElementById('resIcon').textContent = icon;
+  document.getElementById('resTitle').textContent = title;
+  document.getElementById('resTitle').className = 'result-main-title ' + titleClass;
+  document.getElementById('verdictBlock').className = 'verdict-block ' + verdictClass;
+  document.getElementById('verdictText').innerHTML = verdict;
+
+  showScreen('screenResult');
+}
+
+function resetGame() { showScreen('screenWelcome'); }
+
+// ─── NAV ─────────────────────────────────────────────────────────────────────
+function toggleMobileMenu() { document.getElementById('mobileNav').classList.toggle('active'); }
+function toggleMobileDropdown(el) {
+  const dc = el.nextElementSibling;
+  document.querySelectorAll('.mobile-dropdown-content').forEach(c => c.classList.remove('active'));
+  dc.classList.toggle('active');
+}
+
+// Payment / Brokers modals
+function openPayment(name, price) {
+  const msg = encodeURIComponent('Hi, I want to order: ' + name + ' (' + price + ')');
+  document.getElementById('modalProductName').textContent = name;
+  document.getElementById('modalPrice').textContent = price;
+  document.getElementById('whatsappBtn').href = 'https://wa.me/256783354348?text=' + msg;
+  document.getElementById('emailBtn').href = 'mailto:thedigitalprofessor@gmail.com?subject=Order: ' + encodeURIComponent(name) + '&body=' + msg;
+  const m = document.getElementById('paymentModal');
+  m.style.display = 'flex';
+}
+function closePayment() { document.getElementById('paymentModal').style.display = 'none'; }
+function openBrokers() { document.getElementById('brokersModal').style.display = 'flex'; }
+function closeBrokers() { document.getElementById('brokersModal').style.display = 'none'; }
+
+window.addEventListener('resize', () => {
+  if (document.getElementById('screenGame').classList.contains('active')) {
+    initChartCanvas();
+    drawMainChart();
+  }
+});
+
+document.addEventListener('click', (e) => {
+  const nav = document.getElementById('mobileNav');
+  const btn = document.querySelector('.mobile-menu-btn');
+  if (nav.classList.contains('active') && !nav.contains(e.target) && !btn.contains(e.target)) {
+    nav.classList.remove('active');
+  }
+});
+</script>
+</body>
+</html>
