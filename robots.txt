@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /netlify/
+
+Sitemap: https://worldbankfx.netlify.app/sitemap.xml

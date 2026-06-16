@@ -1,8 +1,112 @@
 [build]
   functions = "netlify/functions"
 
+# Security & SEO headers for all pages
 [[headers]]
   for = "/*"
   [headers.values]
     X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+
+# Cache static assets for performance (Core Web Vitals = ranking signal)
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+
+[[headers]]
+  for = "/*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+
+[[headers]]
+  for = "/*.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+
+# Sitemap & robots content-type
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Content-Type = "application/xml; charset=utf-8"
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/robots.txt"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+# Clean URL redirects — ensure .html never reaches Google
+[[redirects]]
+  from = "/pip-calculator.html"
+  to = "/pip-calculator"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/trading-growth-calculator.html"
+  to = "/trading-growth-calculator"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/forex-course.html"
+  to = "/forex-course"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/contact.html"
+  to = "/contact"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/pricing.html"
+  to = "/pricing"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/patience-test.html"
+  to = "/patience-test"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/revenge-breaker.html"
+  to = "/revenge-breaker"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/traders-playground.html"
+  to = "/traders-playground"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/chart-second-eye.html"
+  to = "/chart-second-eye"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/trade-partner.html"
+  to = "/trade-partner"
+  status = 301
+  force = true

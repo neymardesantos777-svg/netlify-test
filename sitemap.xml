@@ -1,70 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+  <!-- Homepage -->
   <url>
     <loc>https://worldbankfx.netlify.app/</loc>
-    <lastmod>2025-01-12</lastmod>
-    <changefreq>daily</changefreq>
+    <lastmod>2025-06-14</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+
+  <!-- Free Course — highest value page -->
   <url>
-    <loc>https://worldbankfx.netlify.app/pip-calculator.html</loc>
-    <lastmod>2025-01-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://worldbankfx.netlify.app/trading-growth-calculator.html</loc>
-    <lastmod>2025-01-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://worldbankfx.netlify.app/services.html</loc>
-    <lastmod>2025-01-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://worldbankfx.netlify.app/shop.html</loc>
-    <lastmod>2025-01-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://worldbankfx.netlify.app/blog.html</loc>
-    <lastmod>2025-01-12</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://worldbankfx.netlify.app/journal.html</loc>
-    <lastmod>2025-01-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://worldbankfx.netlify.app/contact.html</loc>
-    <lastmod>2025-01-12</lastmod>
+    <loc>https://worldbankfx.netlify.app/forex-course</loc>
+    <lastmod>2025-06-14</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <!-- Free Tools -->
+  <url>
+    <loc>https://worldbankfx.netlify.app/pip-calculator</loc>
+    <lastmod>2025-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://worldbankfx.netlify.app/trading-growth-calculator</loc>
+    <lastmod>2025-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://worldbankfx.netlify.app/traders-playground</loc>
+    <lastmod>2025-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://worldbankfx.netlify.app/chart-second-eye</loc>
+    <lastmod>2025-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://worldbankfx.netlify.app/trade-partner</loc>
+    <lastmod>2025-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Psychology Tools -->
+  <url>
+    <loc>https://worldbankfx.netlify.app/patience-test</loc>
+    <lastmod>2025-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://worldbankfx.netlify.app/revenge-breaker</loc>
+    <lastmod>2025-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Pricing -->
+  <url>
+    <loc>https://worldbankfx.netlify.app/pricing</loc>
+    <lastmod>2025-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <!-- Contact -->
+  <url>
+    <loc>https://worldbankfx.netlify.app/contact</loc>
+    <lastmod>2025-06-14</lastmod>
+    <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
-  <url>
-    <loc>https://worldbankfx.netlify.app/traders-playground.html</loc>
-    <lastmod>2025-01-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
+
 </urlset>
-```
-
-**Create robots.txt in root:**
-```
-User-agent: *
-Allow: /
-Sitemap: https://worldbankfx.netlify.app/sitemap.xml
-
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
