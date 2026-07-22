@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Second Eye — Chart Analysis · WorldBankFx</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0a0a0a;
+    --white: #f5f2ec;
+    --gold: #c8a96e;
+    --gold-dim: #8a7249;
+    --green: #3dba7e;
+    --red: #e05555;
+    --amber: #e8a030;
+    --surface: #111111;
+    --surface2: #1a1a1a;
+    --border: #2a2a2a;
+    --border-bright: #3a3a3a;
+    --text-muted: #666;
+    --text-dim: #444;
+    --font-display: 'Syne', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--font-display);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 2rem;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: rgba(10,10,10,0.95);
+    backdrop-filter: blur(12px);
+    z-index: 100;
+  }
+  .nav-logo {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-decoration: none;
+  }
+  .nav-tag {
+    font-size: 11px;
+    font-family: var(--font-mono);
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 4rem 2rem 3rem;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: var(--gold);
+  }
+  h1 {
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+  h1 em {
+    font-style: normal;
+    color: var(--gold);
+  }
+  .hero-sub {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    max-width: 520px;
+    font-weight: 400;
+  }
+
+  /* ── MAIN TOOL ── */
+  .tool-wrap {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 2rem 6rem;
+  }
+
+  /* ── CONTEXT ROW ── */
+  .context-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  @media (max-width: 600px) { .context-row { grid-template-columns: 1fr; } }
+
+  .context-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .context-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 10px;
+  }
+  .chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .chip {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid var(--border-bright);
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .chip:hover { border-color: var(--gold-dim); color: var(--white); }
+  .chip.active { border-color: var(--gold); background: rgba(200,169,110,0.1); color: var(--gold); }
+
+  .pair-input {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid var(--border-bright);
+    background: transparent;
+    color: var(--white);
+    width: 80px;
+    outline: none;
+    transition: border 0.15s;
+  }
+  .pair-input:focus { border-color: var(--gold); }
+  .pair-input::placeholder { color: var(--text-dim); }
+
+  /* ── UPLOAD ZONE ── */
+  .upload-zone {
+    border: 1.5px dashed var(--border-bright);
+    border-radius: 14px;
+    padding: 3rem 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    background: var(--surface);
+    margin-bottom: 16px;
+  }
+  .upload-zone:hover, .upload-zone.dragover {
+    border-color: var(--gold);
+    background: rgba(200,169,110,0.04);
+  }
+  .upload-icon {
+    font-size: 48px;
+    margin-bottom: 1rem;
+    opacity: 0.4;
+  }
+  .upload-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .upload-sub {
+    font-size: 13px;
+    font-family: var(--font-mono);
+    color: var(--text-muted);
+  }
+
+  /* ── PREVIEW ── */
+  #preview-area { display: none; margin-bottom: 16px; }
+  #preview-img {
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    max-height: 380px;
+    object-fit: contain;
+    background: var(--surface);
+  }
+
+  /* ── ANALYSE BUTTON ── */
+  .analyse-btn {
+    width: 100%;
+    padding: 16px;
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 1px solid var(--gold);
+    background: rgba(200,169,110,0.08);
+    color: var(--gold);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .analyse-btn:hover:not(:disabled) {
+    background: var(--gold);
+    color: var(--black);
+  }
+  .analyse-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  /* ── THINKING ── */
+  #thinking {
+    display: none;
+    text-align: center;
+    padding: 3rem 0;
+  }
+  .thinking-label {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
+  }
+  .thinking-bars {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 4px;
+    height: 32px;
+  }
+  .bar {
+    width: 4px;
+    background: var(--gold);
+    border-radius: 2px;
+    animation: barPulse 1.2s ease-in-out infinite;
+    opacity: 0.6;
+  }
+  .bar:nth-child(1) { animation-delay: 0s; }
+  .bar:nth-child(2) { animation-delay: 0.15s; }
+  .bar:nth-child(3) { animation-delay: 0.3s; }
+  .bar:nth-child(4) { animation-delay: 0.45s; }
+  .bar:nth-child(5) { animation-delay: 0.6s; }
+  @keyframes barPulse {
+    0%, 100% { height: 8px; opacity: 0.3; }
+    50% { height: 28px; opacity: 1; }
+  }
+
+  /* ── RESULTS ── */
+  #results { display: none; }
+
+  .result-enter {
+    animation: resultIn 0.5s ease forwards;
+    opacity: 0;
+  }
+  @keyframes resultIn {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* verdict header */
+  .verdict-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.5rem;
+    margin-bottom: 14px;
+  }
+  .grade-ring {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2.5px solid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .grade-ring .grade-val {
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1;
+  }
+  .grade-ring .grade-lbl {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    opacity: 0.6;
+    margin-top: 2px;
+  }
+  .grade-a { border-color: var(--green); color: var(--green); }
+  .grade-b { border-color: var(--amber); color: var(--amber); }
+  .grade-c, .grade-skip { border-color: var(--red); color: var(--red); }
+
+  .verdict-meta { flex: 1; }
+  .verdict-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+
+  .pill {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    padding: 4px 12px;
+    border-radius: 99px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+  .pill-green { background: rgba(61,186,126,0.12); color: var(--green); border: 1px solid rgba(61,186,126,0.3); }
+  .pill-red { background: rgba(224,85,85,0.12); color: var(--red); border: 1px solid rgba(224,85,85,0.3); }
+  .pill-amber { background: rgba(232,160,48,0.12); color: var(--amber); border: 1px solid rgba(232,160,48,0.3); }
+  .pill-gold { background: rgba(200,169,110,0.12); color: var(--gold); border: 1px solid rgba(200,169,110,0.3); }
+  .pill-dim { background: rgba(255,255,255,0.05); color: var(--text-muted); border: 1px solid var(--border); }
+
+  .structure-detail {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  /* result cards */
+  .result-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  @media (max-width: 560px) { .result-grid { grid-template-columns: 1fr; } }
+
+  .rcard {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem 1.1rem;
+  }
+  .rcard-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .rcard-label.green { color: var(--green); }
+  .rcard-label.red { color: var(--red); }
+  .rcard-label.amber { color: var(--amber); }
+  .rcard-label.gold { color: var(--gold); }
+
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 7px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    line-height: 1.5;
+    color: #ccc;
+  }
+  .check-item:last-child { border-bottom: none; }
+  .check-icon { flex-shrink: 0; margin-top: 2px; font-size: 13px; }
+
+  .levels-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem 1.1rem;
+    margin-bottom: 12px;
+  }
+  .level-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    color: #ccc;
+  }
+  .level-row:last-child { border-bottom: none; }
+
+  .notes-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem 1.1rem;
+    margin-bottom: 12px;
+  }
+  .notes-row { margin-bottom: 12px; }
+  .notes-row:last-child { margin-bottom: 0; }
+  .notes-row-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+  .notes-row-text {
+    font-size: 13px;
+    color: #ccc;
+    line-height: 1.6;
+  }
+
+  .emotion-card {
+    background: rgba(232,160,48,0.05);
+    border: 1px solid rgba(232,160,48,0.25);
+    border-radius: 12px;
+    padding: 1rem 1.1rem;
+    margin-bottom: 12px;
+  }
+
+  /* ── RESET BTN ── */
+  .reset-btn {
+    width: 100%;
+    padding: 12px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    border: 1px solid var(--border-bright);
+    background: transparent;
+    color: var(--text-muted);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.15s;
+    margin-top: 8px;
+  }
+  .reset-btn:hover { color: var(--white); border-color: var(--text-muted); }
+
+  /* ── FREE BADGE ── */
+  .free-note {
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-top: 1.5rem;
+    letter-spacing: 0.06em;
+  }
+  .free-note span { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="https://worldbankfx.netlify.app/">WorldBankFx × Professor</a>
+  <span class="nav-tag">second eye · beta</span>
+</nav>
+
+<div class="hero">
+  <div class="hero-eyebrow">Pre-trade analysis</div>
+  <h1>A second eye<br>on your <em>chart.</em></h1>
+  <p class="hero-sub">Upload your chart screenshot before you pull the trigger. Get a structured read — what you're seeing, what you're missing, and whether it's worth the risk.</p>
+</div>
+
+<div class="tool-wrap">
+
+  <div class="context-row">
+    <div class="context-block">
+      <div class="context-label">Pair</div>
+      <div class="chip-row" id="pair-chips">
+        <button class="chip active" onclick="selectPair(this,'XAUUSD')">XAUUSD</button>
+        <button class="chip" onclick="selectPair(this,'EURUSD')">EURUSD</button>
+        <button class="chip" onclick="selectPair(this,'GBPUSD')">GBPUSD</button>
+        <button class="chip" onclick="selectPair(this,'BTCUSD')">BTCUSD</button>
+        <input class="pair-input" id="custom-pair" placeholder="Other…" oninput="selectCustomPair(this.value)">
+      </div>
+    </div>
+
+    <div class="context-block">
+      <div class="context-label">Timeframe</div>
+      <div class="chip-row" id="tf-chips">
+        <button class="chip" onclick="selectTF(this,'M15')">M15</button>
+        <button class="chip" onclick="selectTF(this,'M30')">M30</button>
+        <button class="chip active" onclick="selectTF(this,'H1')">H1</button>
+        <button class="chip" onclick="selectTF(this,'H4')">H4</button>
+        <button class="chip" onclick="selectTF(this,'D1')">D1</button>
+      </div>
+    </div>
+
+    <div class="context-block">
+      <div class="context-label">Your bias</div>
+      <div class="chip-row">
+        <button class="chip" id="bias-buy" onclick="selectBias('BUY')">Bullish</button>
+        <button class="chip" id="bias-sell" onclick="selectBias('SELL')">Bearish</button>
+        <button class="chip active" id="bias-none" onclick="selectBias('NONE')">None</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="upload-zone" id="upload-zone"
+    onclick="document.getElementById('file-input').click()"
+    ondragover="handleDrag(event,true)"
+    ondragleave="handleDrag(event,false)"
+    ondrop="handleDrop(event)">
+    <div class="upload-icon">📈</div>
+    <div class="upload-title">Drop your chart screenshot here</div>
+    <div class="upload-sub">or click to browse — PNG · JPG · WEBP</div>
+    <input type="file" id="file-input" accept="image/*" style="display:none" onchange="handleFile(this.files[0])">
+  </div>
+
+  <div id="preview-area">
+    <img id="preview-img" alt="Your chart">
+    <button class="analyse-btn" id="analyse-btn" onclick="runAnalysis()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+      Analyse this chart
+    </button>
+  </div>
+
+  <div id="thinking">
+    <div class="thinking-label">Reading your chart…</div>
+    <div class="thinking-bars">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+  </div>
+
+  <div id="results"></div>
+
+  <div class="free-note">Powered by <span>WorldBankFx × Professor</span> · Claude Vision · AI-assisted, not financial advice</div>
+</div>
+
+<script>
+let selectedPair = 'XAUUSD';
+let selectedTF = 'H1';
+let selectedBias = 'NONE';
+let imageBase64 = null;
+let imageType = 'image/jpeg';
+
+function selectPair(btn, val) {
+  selectedPair = val;
+  document.querySelectorAll('#pair-chips .chip').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  document.getElementById('custom-pair').value = '';
+}
+function selectCustomPair(val) {
+  if (!val) return;
+  selectedPair = val.toUpperCase();
+  document.querySelectorAll('#pair-chips .chip').forEach(b => b.classList.remove('active'));
+}
+function selectTF(btn, val) {
+  selectedTF = val;
+  document.querySelectorAll('#tf-chips .chip').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+function selectBias(val) {
+  selectedBias = val;
+  ['buy','sell','none'].forEach(b => {
+    const el = document.getElementById('bias-' + b);
+    if (el) el.classList.remove('active');
+  });
+  const target = document.getElementById('bias-' + val.toLowerCase());
+  if (target) target.classList.add('active');
+}
+function handleDrag(e, over) {
+  e.preventDefault();
+  document.getElementById('upload-zone').classList.toggle('dragover', over);
+}
+function handleDrop(e) {
+  e.preventDefault();
+  document.getElementById('upload-zone').classList.remove('dragover');
+  const file = e.dataTransfer.files[0];
+  if (file && file.type.startsWith('image/')) handleFile(file);
+}
+function handleFile(file) {
+  if (!file) return;
+  imageType = file.type || 'image/jpeg';
+  const reader = new FileReader();
+  reader.onload = e => {
+    imageBase64 = e.target.result.split(',')[1];
+    document.getElementById('preview-img').src = e.target.result;
+    document.getElementById('preview-area').style.display = 'block';
+    document.getElementById('upload-zone').style.display = 'none';
+    document.getElementById('results').style.display = 'none';
+    document.getElementById('results').innerHTML = '';
+  };
+  reader.readAsDataURL(file);
+}
+
+async function runAnalysis() {
+  if (!imageBase64) return;
+  document.getElementById('thinking').style.display = 'block';
+  document.getElementById('results').style.display = 'none';
+  document.getElementById('results').innerHTML = '';
+  document.getElementById('analyse-btn').disabled = true;
+
+  const biasText = selectedBias === 'NONE' ? 'no stated bias' : `trader bias is ${selectedBias}`;
+
+  const prompt = `You are an expert forex and trading analyst. Act as a second eye for a trader reviewing their own chart before entering a trade.
+
+Chart context: ${selectedPair}, ${selectedTF} timeframe. ${biasText}.
+
+Analyse the chart image carefully and return ONLY a valid JSON object — no markdown, no explanation, no backticks. Use this exact structure:
+
+{
+  "setup_grade": "A+" or "A" or "B" or "C" or "SKIP",
+  "verdict": "Trade" or "Wait" or "Skip",
+  "bias_confirmed": true or false or null,
+  "structure": {
+    "status": "bullish" or "bearish" or "ranging",
+    "detail": "one clear sentence about market structure"
+  },
+  "key_levels": [
+    { "type": "support" or "resistance" or "POI" or "OB" or "FVG", "note": "short description of the level" }
+  ],
+  "what_trader_sees": [
+    "specific thing visible on the chart that trader likely noticed"
+  ],
+  "what_trader_may_miss": [
+    "specific thing that is easy to miss or a hidden risk"
+  ],
+  "emotion_flags": [
+    "any psychology traps present e.g. FOMO, revenge zone, overextended, chasing"
+  ],
+  "entry_notes": "one sentence — where to enter if trade-worthy, or what to wait for",
+  "risk_note": "one sentence — key invalidation level or risk to be aware of"
+}`;
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1500,
+        messages: [{
+          role: 'user',
+          content: [
+            { type: 'image', source: { type: 'base64', media_type: imageType, data: imageBase64 } },
+            { type: 'text', text: prompt }
+          ]
+        }]
+      })
+    });
+    const data = await res.json();
+    console.log('Claude response:', JSON.stringify(data));
+    if (data.error) throw new Error(data.error.message);
+    const raw = (data.content[0].text || '').replace(/```json|```/g,'').trim();
+    console.log('Raw model output:', raw);
+    const a = JSON.parse(raw);
+    renderResults(a);
+  } catch(err) {
+    console.error('Analysis error:', err);
+    document.getElementById('results').innerHTML = `<div style="color:var(--red);font-size:13px;font-family:var(--font-mono);padding:1rem 0;">Error: ${err.message}</div>`;
+    document.getElementById('results').style.display = 'block';
+  }
+
+  document.getElementById('thinking').style.display = 'none';
+  document.getElementById('analyse-btn').disabled = false;
+}
+
+function gradeClass(g) {
+  const s = (g || '').toUpperCase();
+  if (s === 'A+' || s === 'A') return 'grade-a';
+  if (s === 'B') return 'grade-b';
+  return 'grade-c';
+}
+function verdictPill(v) {
+  if (v === 'Trade') return 'pill-green';
+  if (v === 'Wait') return 'pill-amber';
+  return 'pill-red';
+}
+function levelPill(t) {
+  if (t === 'support') return 'pill-green';
+  if (t === 'resistance') return 'pill-red';
+  return 'pill-amber';
+}
+
+function renderResults(a) {
+  const biasText = a.bias_confirmed === true ? '✓ Bias confirmed' : a.bias_confirmed === false ? '✗ Bias rejected' : '— No bias';
+  const biasClass = a.bias_confirmed === true ? 'pill-green' : a.bias_confirmed === false ? 'pill-red' : 'pill-dim';
+  const structClass = a.structure.status === 'bullish' ? 'pill-green' : a.structure.status === 'bearish' ? 'pill-red' : 'pill-dim';
+  const verdictSymbol = a.verdict === 'Trade' ? '▲' : a.verdict === 'Wait' ? '◆' : '✕';
+
+  let html = `<div class="result-enter">`;
+
+  // Verdict header
+  html += `<div class="verdict-header">
+    <div class="grade-ring ${gradeClass(a.setup_grade)}">
+      <span class="grade-val">${a.setup_grade}</span>
+      <span class="grade-lbl">SETUP</span>
+    </div>
+    <div class="verdict-meta">
+      <div class="verdict-pills">
+        <span class="pill ${verdictPill(a.verdict)}">${verdictSymbol} ${a.verdict}</span>
+        <span class="pill ${biasClass}">${biasText}</span>
+        <span class="pill ${structClass}">${a.structure.status}</span>
+      </div>
+      <div class="structure-detail">${a.structure.detail}</div>
+    </div>
+  </div>`;
+
+  // Key levels
+  if (a.key_levels && a.key_levels.length) {
+    html += `<div class="levels-card">
+      <div class="rcard-label gold">Key levels</div>`;
+    a.key_levels.forEach(l => {
+      html += `<div class="level-row">
+        <span class="pill ${levelPill(l.type)}" style="flex-shrink:0;">${l.type}</span>
+        <span>${l.note}</span>
+      </div>`;
+    });
+    html += `</div>`;
+  }
+
+  // What you see / what you miss
+  html += `<div class="result-grid">
+    <div class="rcard">
+      <div class="rcard-label green">What you see</div>`;
+  (a.what_trader_sees || []).forEach(s => {
+    html += `<div class="check-item"><span class="check-icon" style="color:var(--green)">✓</span><span>${s}</span></div>`;
+  });
+  html += `</div><div class="rcard">
+      <div class="rcard-label red">What you may miss</div>`;
+  (a.what_trader_may_miss || []).forEach(s => {
+    html += `<div class="check-item"><span class="check-icon" style="color:var(--red)">⚠</span><span>${s}</span></div>`;
+  });
+  html += `</div></div>`;
+
+  // Emotion flags
+  if (a.emotion_flags && a.emotion_flags.length && a.emotion_flags[0] !== 'None' && a.emotion_flags[0] !== '') {
+    html += `<div class="emotion-card">
+      <div class="rcard-label amber">Psychology flags</div>`;
+    a.emotion_flags.forEach(f => {
+      html += `<div class="check-item"><span class="check-icon" style="color:var(--amber)">◈</span><span>${f}</span></div>`;
+    });
+    html += `</div>`;
+  }
+
+  // Entry + risk notes
+  html += `<div class="notes-card">
+    <div class="notes-row">
+      <div class="notes-row-label" style="color:var(--gold)">Entry notes</div>
+      <div class="notes-row-text">${a.entry_notes}</div>
+    </div>
+    <div class="notes-row">
+      <div class="notes-row-label" style="color:var(--red)">Risk / invalidation</div>
+      <div class="notes-row-text">${a.risk_note}</div>
+    </div>
+  </div>`;
+
+  // Reset
+  html += `<button class="reset-btn" onclick="resetTool()">↩ Analyse another chart</button>`;
+
+  html += `</div>`;
+
+  document.getElementById('results').innerHTML = html;
+  document.getElementById('results').style.display = 'block';
+  document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function resetTool() {
+  imageBase64 = null;
+  document.getElementById('preview-area').style.display = 'none';
+  document.getElementById('upload-zone').style.display = 'block';
+  document.getElementById('results').style.display = 'none';
+  document.getElementById('results').innerHTML = '';
+  document.getElementById('file-input').value = '';
+  document.getElementById('preview-img').src = '';
+}
+</script>
+</body>
+</html>
