@@ -1,29 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>
+    (function() {
+      var saved = null;
+      try { saved = localStorage.getItem('cc-theme'); } catch (e) {}
+      var theme = saved || ((window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Probability Revealer — Stop Revenge Trading | WorldBankFx Psychology Tool</title>
+  <title>Probability Revealer — Stop Revenge Trading | ChartCircle Psychology Tool</title>
   <meta name="description" content="Free forex trading psychology tool. Confront the true statistics of consecutive losses and train your mind to accept randomness. Stop revenge trading before it destroys your account.">
-  <meta name="keywords" content="revenge trading, forex psychology, probability trading, consecutive losses forex, trading mindset tool, forex discipline game, stop revenge trading, WorldBankFx">
-  <meta name="author" content="WorldBankFx × Professor">
+  <meta name="keywords" content="revenge trading, forex psychology, probability trading, consecutive losses forex, trading mindset tool, forex discipline game, stop revenge trading, ChartCircle">
+  <meta name="author" content="ChartCircle">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://worldbankfx.netlify.app/revenge-breaker">
+  <link rel="canonical" href="https://chartcircle.netlify.app/revenge-breaker.html">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://worldbankfx.netlify.app/revenge-breaker">
-  <meta property="og:title" content="Probability Revealer — Stop Revenge Trading | WorldBankFx">
+  <meta property="og:url" content="https://chartcircle.netlify.app/revenge-breaker.html">
+  <meta property="og:title" content="Probability Revealer — Stop Revenge Trading | ChartCircle">
   <meta property="og:description" content="Revenge trading destroys accounts. This free tool forces you to confront the true statistics of losses and trains you to accept randomness as part of forex trading.">
-  <meta property="og:image" content="https://worldbankfx.netlify.app/og-image.jpg">
-  <meta property="og:site_name" content="WorldBankFx × Professor">
+  <meta property="og:image" content="https://chartcircle.netlify.app/og-image.jpg">
+  <meta property="og:site_name" content="ChartCircle">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="@DigitoProfessor">
   <meta name="twitter:title" content="Probability Revealer — Stop Revenge Trading">
   <meta name="twitter:description" content="Free forex psychology tool. Face the real stats of consecutive losses. Train your mindset before the market trains it for you.">
-  <meta name="twitter:image" content="https://worldbankfx.netlify.app/og-image.jpg">
+  <meta name="twitter:image" content="https://chartcircle.netlify.app/twitter-image.jpg">
 
   <!-- Structured Data -->
   <script type="application/ld+json">
@@ -34,93 +41,136 @@
         "@type": "WebApplication",
         "name": "Probability Revealer — Revenge Trading Breaker",
         "description": "A free interactive forex psychology tool that visualizes the true probability of consecutive losses, helping traders overcome revenge trading and emotional decision-making.",
-        "url": "https://worldbankfx.netlify.app/revenge-breaker",
+        "url": "https://chartcircle.netlify.app/revenge-breaker.html",
         "applicationCategory": "EducationalApplication",
         "genre": "Trading Psychology",
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
         "creator": {
-          "@type": "Person",
-          "name": "WorldBankFx × Professor",
-          "url": "https://worldbankfx.netlify.app"
+          "@type": "Organization",
+          "name": "ChartCircle",
+          "url": "https://chartcircle.netlify.app"
         }
       },
       {
         "@type": "BreadcrumbList",
         "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://worldbankfx.netlify.app/" },
-          { "@type": "ListItem", "position": 2, "name": "Probability Revealer", "item": "https://worldbankfx.netlify.app/revenge-breaker" }
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://chartcircle.netlify.app/" },
+          { "@type": "ListItem", "position": 2, "name": "Probability Revealer", "item": "https://chartcircle.netlify.app/revenge-breaker.html" }
         ]
       }
     ]
   }
   </script>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%230a0a0a'/><rect width='100' height='100' rx='18' fill='none' stroke='%23ffd700' stroke-width='4'/><text x='50' y='38' font-family='Georgia,serif' font-size='22' font-weight='900' fill='%23ffd700' text-anchor='middle'>WB</text><text x='50' y='65' font-family='Georgia,serif' font-size='22' font-weight='900' fill='%23ffd700' text-anchor='middle'>FX</text></svg>">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='47' fill='%230d2340'/><circle cx='50' cy='50' r='47' fill='none' stroke='%230f7d82' stroke-width='3'/><polyline points='24,60 40,44 52,54 76,28' fill='none' stroke='%2312969c' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/><circle cx='76' cy='28' r='4' fill='%2312969c'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
-    :root {
-      --gold: #ffd700;
-      --gold2: #ffed4e;
-      --gold-dim: rgba(255,215,0,0.12);
-      --red: #ef4444;
-      --red-dim: rgba(239,68,68,0.12);
-      --green: #10b981;
-      --green-dim: rgba(16,185,129,0.1);
-      --cyan: #00d4ff;
-      --orange: #ff8c00;
-      --bg: #0a0a0f;
-      --bg2: #0d0d14;
-      --bg3: #13131e;
-      --surface: #0f0f1a;
-      --surface2: #161622;
-      --border: rgba(255,215,0,0.12);
-      --border2: rgba(255,255,255,0.06);
-      --text: #e8e8f0;
-      --muted: #7a7a94;
-      --mono: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      --disp: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    }
     * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+
+    /* ══ LIGHT THEME (default) — matches ChartCircle brand system ══ */
+    :root {
+      --accent: #0f7d82; --accent-light: #12969c; --accent-dim: #0a6367;
+      --positive: #1f8a5f; --negative: #b1414c;
+      --bg: #ffffff; --bg-alt: #f3f6fa; --bg-inset: #eef2f6;
+      --surface: #ffffff; --surface2: #f6f9fb;
+      --border: #e1e6ec; --border-strong: #ccd5de;
+      --heading: #0e2138; --text: #33475a; --muted: #64758a;
+      --on-accent: #ffffff;
+      --shadow-color: rgba(20,40,60,0.10);
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+
+      /* Game terminal tokens (theme-aware) */
+      --gold: var(--accent); --gold2: var(--accent-light); --gold-dim: rgba(15,125,130,0.10);
+      --red: var(--negative); --red-dim: rgba(177,65,76,0.10);
+      --green: var(--positive); --green-dim: rgba(31,138,95,0.10);
+      --cyan: #1c6fae; --orange: #b5650f;
+      --bg2: var(--bg-alt); --bg3: var(--bg-inset);
+      --border2: var(--border);
+      --mono: var(--font-body); --disp: var(--font-display);
+    }
+    /* ══ DARK THEME ══ */
+    [data-theme="dark"] {
+      --accent: #2bb8bf; --accent-light: #4fd3d9; --accent-dim: #1f9096;
+      --positive: #3fae82; --negative: #d0707c;
+      --bg: #0a1420; --bg-alt: #0d1c2b; --bg-inset: #0c2233;
+      --surface: #101f30; --surface2: #0c1f2f;
+      --border: rgba(255,255,255,0.08); --border-strong: rgba(255,255,255,0.18);
+      --heading: #eef3f8; --text: #c3ccd6; --muted: #8b9aab;
+      --on-accent: #05191b;
+      --shadow-color: rgba(0,0,0,0.45);
+
+      --gold: var(--accent); --gold2: var(--accent-light); --gold-dim: rgba(43,184,191,0.14);
+      --red: var(--negative); --red-dim: rgba(208,112,124,0.14);
+      --green: var(--positive); --green-dim: rgba(63,174,130,0.14);
+      --cyan: #5fb3ff; --orange: #ff9d3d;
+      --bg2: var(--bg-alt); --bg3: var(--bg-inset);
+      --border2: var(--border);
+    }
+
     html, body { height: 100%; overflow: hidden; }
     body {
-      font-family: var(--mono);
+      font-family: var(--font-body);
       background: var(--bg);
       color: var(--text);
+      transition: background 0.25s ease, color 0.25s ease;
     }
 
     /* ── SCROLLBAR ── */
-    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar { width: 5px; }
     ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: rgba(255,215,0,0.3); border-radius: 2px; }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+    /* ── THEME TOGGLE ── */
+    .theme-toggle { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--border-strong); background: var(--surface); color: var(--accent); cursor: pointer; font-size: 0.95rem; transition: all 0.25s ease; }
+    .theme-toggle:hover { border-color: var(--accent); }
+    .theme-toggle .fa-sun { display: none; }
+    [data-theme="dark"] .theme-toggle .fa-sun { display: inline-block; }
+    [data-theme="dark"] .theme-toggle .fa-moon { display: none; }
+    .mobile-theme-toggle { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border); color: var(--heading); font-size: 1rem; font-weight: 600; cursor: pointer; }
+    .mobile-theme-toggle .fa-sun { display: none; }
+    [data-theme="dark"] .mobile-theme-toggle .fa-sun { display: inline-block; }
+    [data-theme="dark"] .mobile-theme-toggle .fa-moon { display: none; }
 
     /* ── NAV ── */
-    nav { position: fixed; top: 0; width: 100%; background: rgba(10,10,10,0.97); backdrop-filter: blur(12px); z-index: 1000; border-bottom: 1px solid rgba(255,215,0,0.2); }
-    .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 15px 30px; }
-    .logo { font-size: 1.2rem; font-weight: 900; background: linear-gradient(135deg, var(--gold), var(--gold2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; cursor: pointer; text-decoration: none; white-space: nowrap; }
-    .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
-    .nav-links a { color: #fff; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: color 0.3s; }
-    .nav-links a:hover { color: var(--gold); }
+    nav { position: fixed; top: 0; width: 100%; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(12px); z-index: 1000; border-bottom: 1px solid var(--border); }
+    .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 15px 30px; gap: 20px; }
+    .logo { font-family: var(--font-display); font-size: 1.2rem; font-weight: 600; color: var(--heading); cursor: pointer; text-decoration: none; white-space: nowrap; display: inline-flex; align-items: center; gap: 10px; letter-spacing: 0.3px; }
+    .logo svg { flex-shrink: 0; }
+    .logo-icon-ring, .logo-icon-line { stroke: var(--accent); }
+    .logo-icon-dot { fill: var(--accent-light); }
+    .nav-links { display: flex; gap: 24px; list-style: none; align-items: center; flex: 1; justify-content: center; }
+    .nav-links a { color: var(--text); text-decoration: none; font-weight: 500; font-size: 0.88rem; transition: color 0.3s; letter-spacing: 0.2px; }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-right { display: flex; align-items: center; gap: 14px; }
     .dropdown { position: relative; }
-    .dropdown-content { display: none; position: absolute; top: 100%; left: 0; background: #0f0f0f; min-width: 220px; border: 1px solid var(--gold); border-radius: 10px; margin-top: 4px; padding: 8px 0; z-index: 200; box-shadow: 0 10px 40px rgba(0,0,0,0.6); }
+    .dropdown-content { display: none; position: absolute; top: 100%; left: 0; background: var(--surface); min-width: 230px; border: 1px solid var(--border-strong); border-radius: 6px; margin-top: 10px; padding: 8px 0; z-index: 200; box-shadow: 0 16px 40px var(--shadow-color); }
     .dropdown:hover .dropdown-content, .dropdown-content:hover { display: block; }
-    .dropdown-content a { display: block; padding: 11px 20px; border-bottom: 1px solid #222; color: #ccc; font-size: 0.88rem; }
+    .dropdown-content a { display: flex; align-items: center; gap: 10px; padding: 11px 20px; border-bottom: 1px solid var(--border); color: var(--text); font-size: 0.86rem; }
+    .dropdown-content a i { width: 14px; color: var(--accent); font-size: 0.82rem; }
     .dropdown-content a:last-child { border-bottom: none; }
-    .dropdown-content a:hover { background: rgba(255,215,0,0.08); color: var(--gold); }
-    .nav-cta { background: linear-gradient(135deg, var(--gold), var(--gold2)); color: #000 !important; padding: 9px 22px; border-radius: 25px; font-weight: 800 !important; font-size: 0.85rem !important; transition: all 0.3s ease !important; cursor: pointer; border: none; }
-    .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,215,0,0.35); color: #000 !important; }
-    .mobile-menu-btn { display: none; font-size: 1.5rem; color: var(--gold); cursor: pointer; background: none; border: none; }
-    .mobile-nav { display: none; position: fixed; top: 0; right: -100%; width: 80%; max-width: 380px; height: 100vh; background: #0d0d0d; z-index: 2000; padding: 80px 30px 30px; transition: right 0.3s ease; overflow-y: auto; border-left: 1px solid rgba(255,215,0,0.15); }
+    .dropdown-content a:hover { background: var(--bg-alt); color: var(--accent); }
+    .nav-cta { background: var(--accent); color: var(--on-accent) !important; padding: 10px 22px; border-radius: 6px; font-weight: 700 !important; font-size: 0.82rem !important; letter-spacing: 0.3px; transition: all 0.3s ease !important; cursor: pointer; border: none; white-space: nowrap; }
+    .nav-cta:hover { background: var(--accent-light); transform: translateY(-1px); box-shadow: 0 6px 18px rgba(15,125,130,0.25); color: var(--on-accent) !important; }
+    .mobile-menu-btn { display: none; font-size: 1.4rem; color: var(--accent); cursor: pointer; background: none; border: none; }
+    .mobile-nav { display: none; position: fixed; top: 0; right: -100%; width: 80%; max-width: 380px; height: 100vh; background: var(--bg-alt); z-index: 2000; padding: 80px 30px 30px; transition: right 0.3s ease; overflow-y: auto; border-left: 1px solid var(--border); }
     .mobile-nav.active { right: 0; }
-    .mobile-nav-close { position: absolute; top: 20px; right: 20px; font-size: 2rem; color: var(--gold); cursor: pointer; background: none; border: none; }
+    .mobile-nav-close { position: absolute; top: 20px; right: 20px; font-size: 1.8rem; color: var(--accent); cursor: pointer; background: none; border: none; }
     .mobile-nav-links { list-style: none; }
     .mobile-nav-links li { margin-bottom: 6px; }
-    .mobile-nav-links > li > a { color: #fff; text-decoration: none; font-size: 1.05rem; font-weight: 700; display: block; padding: 12px 0; border-bottom: 1px solid #1a1a1a; }
-    .mobile-dropdown-toggle { display: flex; justify-content: space-between; align-items: center; cursor: pointer; color: #fff; font-size: 1.05rem; font-weight: 700; padding: 12px 0; border-bottom: 1px solid #1a1a1a; }
+    .mobile-nav-links > li > a { color: var(--heading); text-decoration: none; font-size: 1rem; font-weight: 600; display: block; padding: 12px 0; border-bottom: 1px solid var(--border); }
+    .mobile-dropdown-toggle { display: flex; justify-content: space-between; align-items: center; cursor: pointer; color: var(--heading); font-size: 1rem; font-weight: 600; padding: 12px 0; border-bottom: 1px solid var(--border); }
     .mobile-dropdown-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; padding-left: 16px; }
     .mobile-dropdown-content.active { max-height: 400px; }
-    .mobile-dropdown-content a { font-size: 0.95rem; padding: 9px 0; color: #aaa; display: block; text-decoration: none; border-bottom: 1px solid #161616; }
-    .mobile-dropdown-content a:hover { color: var(--gold); }
-    .mobile-nav-cta { display: block; margin-top: 24px; padding: 15px; background: linear-gradient(135deg,var(--gold),var(--gold2)); color: #000; text-align: center; border-radius: 10px; font-weight: 800; font-size: 1rem; text-decoration: none; cursor: pointer; border: none; width: 100%; }
+    .mobile-dropdown-content a { font-size: 0.92rem; padding: 9px 0; color: var(--muted); display: flex; align-items: center; gap: 10px; text-decoration: none; border-bottom: 1px solid var(--border); }
+    .mobile-dropdown-content a i:first-child { width: 14px; color: var(--accent); font-size: 0.8rem; }
+    .mobile-dropdown-content a:hover { color: var(--accent); }
+    .mobile-nav-cta { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 24px; padding: 15px; background: var(--accent); color: var(--on-accent); text-align: center; border-radius: 6px; font-weight: 700; font-size: 0.95rem; text-decoration: none; cursor: pointer; border: none; width: 100%; }
     @media (max-width: 968px) {
       .nav-links { display: none; }
       .mobile-menu-btn { display: block; }
@@ -146,7 +196,7 @@
     }
     .welcome-badge {
       font-size: 0.6rem; letter-spacing: 3px; color: var(--cyan);
-      border: 1px solid rgba(0,212,255,0.3); border-radius: 3px;
+      border: 1px solid var(--border-strong); border-radius: 3px;
       padding: 3px 10px; display: inline-block; margin-bottom: 10px; text-transform: uppercase;
     }
     .welcome-title {
@@ -176,12 +226,12 @@
     .starts-btn {
       width: 100%; padding: 16px;
       background: linear-gradient(135deg, var(--gold), var(--gold2));
-      color: #000; border: none; border-radius: 8px;
+      color: var(--on-accent); border: none; border-radius: 8px;
       font-family: var(--disp); font-size: 1.1rem; font-weight: 900;
       letter-spacing: 3px; text-transform: uppercase; cursor: pointer;
       transition: all 0.2s;
     }
-    .starts-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(255,215,0,0.3); }
+    .starts-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(15,125,130,0.3); }
 
     /* ══════════════════════════════════════
        GAME SCREEN — TERMINAL SPLIT
@@ -252,7 +302,7 @@
     }
     .co-badge.calm { color: var(--green); border-color: rgba(16,185,129,0.3); background: rgba(16,185,129,0.08); }
     .co-badge.tilted { color: var(--orange); border-color: rgba(255,140,0,0.3); background: rgba(255,140,0,0.08); }
-    .co-badge.tilt2 { color: #ff6400; border-color: rgba(255,100,0,0.3); background: rgba(255,100,0,0.08); }
+    .co-badge.tilt2 { color: var(--orange); border-color: rgba(181,101,15,0.4); background: rgba(181,101,15,0.1); }
     .co-badge.revenge { color: var(--red); border-color: rgba(239,68,68,0.4); background: rgba(239,68,68,0.1); }
 
     .chart-overlay-tr {
@@ -308,7 +358,7 @@
       letter-spacing: 1px; text-transform: uppercase;
     }
     .sc-context-tag.after-loss { color: var(--red); border-color: rgba(239,68,68,0.4); background: var(--red-dim); }
-    .sc-context-tag.normal { color: var(--cyan); border-color: rgba(0,212,255,0.25); background: rgba(0,212,255,0.07); }
+    .sc-context-tag.normal { color: var(--cyan); border-color: color-mix(in srgb, var(--cyan) 30%, transparent); background: color-mix(in srgb, var(--cyan) 8%, transparent); }
     .sc-context-tag.streak { color: var(--green); border-color: rgba(16,185,129,0.35); background: var(--green-dim); }
 
     .situation-box {
@@ -358,10 +408,10 @@
     }
     .dec-btn .d-icon { font-size: 1.2rem; }
     .dec-btn .d-sub { font-family: var(--mono); font-size: 0.58rem; color: var(--muted); font-weight: 400; }
-    .dec-btn.trade:hover { border-color: var(--orange); background: rgba(255,140,0,0.1); color: var(--orange); }
+    .dec-btn.trade:hover { border-color: var(--orange); background: color-mix(in srgb, var(--orange) 12%, transparent); color: var(--orange); }
     .dec-btn.wait-btn:hover { border-color: var(--green); background: var(--green-dim); color: var(--green); }
     .dec-btn.size-up:hover { border-color: var(--red); background: var(--red-dim); color: var(--red); }
-    .dec-btn.reduce:hover { border-color: var(--cyan); background: rgba(0,212,255,0.07); color: var(--cyan); }
+    .dec-btn.reduce:hover { border-color: var(--cyan); background: color-mix(in srgb, var(--cyan) 8%, transparent); color: var(--cyan); }
     .dec-btn:disabled { opacity: 0.25; pointer-events: none; }
 
     /* Outcome */
@@ -468,64 +518,59 @@
       letter-spacing: 2px; text-transform: uppercase; cursor: pointer;
       transition: all 0.2s; display: block; margin: 0 auto;
     }
-    .retry-btn:hover { background: var(--gold); color: #000; }
+    .retry-btn:hover { background: var(--gold); color: var(--on-accent); }
 
     /* ── FOOTER ── */
-    footer { background: #000; padding: 60px 20px 36px; border-top: 1px solid #222; }
+    footer { background: var(--bg); padding: 64px 20px 36px; border-top: 1px solid var(--border); }
     .footer-content { max-width: 1200px; margin: 0 auto; }
     .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 50px; }
-    .footer-brand h3 { color: var(--gold); font-size: 1.3rem; margin-bottom: 12px; }
-    .footer-brand p { color: var(--muted); font-size: 0.88rem; line-height: 1.7; max-width: 280px; margin-bottom: 20px; }
-    .footer-social { display: flex; gap: 12px; flex-wrap: wrap; }
-    .social-link { width: 42px; height: 42px; background: #1a1a1a; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; transition: all 0.3s ease; text-decoration: none; color: var(--gold); border: 1px solid #2a2a2a; }
-    .social-link:hover { background: var(--gold); color: #000; transform: scale(1.1); border-color: var(--gold); }
-    .footer-col h4 { color: var(--cyan); margin-bottom: 16px; font-size: 0.88rem; text-transform: uppercase; letter-spacing: 1px; }
-    .footer-col a { display: block; color: var(--muted); margin: 8px 0; text-decoration: none; font-size: 0.88rem; transition: color 0.3s; overflow-wrap: anywhere; }
-    .footer-col a:hover { color: var(--gold); }
-    .footer-col p { color: var(--muted); font-size: 0.88rem; margin: 8px 0; overflow-wrap: anywhere; }
-    .footer-bottom { text-align: center; color: #444; padding-top: 24px; border-top: 1px solid #1a1a1a; font-size: 0.85rem; }
+    .footer-brand h3 { font-family: var(--font-display); color: var(--heading); font-size: 1.35rem; margin-bottom: 12px; font-weight: 600; }
+    .footer-brand p { color: var(--muted); font-size: 0.88rem; line-height: 1.75; max-width: 280px; margin-bottom: 20px; }
+    .footer-social { display: flex; gap: 10px; flex-wrap: wrap; }
+    .social-link { width: 42px; height: 42px; background: var(--surface); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.05rem; transition: all 0.3s ease; text-decoration: none; color: var(--accent); border: 1px solid var(--border-strong); }
+    .social-link:hover { background: var(--accent); color: var(--on-accent); transform: scale(1.06); border-color: var(--accent); }
+    .footer-col h4 { font-family: var(--font-mono); color: var(--muted); margin-bottom: 16px; font-size: 0.76rem; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 500; }
+    .footer-col a { display: block; color: var(--text); margin: 8px 0; text-decoration: none; font-size: 0.88rem; transition: color 0.3s; overflow-wrap: anywhere; }
+    .footer-col a:hover { color: var(--accent); }
+    .footer-col p { color: var(--text); font-size: 0.88rem; margin: 8px 0; overflow-wrap: anywhere; }
+    .footer-bottom { text-align: center; color: var(--muted); padding-top: 26px; border-top: 1px solid var(--border); font-size: 0.82rem; font-family: var(--font-mono); }
 
     /* ── BACK TO TOP ── */
-    .back-to-top { position: fixed; bottom: 28px; right: 28px; width: 46px; height: 46px; background: linear-gradient(135deg,var(--gold),var(--gold2)); border: none; border-radius: 50%; color: #000; font-size: 1.2rem; cursor: pointer; opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 999; box-shadow: 0 4px 15px rgba(255,215,0,0.3); }
+    .back-to-top { position: fixed; bottom: 28px; right: 28px; width: 46px; height: 46px; background: var(--accent); border: none; border-radius: 50%; color: var(--on-accent); font-size: 1.1rem; cursor: pointer; opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 999; box-shadow: 0 6px 18px var(--shadow-color); }
     .back-to-top.show { opacity: 1; visibility: visible; }
-    .back-to-top:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(255,215,0,0.5); }
+    .back-to-top:hover { transform: translateY(-3px); background: var(--accent-light); }
 
     /* ── PAYMENT MODAL ── */
-    #paymentModal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 10000; align-items: center; justify-content: center; }
-    .payment-inner { background: #1a1a2e; padding: 40px; border-radius: 20px; max-width: 500px; width: 90%; border: 2px solid var(--gold); position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.8); }
-    .payment-close { position: absolute; top: 16px; right: 20px; font-size: 1.8rem; color: #fff; background: none; border: none; cursor: pointer; line-height: 1; }
-    .payment-product { font-size: 1.6rem; font-weight: 900; color: var(--gold); margin-bottom: 6px; }
-    .payment-price { font-size: 2.2rem; color: var(--cyan); font-weight: 900; margin-bottom: 28px; }
+    #paymentModal { display: none; position: fixed; inset: 0; background: rgba(6,10,16,0.6); z-index: 10000; align-items: center; justify-content: center; }
+    .payment-inner { background: var(--bg); padding: 40px; border-radius: 12px; max-width: 500px; width: 90%; border: 1px solid var(--border-strong); position: relative; box-shadow: 0 24px 60px var(--shadow-color); }
+    .payment-close { position: absolute; top: 16px; right: 20px; font-size: 1.7rem; color: var(--muted); background: none; border: none; cursor: pointer; line-height: 1; }
+    .payment-product { font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; color: var(--heading); margin-bottom: 6px; }
+    .payment-price { font-family: var(--font-mono); font-size: 1.9rem; color: var(--accent); font-weight: 600; margin-bottom: 28px; }
     .payment-methods { display: flex; flex-direction: column; gap: 12px; }
-    .pay-btn { padding: 16px; border-radius: 10px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; color: #fff; border: none; }
-    .pay-btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
-    .pay-paypal { background: #0070ba; }
-    .pay-whatsapp { background: #25D366; }
-    .pay-email { background: #ea4335; }
-    .payment-details { margin-top: 20px; padding: 18px; background: rgba(255,215,0,0.07); border-radius: 10px; border: 1px solid rgba(255,215,0,0.2); }
+    .pay-btn { padding: 16px; border-radius: 8px; font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; color: var(--heading); border: 1px solid var(--border-strong); background: var(--surface); }
+    .pay-btn:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .pay-btn i { color: var(--accent); }
+    .payment-details { margin-top: 20px; padding: 18px; background: var(--bg-inset); border-radius: 8px; border: 1px solid var(--border); }
     .payment-details p { font-size: 0.88rem; color: var(--muted); margin: 5px 0; }
-    .payment-details strong { color: var(--gold); }
-    .payment-details small { display: block; margin-top: 12px; font-size: 0.82rem; color: #666; }
+    .payment-details strong { color: var(--heading); }
+    .payment-details small { display: block; margin-top: 12px; font-size: 0.8rem; color: var(--muted); }
 
     /* ── BROKERS MODAL ── */
-    #brokersModal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 10000; align-items: center; justify-content: center; }
-    .brokers-inner { background: #1a1a2e; padding: 38px 36px; border-radius: 20px; max-width: 400px; width: 90%; border: 2px solid var(--gold); position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.8); text-align: center; }
-    .brokers-close { position: absolute; top: 14px; right: 18px; font-size: 1.8rem; color: #fff; background: none; border: none; cursor: pointer; line-height: 1; transition: color 0.2s; }
-    .brokers-close:hover { color: var(--gold); }
-    .brokers-eyebrow { font-size: 0.7rem; color: var(--cyan); font-family: var(--mono); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 10px; }
-    .brokers-title { font-size: 1.5rem; font-weight: 900; color: var(--gold); margin-bottom: 8px; }
-    .brokers-sub { color: var(--muted); font-size: 0.87rem; margin-bottom: 28px; line-height: 1.65; }
-    .broker-options { display: flex; flex-direction: column; gap: 14px; }
-    .broker-btn { padding: 18px 24px; border-radius: 12px; font-weight: 800; font-size: 1rem; cursor: pointer; transition: all 0.3s ease; text-decoration: none; display: flex; align-items: center; justify-content: space-between; }
-    .broker-btn.exness { background: linear-gradient(135deg, var(--gold), var(--gold2)); color: #000; }
-    .broker-btn.exness:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,215,0,0.4); }
-    .broker-btn.hfm { background: linear-gradient(135deg, var(--cyan), #0099bb); color: #000; }
-    .broker-btn.hfm:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,212,255,0.4); }
+    #brokersModal { display: none; position: fixed; inset: 0; background: rgba(6,10,16,0.6); z-index: 10000; align-items: center; justify-content: center; }
+    .brokers-inner { background: var(--bg); padding: 40px 36px; border-radius: 12px; max-width: 400px; width: 90%; border: 1px solid var(--border-strong); position: relative; box-shadow: 0 24px 60px var(--shadow-color); text-align: center; }
+    .brokers-close { position: absolute; top: 14px; right: 18px; font-size: 1.7rem; color: var(--muted); background: none; border: none; cursor: pointer; line-height: 1; transition: color 0.2s; }
+    .brokers-close:hover { color: var(--accent); }
+    .brokers-eyebrow { font-size: 0.7rem; color: var(--accent); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 10px; }
+    .brokers-title { font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; color: var(--heading); margin-bottom: 8px; }
+    .brokers-sub { color: var(--muted); font-size: 0.87rem; margin-bottom: 30px; line-height: 1.7; }
+    .broker-options { display: flex; flex-direction: column; gap: 12px; }
+    .broker-btn { padding: 18px 22px; border-radius: 8px; font-weight: 600; font-size: 0.98rem; cursor: pointer; transition: all 0.3s ease; text-decoration: none; display: flex; align-items: center; justify-content: space-between; border: 1px solid var(--border-strong); background: var(--surface); color: var(--heading); }
+    .broker-btn:hover { border-color: var(--accent); transform: translateY(-2px); }
     .broker-btn-left { text-align: left; }
-    .broker-btn-name { font-size: 1.05rem; font-weight: 900; display: block; }
-    .broker-btn-note { font-size: 0.72rem; font-weight: 600; opacity: 0.65; }
-    .broker-btn-icon { font-size: 1.2rem; }
-    .brokers-disclaimer { margin-top: 18px; font-size: 0.75rem; color: #444; line-height: 1.6; }
+    .broker-btn-name { font-family: var(--font-display); font-size: 1.05rem; font-weight: 600; display: block; color: var(--accent); }
+    .broker-btn-note { font-size: 0.72rem; font-weight: 500; color: var(--muted); }
+    .broker-btn-icon { font-size: 1.1rem; color: var(--accent); }
+    .brokers-disclaimer { margin-top: 20px; font-size: 0.75rem; color: var(--muted); line-height: 1.6; }
 
     /* Responsive */
     @media (max-width: 700px) {
@@ -576,38 +621,50 @@
   <!-- ══ NAV ══ -->
   <nav>
     <div class="nav-container">
-      <a href="index.html" class="logo">WORLDBANKFX × PROFESSOR</a>
+      <a href="index.html" class="logo">
+        <svg width="24" height="24" viewBox="0 0 100 100" aria-hidden="true">
+          <circle class="logo-icon-ring" cx="50" cy="50" r="46" fill="none" stroke-width="3"/>
+          <polyline class="logo-icon-line" points="26,58 42,42 54,52 78,26" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle class="logo-icon-dot" cx="78" cy="26" r="4.5"/>
+        </svg>
+        <span>ChartCircle</span>
+      </a>
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li class="dropdown">
           <a href="index.html#services">Offers ▾</a>
           <div class="dropdown-content">
-            <a href="pricing.html">📓 TradeMate Journal</a>
-            <a href="forex-course.html">📈 Free Forex Course</a>
-            <a href="#" onclick="openPayment('Trading Playbook PDF — 5 Pages','$49.99'); return false;">📄 Trading Playbook PDF</a>
-            <a href="https://t.me/w0rldbank07" target="_blank" rel="noopener noreferrer">🔐 Trade Daily with Me</a>
+            <a href="pricing.html"><i class="fas fa-book-bookmark"></i> TradeMate Journal</a>
+            <a href="forex-course.html"><i class="fas fa-chart-line"></i> Free Forex Course</a>
+            <a href="#" onclick="openPayment('Trading Playbook PDF — 5 Pages','$49.99'); return false;"><i class="fas fa-scroll"></i> Trading Playbook PDF</a>
+            <a href="https://t.me/w0rldbank07" target="_blank" rel="noopener noreferrer"><i class="fas fa-lock"></i> Trade Daily with Me</a>
           </div>
         </li>
         <li class="dropdown">
           <a href="index.html#tools">Tools ▾</a>
           <div class="dropdown-content">
-            <a href="pip-calculator.html">🧮 Pip Calculator</a>
-            <a href="trading-growth-calculator.html">📈 Growth Calculator</a>
+            <a href="pip-calculator.html"><i class="fas fa-calculator"></i> Pip Calculator</a>
+            <a href="trading-growth-calculator.html"><i class="fas fa-chart-line"></i> Growth Calculator</a>
           </div>
         </li>
         <li class="dropdown">
           <a href="index.html#games">Games ▾</a>
           <div class="dropdown-content">
-            <a href="patience-test.html">⏳ Patience Test</a>
-            <a href="revenge-breaker.html">🎲 Probability Revealer</a>
+            <a href="patience-test.html"><i class="fas fa-hourglass-half"></i> Patience Test</a>
+            <a href="revenge-breaker.html"><i class="fas fa-dice"></i> Probability Revealer</a>
           </div>
         </li>
         <li><a href="forex-course.html">Fx Course</a></li>
         <li><a href="pricing.html">TradeMate</a></li>
-        <li><a href="contact.html" style="color:var(--gold)">Contact</a></li>
-        <li><button class="nav-cta" onclick="openBrokers()">Our Brokers</button></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
-      <button class="mobile-menu-btn" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button>
+      <div class="nav-right">
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+          <i class="fas fa-moon"></i><i class="fas fa-sun"></i>
+        </button>
+        <button class="nav-cta" onclick="openBrokers()">Our Brokers</button>
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button>
+      </div>
     </div>
   </nav>
 
@@ -615,34 +672,38 @@
   <div class="mobile-nav" id="mobileNav">
     <button class="mobile-nav-close" onclick="toggleMobileMenu()"><i class="fas fa-times"></i></button>
     <ul class="mobile-nav-links">
+      <li class="mobile-theme-toggle" onclick="toggleTheme()">
+        <span>Dark Mode</span>
+        <i class="fas fa-moon"></i><i class="fas fa-sun"></i>
+      </li>
       <li><a href="index.html" onclick="toggleMobileMenu()">Home</a></li>
       <li>
         <div class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(this)"><span>Offers</span><i class="fas fa-chevron-down"></i></div>
         <div class="mobile-dropdown-content">
-          <a href="pricing.html" onclick="toggleMobileMenu()">📓 TradeMate Journal</a>
-          <a href="forex-course.html" onclick="toggleMobileMenu()">📈 Free Forex Course</a>
-          <a href="#" onclick="toggleMobileMenu(); openPayment('Trading Playbook PDF — 5 Pages','$49.99')">📄 Trading Playbook PDF</a>
-          <a href="https://t.me/w0rldbank07" target="_blank" rel="noopener noreferrer" onclick="toggleMobileMenu()">🔐 Trade Daily with Me</a>
+          <a href="pricing.html" onclick="toggleMobileMenu()"><i class="fas fa-book-bookmark"></i> TradeMate Journal</a>
+          <a href="forex-course.html" onclick="toggleMobileMenu()"><i class="fas fa-chart-line"></i> Free Forex Course</a>
+          <a href="#" onclick="toggleMobileMenu(); openPayment('Trading Playbook PDF — 5 Pages','$49.99')"><i class="fas fa-scroll"></i> Trading Playbook PDF</a>
+          <a href="https://t.me/w0rldbank07" target="_blank" rel="noopener noreferrer" onclick="toggleMobileMenu()"><i class="fas fa-lock"></i> Trade Daily with Me</a>
         </div>
       </li>
       <li>
         <div class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(this)"><span>Tools</span><i class="fas fa-chevron-down"></i></div>
         <div class="mobile-dropdown-content">
-          <a href="pip-calculator.html" onclick="toggleMobileMenu()">🧮 Pip Calculator</a>
-          <a href="trading-growth-calculator.html" onclick="toggleMobileMenu()">📈 Growth Calculator</a>
+          <a href="pip-calculator.html" onclick="toggleMobileMenu()"><i class="fas fa-calculator"></i> Pip Calculator</a>
+          <a href="trading-growth-calculator.html" onclick="toggleMobileMenu()"><i class="fas fa-chart-line"></i> Growth Calculator</a>
         </div>
       </li>
       <li>
         <div class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(this)"><span>Games</span><i class="fas fa-chevron-down"></i></div>
         <div class="mobile-dropdown-content">
-          <a href="patience-test.html" onclick="toggleMobileMenu()">⏳ Patience Test</a>
-          <a href="revenge-breaker.html" onclick="toggleMobileMenu()">🎲 Probability Revealer</a>
+          <a href="patience-test.html" onclick="toggleMobileMenu()"><i class="fas fa-hourglass-half"></i> Patience Test</a>
+          <a href="revenge-breaker.html" onclick="toggleMobileMenu()"><i class="fas fa-dice"></i> Probability Revealer</a>
         </div>
       </li>
       <li><a href="forex-course.html" onclick="toggleMobileMenu()">Fx Course</a></li>
       <li><a href="pricing.html" onclick="toggleMobileMenu()">TradeMate Journal</a></li>
       <li><a href="contact.html" onclick="toggleMobileMenu()">Contact</a></li>
-      <button class="mobile-nav-cta" onclick="toggleMobileMenu(); openBrokers()">🏦 Our Brokers</button>
+      <button class="mobile-nav-cta" onclick="toggleMobileMenu(); openBrokers()"><i class="fas fa-building-columns"></i> Our Brokers</button>
     </ul>
   </div>
 
@@ -667,7 +728,7 @@
           <h3>What This Tracks</h3>
           <p><strong>Revenge trades:</strong> entering with compromised psychology.<br><strong>Sizing errors:</strong> doubling down to recover faster.<br><strong>Discipline score:</strong> how often you chose the right action regardless of emotion.</p>
         </div>
-        <div class="info-card" style="border-color: rgba(0,212,255,0.3);">
+        <div class="info-card" style="border-color: var(--border-strong);">
           <h3 style="color: var(--cyan);">Game Mechanics</h3>
           <p>Your win rate is <strong>dynamic</strong>. It drops with each loss streak and rises when you wait. The game presents real trade scenarios — you decide: <strong>enter, size up, reduce size, or wait it out.</strong></p>
         </div>
@@ -680,7 +741,7 @@
       <div class="footer-content">
         <div class="footer-top">
           <div class="footer-brand">
-            <h3>WorldBankFx × Professor</h3>
+            <h3>ChartCircle</h3>
             <p>Empowering traders with knowledge, tools, and live daily trading. Your journey to financial freedom starts here.</p>
             <div class="footer-social">
               <a href="https://www.instagram.com/_thedigitalprofessor/" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-instagram"></i></a>
@@ -713,12 +774,12 @@
             <a href="contact.html">Contact Page</a>
             <a href="https://t.me/w0rldbank07" target="_blank" rel="noopener noreferrer">Telegram DM</a>
             <a href="https://wa.me/256783354348" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-            <a href="mailto:unlimited.worldbankfx@gmail.com">unlimited.worldbankfx<wbr>@gmail.com</a>
+            <a href="mailto:chartcirclefx@gmail.com">chartcirclefx@gmail.com</a>
             <p>+256 783 354 348</p>
           </div>
         </div>
         <div class="footer-bottom">
-          <p>© 2025–2026 WorldBankFx × Professor. All rights reserved. | Built with discipline.</p>
+          <p>© 2025–2026 ChartCircle. All rights reserved. | Built with discipline.</p>
         </div>
       </div>
     </footer>
@@ -906,7 +967,7 @@
         <div class="footer-content">
           <div class="footer-top">
             <div class="footer-brand">
-              <h3>WorldBankFx × Professor</h3>
+              <h3>ChartCircle</h3>
               <p>Empowering traders with knowledge, tools, and live daily trading. Your journey to financial freedom starts here.</p>
               <div class="footer-social">
                 <a href="https://www.instagram.com/_thedigitalprofessor/" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-instagram"></i></a>
@@ -939,12 +1000,12 @@
               <a href="contact.html">Contact Page</a>
               <a href="https://t.me/w0rldbank07" target="_blank" rel="noopener noreferrer">Telegram DM</a>
               <a href="https://wa.me/256783354348" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-              <a href="mailto:unlimited.worldbankfx@gmail.com">unlimited.worldbankfx<wbr>@gmail.com</a>
+              <a href="mailto:chartcirclefx@gmail.com">chartcirclefx@gmail.com</a>
               <p>+256 783 354 348</p>
             </div>
           </div>
           <div class="footer-bottom">
-            <p>© 2025–2026 WorldBankFx × Professor. All rights reserved. | Built with discipline.</p>
+            <p>© 2025–2026 ChartCircle. All rights reserved. | Built with discipline.</p>
           </div>
         </div>
       </footer>
@@ -964,19 +1025,19 @@
       <div class="payment-price" id="modalPrice">$0</div>
       <div class="payment-methods">
         <a href="https://paypal.me/neemacharles777" target="_blank" rel="noopener noreferrer" class="pay-btn pay-paypal">
-          💳 Pay via PayPal
+          <i class="fab fa-paypal"></i> Pay via PayPal
         </a>
         <a id="whatsappBtn" href="#" target="_blank" rel="noopener noreferrer" class="pay-btn pay-whatsapp">
-          💬 Order via WhatsApp
+          <i class="fab fa-whatsapp"></i> Order via WhatsApp
         </a>
         <a id="emailBtn" href="#" class="pay-btn pay-email">
-          📧 Order via Email
+          <i class="fas fa-envelope"></i> Order via Email
         </a>
       </div>
       <div class="payment-details">
         <p><strong>PayPal:</strong> neemacharles777@gmail.com</p>
         <p><strong>WhatsApp:</strong> +256 783 354 348</p>
-        <p><strong>Email:</strong> <a href="mailto:unlimited.worldbankfx@gmail.com" style="color:var(--gold)">unlimited.worldbankfx@gmail.com</a></p>
+        <p><strong>Email:</strong> <a href="mailto:chartcirclefx@gmail.com" style="color:var(--gold)">chartcirclefx@gmail.com</a></p>
         <small>After payment, send your screenshot to WhatsApp or email. I'll respond within 24 hours with your product.</small>
       </div>
     </div>
@@ -1146,12 +1207,35 @@ function initChartCanvas() {
   chartCtx = canvas.getContext('2d');
 }
 
+// Canvas fillStyle/strokeStyle can't resolve CSS custom properties, so
+// resolve the current theme's actual colors here for chart drawing.
+function getChartPalette() {
+  const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+  return dark ? {
+    grid: 'rgba(255,255,255,0.05)',
+    axisText: 'rgba(195,204,214,0.55)',
+    axisText2: 'rgba(195,204,214,0.35)',
+    green: '#3fae82', red: '#d0707c',
+    greenFill: 'rgba(63,174,130,0.10)', redFill: 'rgba(208,112,124,0.10)',
+    pillText: '#05191b', dotStroke: '#0a1420',
+    baseline: 'rgba(43,184,191,0.35)', baselineText: 'rgba(43,184,191,0.6)'
+  } : {
+    grid: 'rgba(14,33,56,0.07)',
+    axisText: 'rgba(51,71,90,0.6)', axisText2: 'rgba(51,71,90,0.4)',
+    green: '#1f8a5f', red: '#b1414c',
+    greenFill: 'rgba(31,138,95,0.08)', redFill: 'rgba(177,65,76,0.08)',
+    pillText: '#ffffff', dotStroke: '#ffffff',
+    baseline: 'rgba(15,125,130,0.35)', baselineText: 'rgba(15,125,130,0.6)'
+  };
+}
+
 function drawMainChart() {
   const canvas = document.getElementById('mainChart');
   if (!canvas) return;
   const W = canvas.width, H = canvas.height;
   const ctx = chartCtx;
   if (!ctx) return;
+  const P = getChartPalette();
 
   ctx.clearRect(0, 0, W, H);
 
@@ -1165,7 +1249,7 @@ function drawMainChart() {
   const toY = v => padT + (1 - (v - minP) / (maxP - minP)) * (H - padT - padB);
 
   // Grid lines
-  ctx.strokeStyle = 'rgba(255,255,255,0.04)';
+  ctx.strokeStyle = P.grid;
   ctx.lineWidth = 1;
   ctx.setLineDash([4,6]);
   for (let g = 0; g < 5; g++) {
@@ -1179,8 +1263,8 @@ function drawMainChart() {
   ctx.setLineDash([]);
 
   // Price labels right axis
-  ctx.fillStyle = 'rgba(120,120,148,0.7)';
-  ctx.font = '10px -apple-system, BlinkMacSystemFont, sans-serif';
+  ctx.fillStyle = P.axisText;
+  ctx.font = '10px "IBM Plex Mono", monospace';
   ctx.textAlign = 'left';
   for (let g = 0; g <= 4; g++) {
     const pVal = minP + (g / 4) * (maxP - minP);
@@ -1189,8 +1273,8 @@ function drawMainChart() {
   }
 
   // Time labels bottom
-  ctx.fillStyle = 'rgba(120,120,148,0.5)';
-  ctx.font = '9px -apple-system, BlinkMacSystemFont, sans-serif';
+  ctx.fillStyle = P.axisText2;
+  ctx.font = '9px "IBM Plex Mono", monospace';
   ctx.textAlign = 'center';
   const timeLabels = ['−8H', '−6H', '−4H', '−2H', 'NOW'];
   timeLabels.forEach((t, idx) => {
@@ -1202,8 +1286,8 @@ function drawMainChart() {
   const last = visible[visible.length - 1];
   const first = visible[0];
   const isUp = last >= first;
-  const fillColor = isUp ? 'rgba(16,185,129,0.07)' : 'rgba(239,68,68,0.07)';
-  const lineColor = isUp ? '#10b981' : '#ef4444';
+  const fillColor = isUp ? P.greenFill : P.redFill;
+  const lineColor = isUp ? P.green : P.red;
 
   ctx.beginPath();
   ctx.moveTo(toX(0), toY(visible[0]));
@@ -1240,8 +1324,8 @@ function drawMainChart() {
   ctx.beginPath();
   ctx.roundRect(pillX, pillY, pillW, pillH, 3);
   ctx.fill();
-  ctx.fillStyle = '#000';
-  ctx.font = 'bold 9px -apple-system, BlinkMacSystemFont, sans-serif';
+  ctx.fillStyle = P.pillText;
+  ctx.font = 'bold 9px "IBM Plex Mono", monospace';
   ctx.textAlign = 'center';
   ctx.fillText(last.toFixed(1), pillX + pillW/2, pillY + 11);
 
@@ -1255,9 +1339,9 @@ function drawMainChart() {
       const yPos = toY(visible[Math.min(xIdx, visible.length - 1)]);
       ctx.beginPath();
       ctx.arc(xPos, yPos, 4, 0, Math.PI * 2);
-      ctx.fillStyle = a.isWin ? 'var(--green)' : 'var(--red)';
+      ctx.fillStyle = a.isWin ? P.green : P.red;
       ctx.fill();
-      ctx.strokeStyle = '#0a0a0f';
+      ctx.strokeStyle = P.dotStroke;
       ctx.lineWidth = 1.5;
       ctx.stroke();
     });
@@ -1333,7 +1417,7 @@ function updateEmoMeter() {
     currentWinRate = 35;
     badge.textContent = 'TILTED — CAUTION';
     badge.className = 'co-badge tilt2';
-    strip.style.background = '#ff6400';
+    strip.style.background = 'var(--orange)';
   } else {
     currentWinRate = 22;
     badge.textContent = 'REVENGE MODE 🔴';
@@ -1463,6 +1547,7 @@ function drawResultCurve() {
   if (data.length < 2) return;
 
   ctx.clearRect(0, 0, W, H);
+  const P = getChartPalette();
 
   const minV = Math.min(...data) - 300;
   const maxV = Math.max(...data) + 300;
@@ -1471,7 +1556,7 @@ function drawResultCurve() {
   const toX = i => padL + (i / (data.length - 1)) * (W - padL - padR);
 
   // Grid
-  ctx.strokeStyle = 'rgba(255,255,255,0.04)';
+  ctx.strokeStyle = P.grid;
   ctx.lineWidth = 1; ctx.setLineDash([3,5]);
   for (let g = 0; g < 4; g++) {
     const y = padT + (g / 3) * (H - padT - padB);
@@ -1481,18 +1566,18 @@ function drawResultCurve() {
 
   // Baseline $10k
   const baseY = toY(10000);
-  ctx.strokeStyle = 'rgba(255,215,0,0.15)';
+  ctx.strokeStyle = P.baseline;
   ctx.lineWidth = 1; ctx.setLineDash([4,4]);
   ctx.beginPath(); ctx.moveTo(padL, baseY); ctx.lineTo(W - padR, baseY); ctx.stroke();
   ctx.setLineDash([]);
-  ctx.fillStyle = 'rgba(255,215,0,0.5)';
-  ctx.font = '9px -apple-system, BlinkMacSystemFont, sans-serif';
+  ctx.fillStyle = P.baselineText;
+  ctx.font = '9px "IBM Plex Mono", monospace';
   ctx.textAlign = 'left';
   ctx.fillText('$10K', W - padR + 4, baseY + 3);
 
   const last = data[data.length - 1];
-  const lineColor = last >= 10000 ? '#10b981' : '#ef4444';
-  const fillColor = last >= 10000 ? 'rgba(16,185,129,0.08)' : 'rgba(239,68,68,0.08)';
+  const lineColor = last >= 10000 ? P.green : P.red;
+  const fillColor = last >= 10000 ? P.greenFill : P.redFill;
 
   ctx.beginPath();
   ctx.moveTo(toX(0), toY(data[0]));
@@ -1507,8 +1592,8 @@ function drawResultCurve() {
   ctx.strokeStyle = lineColor; ctx.lineWidth = 2; ctx.lineJoin = 'round'; ctx.stroke();
 
   // Price labels
-  ctx.fillStyle = 'rgba(120,120,148,0.7)';
-  ctx.font = '9px -apple-system, BlinkMacSystemFont, sans-serif';
+  ctx.fillStyle = P.axisText;
+  ctx.font = '9px "IBM Plex Mono", monospace';
   ctx.textAlign = 'left';
   const labelVals = [minV + (maxV - minV) * 0.05, 10000, maxV - (maxV - minV) * 0.05];
   labelVals.forEach(v => {
@@ -1580,6 +1665,21 @@ function endGame() {
 
 function resetGame() { showScreen('screenWelcome'); }
 
+// ─── THEME ───────────────────────────────────────────────────────────────────
+function toggleTheme() {
+  const cur = document.documentElement.getAttribute('data-theme') || 'light';
+  const next = cur === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', next);
+  try { localStorage.setItem('cc-theme', next); } catch (e) {}
+  // Redraw canvases so chart colors follow the new theme immediately
+  if (document.getElementById('screenGame') && document.getElementById('screenGame').classList.contains('active')) {
+    drawMainChart();
+  }
+  if (document.getElementById('screenResult') && document.getElementById('screenResult').classList.contains('active')) {
+    drawResultCurve();
+  }
+}
+
 // ─── NAV ─────────────────────────────────────────────────────────────────────
 function toggleMobileMenu() { document.getElementById('mobileNav').classList.toggle('active'); }
 function toggleMobileDropdown(el) {
@@ -1594,7 +1694,7 @@ function openPayment(name, price) {
   document.getElementById('modalProductName').textContent = name;
   document.getElementById('modalPrice').textContent = price;
   document.getElementById('whatsappBtn').href = 'https://wa.me/256783354348?text=' + msg;
-  document.getElementById('emailBtn').href = 'mailto:thedigitalprofessor@gmail.com?subject=Order: ' + encodeURIComponent(name) + '&body=' + msg;
+  document.getElementById('emailBtn').href = 'mailto:chartcirclefx@gmail.com?subject=Order: ' + encodeURIComponent(name) + '&body=' + msg;
   const m = document.getElementById('paymentModal');
   m.style.display = 'flex';
 }

@@ -1,459 +1,438 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>
+    (function() {
+      var saved = null;
+      try { saved = localStorage.getItem('cc-theme'); } catch (e) {}
+      var theme = saved || ((window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
   <meta charset="UTF-8">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "EducationalOrganization",
-    "name": "WorldBankFx × Professor",
+    "name": "ChartCircle",
     "description": "Forex Trading Education, Professional Trading Tools & Live Trading Community",
-    "url": "https://worldbankfx.netlify.app",
-    "founder": { "@type": "Person", "name": "WorldBankFx Professor" },
+    "url": "https://chartcircle.netlify.app",
+    "founder": { "@type": "Person", "name": "ChartCircle" },
     "contactPoint": {
       "@type": "ContactPoint",
-      "email": "unlimited.worldbankfx@gmail.com",
+      "email": "chartcirclefx@gmail.com",
       "telephone": "+256783354348",
       "contactType": "Customer Service"
     }
   }
   </script>
   <meta name="google-site-verification" content="r4rRAzZbS65i13vvxa7d6-Ls43t6F50sXvAqPm5NfO4" />
-  <meta name="description" content="WorldBankFx × Professor - Master Forex Trading with 5 years proven strategies, TradeMate journal, trading playbook, and live daily trading community.">
-  <meta name="keywords" content="forex trading, forex education, pip calculator, trading tools, forex masterclass, technical analysis, trading psychology, WorldBankFx, forex mentor, trading journal, forex courses, trading strategies">
-  <meta name="author" content="WorldBankFx × Professor">
+  <meta name="description" content="ChartCircle - Master Forex Trading with 5 years proven strategies, TradeMate journal, trading playbook, and live daily trading community.">
+  <meta name="keywords" content="forex trading, forex education, pip calculator, trading tools, forex masterclass, technical analysis, trading psychology, ChartCircle, forex mentor, trading journal, forex courses, trading strategies">
+  <meta name="author" content="ChartCircle">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://worldbankfx.netlify.app/">
+  <link rel="canonical" href="https://chartcircle.netlify.app/">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://worldbankfx.netlify.app/">
-  <meta property="og:title" content="WorldBankFx × Professor | Forex Trading Mastery">
+  <meta property="og:url" content="https://chartcircle.netlify.app/">
+  <meta property="og:title" content="ChartCircle | Forex Trading Mastery">
   <meta property="og:description" content="Learn Forex Trading from 5 years of proven strategies. Free tools, playbook, journal, and live daily trading community.">
-  <meta property="og:image" content="https://worldbankfx.netlify.app/og-image.jpg">
+  <meta property="og:image" content="https://chartcircle.netlify.app/og-image.jpg">
   <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://worldbankfx.netlify.app/">
-  <meta property="twitter:title" content="WorldBankFx × Professor | Forex Trading Mastery">
+  <meta property="twitter:url" content="https://chartcircle.netlify.app/">
+  <meta property="twitter:title" content="ChartCircle | Forex Trading Mastery">
   <meta property="twitter:description" content="Learn Forex Trading from 5 years of proven strategies. Free tools, playbook, journal, and live daily trading community.">
-  <meta property="twitter:image" content="https://worldbankfx.netlify.app/twitter-image.jpg">
+  <meta property="twitter:image" content="https://chartcircle.netlify.app/twitter-image.jpg">
   <meta name="language" content="English">
   <meta name="geo.region" content="UG">
   <meta name="geo.placename" content="Uganda">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WorldBankFx × Professor | Forex Trading Mastery</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%230a0a0a'/><rect width='100' height='100' rx='18' fill='none' stroke='%23ffd700' stroke-width='4'/><text x='50' y='38' font-family='Georgia,serif' font-size='22' font-weight='900' fill='%23ffd700' text-anchor='middle'>WB</text><text x='50' y='65' font-family='Georgia,serif' font-size='22' font-weight='900' fill='%23ffd700' text-anchor='middle'>FX</text></svg>">
+  <title>ChartCircle | Forex Trading Mastery</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='47' fill='%230d2340'/><circle cx='50' cy='50' r='47' fill='none' stroke='%230f7d82' stroke-width='3'/><polyline points='24,60 40,44 52,54 76,28' fill='none' stroke='%2312969c' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/><circle cx='76' cy='28' r='4' fill='%2312969c'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+
+    /* ══ LIGHT THEME (default) ══ */
     :root {
-      --gold: #ffd700; --gold2: #ffed4e; --cyan: #00d4ff;
-      --green: #10b981; --red: #ef4444;
-      --bg: #0a0a0a; --bg2: #0f0f0f; --bg3: #1a1a1a; --bg4: #1a1a2e;
-      --border: rgba(255,215,0,0.15); --text: #fff; --muted: #aaa;
+      --accent: #0f7d82; --accent-light: #12969c; --accent-dim: #0a6367;
+      --positive: #1f8a5f; --negative: #b1414c;
+      --bg: #ffffff; --bg-alt: #f3f6fa; --bg-inset: #eef2f6;
+      --surface: #ffffff; --surface2: #f6f9fb;
+      --border: #e1e6ec; --border-strong: #ccd5de;
+      --heading: #0e2138; --text: #33475a; --muted: #64758a;
+      --on-accent: #ffffff;
+      --hero-a: rgba(255,255,255,0.90); --hero-b: rgba(255,255,255,0.78); --hero-c: rgba(255,255,255,0.94);
+      --ring-color: rgba(15,125,130,0.13); --ring-color2: rgba(15,125,130,0.07);
+      --shadow-color: rgba(20,40,60,0.10);
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
     }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+    /* ══ DARK THEME ══ */
+    [data-theme="dark"] {
+      --accent: #2bb8bf; --accent-light: #4fd3d9; --accent-dim: #1f9096;
+      --positive: #3fae82; --negative: #d0707c;
+      --bg: #0a1420; --bg-alt: #0d1c2b; --bg-inset: #0c2233;
+      --surface: #101f30; --surface2: #0c1f2f;
+      --border: rgba(255,255,255,0.08); --border-strong: rgba(255,255,255,0.18);
+      --heading: #eef3f8; --text: #c3ccd6; --muted: #8b9aab;
+      --on-accent: #05191b;
+      --hero-a: rgba(9,15,22,0.90); --hero-b: rgba(10,20,32,0.80); --hero-c: rgba(9,15,22,0.94);
+      --ring-color: rgba(43,184,191,0.16); --ring-color2: rgba(43,184,191,0.09);
+      --shadow-color: rgba(0,0,0,0.45);
+    }
+
+    body { font-family: var(--font-body); background: var(--bg); color: var(--text); overflow-x: hidden; transition: background 0.25s ease, color 0.25s ease; }
 
     /* ── SCROLLBAR ── */
     ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--bg2); }
-    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+    ::-webkit-scrollbar-track { background: var(--bg-alt); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+    /* ── THEME TOGGLE ── */
+    .theme-toggle { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--border-strong); background: var(--surface); color: var(--accent); cursor: pointer; font-size: 0.95rem; transition: all 0.25s ease; }
+    .theme-toggle:hover { border-color: var(--accent); }
+    .theme-toggle .fa-sun { display: none; }
+    [data-theme="dark"] .theme-toggle .fa-sun { display: inline-block; }
+    [data-theme="dark"] .theme-toggle .fa-moon { display: none; }
+    .mobile-theme-toggle { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border); color: var(--heading); font-size: 1rem; font-weight: 600; cursor: pointer; }
 
     /* ── NAV ── */
-    nav { position: fixed; top: 0; width: 100%; background: rgba(10,10,10,0.97); backdrop-filter: blur(12px); z-index: 1000; border-bottom: 1px solid rgba(255,215,0,0.2); }
-    .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 15px 30px; }
-    .logo { font-size: 1.2rem; font-weight: 900; background: linear-gradient(135deg, var(--gold), var(--gold2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; cursor: pointer; text-decoration: none; white-space: nowrap; }
-    .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
-    .nav-links a { color: #fff; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: color 0.3s; }
-    .nav-links a:hover { color: var(--gold); }
+    nav { position: fixed; top: 0; width: 100%; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(12px); z-index: 1000; border-bottom: 1px solid var(--border); }
+    .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 15px 30px; gap: 20px; }
+    .logo { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; color: var(--heading); cursor: pointer; text-decoration: none; white-space: nowrap; letter-spacing: 0.3px; }
+    .logo-mark { display: inline-flex; align-items: center; gap: 10px; }
+    .logo-mark svg { flex-shrink: 0; }
+    .logo-icon-ring { stroke: var(--accent); }
+    .logo-icon-line { stroke: var(--accent); }
+    .logo-icon-dot { fill: var(--accent-light); }
+    .logo-mark span { letter-spacing: 0.4px; }
+    .nav-links { display: flex; gap: 26px; list-style: none; align-items: center; flex: 1; justify-content: center; }
+    .nav-links a { color: var(--text); text-decoration: none; font-weight: 500; font-size: 0.88rem; transition: color 0.3s; letter-spacing: 0.2px; }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-right { display: flex; align-items: center; gap: 14px; }
     .dropdown { position: relative; }
-    .dropdown-content { display: none; position: absolute; top: 100%; left: 0; background: #0f0f0f; min-width: 220px; border: 1px solid var(--gold); border-radius: 10px; margin-top: 4px; padding: 8px 0; z-index: 200; box-shadow: 0 10px 40px rgba(0,0,0,0.6); }
+    .dropdown-content { display: none; position: absolute; top: 100%; left: 0; background: var(--surface); min-width: 230px; border: 1px solid var(--border-strong); border-radius: 6px; margin-top: 10px; padding: 8px 0; z-index: 200; box-shadow: 0 16px 40px var(--shadow-color); }
     .dropdown:hover .dropdown-content, .dropdown-content:hover { display: block; }
-    .dropdown-content a { display: block; padding: 11px 20px; border-bottom: 1px solid #222; color: #ccc; font-size: 0.88rem; }
+    .dropdown-content a { display: flex; align-items: center; gap: 10px; padding: 11px 20px; border-bottom: 1px solid var(--border); color: var(--text); font-size: 0.86rem; }
+    .dropdown-content a i { width: 14px; color: var(--accent); font-size: 0.82rem; }
     .dropdown-content a:last-child { border-bottom: none; }
-    .dropdown-content a:hover { background: rgba(255,215,0,0.08); color: var(--gold); }
-    .nav-cta { background: linear-gradient(135deg, var(--gold), var(--gold2)); color: #000 !important; padding: 9px 22px; border-radius: 25px; font-weight: 800 !important; font-size: 0.85rem !important; transition: all 0.3s ease !important; cursor: pointer; border: none; }
-    .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,215,0,0.35); color: #000 !important; }
-    .mobile-menu-btn { display: none; font-size: 1.5rem; color: var(--gold); cursor: pointer; background: none; border: none; }
-    .mobile-nav { display: none; position: fixed; top: 0; right: -100%; width: 80%; max-width: 380px; height: 100vh; background: #0d0d0d; z-index: 2000; padding: 80px 30px 30px; transition: right 0.3s ease; overflow-y: auto; border-left: 1px solid rgba(255,215,0,0.15); }
+    .dropdown-content a:hover { background: var(--bg-alt); color: var(--accent); }
+    .nav-cta { background: var(--accent); color: var(--on-accent) !important; padding: 10px 22px; border-radius: 6px; font-weight: 700 !important; font-size: 0.82rem !important; letter-spacing: 0.3px; transition: all 0.3s ease !important; cursor: pointer; border: none; white-space: nowrap; }
+    .nav-cta:hover { background: var(--accent-light); transform: translateY(-1px); box-shadow: 0 6px 18px rgba(15,125,130,0.25); color: var(--on-accent) !important; }
+    .mobile-menu-btn { display: none; font-size: 1.4rem; color: var(--accent); cursor: pointer; background: none; border: none; }
+    .mobile-nav { display: none; position: fixed; top: 0; right: -100%; width: 80%; max-width: 380px; height: 100vh; background: var(--bg-alt); z-index: 2000; padding: 80px 30px 30px; transition: right 0.3s ease; overflow-y: auto; border-left: 1px solid var(--border); }
     .mobile-nav.active { right: 0; }
-    .mobile-nav-close { position: absolute; top: 20px; right: 20px; font-size: 2rem; color: var(--gold); cursor: pointer; background: none; border: none; }
+    .mobile-nav-close { position: absolute; top: 20px; right: 20px; font-size: 1.8rem; color: var(--accent); cursor: pointer; background: none; border: none; }
     .mobile-nav-links { list-style: none; }
     .mobile-nav-links li { margin-bottom: 6px; }
-    .mobile-nav-links > li > a { color: #fff; text-decoration: none; font-size: 1.05rem; font-weight: 700; display: block; padding: 12px 0; border-bottom: 1px solid #1a1a1a; }
-    .mobile-dropdown-toggle { display: flex; justify-content: space-between; align-items: center; cursor: pointer; color: #fff; font-size: 1.05rem; font-weight: 700; padding: 12px 0; border-bottom: 1px solid #1a1a1a; }
+    .mobile-nav-links > li > a { color: var(--heading); text-decoration: none; font-size: 1rem; font-weight: 600; display: block; padding: 12px 0; border-bottom: 1px solid var(--border); }
+    .mobile-dropdown-toggle { display: flex; justify-content: space-between; align-items: center; cursor: pointer; color: var(--heading); font-size: 1rem; font-weight: 600; padding: 12px 0; border-bottom: 1px solid var(--border); }
     .mobile-dropdown-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; padding-left: 16px; }
     .mobile-dropdown-content.active { max-height: 400px; }
-    .mobile-dropdown-content a { font-size: 0.95rem; padding: 9px 0; color: #aaa; display: block; text-decoration: none; border-bottom: 1px solid #161616; }
-    .mobile-dropdown-content a:hover { color: var(--gold); }
-    .mobile-nav-cta { display: block; margin-top: 24px; padding: 15px; background: linear-gradient(135deg,var(--gold),var(--gold2)); color: #000; text-align: center; border-radius: 10px; font-weight: 800; font-size: 1rem; text-decoration: none; cursor: pointer; border: none; width: 100%; }
+    .mobile-dropdown-content a { font-size: 0.92rem; padding: 9px 0; color: var(--muted); display: flex; align-items: center; gap: 10px; text-decoration: none; border-bottom: 1px solid var(--border); }
+    .mobile-dropdown-content a i:first-child { width: 14px; color: var(--accent); font-size: 0.8rem; }
+    .mobile-dropdown-content a:hover { color: var(--accent); }
+    .mobile-nav-cta { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 24px; padding: 15px; background: var(--accent); color: var(--on-accent); text-align: center; border-radius: 6px; font-weight: 700; font-size: 0.95rem; text-decoration: none; cursor: pointer; border: none; width: 100%; }
 
     /* ── HERO ── */
     .hero { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; padding-top: 60px; }
     .hero-background { position: absolute; inset: 0; z-index: 0; }
     .hero-background canvas { width: 100%; height: 100%; opacity: 1; }
-    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(160deg, rgba(6,6,14,0.88) 0%, rgba(10,14,30,0.80) 60%, rgba(6,6,14,0.92) 100%); z-index: 1; }
-    .animated-bg { position: absolute; width: 100%; height: 100%; background: radial-gradient(circle at 20% 50%, rgba(255,215,0,0.08) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(0,212,255,0.08) 0%, transparent 50%); animation: bgFloat 20s ease-in-out infinite; z-index: 1; }
-    @keyframes bgFloat { 0%,100%{transform:scale(1) rotate(0deg);} 50%{transform:scale(1.05) rotate(2deg);} }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(160deg, var(--hero-a) 0%, var(--hero-b) 60%, var(--hero-c) 100%); z-index: 1; }
+    .hero-ring { position: absolute; top: 50%; left: 50%; width: min(78vw, 900px); height: min(78vw, 900px); border: 1px solid var(--ring-color); border-radius: 50%; transform: translate(-50%,-50%); z-index: 1; pointer-events: none; }
+    .hero-ring::before { content: ''; position: absolute; inset: 34px; border: 1px solid var(--ring-color2); border-radius: 50%; }
     .hero-content { position: relative; z-index: 2; text-align: center; padding: 32px 20px; max-width: 1100px; width: 100%; }
-    .brand { font-size: clamp(1.8rem, 4.5vw, 3.8rem); font-weight: 900; margin-bottom: 14px; background: linear-gradient(135deg,var(--gold),var(--gold2),var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.5px; text-transform: uppercase; animation: shimmer 3s ease-in-out infinite; background-size: 200% auto; white-space: nowrap; }
-    @keyframes shimmer { 0%,100%{background-position:0% 50%;} 50%{background-position:100% 50%;} }
-    .tagline { font-size: clamp(0.95rem, 2vw, 1.35rem); color: var(--cyan); margin-bottom: 22px; font-weight: 600; }
-    .experience { display: flex; justify-content: center; gap: 52px; margin: 22px 0; flex-wrap: wrap; }
+    .brand-badge { display: inline-flex; align-items: center; gap: 9px; padding: 8px 20px; border-radius: 30px; border: 1px solid var(--border-strong); background: var(--surface); color: var(--accent-dim); font-size: 0.76rem; font-weight: 600; letter-spacing: 0.6px; margin-bottom: 22px; font-family: var(--font-mono); text-transform: uppercase; }
+    .brand { font-family: var(--font-display); font-size: clamp(2rem, 5.5vw, 4.4rem); font-weight: 600; margin-bottom: 16px; color: var(--heading); letter-spacing: -0.5px; }
+    .tagline { font-size: clamp(0.95rem, 2vw, 1.25rem); color: var(--muted); margin-bottom: 26px; font-weight: 400; max-width: 560px; margin-left: auto; margin-right: auto; line-height: 1.6; }
+    .experience { display: flex; justify-content: center; gap: 52px; margin: 26px 0; flex-wrap: wrap; }
     .exp-item { text-align: center; }
-    .exp-number { font-size: 2.8rem; font-weight: 900; color: var(--gold); line-height: 1; }
-    .exp-label { font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 2px; margin-top: 5px; }
-    .cta-buttons { display: flex; gap: 16px; justify-content: center; margin-top: 28px; flex-wrap: wrap; }
-    .cta-btn { padding: 16px 36px; font-size: 1rem; font-weight: 700; border: none; border-radius: 50px; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; display: inline-block; }
-    .cta-primary { background: linear-gradient(135deg,var(--gold),var(--gold2)); color: #000; }
-    .cta-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(255,215,0,0.4); }
-    .cta-secondary { background: transparent; border: 2px solid var(--cyan); color: var(--cyan); }
-    .cta-secondary:hover { background: var(--cyan); color: #000; transform: translateY(-3px); }
-    .market-clocks { display: flex; justify-content: center; gap: 18px; margin-top: 32px; flex-wrap: wrap; }
-    .clock-item { background: rgba(15,15,15,0.85); padding: 18px 28px; border-radius: 14px; border: 1px solid rgba(255,215,0,0.25); text-align: center; min-width: 178px; backdrop-filter: blur(6px); }
-    .clock-city { font-size: 0.82rem; color: var(--muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
-    .clock-time { font-size: 1.6rem; font-weight: 900; color: var(--gold); font-family: 'Courier New', monospace; }
-    .clock-day { font-size: 0.74rem; color: #555; margin-top: 4px; }
-    .clock-status { font-size: 0.76rem; margin-top: 6px; font-weight: 700; }
-    .clock-status.open { color: var(--green); }
-    .clock-status.closed { color: var(--red); }
+    .exp-number { font-family: var(--font-display); font-size: 2.6rem; font-weight: 500; color: var(--heading); line-height: 1; }
+    .exp-label { font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 2px; margin-top: 7px; }
+    .cta-buttons { display: flex; gap: 16px; justify-content: center; margin-top: 30px; flex-wrap: wrap; }
+    .cta-btn { padding: 15px 32px; font-size: 0.92rem; font-weight: 600; border: none; border-radius: 6px; cursor: pointer; transition: all 0.3s ease; letter-spacing: 0.3px; text-decoration: none; display: inline-flex; align-items: center; gap: 9px; }
+    .cta-primary { background: var(--accent); color: var(--on-accent); }
+    .cta-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(15,125,130,0.28); background: var(--accent-light); }
+    .cta-secondary { background: var(--surface); border: 1px solid var(--border-strong); color: var(--heading); }
+    .cta-secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+    .market-clocks { display: flex; justify-content: center; gap: 16px; margin-top: 36px; flex-wrap: wrap; }
+    .clock-item { background: var(--surface); padding: 16px 26px; border-radius: 8px; border: 1px solid var(--border); text-align: center; min-width: 170px; backdrop-filter: blur(6px); box-shadow: 0 4px 16px var(--shadow-color); }
+    .clock-city { font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1.5px; }
+    .clock-time { font-size: 1.5rem; font-weight: 600; color: var(--heading); font-family: var(--font-mono); }
+    .clock-day { font-size: 0.7rem; color: var(--muted); margin-top: 4px; font-family: var(--font-mono); }
+    .clock-status { font-size: 0.72rem; margin-top: 6px; font-weight: 600; font-family: var(--font-mono); letter-spacing: 0.5px; }
+    .clock-status.open { color: var(--positive); }
+    .clock-status.closed { color: var(--negative); }
 
     /* ── SECTION COMMON ── */
-    section { padding: 90px 20px; }
-    .section-title { text-align: center; font-size: clamp(1.8rem,4vw,2.8rem); font-weight: 900; margin-bottom: 16px; color: var(--gold); }
-    .section-sub { text-align: center; color: var(--muted); font-size: 1rem; margin-bottom: 60px; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.7; }
+    section { padding: 100px 20px; }
+    .section-title { text-align: center; font-family: var(--font-display); font-size: clamp(1.7rem,4vw,2.6rem); font-weight: 600; margin-bottom: 16px; color: var(--heading); position: relative; }
+    .section-title::before { content: ''; display: block; width: 40px; height: 1px; background: var(--accent); margin: 0 auto 20px; }
+    .section-sub { text-align: center; color: var(--muted); font-size: 0.98rem; margin-bottom: 64px; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.75; }
 
-    /* ── OFFERS SECTION (replaces services slider) ── */
-    .offers-section { background: var(--bg2); }
-    .offers-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
-    .offer-card { background: linear-gradient(135deg, #1a1a2e, #16213e); padding: 28px 22px; border-radius: 18px; border: 1px solid rgba(255,215,0,0.1); transition: all 0.3s ease; cursor: pointer; text-decoration: none; display: flex; flex-direction: column; color: inherit; }
-    .offer-card:hover { transform: translateY(-8px); border-color: var(--gold); box-shadow: 0 18px 40px rgba(255,215,0,0.18); }
-    .offer-premium { border-color: rgba(0,212,255,0.18); background: linear-gradient(135deg, #0d1a2e, #0f1a3e); }
-    .offer-premium:hover { border-color: var(--cyan); box-shadow: 0 18px 40px rgba(0,212,255,0.2); }
-    .offer-icon { font-size: 2.4rem; margin-bottom: 14px; display: block; }
-    .offer-title { font-size: 1.05rem; font-weight: 800; color: var(--cyan); margin-bottom: 10px; line-height: 1.3; }
-    .offer-premium .offer-title { color: var(--gold); }
-    .offer-desc { color: var(--muted); font-size: 0.85rem; line-height: 1.65; flex: 1; }
-    .offer-footer { margin-top: 18px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 14px; }
-    .offer-price { font-size: 1.15rem; font-weight: 900; }
-    .offer-price.free { color: var(--green); }
-    .offer-price.paid { color: var(--gold); }
-    .offer-arrow { font-size: 0.8rem; font-weight: 700; display: flex; align-items: center; gap: 5px; }
-    .offer-card:not(.offer-premium) .offer-arrow { color: var(--cyan); }
-    .offer-premium .offer-arrow { color: var(--gold); }
-    .offer-tag { display: inline-block; font-size: 0.68rem; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-bottom: 10px; }
-    .offer-tag.free-tag { background: rgba(16,185,129,0.12); color: var(--green); border: 1px solid rgba(16,185,129,0.25); }
-    .offer-tag.paid-tag { background: rgba(255,215,0,0.08); color: var(--gold); border: 1px solid rgba(255,215,0,0.2); }
-    .offer-tag.live-tag { background: rgba(0,212,255,0.08); color: var(--cyan); border: 1px solid rgba(0,212,255,0.2); }
-    .offer-tag.tg-tag { background: rgba(0,212,255,0.08); color: var(--cyan); border: 1px solid rgba(0,212,255,0.2); }
+    /* ── Icon plate ── */
+    .icon-plate { width: 52px; height: 52px; border-radius: 50%; border: 1px solid var(--border-strong); display: flex; align-items: center; justify-content: center; margin-bottom: 18px; color: var(--accent); font-size: 1.2rem; flex-shrink: 0; background: var(--bg-inset); }
+
+    /* ── OFFERS SECTION ── */
+    .offers-section { background: var(--bg-alt); }
+    .offers-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .offer-card { background: var(--surface); padding: 30px 24px; border-radius: 10px; border: 1px solid var(--border); transition: all 0.3s ease; cursor: pointer; text-decoration: none; display: flex; flex-direction: column; color: inherit; box-shadow: 0 2px 10px var(--shadow-color); }
+    .offer-card:hover { transform: translateY(-6px); border-color: var(--border-strong); box-shadow: 0 18px 40px var(--shadow-color); }
+    .offer-premium { border-color: var(--border-strong); background: linear-gradient(180deg, var(--surface2), var(--surface)); }
+    .offer-premium:hover { border-color: var(--accent); }
+    .offer-title { font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; color: var(--heading); margin-bottom: 10px; line-height: 1.3; }
+    .offer-desc { color: var(--muted); font-size: 0.85rem; line-height: 1.7; flex: 1; }
+    .offer-footer { margin-top: 20px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); padding-top: 16px; }
+    .offer-price { font-family: var(--font-mono); font-size: 1rem; font-weight: 600; }
+    .offer-price.free { color: var(--positive); }
+    .offer-price.paid { color: var(--accent); }
+    .offer-arrow { font-size: 0.78rem; font-weight: 600; display: flex; align-items: center; gap: 6px; color: var(--accent); }
+    .offer-tag { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 0.65rem; font-weight: 600; padding: 4px 11px; border-radius: 20px; margin-bottom: 14px; text-transform: uppercase; letter-spacing: 0.4px; width: fit-content; }
+    .offer-tag.free-tag { background: rgba(31,138,95,0.09); color: var(--positive); border: 1px solid rgba(31,138,95,0.28); }
+    .offer-tag.paid-tag { background: var(--bg-inset); color: var(--accent); border: 1px solid var(--border-strong); }
+    .offer-tag.live-tag { background: var(--bg-inset); color: var(--accent); border: 1px solid var(--border-strong); }
+    .offer-tag.tg-tag { background: var(--bg-inset); color: var(--accent); border: 1px solid var(--border-strong); }
     @media (max-width: 900px) { .offers-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 480px) { .offers-grid { grid-template-columns: 1fr; } }
 
     /* ── FX COURSE PROMO ── */
-    .course-promo { background: linear-gradient(135deg, #0a0a0a 0%, #0f0f1f 100%); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .course-promo { background: var(--bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .course-promo-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-    .promo-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.25); padding: 6px 16px; border-radius: 20px; margin-bottom: 20px; }
-    .promo-badge span { font-size: 0.7rem; color: var(--cyan); font-family: monospace; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; }
-    .promo-title { font-size: clamp(1.7rem,3.5vw,2.5rem); font-weight: 900; color: #fff; margin-bottom: 16px; line-height: 1.2; }
-    .promo-title span { color: var(--cyan); }
-    .promo-desc { color: var(--muted); font-size: 0.97rem; line-height: 1.85; margin-bottom: 28px; }
-    .promo-features { display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; }
-    .promo-feature { display: flex; align-items: center; gap: 10px; color: #ccc; font-size: 0.9rem; }
+    .promo-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--bg-inset); border: 1px solid var(--border-strong); padding: 7px 16px; border-radius: 20px; margin-bottom: 22px; }
+    .promo-badge span { font-size: 0.7rem; color: var(--accent); font-family: var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; }
+    .promo-title { font-family: var(--font-display); font-size: clamp(1.6rem,3.5vw,2.4rem); font-weight: 600; color: var(--heading); margin-bottom: 18px; line-height: 1.25; }
+    .promo-title span { color: var(--accent); }
+    .promo-desc { color: var(--muted); font-size: 0.96rem; line-height: 1.9; margin-bottom: 30px; }
+    .promo-features { display: flex; flex-direction: column; gap: 11px; margin-bottom: 34px; }
+    .promo-feature { display: flex; align-items: center; gap: 11px; color: var(--text); font-size: 0.9rem; }
     .promo-btns { display: flex; gap: 14px; flex-wrap: wrap; }
-    .promo-btn-main { padding: 15px 34px; background: linear-gradient(135deg,var(--cyan),#0099bb); color: #000; border-radius: 8px; font-weight: 800; font-size: 0.97rem; text-decoration: none; transition: all 0.3s; }
-    .promo-btn-main:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,212,255,0.35); }
-    .promo-btn-sec { padding: 15px 26px; background: transparent; color: var(--cyan); border: 1px solid rgba(0,212,255,0.3); border-radius: 8px; font-weight: 600; font-size: 0.97rem; text-decoration: none; transition: all 0.3s; }
-    .promo-btn-sec:hover { background: rgba(0,212,255,0.08); }
-    .course-mockup { background: #0d0d0d; border: 1px solid rgba(0,212,255,0.15); border-radius: 16px; padding: 24px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
-    .mockup-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
-    .mockup-title { font-family: monospace; font-size: 0.7rem; color: var(--cyan); font-weight: 700; letter-spacing: 0.1em; }
-    .mockup-badge { background: rgba(0,212,255,0.1); color: var(--cyan); font-family: monospace; font-size: 0.58rem; padding: 3px 10px; border-radius: 20px; border: 1px solid rgba(0,212,255,0.2); }
-    .mockup-progress { margin-bottom: 18px; }
-    .mockup-progress-label { font-family: monospace; font-size: 0.6rem; color: #555; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
-    .mockup-bar { height: 6px; background: #1a1a1a; border-radius: 3px; overflow: hidden; }
-    .mockup-fill { height: 100%; background: linear-gradient(90deg, var(--cyan), var(--gold)); border-radius: 3px; width: 65%; }
+    .promo-btn-main { padding: 15px 30px; background: var(--accent); color: var(--on-accent); border-radius: 6px; font-weight: 700; font-size: 0.92rem; text-decoration: none; transition: all 0.3s; display: inline-flex; align-items: center; gap: 9px; }
+    .promo-btn-main:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(15,125,130,0.25); background: var(--accent-light); }
+    .promo-btn-sec { padding: 15px 26px; background: var(--surface); color: var(--heading); border: 1px solid var(--border-strong); border-radius: 6px; font-weight: 500; font-size: 0.92rem; text-decoration: none; transition: all 0.3s; }
+    .promo-btn-sec:hover { border-color: var(--accent); color: var(--accent); }
+    .course-mockup { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 26px; box-shadow: 0 20px 60px var(--shadow-color); }
+    .mockup-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+    .mockup-title { font-family: var(--font-mono); font-size: 0.68rem; color: var(--accent); font-weight: 600; letter-spacing: 0.08em; }
+    .mockup-badge { background: rgba(31,138,95,0.1); color: var(--positive); font-family: var(--font-mono); font-size: 0.58rem; padding: 3px 10px; border-radius: 20px; border: 1px solid rgba(31,138,95,0.25); }
+    .mockup-progress { margin-bottom: 20px; }
+    .mockup-progress-label { font-family: var(--font-mono); font-size: 0.6rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
+    .mockup-bar { height: 4px; background: var(--bg-inset); border-radius: 3px; overflow: hidden; }
+    .mockup-fill { height: 100%; background: var(--accent); border-radius: 3px; width: 65%; }
     .mockup-lessons { display: flex; flex-direction: column; gap: 8px; }
-    .mockup-lesson { display: flex; align-items: center; gap: 12px; background: #161616; border-radius: 8px; padding: 10px 12px; border: 1px solid #222; }
-    .mockup-lesson.done { border-color: rgba(16,185,129,0.2); }
-    .mockup-lesson.active { border-color: rgba(0,212,255,0.3); background: rgba(0,212,255,0.04); }
+    .mockup-lesson { display: flex; align-items: center; gap: 12px; background: var(--bg-inset); border-radius: 6px; padding: 11px 12px; border: 1px solid var(--border); }
+    .mockup-lesson.done { border-color: rgba(31,138,95,0.2); }
+    .mockup-lesson.active { border-color: var(--border-strong); background: color-mix(in srgb, var(--accent) 5%, var(--bg-inset)); }
     .lesson-dot { width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.55rem; font-weight: 700; flex-shrink: 0; }
-    .lesson-dot.done { background: rgba(16,185,129,0.2); color: var(--green); border: 1px solid rgba(16,185,129,0.3); }
-    .lesson-dot.active { background: rgba(0,212,255,0.15); color: var(--cyan); border: 1px solid rgba(0,212,255,0.4); }
-    .lesson-dot.locked { background: #1a1a1a; color: #333; border: 1px solid #2a2a2a; }
-    .lesson-text { font-family: monospace; font-size: 0.66rem; color: #888; line-height: 1.4; }
-    .lesson-text strong { color: #ccc; display: block; margin-bottom: 1px; }
+    .lesson-dot.done { background: rgba(31,138,95,0.16); color: var(--positive); border: 1px solid rgba(31,138,95,0.3); }
+    .lesson-dot.active { background: rgba(15,125,130,0.14); color: var(--accent); border: 1px solid var(--border-strong); }
+    .lesson-dot.locked { background: var(--surface); color: var(--muted); border: 1px solid var(--border); }
+    .lesson-text { font-family: var(--font-mono); font-size: 0.66rem; color: var(--muted); line-height: 1.4; }
+    .lesson-text strong { color: var(--text); display: block; margin-bottom: 1px; font-weight: 600; }
 
     /* ── GAMES SECTION ── */
-    .games-section { background: var(--bg3); }
-    .games-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; }
-    .game-card { background: linear-gradient(135deg, #0f0f1a, #1a1a2e); border-radius: 18px; overflow: hidden; border: 1px solid rgba(255,215,0,0.1); transition: all 0.3s ease; text-decoration: none; display: block; color: inherit; }
-    .game-card:hover { transform: translateY(-8px); border-color: var(--gold); box-shadow: 0 18px 40px rgba(255,215,0,0.18); }
+    .games-section { background: var(--bg-alt); }
+    .games-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+    .game-card { background: var(--surface); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); transition: all 0.3s ease; text-decoration: none; display: block; color: inherit; box-shadow: 0 2px 10px var(--shadow-color); }
+    .game-card:hover { transform: translateY(-6px); border-color: var(--border-strong); box-shadow: 0 18px 40px var(--shadow-color); }
     .game-card-top { padding: 32px 28px 20px; }
-    .game-emoji { font-size: 3rem; margin-bottom: 16px; display: block; }
-    .game-title { font-size: 1.25rem; font-weight: 800; color: var(--gold); margin-bottom: 10px; }
-    .game-desc { color: var(--muted); font-size: 0.9rem; line-height: 1.65; }
-    .game-card-bottom { padding: 16px 28px 24px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255,215,0,0.08); }
-    .game-tag { font-size: 0.75rem; color: var(--cyan); background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.2); padding: 4px 12px; border-radius: 20px; font-weight: 600; }
-    .game-play { font-size: 0.85rem; color: var(--gold); font-weight: 700; display: flex; align-items: center; gap: 6px; }
+    .game-title { font-family: var(--font-display); font-size: 1.2rem; font-weight: 600; color: var(--heading); margin-bottom: 10px; }
+    .game-desc { color: var(--muted); font-size: 0.9rem; line-height: 1.7; }
+    .game-card-bottom { padding: 16px 28px 24px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); }
+    .game-tag { font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent); background: var(--bg-inset); border: 1px solid var(--border-strong); padding: 4px 12px; border-radius: 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.4px; }
+    .game-play { font-size: 0.82rem; color: var(--accent); font-weight: 600; display: flex; align-items: center; gap: 6px; }
 
     /* ── TOOLS SECTION ── */
-    .tools-section { background: var(--bg2); }
-    .tools-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
-    .tool-card { background: #111; border-radius: 16px; padding: 32px 26px; border: 1px solid #222; transition: all 0.3s ease; text-decoration: none; display: block; color: inherit; position: relative; overflow: hidden; }
-    .tool-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--gold), var(--cyan)); transform: scaleX(0); transition: transform 0.3s; transform-origin: left; }
-    .tool-card:hover { border-color: rgba(255,215,0,0.3); transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.4); }
+    .tools-section { background: var(--bg); }
+    .tools-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 22px; }
+    .tool-card { background: var(--surface); border-radius: 10px; padding: 32px 26px; border: 1px solid var(--border); transition: all 0.3s ease; text-decoration: none; display: block; color: inherit; position: relative; overflow: hidden; box-shadow: 0 2px 10px var(--shadow-color); }
+    .tool-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--accent); transform: scaleX(0); transition: transform 0.3s; transform-origin: left; }
+    .tool-card:hover { border-color: var(--border-strong); transform: translateY(-4px); box-shadow: 0 15px 35px var(--shadow-color); }
     .tool-card:hover::before { transform: scaleX(1); }
-    .tool-icon { font-size: 2.5rem; margin-bottom: 16px; }
-    .tool-title { font-size: 1.2rem; font-weight: 800; color: #fff; margin-bottom: 10px; }
-    .tool-desc { color: var(--muted); font-size: 0.9rem; line-height: 1.65; margin-bottom: 18px; }
-    .tool-link { font-size: 0.85rem; color: var(--gold); font-weight: 700; display: flex; align-items: center; gap: 6px; }
+    .tool-title { font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; color: var(--heading); margin-bottom: 10px; }
+    .tool-desc { color: var(--muted); font-size: 0.9rem; line-height: 1.7; margin-bottom: 20px; }
+    .tool-link { font-size: 0.82rem; color: var(--accent); font-weight: 600; display: flex; align-items: center; gap: 6px; }
 
     /* ── TRADEMATE PROMO ── */
-    .trademate-section { background: linear-gradient(135deg, #0a0a0a 0%, #0f0f1a 100%); border-top: 1px solid var(--border); }
+    .trademate-section { background: var(--bg-alt); border-top: 1px solid var(--border); }
     .trademate-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-    .cm-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,215,0,0.08); border: 1px solid rgba(255,215,0,0.2); padding: 6px 16px; border-radius: 20px; margin-bottom: 20px; }
-    .cm-badge span { font-size: 0.7rem; color: var(--gold); font-family: monospace; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; }
-    .cm-title { font-size: clamp(1.7rem,3.5vw,2.6rem); font-weight: 900; color: #fff; margin-bottom: 16px; line-height: 1.2; }
-    .cm-title span { color: var(--gold); }
-    .cm-desc { color: var(--muted); font-size: 0.97rem; line-height: 1.85; margin-bottom: 28px; }
-    .cm-features { display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; }
-    .cm-feature { display: flex; align-items: center; gap: 10px; color: #ccc; font-size: 0.9rem; }
+    .cm-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--bg-inset); border: 1px solid var(--border-strong); padding: 7px 16px; border-radius: 20px; margin-bottom: 22px; }
+    .cm-badge span { font-size: 0.7rem; color: var(--accent); font-family: var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; }
+    .cm-title { font-family: var(--font-display); font-size: clamp(1.6rem,3.5vw,2.5rem); font-weight: 600; color: var(--heading); margin-bottom: 18px; line-height: 1.25; }
+    .cm-title span { color: var(--accent); }
+    .cm-desc { color: var(--muted); font-size: 0.96rem; line-height: 1.9; margin-bottom: 30px; }
+    .cm-features { display: flex; flex-direction: column; gap: 11px; margin-bottom: 34px; }
+    .cm-feature { display: flex; align-items: center; gap: 11px; color: var(--text); font-size: 0.9rem; }
     .cm-btns { display: flex; gap: 14px; flex-wrap: wrap; }
-    .cm-btn-main { padding: 15px 34px; background: linear-gradient(135deg,var(--gold),var(--gold2)); color: #000; border-radius: 8px; font-weight: 800; font-size: 0.97rem; text-decoration: none; transition: all 0.3s; }
-    .cm-btn-main:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,215,0,0.35); }
-    .cm-btn-sec { padding: 15px 26px; background: transparent; color: var(--gold); border: 1px solid rgba(255,215,0,0.3); border-radius: 8px; font-weight: 600; font-size: 0.97rem; text-decoration: none; transition: all 0.3s; }
-    .cm-btn-sec:hover { background: rgba(255,215,0,0.06); }
-    .cm-mockup { background: #0f0f0f; border: 1px solid rgba(255,215,0,0.15); border-radius: 16px; padding: 24px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
-    .cm-mockup-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-    .cm-mockup-title { font-family: monospace; font-size: 0.72rem; color: var(--gold); font-weight: 700; }
-    .cm-mockup-badge { background: rgba(0,230,118,0.1); color: #00e676; font-family: monospace; font-size: 0.58rem; padding: 3px 10px; border-radius: 20px; border: 1px solid rgba(0,230,118,0.2); }
-    .cm-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
-    .cm-stat { background: #161616; border: 1px solid #222; border-radius: 10px; padding: 14px; }
-    .cm-stat-label { font-family: monospace; font-size: 0.52rem; color: #555; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
-    .cm-stat-value { font-size: 1.6rem; font-weight: 900; color: #00e676; }
-    .cm-stat-sub { font-family: monospace; font-size: 0.56rem; color: #555; }
-    .cm-insight { background: #161616; border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; }
-    .cm-insight.good { border-left: 3px solid #00e676; border: 1px solid rgba(0,230,118,0.1); border-left: 3px solid #00e676; }
-    .cm-insight.warn { border: 1px solid rgba(255,61,87,0.1); border-left: 3px solid #ff3d57; }
-    .cm-insight-label { font-family: monospace; font-size: 0.54rem; margin-bottom: 3px; }
-    .cm-insight.good .cm-insight-label { color: #00e676; }
-    .cm-insight.warn .cm-insight-label { color: #ff3d57; }
-    .cm-insight-text { font-family: monospace; font-size: 0.66rem; color: #888; line-height: 1.6; }
-    .cm-insight-text strong { color: #ccc; }
+    .cm-btn-main { padding: 15px 30px; background: var(--accent); color: var(--on-accent); border-radius: 6px; font-weight: 700; font-size: 0.92rem; text-decoration: none; transition: all 0.3s; display: inline-flex; align-items: center; gap: 9px; }
+    .cm-btn-main:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(15,125,130,0.25); background: var(--accent-light); }
+    .cm-btn-sec { padding: 15px 26px; background: var(--surface); color: var(--heading); border: 1px solid var(--border-strong); border-radius: 6px; font-weight: 500; font-size: 0.92rem; text-decoration: none; transition: all 0.3s; }
+    .cm-btn-sec:hover { border-color: var(--accent); color: var(--accent); }
+    .cm-mockup { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 26px; box-shadow: 0 20px 60px var(--shadow-color); }
+    .cm-mockup-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+    .cm-mockup-title { font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent); font-weight: 600; letter-spacing: 0.06em; }
+    .cm-mockup-badge { background: var(--bg-inset); color: var(--accent); font-family: var(--font-mono); font-size: 0.58rem; padding: 3px 10px; border-radius: 20px; border: 1px solid var(--border-strong); }
+    .cm-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+    .cm-stat { background: var(--bg-inset); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+    .cm-stat-label { font-family: var(--font-mono); font-size: 0.52rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+    .cm-stat-value { font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; color: var(--positive); }
+    .cm-stat-sub { font-family: var(--font-mono); font-size: 0.56rem; color: var(--muted); }
+    .cm-insight { background: var(--bg-inset); border-radius: 6px; padding: 11px 13px; margin-bottom: 8px; border: 1px solid var(--border); }
+    .cm-insight.good { border-left: 2px solid var(--positive); }
+    .cm-insight.warn { border-left: 2px solid var(--negative); }
+    .cm-insight-label { font-family: var(--font-mono); font-size: 0.54rem; margin-bottom: 4px; letter-spacing: 0.05em; }
+    .cm-insight.good .cm-insight-label { color: var(--positive); }
+    .cm-insight.warn .cm-insight-label { color: var(--negative); }
+    .cm-insight-text { font-family: var(--font-mono); font-size: 0.66rem; color: var(--muted); line-height: 1.6; }
+    .cm-insight-text strong { color: var(--text); }
 
     /* ── SOCIAL SECTION ── */
-    .social-section { background: var(--bg2); }
-    .social-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
-    .social-card { background: #111; border-radius: 16px; overflow: hidden; border: 1px solid #222; transition: all 0.3s ease; text-decoration: none; display: block; color: inherit; }
-    .social-card:hover { border-color: rgba(255,215,0,0.3); transform: translateY(-4px); }
-    .social-card-header { padding: 16px 20px; background: #0d0d0d; display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 0.92rem; }
-    .social-card-icon-area { aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; opacity: 0.5; }
-    .social-card-body { padding: 18px 20px; color: var(--muted); font-size: 0.9rem; line-height: 1.65; }
+    .social-section { background: var(--bg); }
+    .social-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 22px; }
+    .social-card { background: var(--surface); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); transition: all 0.3s ease; text-decoration: none; display: block; color: inherit; box-shadow: 0 2px 10px var(--shadow-color); }
+    .social-card:hover { border-color: var(--border-strong); transform: translateY(-4px); }
+    .social-card-header { padding: 16px 20px; background: var(--bg-inset); display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 0.9rem; color: var(--heading); }
+    .social-card-icon-area { aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; color: var(--accent); background: var(--bg-inset) !important; }
+    .social-card-body { padding: 18px 20px; color: var(--muted); font-size: 0.9rem; line-height: 1.7; }
     .social-card-action { padding: 0 20px 20px; }
-    .social-card-btn { display: inline-flex; align-items: center; gap: 6px; color: var(--gold); font-weight: 700; font-size: 0.85rem; text-decoration: none; border: 1px solid rgba(255,215,0,0.2); padding: 8px 16px; border-radius: 20px; transition: all 0.3s; }
-    .social-card-btn:hover { background: rgba(255,215,0,0.08); }
+    .social-card-btn { display: inline-flex; align-items: center; gap: 6px; color: var(--accent); font-weight: 600; font-size: 0.82rem; text-decoration: none; border: 1px solid var(--border-strong); padding: 8px 16px; border-radius: 20px; transition: all 0.3s; }
+    .social-card-btn:hover { background: var(--bg-inset); }
 
     /* ── FOOTER ── */
-    footer { background: #000; padding: 60px 20px 36px; border-top: 1px solid #222; }
+    footer { background: var(--bg); padding: 64px 20px 36px; border-top: 1px solid var(--border); }
     .footer-content { max-width: 1200px; margin: 0 auto; }
     .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 50px; }
-    .footer-brand h3 { color: var(--gold); font-size: 1.3rem; margin-bottom: 12px; }
-    .footer-brand p { color: var(--muted); font-size: 0.88rem; line-height: 1.7; max-width: 280px; margin-bottom: 20px; }
-    .footer-social { display: flex; gap: 12px; flex-wrap: wrap; }
-    .social-link { width: 42px; height: 42px; background: #1a1a1a; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; transition: all 0.3s ease; text-decoration: none; color: var(--gold); border: 1px solid #2a2a2a; }
-    .social-link:hover { background: var(--gold); color: #000; transform: scale(1.1); border-color: var(--gold); }
-    .footer-col h4 { color: var(--cyan); margin-bottom: 16px; font-size: 0.88rem; text-transform: uppercase; letter-spacing: 1px; }
-    .footer-col a { display: block; color: var(--muted); margin: 8px 0; text-decoration: none; font-size: 0.88rem; transition: color 0.3s; }
-    .footer-col a:hover { color: var(--gold); }
-    .footer-col p { color: var(--muted); font-size: 0.88rem; margin: 8px 0; }
-    .footer-bottom { text-align: center; color: #444; padding-top: 24px; border-top: 1px solid #1a1a1a; font-size: 0.85rem; }
+    .footer-brand h3 { font-family: var(--font-display); color: var(--heading); font-size: 1.35rem; margin-bottom: 12px; font-weight: 600; }
+    .footer-brand p { color: var(--muted); font-size: 0.88rem; line-height: 1.75; max-width: 280px; margin-bottom: 20px; }
+    .footer-social { display: flex; gap: 10px; flex-wrap: wrap; }
+    .social-link { width: 40px; height: 40px; background: var(--surface); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: all 0.3s ease; text-decoration: none; color: var(--accent); border: 1px solid var(--border); }
+    .social-link:hover { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+    .footer-col h4 { font-family: var(--font-mono); color: var(--muted); margin-bottom: 16px; font-size: 0.76rem; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 500; }
+    .footer-col a { display: block; color: var(--text); margin: 8px 0; text-decoration: none; font-size: 0.88rem; transition: color 0.3s; }
+    .footer-col a:hover { color: var(--accent); }
+    .footer-col p { color: var(--text); font-size: 0.88rem; margin: 8px 0; }
+    .footer-bottom { text-align: center; color: var(--muted); padding-top: 26px; border-top: 1px solid var(--border); font-size: 0.82rem; font-family: var(--font-mono); }
 
     /* ── BACK TO TOP ── */
-    .back-to-top { position: fixed; bottom: 28px; right: 28px; width: 46px; height: 46px; background: linear-gradient(135deg,var(--gold),var(--gold2)); border: none; border-radius: 50%; color: #000; font-size: 1.2rem; cursor: pointer; opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 999; box-shadow: 0 4px 15px rgba(255,215,0,0.3); }
+    .back-to-top { position: fixed; bottom: 28px; right: 28px; width: 44px; height: 44px; background: var(--accent); border: none; border-radius: 50%; color: var(--on-accent); font-size: 1.05rem; cursor: pointer; opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 999; box-shadow: 0 4px 16px var(--shadow-color); }
     .back-to-top.show { opacity: 1; visibility: visible; }
-    .back-to-top:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(255,215,0,0.5); }
+    .back-to-top:hover { transform: translateY(-3px); background: var(--accent-light); }
 
     /* ── PAYMENT MODAL ── */
-    #paymentModal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 10000; align-items: center; justify-content: center; }
-    .payment-inner { background: #1a1a2e; padding: 40px; border-radius: 20px; max-width: 500px; width: 90%; border: 2px solid var(--gold); position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.8); }
-    .payment-close { position: absolute; top: 16px; right: 20px; font-size: 1.8rem; color: #fff; background: none; border: none; cursor: pointer; line-height: 1; }
-    .payment-product { font-size: 1.6rem; font-weight: 900; color: var(--gold); margin-bottom: 6px; }
-    .payment-price { font-size: 2.2rem; color: var(--cyan); font-weight: 900; margin-bottom: 28px; }
+    #paymentModal { display: none; position: fixed; inset: 0; background: rgba(6,10,16,0.6); z-index: 10000; align-items: center; justify-content: center; }
+    .payment-inner { background: var(--bg); padding: 40px; border-radius: 12px; max-width: 500px; width: 90%; border: 1px solid var(--border-strong); position: relative; box-shadow: 0 24px 60px var(--shadow-color); }
+    .payment-close { position: absolute; top: 16px; right: 20px; font-size: 1.7rem; color: var(--muted); background: none; border: none; cursor: pointer; line-height: 1; }
+    .payment-product { font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; color: var(--heading); margin-bottom: 6px; }
+    .payment-price { font-family: var(--font-mono); font-size: 1.9rem; color: var(--accent); font-weight: 600; margin-bottom: 28px; }
     .payment-methods { display: flex; flex-direction: column; gap: 12px; }
-    .pay-btn { padding: 16px; border-radius: 10px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; color: #fff; border: none; }
-    .pay-btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
-    .pay-paypal { background: #0070ba; }
-    .pay-whatsapp { background: #25D366; }
-    .pay-email { background: #ea4335; }
-    .payment-details { margin-top: 20px; padding: 18px; background: rgba(255,215,0,0.07); border-radius: 10px; border: 1px solid rgba(255,215,0,0.2); }
+    .pay-btn { padding: 16px; border-radius: 8px; font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; color: var(--heading); border: 1px solid var(--border-strong); background: var(--surface); }
+    .pay-btn:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .pay-btn i { color: var(--accent); }
+    .payment-details { margin-top: 20px; padding: 18px; background: var(--bg-inset); border-radius: 8px; border: 1px solid var(--border); }
     .payment-details p { font-size: 0.88rem; color: var(--muted); margin: 5px 0; }
-    .payment-details strong { color: var(--gold); }
-    .payment-details small { display: block; margin-top: 12px; font-size: 0.82rem; color: #666; }
+    .payment-details strong { color: var(--heading); }
+    .payment-details small { display: block; margin-top: 12px; font-size: 0.8rem; color: var(--muted); }
 
     /* ── BROKERS MODAL ── */
-    #brokersModal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 10000; align-items: center; justify-content: center; }
-    .brokers-inner { background: #1a1a2e; padding: 38px 36px; border-radius: 20px; max-width: 400px; width: 90%; border: 2px solid var(--gold); position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.8); text-align: center; }
-    .brokers-close { position: absolute; top: 14px; right: 18px; font-size: 1.8rem; color: #fff; background: none; border: none; cursor: pointer; line-height: 1; transition: color 0.2s; }
-    .brokers-close:hover { color: var(--gold); }
-    .brokers-eyebrow { font-size: 0.7rem; color: var(--cyan); font-family: monospace; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 10px; }
-    .brokers-title { font-size: 1.5rem; font-weight: 900; color: var(--gold); margin-bottom: 8px; }
-    .brokers-sub { color: var(--muted); font-size: 0.87rem; margin-bottom: 28px; line-height: 1.65; }
-    .broker-options { display: flex; flex-direction: column; gap: 14px; }
-    .broker-btn { padding: 18px 24px; border-radius: 12px; font-weight: 800; font-size: 1rem; cursor: pointer; transition: all 0.3s ease; text-decoration: none; display: flex; align-items: center; justify-content: space-between; }
-    .broker-btn.exness { background: linear-gradient(135deg, var(--gold), var(--gold2)); color: #000; }
-    .broker-btn.exness:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,215,0,0.4); }
-    .broker-btn.hfm { background: linear-gradient(135deg, var(--cyan), #0099bb); color: #000; }
-    .broker-btn.hfm:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,212,255,0.4); }
+    #brokersModal { display: none; position: fixed; inset: 0; background: rgba(6,10,16,0.6); z-index: 10000; align-items: center; justify-content: center; }
+    .brokers-inner { background: var(--bg); padding: 40px 36px; border-radius: 12px; max-width: 400px; width: 90%; border: 1px solid var(--border-strong); position: relative; box-shadow: 0 24px 60px var(--shadow-color); text-align: center; }
+    .brokers-close { position: absolute; top: 14px; right: 18px; font-size: 1.7rem; color: var(--muted); background: none; border: none; cursor: pointer; line-height: 1; transition: color 0.2s; }
+    .brokers-close:hover { color: var(--accent); }
+    .brokers-eyebrow { font-size: 0.7rem; color: var(--accent); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 10px; }
+    .brokers-title { font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; color: var(--heading); margin-bottom: 8px; }
+    .brokers-sub { color: var(--muted); font-size: 0.87rem; margin-bottom: 30px; line-height: 1.7; }
+    .broker-options { display: flex; flex-direction: column; gap: 12px; }
+    .broker-btn { padding: 18px 22px; border-radius: 8px; font-weight: 600; font-size: 0.98rem; cursor: pointer; transition: all 0.3s ease; text-decoration: none; display: flex; align-items: center; justify-content: space-between; border: 1px solid var(--border-strong); background: var(--surface); color: var(--heading); }
+    .broker-btn:hover { border-color: var(--accent); transform: translateY(-2px); }
     .broker-btn-left { text-align: left; }
-    .broker-btn-name { font-size: 1.05rem; font-weight: 900; display: block; }
-    .broker-btn-note { font-size: 0.72rem; font-weight: 600; opacity: 0.65; }
-    .broker-btn-icon { font-size: 1.2rem; }
-    .brokers-disclaimer { margin-top: 18px; font-size: 0.75rem; color: #444; line-height: 1.6; }
+    .broker-btn-name { font-family: var(--font-display); font-size: 1.05rem; font-weight: 600; display: block; color: var(--accent); }
+    .broker-btn-note { font-size: 0.72rem; font-weight: 500; color: var(--muted); }
+    .broker-btn-icon { font-size: 1.1rem; color: var(--accent); }
+    .brokers-disclaimer { margin-top: 20px; font-size: 0.75rem; color: var(--muted); line-height: 1.6; }
 
     /* ══ RESPONSIVE ══ */
-
-    /* ── Tablet / small desktop ── */
     @media (max-width: 1024px) {
       .footer-top { grid-template-columns: 1fr 1fr; gap: 30px; }
       .course-promo-inner, .trademate-grid { grid-template-columns: 1fr; gap: 40px; }
     }
-
-    /* ── Nav collapse ── */
     @media (max-width: 968px) {
       .nav-links { display: none; }
       .mobile-menu-btn { display: block; }
       .mobile-nav { display: block; }
     }
-
-    /* ── Tablet ── */
     @media (max-width: 768px) {
-      /* Section spacing */
-      section { padding: 70px 18px; }
-
-      /* Hero */
+      section { padding: 76px 18px; }
       .hero-content { padding: 28px 16px; }
       .brand { white-space: normal; word-break: break-word; }
       .tagline { font-size: 0.95rem; }
-
-      /* Stats row */
       .experience { gap: 18px; }
-      .exp-number { font-size: 2rem; }
-      .exp-label { font-size: 0.72rem; letter-spacing: 1px; }
-
-      /* CTA buttons */
+      .exp-number { font-size: 1.9rem; }
+      .exp-label { font-size: 0.68rem; letter-spacing: 1px; }
       .cta-buttons { flex-direction: column; align-items: center; gap: 12px; }
-      .cta-btn { width: 100%; max-width: 320px; text-align: center; padding: 15px 28px; font-size: 0.95rem; }
-
-      /* Market clocks — scrollable strip */
-      .market-clocks {
-        gap: 12px;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        scroll-snap-type: x mandatory;
-        padding-bottom: 10px;
-        justify-content: flex-start;
-        padding-left: 4px;
-        padding-right: 4px;
-      }
-      .clock-item {
-        min-width: 148px;
-        flex-shrink: 0;
-        scroll-snap-align: start;
-        padding: 14px 18px;
-      }
-      .clock-time { font-size: 1.3rem; }
-
-      /* Offers grid already 2-col at 900px — keep it */
-
-      /* Course & TradeMate promo mockup order */
-      .course-promo-inner > div:last-child,
-      .trademate-grid > div:last-child { order: -1; }
-
-      /* Footer */
+      .cta-btn { width: 100%; max-width: 320px; text-align: center; justify-content: center; padding: 15px 28px; font-size: 0.92rem; }
+      .market-clocks { gap: 12px; flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scroll-snap-type: x mandatory; padding-bottom: 10px; justify-content: flex-start; padding-left: 4px; padding-right: 4px; }
+      .clock-item { min-width: 148px; flex-shrink: 0; scroll-snap-align: start; padding: 14px 18px; }
+      .clock-time { font-size: 1.25rem; }
+      .course-promo-inner > div:last-child, .trademate-grid > div:last-child { order: -1; }
       .footer-top { grid-template-columns: 1fr 1fr; gap: 24px; }
       .footer-brand { grid-column: 1 / -1; }
       .footer-brand p { max-width: 100%; }
     }
-
-    /* ── Mobile ── */
     @media (max-width: 640px) {
-      /* Nav */
       .nav-container { padding: 13px 16px; }
-      .logo { font-size: 0.92rem; }
-
-      /* Sections */
+      .logo { font-size: 0.95rem; }
       section { padding: 60px 16px; }
       .section-title { font-size: clamp(1.5rem, 5.5vw, 2rem); margin-bottom: 12px; }
-      .section-sub { font-size: 0.9rem; margin-bottom: 40px; }
-
-      /* Hero */
-      .brand { font-size: clamp(1.4rem, 7vw, 2rem); }
+      .section-sub { font-size: 0.9rem; margin-bottom: 44px; }
+      .brand { font-size: clamp(1.6rem, 8vw, 2.2rem); }
       .experience { gap: 14px; flex-wrap: wrap; }
-      .exp-number { font-size: 1.75rem; }
+      .exp-number { font-size: 1.6rem; }
       .exp-item { min-width: 64px; }
-
-      /* Offers */
       .offers-grid { grid-template-columns: 1fr; gap: 16px; }
       .offer-card { padding: 22px 18px; }
-
-      /* Course promo */
       .course-promo-inner { gap: 28px; }
-      .promo-title { font-size: clamp(1.45rem, 5.5vw, 2rem); }
+      .promo-title { font-size: clamp(1.4rem, 5.5vw, 1.9rem); }
       .promo-btns { flex-direction: column; gap: 10px; }
-      .promo-btn-main, .promo-btn-sec { text-align: center; padding: 14px 20px; }
-
-      /* TradeMate promo */
+      .promo-btn-main, .promo-btn-sec { text-align: center; justify-content: center; padding: 14px 20px; }
       .trademate-grid { gap: 28px; }
-      .cm-title { font-size: clamp(1.45rem, 5.5vw, 2rem); }
+      .cm-title { font-size: clamp(1.4rem, 5.5vw, 1.9rem); }
       .cm-btns { flex-direction: column; gap: 10px; }
-      .cm-btn-main, .cm-btn-sec { text-align: center; padding: 14px 20px; }
-
-      /* Mockup cards — smaller fonts so they don't overflow */
-      .course-mockup, .cm-mockup { padding: 16px; }
+      .cm-btn-main, .cm-btn-sec { text-align: center; justify-content: center; padding: 14px 20px; }
+      .course-mockup, .cm-mockup { padding: 18px; }
       .lesson-text { font-size: 0.62rem; }
-      .cm-stat-value { font-size: 1.3rem; }
-
-      /* Games */
+      .cm-stat-value { font-size: 1.25rem; }
       .games-grid { gap: 18px; }
       .game-card-top { padding: 24px 20px 16px; }
       .game-card-bottom { padding: 14px 20px 20px; }
-
-      /* Tools */
       .tools-grid { gap: 16px; }
       .tool-card { padding: 24px 20px; }
-
-      /* Social */
       .social-grid { gap: 16px; }
-
-      /* Footer */
       .footer-top { grid-template-columns: 1fr; gap: 28px; }
       .footer-brand { grid-column: auto; }
       .footer-social { gap: 10px; }
-
-      /* Modals */
       .payment-inner { padding: 28px 20px; }
-      .payment-product { font-size: 1.3rem; }
-      .payment-price { font-size: 1.8rem; margin-bottom: 20px; }
-      .pay-btn { padding: 14px; font-size: 0.92rem; }
+      .payment-product { font-size: 1.25rem; }
+      .payment-price { font-size: 1.6rem; margin-bottom: 20px; }
+      .pay-btn { padding: 14px; font-size: 0.9rem; }
       .brokers-inner { padding: 30px 22px; }
-      .brokers-title { font-size: 1.3rem; }
-
-      /* Back to top */
+      .brokers-title { font-size: 1.25rem; }
       .back-to-top { bottom: 18px; right: 16px; width: 40px; height: 40px; font-size: 1rem; }
     }
-
-    /* ── Small mobile ── */
     @media (max-width: 400px) {
-      .brand { font-size: clamp(1.15rem, 7.5vw, 1.6rem); }
+      .brand { font-size: clamp(1.3rem, 8.5vw, 1.8rem); }
       .nav-container { padding: 12px 14px; }
-      .logo { font-size: 0.82rem; letter-spacing: -0.3px; }
-      .cta-btn { font-size: 0.88rem; padding: 13px 22px; letter-spacing: 0.5px; }
-      .exp-number { font-size: 1.5rem; }
-      .exp-label { font-size: 0.65rem; }
-      .clock-item { min-width: 130px; padding: 12px 14px; }
-      .clock-time { font-size: 1.15rem; }
+      .logo { font-size: 0.85rem; letter-spacing: -0.2px; }
+      .cta-btn { font-size: 0.86rem; padding: 13px 22px; }
+      .exp-number { font-size: 1.4rem; }
+      .exp-label { font-size: 0.62rem; }
+      .clock-item { min-width: 128px; padding: 12px 14px; }
+      .clock-time { font-size: 1.1rem; }
       .offer-card { padding: 18px 16px; }
-      .promo-btn-main, .promo-btn-sec,
-      .cm-btn-main, .cm-btn-sec { font-size: 0.9rem; padding: 13px 16px; }
+      .promo-btn-main, .promo-btn-sec, .cm-btn-main, .cm-btn-sec { font-size: 0.88rem; padding: 13px 16px; }
       .payment-inner { padding: 22px 16px; width: 95%; }
       .brokers-inner { padding: 24px 16px; width: 95%; }
       section { padding: 50px 14px; }
@@ -465,38 +444,50 @@
   <!-- ══ NAV ══ -->
   <nav>
     <div class="nav-container">
-      <a href="index.html" class="logo">WORLDBANKFX × PROFESSOR</a>
+      <a href="index.html" class="logo logo-mark">
+        <svg width="24" height="24" viewBox="0 0 100 100" aria-hidden="true">
+          <circle class="logo-icon-ring" cx="50" cy="50" r="46" fill="none" stroke-width="3"/>
+          <polyline class="logo-icon-line" points="26,58 42,42 54,52 78,26" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle class="logo-icon-dot" cx="78" cy="26" r="4.5"/>
+        </svg>
+        <span>ChartCircle</span>
+      </a>
       <ul class="nav-links">
         <li><a href="#home">Home</a></li>
         <li class="dropdown">
           <a href="#services">Offers ▾</a>
           <div class="dropdown-content">
-            <a href="pricing.html">📓 TradeMate Journal</a>
-            <a href="forex-course.html">📈 Free Forex Course</a>
-            <a href="#" onclick="openPayment('Trading Playbook PDF — 5 Pages','$49.99'); return false;">📄 Trading Playbook PDF</a>
-            <a href="https://t.me/w0rldbank07" target="_blank" rel="noopener noreferrer">🔐 Trade Daily with Me</a>
+            <a href="pricing.html"><i class="fas fa-book-bookmark"></i> TradeMate Journal</a>
+            <a href="forex-course.html"><i class="fas fa-chart-line"></i> Free Forex Course</a>
+            <a href="#" onclick="openPayment('Trading Playbook PDF — 5 Pages','$49.99'); return false;"><i class="fas fa-scroll"></i> Trading Playbook PDF</a>
+            <a href="https://t.me/w0rldbank07" target="_blank" rel="noopener noreferrer"><i class="fas fa-lock"></i> Trade Daily with Me</a>
           </div>
         </li>
         <li class="dropdown">
           <a href="#tools">Tools ▾</a>
           <div class="dropdown-content">
-            <a href="pip-calculator.html">🧮 Pip Calculator</a>
-            <a href="trading-growth-calculator.html">📈 Growth Calculator</a>
+            <a href="pip-calculator.html"><i class="fas fa-calculator"></i> Pip Calculator</a>
+            <a href="trading-growth-calculator.html"><i class="fas fa-chart-line"></i> Growth Calculator</a>
           </div>
         </li>
         <li class="dropdown">
           <a href="#games">Games ▾</a>
           <div class="dropdown-content">
-            <a href="patience-test.html">⏳ Patience Test</a>
-            <a href="revenge-breaker.html">🎲 Probability Revealer</a>
+            <a href="patience-test.html"><i class="fas fa-hourglass-half"></i> Patience Test</a>
+            <a href="revenge-breaker.html"><i class="fas fa-dice"></i> Probability Revealer</a>
           </div>
         </li>
         <li><a href="forex-course.html">Fx Course</a></li>
         <li><a href="pricing.html">TradeMate</a></li>
         <li><a href="contact.html">Contact</a></li>
-        <li><button class="nav-cta" onclick="openBrokers()">Our Brokers</button></li>
       </ul>
-      <button class="mobile-menu-btn" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button>
+      <div class="nav-right">
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+          <i class="fas fa-moon"></i><i class="fas fa-sun"></i>
+        </button>
+        <button class="nav-cta" onclick="openBrokers()">Our Brokers</button>
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button>
+      </div>
     </div>
   </nav>
 
@@ -504,34 +495,38 @@
   <div class="mobile-nav" id="mobileNav">
     <button class="mobile-nav-close" onclick="toggleMobileMenu()"><i class="fas fa-times"></i></button>
     <ul class="mobile-nav-links">
+      <li class="mobile-theme-toggle" onclick="toggleTheme()">
+        <span>Dark Mode</span>
+        <i class="fas fa-moon"></i><i class="fas fa-sun"></i>
+      </li>
       <li><a href="#home" onclick="toggleMobileMenu()">Home</a></li>
       <li>
         <div class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(this)"><span>Offers</span><i class="fas fa-chevron-down"></i></div>
         <div class="mobile-dropdown-content">
-          <a href="pricing.html" onclick="toggleMobileMenu()">📓 TradeMate Journal</a>
-          <a href="forex-course.html" onclick="toggleMobileMenu()">📈 Free Forex Course</a>
-          <a href="#" onclick="toggleMobileMenu(); openPayment('Trading Playbook PDF — 5 Pages','$49.99')">📄 Trading Playbook PDF</a>
-          <a href="https://t.me/w0rldbank07" target="_blank" rel="noopener noreferrer" onclick="toggleMobileMenu()">🔐 Trade Daily with Me</a>
+          <a href="pricing.html" onclick="toggleMobileMenu()"><i class="fas fa-book-bookmark"></i> TradeMate Journal</a>
+          <a href="forex-course.html" onclick="toggleMobileMenu()"><i class="fas fa-chart-line"></i> Free Forex Course</a>
+          <a href="#" onclick="toggleMobileMenu(); openPayment('Trading Playbook PDF — 5 Pages','$49.99')"><i class="fas fa-scroll"></i> Trading Playbook PDF</a>
+          <a href="https://t.me/w0rldbank07" target="_blank" rel="noopener noreferrer" onclick="toggleMobileMenu()"><i class="fas fa-lock"></i> Trade Daily with Me</a>
         </div>
       </li>
       <li>
         <div class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(this)"><span>Tools</span><i class="fas fa-chevron-down"></i></div>
         <div class="mobile-dropdown-content">
-          <a href="pip-calculator.html" onclick="toggleMobileMenu()">🧮 Pip Calculator</a>
-          <a href="trading-growth-calculator.html" onclick="toggleMobileMenu()">📈 Growth Calculator</a>
+          <a href="pip-calculator.html" onclick="toggleMobileMenu()"><i class="fas fa-calculator"></i> Pip Calculator</a>
+          <a href="trading-growth-calculator.html" onclick="toggleMobileMenu()"><i class="fas fa-chart-line"></i> Growth Calculator</a>
         </div>
       </li>
       <li>
         <div class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(this)"><span>Games</span><i class="fas fa-chevron-down"></i></div>
         <div class="mobile-dropdown-content">
-          <a href="patience-test.html" onclick="toggleMobileMenu()">⏳ Patience Test</a>
-          <a href="revenge-breaker.html" onclick="toggleMobileMenu()">🎲 Probability Revealer</a>
+          <a href="patience-test.html" onclick="toggleMobileMenu()"><i class="fas fa-hourglass-half"></i> Patience Test</a>
+          <a href="revenge-breaker.html" onclick="toggleMobileMenu()"><i class="fas fa-dice"></i> Probability Revealer</a>
         </div>
       </li>
       <li><a href="forex-course.html" onclick="toggleMobileMenu()">Fx Course</a></li>
       <li><a href="pricing.html" onclick="toggleMobileMenu()">TradeMate Journal</a></li>
       <li><a href="contact.html" onclick="toggleMobileMenu()">Contact</a></li>
-      <button class="mobile-nav-cta" onclick="toggleMobileMenu(); openBrokers()">🏦 Our Brokers</button>
+      <button class="mobile-nav-cta" onclick="toggleMobileMenu(); openBrokers()"><i class="fas fa-building-columns"></i> Our Brokers</button>
     </ul>
   </div>
 
@@ -539,10 +534,11 @@
   <section class="hero" id="home">
     <div class="hero-background"><canvas id="forexCanvas"></canvas></div>
     <div class="hero-overlay"></div>
-    <div class="animated-bg"></div>
+    <div class="hero-ring" aria-hidden="true"></div>
     <div class="hero-content">
-      <h1 class="brand">WorldBankFx × Professor</h1>
-      <p class="tagline">Forex Trading Mastery · Tools · Live Daily Trading Community</p>
+      <div class="brand-badge"><i class="fas fa-chart-line"></i> Real Trades. Real Tools. Real Community.</div>
+      <h1 class="brand">ChartCircle</h1>
+      <p class="tagline">Forex education, trading tools, and a community built to grow together.</p>
       <div class="experience">
         <div class="exp-item">
           <div class="exp-number">5+</div>
@@ -562,24 +558,24 @@
         </div>
       </div>
       <div class="cta-buttons">
-        <a href="forex-course.html" class="cta-btn cta-primary">🎓 Start the Fx Course</a>
-        <a href="pricing.html" class="cta-btn cta-secondary">📊 Open TradeMate</a>
+        <a href="forex-course.html" class="cta-btn cta-primary"><i class="fas fa-graduation-cap"></i> Start the Fx Course</a>
+        <a href="pricing.html" class="cta-btn cta-secondary"><i class="fas fa-chart-pie"></i> Open TradeMate</a>
       </div>
       <div class="market-clocks">
         <div class="clock-item">
-          <div class="clock-city">🗼 Tokyo</div>
+          <div class="clock-city">Tokyo</div>
           <div class="clock-time" id="tokyoTime">--:--:--</div>
           <div class="clock-day" id="tokyoDay">---</div>
           <div class="clock-status" id="tokyoStatus">—</div>
         </div>
         <div class="clock-item">
-          <div class="clock-city">🏛️ London</div>
+          <div class="clock-city">London</div>
           <div class="clock-time" id="londonTime">--:--:--</div>
           <div class="clock-day" id="londonDay">---</div>
           <div class="clock-status" id="londonStatus">—</div>
         </div>
         <div class="clock-item">
-          <div class="clock-city">🗽 New York</div>
+          <div class="clock-city">New York</div>
           <div class="clock-time" id="newYorkTime">--:--:--</div>
           <div class="clock-day" id="newYorkDay">---</div>
           <div class="clock-status" id="newYorkStatus">—</div>
@@ -594,9 +590,8 @@
     <p class="section-sub">Four real things built from experience. No fluff, no filler.</p>
     <div class="offers-grid">
 
-      <!-- Card 1: TradeMate Journal -->
       <a href="pricing.html" class="offer-card">
-        <span class="offer-icon">📓</span>
+        <div class="icon-plate"><i class="fas fa-book-bookmark"></i></div>
         <span class="offer-tag free-tag">Free Trial</span>
         <div class="offer-title">TradeMate Journal</div>
         <p class="offer-desc">Track every trade, every emotion, every session. Spot your patterns before they drain your account. First 10 trades completely free.</p>
@@ -606,9 +601,8 @@
         </div>
       </a>
 
-      <!-- Card 2: Forex Course -->
       <a href="forex-course.html" class="offer-card">
-        <span class="offer-icon">📈</span>
+        <div class="icon-plate"><i class="fas fa-chart-line"></i></div>
         <span class="offer-tag free-tag">100% Free</span>
         <div class="offer-title">Forex Fresher Course</div>
         <p class="offer-desc">Structured beginner modules covering market structure, candlestick patterns, entry/exit strategy, risk management, and trading psychology.</p>
@@ -618,9 +612,8 @@
         </div>
       </a>
 
-      <!-- Card 3: Trading Playbook PDF -->
       <div class="offer-card" onclick="openPayment('Trading Playbook PDF — 5 Pages','$49.99')">
-        <span class="offer-icon">📄</span>
+        <div class="icon-plate"><i class="fas fa-scroll"></i></div>
         <span class="offer-tag paid-tag">5-Page PDF</span>
         <div class="offer-title">Personal Trading Playbook</div>
         <p class="offer-desc">My actual playbook. Five pages of real setups, entry rules, and filters I use in live trading. No theory — just what works.</p>
@@ -630,9 +623,8 @@
         </div>
       </div>
 
-      <!-- Card 4: Daily Trading Telegram -->
       <a href="https://t.me/w0rldbank07" target="_blank" rel="noopener noreferrer" class="offer-card offer-premium">
-        <span class="offer-icon">🔐</span>
+        <div class="icon-plate"><i class="fas fa-lock"></i></div>
         <span class="offer-tag tg-tag">Private · Telegram</span>
         <div class="offer-title">Trade Daily with Me</div>
         <p class="offer-desc">Join my private Telegram. I share live setups, real-time analysis, and trade with you every session. Message me: "Hey, I'm interested in trading daily with you."</p>
@@ -649,25 +641,25 @@
   <section class="course-promo">
     <div class="course-promo-inner">
       <div>
-        <div class="promo-badge"><span>🎓 WorldBankFx × The Teaser Class</span></div>
+        <div class="promo-badge"><span>ChartCircle × The Teaser Class</span></div>
         <h2 class="promo-title">The Forex Course<br><span>That Actually Works.</span></h2>
         <p class="promo-desc">No fluff, no fake signals. This is a real interactive course built from 5 years of live trading. Lessons, quizzes, and a progress tracker — you'll know exactly what you're learning and why it matters.</p>
         <div class="promo-features">
-          <div class="promo-feature"><span style="color:var(--cyan)">✓</span> Structured lessons from beginner to advanced</div>
-          <div class="promo-feature"><span style="color:var(--cyan)">✓</span> Built-in quizzes to test your understanding</div>
-          <div class="promo-feature"><span style="color:var(--cyan)">✓</span> Real chart patterns used in live trading</div>
-          <div class="promo-feature"><span style="color:var(--cyan)">✓</span> Trading psychology — the part most courses skip</div>
-          <div class="promo-feature"><span style="color:var(--gold)">★</span> Free to access — start right now</div>
+          <div class="promo-feature"><span style="color:var(--positive)"><i class="fas fa-check"></i></span> Structured lessons from beginner to advanced</div>
+          <div class="promo-feature"><span style="color:var(--positive)"><i class="fas fa-check"></i></span> Built-in quizzes to test your understanding</div>
+          <div class="promo-feature"><span style="color:var(--positive)"><i class="fas fa-check"></i></span> Real chart patterns used in live trading</div>
+          <div class="promo-feature"><span style="color:var(--positive)"><i class="fas fa-check"></i></span> Trading psychology — the part most courses skip</div>
+          <div class="promo-feature"><span style="color:var(--accent)"><i class="fas fa-star"></i></span> Free to access — start right now</div>
         </div>
         <div class="promo-btns">
-          <a href="forex-course.html" class="promo-btn-main">🚀 Start the Course Free</a>
+          <a href="forex-course.html" class="promo-btn-main">Start the Course Free <i class="fas fa-arrow-right"></i></a>
           <a href="contact.html" class="promo-btn-sec">Ask a Question →</a>
         </div>
       </div>
       <div>
         <div class="course-mockup">
           <div class="mockup-header">
-            <span class="mockup-title">FX COURSE — Progress</span>
+            <span class="mockup-title">FX COURSE — PROGRESS</span>
             <span class="mockup-badge">FREE</span>
           </div>
           <div class="mockup-progress">
@@ -688,11 +680,11 @@
               <div class="lesson-text"><strong>Module 3: Entry &amp; Exit Strategy</strong>Currently in progress — keep going!</div>
             </div>
             <div class="mockup-lesson">
-              <div class="lesson-dot locked">🔒</div>
+              <div class="lesson-dot locked"><i class="fas fa-lock" style="font-size:0.5rem"></i></div>
               <div class="lesson-text"><strong>Module 4: Risk Management</strong>The difference between surviving &amp; thriving</div>
             </div>
             <div class="mockup-lesson">
-              <div class="lesson-dot locked">🔒</div>
+              <div class="lesson-dot locked"><i class="fas fa-lock" style="font-size:0.5rem"></i></div>
               <div class="lesson-text"><strong>Module 5: Trading Psychology</strong>Why you lose even when you're right</div>
             </div>
           </div>
@@ -708,7 +700,7 @@
     <div class="games-grid">
       <a href="patience-test.html" class="game-card">
         <div class="game-card-top">
-          <span class="game-emoji">⏳</span>
+          <div class="icon-plate"><i class="fas fa-hourglass-half"></i></div>
           <div class="game-title">Patience Test</div>
           <p class="game-desc">Most traders lose because they overtrade. This test measures how long you can hold off before pulling the trigger. Real traders wait for A+ setups. Are you one of them?</p>
         </div>
@@ -719,7 +711,7 @@
       </a>
       <a href="revenge-breaker.html" class="game-card">
         <div class="game-card-top">
-          <span class="game-emoji">🎲</span>
+          <div class="icon-plate"><i class="fas fa-dice"></i></div>
           <div class="game-title">Probability Revealer</div>
           <p class="game-desc">Revenge trading destroys accounts. This tool forces you to confront the true statistics of consecutive losses — and trains you to accept randomness as part of the game.</p>
         </div>
@@ -737,19 +729,19 @@
     <p class="section-sub">Professional-grade calculators available to every trader — no login, no payment, no catch.</p>
     <div class="tools-grid">
       <a href="pip-calculator.html" class="tool-card">
-        <div class="tool-icon">🧮</div>
+        <div class="icon-plate"><i class="fas fa-calculator"></i></div>
         <div class="tool-title">Pip Calculator</div>
         <p class="tool-desc">Calculate pip value instantly for any currency pair including XAUUSD gold and BTCUSD. Real-time results as you type — no button click needed.</p>
         <div class="tool-link">Open Calculator <i class="fas fa-arrow-right"></i></div>
       </a>
       <a href="trading-growth-calculator.html" class="tool-card">
-        <div class="tool-icon">📈</div>
+        <div class="icon-plate"><i class="fas fa-chart-line"></i></div>
         <div class="tool-title">Growth Calculator</div>
         <p class="tool-desc">Project your account growth with compounding, win rate projections, and a detailed trade-by-trade breakdown. Visualise your journey before you take it.</p>
         <div class="tool-link">Open Calculator <i class="fas fa-arrow-right"></i></div>
       </a>
       <a href="pricing.html" class="tool-card">
-        <div class="tool-icon">📓</div>
+        <div class="icon-plate"><i class="fas fa-book-bookmark"></i></div>
         <div class="tool-title">TradeMate Journal</div>
         <p class="tool-desc">Log trades, track emotions, analyse sessions. Your first 10 trades are completely free — no card needed. See your patterns before they see you.</p>
         <div class="tool-link">Open Journal <i class="fas fa-arrow-right"></i></div>
@@ -761,24 +753,24 @@
   <section class="trademate-section">
     <div class="trademate-grid">
       <div>
-        <div class="cm-badge"><span>NEW — TradeMate Journal</span></div>
+        <div class="cm-badge"><span>New — TradeMate Journal</span></div>
         <h2 class="cm-title">Your Trading Journal.<br><span>Your Unfair Advantage.</span></h2>
         <p class="cm-desc">Stop guessing why you're losing. TradeMate tracks every trade, every emotion, every session — and shows you the honest patterns in your own data. Built for serious traders.</p>
         <div class="cm-features">
-          <div class="cm-feature"><span style="color:#00e676">✓</span> Equity curve &amp; performance stats</div>
-          <div class="cm-feature"><span style="color:#00e676">✓</span> Session, pair &amp; emotion analysis</div>
-          <div class="cm-feature"><span style="color:#00e676">✓</span> Statistical-powered insights from YOUR real data</div>
-          <div class="cm-feature"><span style="color:var(--gold)">★</span> Free trial — first 15 Days, no card needed</div>
+          <div class="cm-feature"><span style="color:var(--positive)"><i class="fas fa-check"></i></span> Equity curve &amp; performance stats</div>
+          <div class="cm-feature"><span style="color:var(--positive)"><i class="fas fa-check"></i></span> Session, pair &amp; emotion analysis</div>
+          <div class="cm-feature"><span style="color:var(--positive)"><i class="fas fa-check"></i></span> Statistical-powered insights from YOUR real data</div>
+          <div class="cm-feature"><span style="color:var(--accent)"><i class="fas fa-star"></i></span> Free trial — first 15 days, no card needed</div>
         </div>
         <div class="cm-btns">
-          <a href="pricing.html" class="cm-btn-main">📊 Open TradeMate Free</a>
+          <a href="pricing.html" class="cm-btn-main">Open TradeMate Free <i class="fas fa-arrow-right"></i></a>
           <a href="pricing.html" class="cm-btn-sec">See Pro Pricing →</a>
         </div>
       </div>
       <div>
         <div class="cm-mockup">
           <div class="cm-mockup-header">
-            <span class="cm-mockup-title">TRADEMATE — Dashboard</span>
+            <span class="cm-mockup-title">TRADEMATE — DASHBOARD</span>
             <span class="cm-mockup-badge">PRO</span>
           </div>
           <div class="cm-stats">
@@ -794,11 +786,11 @@
             </div>
           </div>
           <div class="cm-insight good">
-            <div class="cm-insight-label">✦ PATTERN</div>
+            <div class="cm-insight-label">PATTERN</div>
             <div class="cm-insight-text"><strong>London</strong> is your best session at 78% win rate. Prioritise it.</div>
           </div>
           <div class="cm-insight warn">
-            <div class="cm-insight-label">⚠ WARNING</div>
+            <div class="cm-insight-label">WARNING</div>
             <div class="cm-insight-text">When trading <strong>FOMO</strong>, win rate drops to 22%. Walk away.</div>
           </div>
         </div>
@@ -812,26 +804,26 @@
     <p class="section-sub">Daily market insights, trading tips, and behind-the-scenes across all platforms.</p>
     <div class="social-grid">
       <a href="https://www.instagram.com/_thedigitalprofessor/" target="_blank" rel="noopener noreferrer" class="social-card">
-        <div class="social-card-header"><i class="fab fa-instagram" style="color:#E4405F;font-size:1.3rem"></i> Instagram</div>
-        <div class="social-card-icon-area" style="background:linear-gradient(135deg,#667eea,#764ba2)"><i class="fab fa-instagram"></i></div>
+        <div class="social-card-header"><i class="fab fa-instagram" style="color:var(--accent);font-size:1.2rem"></i> Instagram</div>
+        <div class="social-card-icon-area"><i class="fab fa-instagram"></i></div>
         <div class="social-card-body">Daily trading insights, chart analysis, and behind-the-scenes of live trading.</div>
         <div class="social-card-action"><span class="social-card-btn">@_thedigitalprofessor <i class="fas fa-arrow-right"></i></span></div>
       </a>
       <a href="https://www.youtube.com/@TheWorldBankProfessor" target="_blank" rel="noopener noreferrer" class="social-card">
-        <div class="social-card-header"><i class="fab fa-youtube" style="color:#FF0000;font-size:1.3rem"></i> YouTube</div>
-        <div class="social-card-icon-area" style="background:linear-gradient(135deg,#f093fb,#f5576c)"><i class="fab fa-youtube"></i></div>
+        <div class="social-card-header"><i class="fab fa-youtube" style="color:var(--accent);font-size:1.2rem"></i> YouTube</div>
+        <div class="social-card-icon-area"><i class="fab fa-youtube"></i></div>
         <div class="social-card-body">In-depth tutorials, market breakdowns, and full trading sessions.</div>
         <div class="social-card-action"><span class="social-card-btn">Subscribe on YouTube <i class="fas fa-arrow-right"></i></span></div>
       </a>
       <a href="https://x.com/DigitoProfessor" target="_blank" rel="noopener noreferrer" class="social-card">
-        <div class="social-card-header"><i class="fab fa-twitter" style="color:#1DA1F2;font-size:1.3rem"></i> X / Twitter</div>
-        <div class="social-card-icon-area" style="background:linear-gradient(135deg,#4facfe,#00f2fe)"><i class="fab fa-twitter"></i></div>
+        <div class="social-card-header"><i class="fab fa-twitter" style="color:var(--accent);font-size:1.2rem"></i> X / Twitter</div>
+        <div class="social-card-icon-area"><i class="fab fa-twitter"></i></div>
         <div class="social-card-body">Quick trade ideas, market commentary, and real-time thoughts.</div>
         <div class="social-card-action"><span class="social-card-btn">@DigitoProfessor <i class="fas fa-arrow-right"></i></span></div>
       </a>
       <a href="https://t.me/w0rldbank07" target="_blank" rel="noopener noreferrer" class="social-card">
-        <div class="social-card-header"><i class="fab fa-telegram" style="color:#29B6F6;font-size:1.3rem"></i> Telegram</div>
-        <div class="social-card-icon-area" style="background:linear-gradient(135deg,#1a237e,#0288d1)"><i class="fab fa-telegram"></i></div>
+        <div class="social-card-header"><i class="fab fa-telegram" style="color:var(--accent);font-size:1.2rem"></i> Telegram</div>
+        <div class="social-card-icon-area"><i class="fab fa-telegram"></i></div>
         <div class="social-card-body">Live trade setups, private signals, and daily trading sessions. This is where the real work happens.</div>
         <div class="social-card-action"><span class="social-card-btn">@w0rldbank07 <i class="fas fa-arrow-right"></i></span></div>
       </a>
@@ -843,7 +835,7 @@
     <div class="footer-content">
       <div class="footer-top">
         <div class="footer-brand">
-          <h3>WorldBankFx × Professor</h3>
+          <h3>ChartCircle</h3>
           <p>Empowering traders with knowledge, tools, and live daily trading. Your journey to financial freedom starts here.</p>
           <div class="footer-social">
             <a href="https://www.instagram.com/_thedigitalprofessor/" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-instagram"></i></a>
@@ -878,12 +870,12 @@
           <a href="contact.html">Contact Page</a>
           <a href="https://t.me/w0rldbank07" target="_blank" rel="noopener noreferrer">Telegram</a>
           <a href="https://wa.me/256783354348" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-          <a href="mailto:unlimited.worldbankfx@gmail.com">unlimited.worldbankfx@gmail.com</a>
+          <a href="mailto:chartcirclefx@gmail.com">chartcirclefx@gmail.com</a>
           <p>+256 783 354 348</p>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>© 2025–2026 WorldBankFx × Professor. All rights reserved. | Built with discipline.</p>
+        <p>© 2025–2026 ChartCircle. All rights reserved. | Built with discipline.</p>
       </div>
     </div>
   </footer>
@@ -893,33 +885,33 @@
   </button>
 
   <!-- ══ PAYMENT MODAL ══ -->
-  <div id="paymentModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:10000;align-items:center;justify-content:center;">
+  <div id="paymentModal">
     <div class="payment-inner">
       <button class="payment-close" onclick="closePayment()">×</button>
       <div class="payment-product" id="modalProductName">Product</div>
       <div class="payment-price" id="modalPrice">$0</div>
       <div class="payment-methods">
         <a href="https://paypal.me/neemacharles777" target="_blank" rel="noopener noreferrer" class="pay-btn pay-paypal">
-          💳 Pay via PayPal
+          <i class="fab fa-paypal"></i> Pay via PayPal
         </a>
         <a id="whatsappBtn" href="#" target="_blank" rel="noopener noreferrer" class="pay-btn pay-whatsapp">
-          💬 Order via WhatsApp
+          <i class="fab fa-whatsapp"></i> Order via WhatsApp
         </a>
         <a id="emailBtn" href="#" class="pay-btn pay-email">
-          📧 Order via Email
+          <i class="fas fa-envelope"></i> Order via Email
         </a>
       </div>
       <div class="payment-details">
         <p><strong>PayPal:</strong> neemacharles777@gmail.com</p>
         <p><strong>WhatsApp:</strong> +256 783 354 348</p>
-        <p><strong>Email:</strong> <a href="mailto:unlimited.worldbankfx@gmail.com" style="color:var(--gold)">unlimited.worldbankfx@gmail.com</a></p>
+        <p><strong>Email:</strong> <a href="mailto:chartcirclefx@gmail.com" style="color:var(--accent)">chartcirclefx@gmail.com</a></p>
         <small>After payment, send your screenshot to WhatsApp or email. I'll respond within 24 hours with your product.</small>
       </div>
     </div>
   </div>
 
   <!-- ══ BROKERS MODAL ══ -->
-  <div id="brokersModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:10000;align-items:center;justify-content:center;">
+  <div id="brokersModal">
     <div class="brokers-inner">
       <button class="brokers-close" onclick="closeBrokers()">×</button>
       <div class="brokers-eyebrow">Recommended Partners</div>
@@ -946,6 +938,14 @@
   </div>
 
   <script>
+    // ── Theme ──
+    function toggleTheme() {
+      const cur = document.documentElement.getAttribute('data-theme') || 'light';
+      const next = cur === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('cc-theme', next); } catch (e) {}
+    }
+
     // ── Mobile Nav ──
     function toggleMobileMenu() {
       document.getElementById('mobileNav').classList.toggle('active');
@@ -985,7 +985,7 @@
       document.getElementById('modalPrice').textContent = price;
       document.getElementById('paymentModal').style.display = 'flex';
       document.getElementById('whatsappBtn').href = `https://wa.me/256783354348?text=${encodeURIComponent('Hi! I want to purchase: '+product+' ('+price+'). Please send payment details.')}`;
-      document.getElementById('emailBtn').href = `mailto:unlimited.worldbankfx@gmail.com?subject=${encodeURIComponent('Purchase: '+product)}&body=${encodeURIComponent('Hi,\n\nI would like to purchase:\n'+product+' — '+price+'\n\nPlease confirm payment details.\n\nThank you!')}`;
+      document.getElementById('emailBtn').href = `mailto:chartcirclefx@gmail.com?subject=${encodeURIComponent('Purchase: '+product)}&body=${encodeURIComponent('Hi,\n\nI would like to purchase:\n'+product+' — '+price+'\n\nPlease confirm payment details.\n\nThank you!')}`;
     }
     function closePayment() {
       document.getElementById('paymentModal').style.display = 'none';
@@ -1020,7 +1020,25 @@
       resize();
       window.addEventListener('resize', resize);
 
-      // ── Price history: smooth realistic walk ──
+      const LIGHT = {
+        bg: '#ffffff', wash: 'rgba(15,125,130,0.045)',
+        grid: 'rgba(14,33,56,0.055)', vgrid: 'rgba(14,33,56,0.035)',
+        fillTop: 'rgba(15,125,130,0.10)', fillMid: 'rgba(15,125,130,0.025)',
+        line: 'rgba(15,125,130,0.85)', glow: 'rgba(15,125,130,0.22)',
+        dot: '#0f7d82', pulse: '15,125,130',
+        pairLabel: 'rgba(15,125,130,0.34)', subLabel: 'rgba(14,33,56,0.20)',
+        up: 'rgba(31,138,95,0.9)', down: 'rgba(177,65,76,0.9)'
+      };
+      const DARK = {
+        bg: '#0a1420', wash: 'rgba(43,184,191,0.06)',
+        grid: 'rgba(238,243,248,0.05)', vgrid: 'rgba(238,243,248,0.03)',
+        fillTop: 'rgba(43,184,191,0.13)', fillMid: 'rgba(43,184,191,0.03)',
+        line: 'rgba(43,184,191,0.85)', glow: 'rgba(43,184,191,0.3)',
+        dot: '#4fd3d9', pulse: '43,184,191',
+        pairLabel: 'rgba(43,184,191,0.4)', subLabel: 'rgba(238,243,248,0.16)',
+        up: 'rgba(63,174,130,0.9)', down: 'rgba(208,112,124,0.9)'
+      };
+
       const POINTS = 120;
       const history = [];
       let seed = 1.08420;
@@ -1028,51 +1046,41 @@
         seed += (Math.random() - 0.472) * 0.0018;
         history.push(seed);
       }
-      // live "head" of the line
       let liveY = history[POINTS - 1];
       let liveVel = 0;
-
-      // ── Subtle horizontal price levels ──
-      const levels = [0.28, 0.42, 0.56, 0.70]; // as fractions of chart height band
-
-      // ── Soft ambient glow (one gold, one blue — very restrained) ──
+      const levels = [0.28, 0.42, 0.56, 0.70];
       let t = 0;
       let frameCount = 0;
 
-      function drawBase() {
-        ctx.fillStyle = '#06060e';
+      function drawBase(P) {
+        ctx.fillStyle = P.bg;
         ctx.fillRect(0, 0, W, H);
-        // Very faint left-side gold wash
         const g = ctx.createRadialGradient(0, H * 0.5, 0, 0, H * 0.5, W * 0.55);
-        g.addColorStop(0, 'rgba(255,215,0,0.028)');
-        g.addColorStop(1, 'rgba(255,215,0,0)');
+        g.addColorStop(0, P.wash);
+        g.addColorStop(1, 'rgba(0,0,0,0)');
         ctx.fillStyle = g;
         ctx.fillRect(0, 0, W, H);
       }
 
-      function drawGrid() {
-        // Horizontal price-level lines — like a real chart
+      function drawGrid(P) {
         ctx.lineWidth = 0.5;
         ctx.setLineDash([6, 14]);
         levels.forEach(l => {
           const y = H * 0.12 + l * (H * 0.76);
-          ctx.strokeStyle = 'rgba(255,255,255,0.045)';
+          ctx.strokeStyle = P.grid;
           ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
         });
         ctx.setLineDash([]);
-
-        // Vertical time dividers — very faint
         const cols = 6;
         for (let i = 1; i < cols; i++) {
           const x = (i / cols) * W;
-          ctx.strokeStyle = 'rgba(255,255,255,0.025)';
+          ctx.strokeStyle = P.vgrid;
           ctx.lineWidth = 0.5;
           ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
         }
       }
 
-      function drawPriceLine() {
-        // Evolve history: shift left every 3rd frame only
+      function drawPriceLine(P) {
         frameCount++;
         liveVel += (Math.random() - 0.472) * 0.000028;
         liveVel *= 0.94;
@@ -1089,70 +1097,63 @@
         const chartH = H - pad.t - pad.b;
         const xStep = W / (POINTS - 1);
         const toY = v => pad.t + chartH - ((v - minP) / range) * chartH;
-
         const pts = history.map((v, i) => ({ x: i * xStep, y: toY(v) }));
 
-        // ── Area fill ──
         const fillGrad = ctx.createLinearGradient(0, pad.t, 0, H - pad.b);
-        fillGrad.addColorStop(0,   'rgba(255,215,0,0.10)');
-        fillGrad.addColorStop(0.6, 'rgba(255,215,0,0.02)');
-        fillGrad.addColorStop(1,   'rgba(255,215,0,0)');
+        fillGrad.addColorStop(0,   P.fillTop);
+        fillGrad.addColorStop(0.6, P.fillMid);
+        fillGrad.addColorStop(1,   'rgba(0,0,0,0)');
         ctx.fillStyle = fillGrad;
         ctx.beginPath();
         pts.forEach((p, i) => i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y));
         ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.closePath();
         ctx.fill();
 
-        // ── Main line ──
         ctx.save();
-        ctx.shadowBlur = 12;
-        ctx.shadowColor = 'rgba(255,215,0,0.35)';
-        ctx.strokeStyle = 'rgba(255,215,0,0.75)';
-        ctx.lineWidth = 1.8;
+        ctx.shadowBlur = 6;
+        ctx.shadowColor = P.glow;
+        ctx.strokeStyle = P.line;
+        ctx.lineWidth = 1.3;
         ctx.lineJoin = 'round';
         ctx.beginPath();
         pts.forEach((p, i) => i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y));
         ctx.stroke();
         ctx.restore();
 
-        // ── Live dot at the head ──
         const head = pts[pts.length - 1];
-        // outer pulse ring
         const pulse = (Math.sin(t * 0.06) + 1) / 2;
         ctx.beginPath();
         ctx.arc(head.x, head.y, 6 + pulse * 4, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(255,215,0,${0.15 + pulse * 0.15})`;
+        ctx.strokeStyle = `rgba(${P.pulse},${0.14 + pulse * 0.12})`;
         ctx.lineWidth = 1;
         ctx.stroke();
-        // inner dot
         ctx.beginPath();
         ctx.arc(head.x, head.y, 3, 0, Math.PI * 2);
-        ctx.fillStyle = '#ffd700';
+        ctx.fillStyle = P.dot;
         ctx.fill();
 
-        // ── Current price label ──
         const priceStr = liveY.toFixed(5);
         const isUp = history[POINTS - 1] >= history[POINTS - 2];
         const labelX = head.x - 58;
         const labelY = head.y - 14;
-        ctx.font = '600 11px "Courier New", monospace';
-        ctx.fillStyle = isUp ? 'rgba(16,185,129,0.85)' : 'rgba(239,68,68,0.85)';
+        ctx.font = '600 11px "IBM Plex Mono", monospace';
+        ctx.fillStyle = isUp ? P.up : P.down;
         ctx.fillText((isUp ? '▲ ' : '▼ ') + priceStr, labelX, labelY);
 
-        // ── Pair label, top-left ──
-        ctx.font = '700 13px "Courier New", monospace';
-        ctx.fillStyle = 'rgba(255,215,0,0.30)';
+        ctx.font = '700 13px "IBM Plex Mono", monospace';
+        ctx.fillStyle = P.pairLabel;
         ctx.fillText('EUR/USD', 28, 38);
-        ctx.font = '400 10px "Courier New", monospace';
-        ctx.fillStyle = 'rgba(255,255,255,0.14)';
+        ctx.font = '400 10px "IBM Plex Mono", monospace';
+        ctx.fillStyle = P.subLabel;
         ctx.fillText('1H  ·  LIVE', 28, 54);
       }
 
       function animate() {
         t++;
-        drawBase();
-        drawGrid();
-        drawPriceLine();
+        const P = document.documentElement.getAttribute('data-theme') === 'dark' ? DARK : LIGHT;
+        drawBase(P);
+        drawGrid(P);
+        drawPriceLine(P);
         requestAnimationFrame(animate);
       }
       animate();
