@@ -1,31 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script>
-    (function() {
-      var saved = null;
-      try { saved = localStorage.getItem('cc-theme'); } catch (e) {}
-      var theme = saved || ((window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light');
-      document.documentElement.setAttribute('data-theme', theme);
-    })();
-  </script>
   <meta charset="UTF-8">
   <meta name="google-site-verification" content="r4rRAzZbS65i13vvxa7d6-Ls43t6F50sXvAqPm5NfO4" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TradeMate Pricing | ChartCircle — Free Trial, Pro & Partner Plans</title>
+  <title>TradeMate Pricing | WorldBankFx — Free Trial, Pro & Partner Plans</title>
   <meta name="description" content="TradeMate trading journal pricing. Start free with a 15-day trial, upgrade to Pro for unlimited trade logging. Built for forex traders.">
-  <meta name="keywords" content="TradeMate pricing, trading journal price, forex journal pro, trading journal subscription, ChartCircle pricing, trade tracker cost">
-  <meta name="author" content="ChartCircle">
+  <meta name="keywords" content="TradeMate pricing, trading journal price, forex journal pro, trading journal subscription, WorldBankFx pricing, trade tracker cost">
+  <meta name="author" content="WorldBankFx">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://chartcircle.netlify.app/pricing.html">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://chartcircle.netlify.app/pricing.html">
-  <meta property="og:title" content="TradeMate Pricing | ChartCircle — Free Trial to Pro">
+  <meta property="og:title" content="TradeMate Pricing | WorldBankFx — Free Trial to Pro">
   <meta property="og:description" content="Start free. 15-day trial, no card needed. Upgrade to Pro for unlimited trading journal entries.">
   <meta property="og:image" content="https://chartcircle.netlify.app/og-image.jpg">
-  <meta property="og:site_name" content="ChartCircle">
+  <meta property="og:site_name" content="WorldBankFx">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
@@ -63,7 +55,7 @@
         ],
         "creator": {
           "@type": "Organization",
-          "name": "ChartCircle",
+          "name": "WorldBankFx",
           "url": "https://chartcircle.netlify.app"
         }
       },
@@ -81,37 +73,25 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='47' fill='%230d2340'/><circle cx='50' cy='50' r='47' fill='none' stroke='%230f7d82' stroke-width='3'/><polyline points='24,60 40,44 52,54 76,28' fill='none' stroke='%2312969c' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/><circle cx='76' cy='28' r='4' fill='%2312969c'/></svg>">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='47' fill='%230a1220'/><circle cx='50' cy='50' r='47' fill='none' stroke='%23c9a227' stroke-width='3'/><polyline points='24,60 40,44 52,54 76,28' fill='none' stroke='%23d4af37' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/><circle cx='76' cy='28' r='4' fill='%23d4af37'/></svg>">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
 
     /* ══ LIGHT THEME (default) ══ */
     :root {
-      --accent: #0f7d82; --accent-light: #12969c; --accent-dim: #0a6367;
-      --positive: #1f8a5f; --negative: #b1414c;
-      --bg: #ffffff; --bg-alt: #f3f6fa; --bg-inset: #eef2f6;
-      --surface: #ffffff; --surface2: #f6f9fb;
-      --border: #e1e6ec; --border-strong: #ccd5de;
-      --heading: #0e2138; --text: #33475a; --muted: #64758a;
-      --on-accent: #ffffff;
-      --shadow-color: rgba(20,40,60,0.10);
+      --accent: #c9a227; --accent-light: #dab94a; --accent-dim: #a9860f;
+      --positive: #2e7d5b; --negative: #b23a48;
+      --bg: #fbf9f4; --bg-alt: #f3eee3; --bg-inset: #ece4d3;
+      --surface: #ffffff; --surface2: #f6f1e6;
+      --border: #e4dcc8; --border-strong: #d2c6a8;
+      --heading: #0a1220; --text: #33394a; --muted: #6b7280;
+      --on-accent: #0a1220;
+      --shadow-color: rgba(10,18,32,0.10);
       --font-display: 'Fraunces', Georgia, serif;
       --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
     }
-    /* ══ DARK THEME ══ */
-    [data-theme="dark"] {
-      --accent: #2bb8bf; --accent-light: #4fd3d9; --accent-dim: #1f9096;
-      --positive: #3fae82; --negative: #d0707c;
-      --bg: #0a1420; --bg-alt: #0d1c2b; --bg-inset: #0c2233;
-      --surface: #101f30; --surface2: #0c1f2f;
-      --border: rgba(255,255,255,0.08); --border-strong: rgba(255,255,255,0.18);
-      --heading: #eef3f8; --text: #c3ccd6; --muted: #8b9aab;
-      --on-accent: #05191b;
-      --shadow-color: rgba(0,0,0,0.45);
-    }
-
     body { font-family: var(--font-body); background: var(--bg); color: var(--text); overflow-x: hidden; transition: background 0.25s ease, color 0.25s ease; }
 
     /* ── SCROLLBAR ── */
@@ -119,16 +99,6 @@
     ::-webkit-scrollbar-track { background: var(--bg-alt); }
     ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
 
-    /* ── THEME TOGGLE ── */
-    .theme-toggle { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--border-strong); background: var(--surface); color: var(--accent); cursor: pointer; font-size: 0.95rem; transition: all 0.25s ease; }
-    .theme-toggle:hover { border-color: var(--accent); }
-    .theme-toggle .fa-sun { display: none; }
-    [data-theme="dark"] .theme-toggle .fa-sun { display: inline-block; }
-    [data-theme="dark"] .theme-toggle .fa-moon { display: none; }
-    .mobile-theme-toggle { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border); color: var(--heading); font-size: 1rem; font-weight: 600; cursor: pointer; }
-    .mobile-theme-toggle .fa-sun { display: none; }
-    [data-theme="dark"] .mobile-theme-toggle .fa-sun { display: inline-block; }
-    [data-theme="dark"] .mobile-theme-toggle .fa-moon { display: none; }
 
     /* ── NAV ── */
     nav { position: fixed; top: 0; width: 100%; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(12px); z-index: 1000; border-bottom: 1px solid var(--border); }
@@ -152,7 +122,7 @@
     .dropdown-content a:last-child { border-bottom: none; }
     .dropdown-content a:hover { background: var(--bg-alt); color: var(--accent); }
     .nav-cta { background: var(--accent); color: var(--on-accent) !important; padding: 10px 22px; border-radius: 6px; font-weight: 700 !important; font-size: 0.82rem !important; letter-spacing: 0.3px; transition: all 0.3s ease !important; cursor: pointer; border: none; white-space: nowrap; }
-    .nav-cta:hover { background: var(--accent-light); transform: translateY(-1px); box-shadow: 0 6px 18px rgba(15,125,130,0.25); color: var(--on-accent) !important; }
+    .nav-cta:hover { background: var(--accent-light); transform: translateY(-1px); box-shadow: 0 6px 18px rgba(201,162,39,0.25); color: var(--on-accent) !important; }
     .mobile-menu-btn { display: none; font-size: 1.4rem; color: var(--accent); cursor: pointer; background: none; border: none; }
     .mobile-nav { display: none; position: fixed; top: 0; right: -100%; width: 80%; max-width: 380px; height: 100vh; background: var(--bg-alt); z-index: 2000; padding: 80px 30px 30px; transition: right 0.3s ease; overflow-y: auto; border-left: 1px solid var(--border); }
     .mobile-nav.active { right: 0; }
@@ -189,7 +159,7 @@
     .plan-savings { font-family: var(--font-mono); font-size: 0.72rem; color: var(--positive); font-weight: 600; min-height: 18px; margin-bottom: 22px; }
     .plan-cta { width: 100%; padding: 13px; background: var(--bg-inset); border: 1px solid var(--border-strong); color: var(--heading); font-weight: 700; font-size: 0.9rem; border-radius: 8px; cursor: pointer; transition: all 0.25s; margin-bottom: 22px; }
     .plan-card.featured .plan-cta { background: var(--accent); color: var(--on-accent); border-color: transparent; }
-    .plan-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(15,125,130,0.2); border-color: var(--accent); }
+    .plan-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(201,162,39,0.2); border-color: var(--accent); }
     .plan-card.featured .plan-cta:hover { background: var(--accent-light); }
     .plan-features { list-style: none; display: flex; flex-direction: column; gap: 9px; }
     .plan-features li { display: flex; align-items: flex-start; gap: 9px; font-size: 0.82rem; color: var(--text); line-height: 1.45; }
@@ -370,7 +340,7 @@
           <polyline class="logo-icon-line" points="26,58 42,42 54,52 78,26" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
           <circle class="logo-icon-dot" cx="78" cy="26" r="4.5"/>
         </svg>
-        <span>ChartCircle</span>
+        <span>WorldBankFx</span>
       </a>
       <ul class="nav-links">
         <li><a href="index.html#home">Home</a></li>
@@ -403,9 +373,6 @@
         <li><a href="contact.html">Contact</a></li>
       </ul>
       <div class="nav-right">
-        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
-          <i class="fas fa-moon"></i><i class="fas fa-sun"></i>
-        </button>
         <button class="nav-cta" onclick="openBrokers()">Our Brokers</button>
         <button class="mobile-menu-btn" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button>
       </div>
@@ -416,10 +383,6 @@
   <div class="mobile-nav" id="mobileNav">
     <button class="mobile-nav-close" onclick="toggleMobileMenu()"><i class="fas fa-times"></i></button>
     <ul class="mobile-nav-links">
-      <li class="mobile-theme-toggle" onclick="toggleTheme()">
-        <span>Dark Mode</span>
-        <i class="fas fa-moon"></i><i class="fas fa-sun"></i>
-      </li>
       <li><a href="index.html#home" onclick="toggleMobileMenu()">Home</a></li>
       <li>
         <div class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(this)"><span>Offers</span><i class="fas fa-chevron-down"></i></div>
@@ -614,7 +577,7 @@
     <div class="footer-content">
       <div class="footer-top">
         <div class="footer-brand">
-          <h3>ChartCircle</h3>
+          <h3>WorldBankFx</h3>
           <p>Empowering traders with knowledge, tools, and live daily trading. Your journey to financial freedom starts here.</p>
           <div class="footer-social">
             <a href="https://www.instagram.com/_thedigitalprofessor/" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-instagram"></i></a>
@@ -650,12 +613,12 @@
           <a href="contact.html">Contact Page</a>
           <a href="https://t.me/w0rldbank07" target="_blank" rel="noopener noreferrer">Telegram</a>
           <a href="https://wa.me/256783354348" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-          <a href="mailto:chartcirclefx@gmail.com">chartcirclefx@gmail.com</a>
+          <a href="mailto:unlimited.worldbankfx@gmail.com">unlimited.worldbankfx@gmail.com</a>
           <p>+256 783 354 348</p>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>© 2025–2026 ChartCircle. All rights reserved. | Built with discipline.</p>
+        <p>© 2025–2026 WorldBankFx. All rights reserved. | Built with discipline.</p>
       </div>
     </div>
   </footer>
@@ -685,7 +648,7 @@
       <div class="modal-ref">
         <p><strong>PayPal:</strong> neemacharles777@gmail.com</p>
         <p><strong>WhatsApp:</strong> +256 783 354 348</p>
-        <p><strong>Email:</strong> chartcirclefx@gmail.com</p>
+        <p><strong>Email:</strong> unlimited.worldbankfx@gmail.com</p>
       </div>
       <div class="modal-note">
         Include your <strong>registered email</strong> in your payment message.<br>
@@ -714,7 +677,7 @@
       <div class="payment-details">
         <p><strong>PayPal:</strong> neemacharles777@gmail.com</p>
         <p><strong>WhatsApp:</strong> +256 783 354 348</p>
-        <p><strong>Email:</strong> <a href="mailto:chartcirclefx@gmail.com" style="color:var(--accent)">chartcirclefx@gmail.com</a></p>
+        <p><strong>Email:</strong> <a href="mailto:unlimited.worldbankfx@gmail.com" style="color:var(--accent)">unlimited.worldbankfx@gmail.com</a></p>
         <small>After payment, send your screenshot to WhatsApp or email. I'll respond within 24 hours with your product.</small>
       </div>
     </div>
@@ -752,14 +715,6 @@
   </button>
 
   <script>
-    // ── Theme ──
-    function toggleTheme() {
-      const cur = document.documentElement.getAttribute('data-theme') || 'light';
-      const next = cur === 'light' ? 'dark' : 'light';
-      document.documentElement.setAttribute('data-theme', next);
-      try { localStorage.setItem('cc-theme', next); } catch (e) {}
-    }
-
     // ── Mobile Nav ──
     function toggleMobileMenu() {
       document.getElementById('mobileNav').classList.toggle('active');
@@ -788,7 +743,7 @@
       document.getElementById('modalPrice').textContent = price;
       document.getElementById('paymentModal').style.display = 'flex';
       document.getElementById('whatsappBtn').href = `https://wa.me/256783354348?text=${encodeURIComponent('Hi! I want to purchase: '+product+' ('+price+'). Please send payment details.')}`;
-      document.getElementById('emailBtn').href = `mailto:chartcirclefx@gmail.com?subject=${encodeURIComponent('Purchase: '+product)}&body=${encodeURIComponent('Hi,\n\nI would like to purchase:\n'+product+' — '+price+'\n\nPlease confirm payment details.\n\nThank you!')}`;
+      document.getElementById('emailBtn').href = `mailto:unlimited.worldbankfx@gmail.com?subject=${encodeURIComponent('Purchase: '+product)}&body=${encodeURIComponent('Hi,\n\nI would like to purchase:\n'+product+' — '+price+'\n\nPlease confirm payment details.\n\nThank you!')}`;
     }
     function closePayment() {
       document.getElementById('paymentModal').style.display = 'none';
@@ -826,7 +781,7 @@
       encodeURIComponent(`Hi! I want to upgrade my TradeMate Journal to PRO.\n\nPlan: ${plan}\nAmount: ${price}\n\nPlease confirm payment instructions. Thank you!`);
 
     const emHref = (plan, price) =>
-      `mailto:chartcirclefx@gmail.com?subject=${encodeURIComponent('TradeMate Pro Upgrade — ' + plan)}&body=${encodeURIComponent(`Hi ChartCircle,\n\nI want to upgrade my TradeMate Journal to Pro.\n\nPlan: ${plan}\nAmount: ${price}\n\nPlease send payment instructions.\n\nThank you!`)}`;
+      `mailto:unlimited.worldbankfx@gmail.com?subject=${encodeURIComponent('TradeMate Pro Upgrade — ' + plan)}&body=${encodeURIComponent(`Hi WorldBankFx,\n\nI want to upgrade my TradeMate Journal to Pro.\n\nPlan: ${plan}\nAmount: ${price}\n\nPlease send payment instructions.\n\nThank you!`)}`;
 
     function openModal(plan) {
       activePlan = plan;

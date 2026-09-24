@@ -1,53 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script>
-    (function() {
-      var saved = null;
-      try { saved = localStorage.getItem('cc-theme'); } catch (e) {}
-      var theme = saved || ((window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light');
-      document.documentElement.setAttribute('data-theme', theme);
-    })();
-  </script>
   <meta charset="UTF-8">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "EducationalOrganization",
-    "name": "ChartCircle",
+    "name": "WorldBankFx",
     "description": "Forex Trading Education, Professional Trading Tools & Live Trading Community",
     "url": "https://chartcircle.netlify.app",
-    "founder": { "@type": "Person", "name": "ChartCircle" },
+    "founder": { "@type": "Person", "name": "Charles" },
     "contactPoint": {
       "@type": "ContactPoint",
-      "email": "chartcirclefx@gmail.com",
+      "email": "unlimited.worldbankfx@gmail.com",
       "telephone": "+256783354348",
       "contactType": "Customer Service"
     }
   }
   </script>
   <meta name="google-site-verification" content="r4rRAzZbS65i13vvxa7d6-Ls43t6F50sXvAqPm5NfO4" />
-  <meta name="description" content="ChartCircle - Master Forex Trading with 5 years proven strategies, TradeMate journal, trading playbook, and live daily trading community.">
-  <meta name="keywords" content="forex trading, forex education, pip calculator, trading tools, forex masterclass, technical analysis, trading psychology, ChartCircle, forex mentor, trading journal, forex courses, trading strategies">
-  <meta name="author" content="ChartCircle">
+  <meta name="description" content="WorldBankFx - Master Forex Trading with 5 years proven strategies, TradeMate journal, trading playbook, and live daily trading community.">
+  <meta name="keywords" content="forex trading, forex education, pip calculator, trading tools, forex masterclass, technical analysis, trading psychology, WorldBankFx, forex mentor, trading journal, forex courses, trading strategies">
+  <meta name="author" content="WorldBankFx">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://chartcircle.netlify.app/">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://chartcircle.netlify.app/">
-  <meta property="og:title" content="ChartCircle | Forex Trading Mastery">
+  <meta property="og:title" content="WorldBankFx | Forex Trading Mastery">
   <meta property="og:description" content="Learn Forex Trading from 5 years of proven strategies. Free tools, playbook, journal, and live daily trading community.">
   <meta property="og:image" content="https://chartcircle.netlify.app/og-image.jpg">
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="https://chartcircle.netlify.app/">
-  <meta property="twitter:title" content="ChartCircle | Forex Trading Mastery">
+  <meta property="twitter:title" content="WorldBankFx | Forex Trading Mastery">
   <meta property="twitter:description" content="Learn Forex Trading from 5 years of proven strategies. Free tools, playbook, journal, and live daily trading community.">
   <meta property="twitter:image" content="https://chartcircle.netlify.app/twitter-image.jpg">
   <meta name="language" content="English">
   <meta name="geo.region" content="UG">
   <meta name="geo.placename" content="Uganda">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ChartCircle | Forex Trading Mastery</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='47' fill='%230d2340'/><circle cx='50' cy='50' r='47' fill='none' stroke='%230f7d82' stroke-width='3'/><polyline points='24,60 40,44 52,54 76,28' fill='none' stroke='%2312969c' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/><circle cx='76' cy='28' r='4' fill='%2312969c'/></svg>">
+  <title>WorldBankFx | Forex Trading Mastery</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='47' fill='%230a1220'/><circle cx='50' cy='50' r='47' fill='none' stroke='%23c9a227' stroke-width='3'/><polyline points='24,60 40,44 52,54 76,28' fill='none' stroke='%23d4af37' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/><circle cx='76' cy='28' r='4' fill='%23d4af37'/></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -56,36 +48,22 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
 
-    /* ══ LIGHT THEME (default) ══ */
+    /* ══ THEME ══ */
     :root {
-      --accent: #0f7d82; --accent-light: #12969c; --accent-dim: #0a6367;
-      --positive: #1f8a5f; --negative: #b1414c;
-      --bg: #ffffff; --bg-alt: #f3f6fa; --bg-inset: #eef2f6;
-      --surface: #ffffff; --surface2: #f6f9fb;
-      --border: #e1e6ec; --border-strong: #ccd5de;
-      --heading: #0e2138; --text: #33475a; --muted: #64758a;
-      --on-accent: #ffffff;
-      --hero-a: rgba(255,255,255,0.90); --hero-b: rgba(255,255,255,0.78); --hero-c: rgba(255,255,255,0.94);
-      --ring-color: rgba(15,125,130,0.13); --ring-color2: rgba(15,125,130,0.07);
-      --shadow-color: rgba(20,40,60,0.10);
+      --accent: #c9a227; --accent-light: #dab94a; --accent-dim: #a9860f;
+      --positive: #2e7d5b; --negative: #b23a48;
+      --bg: #fbf9f4; --bg-alt: #f3eee3; --bg-inset: #ece4d3;
+      --surface: #ffffff; --surface2: #f6f1e6;
+      --border: #e4dcc8; --border-strong: #d2c6a8;
+      --heading: #0a1220; --text: #33394a; --muted: #6b7280;
+      --on-accent: #0a1220;
+      --hero-a: rgba(251,249,244,0.90); --hero-b: rgba(251,249,244,0.78); --hero-c: rgba(251,249,244,0.94);
+      --ring-color: rgba(201,162,39,0.15); --ring-color2: rgba(201,162,39,0.08);
+      --shadow-color: rgba(10,18,32,0.10);
       --font-display: 'Fraunces', Georgia, serif;
       --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
     }
-    /* ══ DARK THEME ══ */
-    [data-theme="dark"] {
-      --accent: #2bb8bf; --accent-light: #4fd3d9; --accent-dim: #1f9096;
-      --positive: #3fae82; --negative: #d0707c;
-      --bg: #0a1420; --bg-alt: #0d1c2b; --bg-inset: #0c2233;
-      --surface: #101f30; --surface2: #0c1f2f;
-      --border: rgba(255,255,255,0.08); --border-strong: rgba(255,255,255,0.18);
-      --heading: #eef3f8; --text: #c3ccd6; --muted: #8b9aab;
-      --on-accent: #05191b;
-      --hero-a: rgba(9,15,22,0.90); --hero-b: rgba(10,20,32,0.80); --hero-c: rgba(9,15,22,0.94);
-      --ring-color: rgba(43,184,191,0.16); --ring-color2: rgba(43,184,191,0.09);
-      --shadow-color: rgba(0,0,0,0.45);
-    }
-
     body { font-family: var(--font-body); background: var(--bg); color: var(--text); overflow-x: hidden; transition: background 0.25s ease, color 0.25s ease; }
 
     /* ── SCROLLBAR ── */
@@ -93,13 +71,6 @@
     ::-webkit-scrollbar-track { background: var(--bg-alt); }
     ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
 
-    /* ── THEME TOGGLE ── */
-    .theme-toggle { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--border-strong); background: var(--surface); color: var(--accent); cursor: pointer; font-size: 0.95rem; transition: all 0.25s ease; }
-    .theme-toggle:hover { border-color: var(--accent); }
-    .theme-toggle .fa-sun { display: none; }
-    [data-theme="dark"] .theme-toggle .fa-sun { display: inline-block; }
-    [data-theme="dark"] .theme-toggle .fa-moon { display: none; }
-    .mobile-theme-toggle { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border); color: var(--heading); font-size: 1rem; font-weight: 600; cursor: pointer; }
 
     /* ── NAV ── */
     nav { position: fixed; top: 0; width: 100%; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(12px); z-index: 1000; border-bottom: 1px solid var(--border); }
@@ -123,7 +94,7 @@
     .dropdown-content a:last-child { border-bottom: none; }
     .dropdown-content a:hover { background: var(--bg-alt); color: var(--accent); }
     .nav-cta { background: var(--accent); color: var(--on-accent) !important; padding: 10px 22px; border-radius: 6px; font-weight: 700 !important; font-size: 0.82rem !important; letter-spacing: 0.3px; transition: all 0.3s ease !important; cursor: pointer; border: none; white-space: nowrap; }
-    .nav-cta:hover { background: var(--accent-light); transform: translateY(-1px); box-shadow: 0 6px 18px rgba(15,125,130,0.25); color: var(--on-accent) !important; }
+    .nav-cta:hover { background: var(--accent-light); transform: translateY(-1px); box-shadow: 0 6px 18px rgba(201,162,39,0.25); color: var(--on-accent) !important; }
     .mobile-menu-btn { display: none; font-size: 1.4rem; color: var(--accent); cursor: pointer; background: none; border: none; }
     .mobile-nav { display: none; position: fixed; top: 0; right: -100%; width: 80%; max-width: 380px; height: 100vh; background: var(--bg-alt); z-index: 2000; padding: 80px 30px 30px; transition: right 0.3s ease; overflow-y: auto; border-left: 1px solid var(--border); }
     .mobile-nav.active { right: 0; }
@@ -157,7 +128,7 @@
     .cta-buttons { display: flex; gap: 16px; justify-content: center; margin-top: 30px; flex-wrap: wrap; }
     .cta-btn { padding: 15px 32px; font-size: 0.92rem; font-weight: 600; border: none; border-radius: 6px; cursor: pointer; transition: all 0.3s ease; letter-spacing: 0.3px; text-decoration: none; display: inline-flex; align-items: center; gap: 9px; }
     .cta-primary { background: var(--accent); color: var(--on-accent); }
-    .cta-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(15,125,130,0.28); background: var(--accent-light); }
+    .cta-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(201,162,39,0.28); background: var(--accent-light); }
     .cta-secondary { background: var(--surface); border: 1px solid var(--border-strong); color: var(--heading); }
     .cta-secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
     .market-clocks { display: flex; justify-content: center; gap: 16px; margin-top: 36px; flex-wrap: wrap; }
@@ -177,6 +148,19 @@
 
     /* ── Icon plate ── */
     .icon-plate { width: 52px; height: 52px; border-radius: 50%; border: 1px solid var(--border-strong); display: flex; align-items: center; justify-content: center; margin-bottom: 18px; color: var(--accent); font-size: 1.2rem; flex-shrink: 0; background: var(--bg-inset); }
+
+    /* ── FOUNDER SECTION ── */
+    .founder-section { background: var(--bg); border-bottom: 1px solid var(--border); }
+    .founder-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 64px; align-items: center; }
+    .founder-photo { position: relative; }
+    .founder-photo img { width: 100%; height: auto; display: block; border-radius: 10px; border: 1px solid var(--border-strong); box-shadow: 0 20px 60px var(--shadow-color); }
+    .founder-title { font-family: var(--font-display); font-size: clamp(1.7rem,3.5vw,2.5rem); font-weight: 600; color: var(--heading); margin-bottom: 20px; line-height: 1.25; }
+    .founder-lede { color: var(--heading); font-size: 1.05rem; font-weight: 500; line-height: 1.8; margin-bottom: 18px; }
+    .founder-body { color: var(--muted); font-size: 0.95rem; line-height: 1.85; margin-bottom: 18px; }
+    @media (max-width: 860px) {
+      .founder-inner { grid-template-columns: 1fr; gap: 36px; }
+      .founder-photo { max-width: 320px; margin: 0 auto; }
+    }
 
     /* ── OFFERS SECTION ── */
     .offers-section { background: var(--bg-alt); }
@@ -212,7 +196,7 @@
     .promo-feature { display: flex; align-items: center; gap: 11px; color: var(--text); font-size: 0.9rem; }
     .promo-btns { display: flex; gap: 14px; flex-wrap: wrap; }
     .promo-btn-main { padding: 15px 30px; background: var(--accent); color: var(--on-accent); border-radius: 6px; font-weight: 700; font-size: 0.92rem; text-decoration: none; transition: all 0.3s; display: inline-flex; align-items: center; gap: 9px; }
-    .promo-btn-main:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(15,125,130,0.25); background: var(--accent-light); }
+    .promo-btn-main:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(201,162,39,0.25); background: var(--accent-light); }
     .promo-btn-sec { padding: 15px 26px; background: var(--surface); color: var(--heading); border: 1px solid var(--border-strong); border-radius: 6px; font-weight: 500; font-size: 0.92rem; text-decoration: none; transition: all 0.3s; }
     .promo-btn-sec:hover { border-color: var(--accent); color: var(--accent); }
     .course-mockup { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 26px; box-shadow: 0 20px 60px var(--shadow-color); }
@@ -229,7 +213,7 @@
     .mockup-lesson.active { border-color: var(--border-strong); background: color-mix(in srgb, var(--accent) 5%, var(--bg-inset)); }
     .lesson-dot { width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.55rem; font-weight: 700; flex-shrink: 0; }
     .lesson-dot.done { background: rgba(31,138,95,0.16); color: var(--positive); border: 1px solid rgba(31,138,95,0.3); }
-    .lesson-dot.active { background: rgba(15,125,130,0.14); color: var(--accent); border: 1px solid var(--border-strong); }
+    .lesson-dot.active { background: rgba(201,162,39,0.14); color: var(--accent); border: 1px solid var(--border-strong); }
     .lesson-dot.locked { background: var(--surface); color: var(--muted); border: 1px solid var(--border); }
     .lesson-text { font-family: var(--font-mono); font-size: 0.66rem; color: var(--muted); line-height: 1.4; }
     .lesson-text strong { color: var(--text); display: block; margin-bottom: 1px; font-weight: 600; }
@@ -269,7 +253,7 @@
     .cm-feature { display: flex; align-items: center; gap: 11px; color: var(--text); font-size: 0.9rem; }
     .cm-btns { display: flex; gap: 14px; flex-wrap: wrap; }
     .cm-btn-main { padding: 15px 30px; background: var(--accent); color: var(--on-accent); border-radius: 6px; font-weight: 700; font-size: 0.92rem; text-decoration: none; transition: all 0.3s; display: inline-flex; align-items: center; gap: 9px; }
-    .cm-btn-main:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(15,125,130,0.25); background: var(--accent-light); }
+    .cm-btn-main:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(201,162,39,0.25); background: var(--accent-light); }
     .cm-btn-sec { padding: 15px 26px; background: var(--surface); color: var(--heading); border: 1px solid var(--border-strong); border-radius: 6px; font-weight: 500; font-size: 0.92rem; text-decoration: none; transition: all 0.3s; }
     .cm-btn-sec:hover { border-color: var(--accent); color: var(--accent); }
     .cm-mockup { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 26px; box-shadow: 0 20px 60px var(--shadow-color); }
@@ -450,10 +434,11 @@
           <polyline class="logo-icon-line" points="26,58 42,42 54,52 78,26" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
           <circle class="logo-icon-dot" cx="78" cy="26" r="4.5"/>
         </svg>
-        <span>ChartCircle</span>
+        <span>WorldBankFx</span>
       </a>
       <ul class="nav-links">
         <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
         <li class="dropdown">
           <a href="#services">Offers ▾</a>
           <div class="dropdown-content">
@@ -483,9 +468,6 @@
         <li><a href="contact.html">Contact</a></li>
       </ul>
       <div class="nav-right">
-        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
-          <i class="fas fa-moon"></i><i class="fas fa-sun"></i>
-        </button>
         <button class="nav-cta" onclick="openBrokers()">Our Brokers</button>
         <button class="mobile-menu-btn" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button>
       </div>
@@ -496,11 +478,8 @@
   <div class="mobile-nav" id="mobileNav">
     <button class="mobile-nav-close" onclick="toggleMobileMenu()"><i class="fas fa-times"></i></button>
     <ul class="mobile-nav-links">
-      <li class="mobile-theme-toggle" onclick="toggleTheme()">
-        <span>Dark Mode</span>
-        <i class="fas fa-moon"></i><i class="fas fa-sun"></i>
-      </li>
       <li><a href="#home" onclick="toggleMobileMenu()">Home</a></li>
+      <li><a href="#about" onclick="toggleMobileMenu()">About</a></li>
       <li>
         <div class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(this)"><span>Offers</span><i class="fas fa-chevron-down"></i></div>
         <div class="mobile-dropdown-content">
@@ -539,8 +518,8 @@
     <div class="hero-ring" aria-hidden="true"></div>
     <div class="hero-content">
       <div class="brand-badge"><i class="fas fa-chart-line"></i> Real Trades. Real Tools. Real Community.</div>
-      <h1 class="brand">ChartCircle</h1>
-      <p class="tagline">Forex education, trading tools, and a community built to grow together.</p>
+      <h1 class="brand">WorldBankFx</h1>
+      <p class="tagline">Be self-reliant. Be the bank your family looks up to. Real forex education, real tools, real trading — from someone who built it from nothing.</p>
       <div class="experience">
         <div class="exp-item">
           <div class="exp-number">5+</div>
@@ -581,6 +560,26 @@
           <div class="clock-time" id="newYorkTime">--:--:--</div>
           <div class="clock-day" id="newYorkDay">---</div>
           <div class="clock-status" id="newYorkStatus">—</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FOUNDER ══ -->
+  <section class="founder-section" id="about">
+    <div class="founder-inner">
+      <div class="founder-photo">
+        <img src="images/founder-charles.jpg" alt="Charles, founder of WorldBankFx, seated portrait in navy suit">
+      </div>
+      <div class="founder-copy">
+        <div class="promo-badge"><span>The Founder</span></div>
+        <h2 class="founder-title">Be your own bank.</h2>
+        <p class="founder-lede">I'm Charles — known online as The Professor. I started trading with nothing but a laptop and a stubborn refusal to stay broke. No inheritance, no shortcut, no one handing me a seat at the table.</p>
+        <p class="founder-body">Eight years in tech taught me how to build systems. Five years in forex taught me how to trust them under pressure. WorldBankFx is what happens when those two worlds meet — real strategy, real tools, and a community that proves financial independence isn't reserved for the lucky few.</p>
+        <p class="founder-body">I named it WorldBankFx on purpose. Not because I'm affiliated with any institution — because I want every person who comes through here to understand a simple idea: you can be the bank your family looks up to. Self-reliant. Self-taught. Self-made.</p>
+        <div class="promo-btns">
+          <a href="https://t.me/w0rldbank07" target="_blank" rel="noopener noreferrer" class="promo-btn-main">Trade Daily with Me <i class="fas fa-arrow-right"></i></a>
+          <a href="contact.html" class="promo-btn-sec">Get in Touch →</a>
         </div>
       </div>
     </div>
@@ -643,7 +642,7 @@
   <section class="course-promo">
     <div class="course-promo-inner">
       <div>
-        <div class="promo-badge"><span>ChartCircle × The Teaser Class</span></div>
+        <div class="promo-badge"><span>WorldBankFx × The Teaser Class</span></div>
         <h2 class="promo-title">The Forex Course<br><span>That Actually Works.</span></h2>
         <p class="promo-desc">No fluff, no fake signals. This is a real interactive course built from 5 years of live trading. Lessons, quizzes, and a progress tracker — you'll know exactly what you're learning and why it matters.</p>
         <div class="promo-features">
@@ -843,7 +842,7 @@
     <div class="footer-content">
       <div class="footer-top">
         <div class="footer-brand">
-          <h3>ChartCircle</h3>
+          <h3>WorldBankFx</h3>
           <p>Empowering traders with knowledge, tools, and live daily trading. Your journey to financial freedom starts here.</p>
           <div class="footer-social">
             <a href="https://www.instagram.com/_thedigitalprofessor/" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-instagram"></i></a>
@@ -879,12 +878,12 @@
           <a href="contact.html">Contact Page</a>
           <a href="https://t.me/w0rldbank07" target="_blank" rel="noopener noreferrer">Telegram</a>
           <a href="https://wa.me/256783354348" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-          <a href="mailto:chartcirclefx@gmail.com">chartcirclefx@gmail.com</a>
+          <a href="mailto:unlimited.worldbankfx@gmail.com">unlimited.worldbankfx@gmail.com</a>
           <p>+256 783 354 348</p>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>© 2025–2026 ChartCircle. All rights reserved. | Built with discipline.</p>
+        <p>© 2025–2026 WorldBankFx. All rights reserved. | Built with discipline.</p>
       </div>
     </div>
   </footer>
@@ -913,7 +912,7 @@
       <div class="payment-details">
         <p><strong>PayPal:</strong> neemacharles777@gmail.com</p>
         <p><strong>WhatsApp:</strong> +256 783 354 348</p>
-        <p><strong>Email:</strong> <a href="mailto:chartcirclefx@gmail.com" style="color:var(--accent)">chartcirclefx@gmail.com</a></p>
+        <p><strong>Email:</strong> <a href="mailto:unlimited.worldbankfx@gmail.com" style="color:var(--accent)">unlimited.worldbankfx@gmail.com</a></p>
         <small>After payment, send your screenshot to WhatsApp or email. I'll respond within 24 hours with your product.</small>
       </div>
     </div>
@@ -947,14 +946,6 @@
   </div>
 
   <script>
-    // ── Theme ──
-    function toggleTheme() {
-      const cur = document.documentElement.getAttribute('data-theme') || 'light';
-      const next = cur === 'light' ? 'dark' : 'light';
-      document.documentElement.setAttribute('data-theme', next);
-      try { localStorage.setItem('cc-theme', next); } catch (e) {}
-    }
-
     // ── Mobile Nav ──
     function toggleMobileMenu() {
       document.getElementById('mobileNav').classList.toggle('active');
@@ -994,7 +985,7 @@
       document.getElementById('modalPrice').textContent = price;
       document.getElementById('paymentModal').style.display = 'flex';
       document.getElementById('whatsappBtn').href = `https://wa.me/256783354348?text=${encodeURIComponent('Hi! I want to purchase: '+product+' ('+price+'). Please send payment details.')}`;
-      document.getElementById('emailBtn').href = `mailto:chartcirclefx@gmail.com?subject=${encodeURIComponent('Purchase: '+product)}&body=${encodeURIComponent('Hi,\n\nI would like to purchase:\n'+product+' — '+price+'\n\nPlease confirm payment details.\n\nThank you!')}`;
+      document.getElementById('emailBtn').href = `mailto:unlimited.worldbankfx@gmail.com?subject=${encodeURIComponent('Purchase: '+product)}&body=${encodeURIComponent('Hi,\n\nI would like to purchase:\n'+product+' — '+price+'\n\nPlease confirm payment details.\n\nThank you!')}`;
     }
     function closePayment() {
       document.getElementById('paymentModal').style.display = 'none';
@@ -1030,24 +1021,14 @@
       window.addEventListener('resize', resize);
 
       const LIGHT = {
-        bg: '#ffffff', wash: 'rgba(15,125,130,0.045)',
+        bg: '#ffffff', wash: 'rgba(201,162,39,0.045)',
         grid: 'rgba(14,33,56,0.055)', vgrid: 'rgba(14,33,56,0.035)',
-        fillTop: 'rgba(15,125,130,0.10)', fillMid: 'rgba(15,125,130,0.025)',
-        line: 'rgba(15,125,130,0.85)', glow: 'rgba(15,125,130,0.22)',
-        dot: '#0f7d82', pulse: '15,125,130',
-        pairLabel: 'rgba(15,125,130,0.34)', subLabel: 'rgba(14,33,56,0.20)',
+        fillTop: 'rgba(201,162,39,0.10)', fillMid: 'rgba(201,162,39,0.025)',
+        line: 'rgba(201,162,39,0.85)', glow: 'rgba(201,162,39,0.22)',
+        dot: '#c9a227', pulse: '201,162,39',
+        pairLabel: 'rgba(201,162,39,0.34)', subLabel: 'rgba(14,33,56,0.20)',
         up: 'rgba(31,138,95,0.9)', down: 'rgba(177,65,76,0.9)'
       };
-      const DARK = {
-        bg: '#0a1420', wash: 'rgba(43,184,191,0.06)',
-        grid: 'rgba(238,243,248,0.05)', vgrid: 'rgba(238,243,248,0.03)',
-        fillTop: 'rgba(43,184,191,0.13)', fillMid: 'rgba(43,184,191,0.03)',
-        line: 'rgba(43,184,191,0.85)', glow: 'rgba(43,184,191,0.3)',
-        dot: '#4fd3d9', pulse: '43,184,191',
-        pairLabel: 'rgba(43,184,191,0.4)', subLabel: 'rgba(238,243,248,0.16)',
-        up: 'rgba(63,174,130,0.9)', down: 'rgba(208,112,124,0.9)'
-      };
-
       const POINTS = 120;
       const history = [];
       let seed = 1.08420;
@@ -1159,7 +1140,7 @@
 
       function animate() {
         t++;
-        const P = document.documentElement.getAttribute('data-theme') === 'dark' ? DARK : LIGHT;
+        const P = LIGHT;
         drawBase(P);
         drawGrid(P);
         drawPriceLine(P);
