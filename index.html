@@ -8,7 +8,7 @@
     "@type": "EducationalOrganization",
     "name": "WorldBankFx",
     "description": "Forex Trading Education, Professional Trading Tools & Live Trading Community",
-    "url": "https://chartcircle.netlify.app",
+    "url": "https://worldbankfx.netlify.app",
     "founder": { "@type": "Person", "name": "Charles" },
     "contactPoint": {
       "@type": "ContactPoint",
@@ -23,22 +23,24 @@
   <meta name="keywords" content="forex trading, forex education, pip calculator, trading tools, forex masterclass, technical analysis, trading psychology, WorldBankFx, forex mentor, trading journal, forex courses, trading strategies">
   <meta name="author" content="WorldBankFx">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://chartcircle.netlify.app/">
+  <link rel="canonical" href="https://worldbankfx.netlify.app/">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://chartcircle.netlify.app/">
+  <meta property="og:url" content="https://worldbankfx.netlify.app/">
   <meta property="og:title" content="WorldBankFx | Forex Trading Mastery">
   <meta property="og:description" content="Learn Forex Trading from 5 years of proven strategies. Free tools, playbook, journal, and live daily trading community.">
-  <meta property="og:image" content="https://chartcircle.netlify.app/og-image.jpg">
+  <meta property="og:image" content="https://worldbankfx.netlify.app/og-image.jpg">
   <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://chartcircle.netlify.app/">
+  <meta property="twitter:url" content="https://worldbankfx.netlify.app/">
   <meta property="twitter:title" content="WorldBankFx | Forex Trading Mastery">
   <meta property="twitter:description" content="Learn Forex Trading from 5 years of proven strategies. Free tools, playbook, journal, and live daily trading community.">
-  <meta property="twitter:image" content="https://chartcircle.netlify.app/twitter-image.jpg">
+  <meta property="twitter:image" content="https://worldbankfx.netlify.app/twitter-image.jpg">
   <meta name="language" content="English">
   <meta name="geo.region" content="UG">
   <meta name="geo.placename" content="Uganda">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WorldBankFx | Forex Trading Mastery</title>
+  <!-- PayPal hosted buttons SDK: load ONCE per page -->
+  <script async src="https://www.paypal.com/sdk/js?client-id=BAAin5rJirwvAc2-BLULDPnVUn-hXcN4Nh2UsVHuXWui1Vsq-SAfY27vNYf-X4ZxQcyVrGNf6NbhkTQ47A&components=hosted-buttons&disable-funding=venmo&currency=USD"></script>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='47' fill='%230a1220'/><circle cx='50' cy='50' r='47' fill='none' stroke='%23c9a227' stroke-width='3'/><polyline points='24,60 40,44 52,54 76,28' fill='none' stroke='%23d4af37' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/><circle cx='76' cy='28' r='4' fill='%23d4af37'/></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -338,6 +340,23 @@
     .broker-btn-icon { font-size: 1.1rem; color: var(--accent); }
     .brokers-disclaimer { margin-top: 20px; font-size: 0.75rem; color: var(--muted); line-height: 1.6; }
 
+
+    /* ── PARTNERS ── */
+    .partners-section { background: var(--bg-alt); border-top: 1px solid var(--border); }
+    .partners-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; }
+    .partner-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 30px 26px; text-decoration: none; color: inherit; display: flex; flex-direction: column; transition: all 0.3s ease; box-shadow: 0 2px 10px var(--shadow-color); }
+    .partner-card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 18px 40px var(--shadow-color); }
+    .partner-name { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; color: var(--heading); margin-bottom: 8px; }
+    .partner-desc { color: var(--muted); font-size: 0.9rem; line-height: 1.7; flex: 1; margin-bottom: 18px; }
+    .partner-cta { color: var(--accent); font-weight: 600; font-size: 0.85rem; display: flex; align-items: center; gap: 6px; }
+    .partners-dm { max-width: 700px; margin: 40px auto 0; text-align: center; }
+    .partners-dm p { color: var(--heading); font-weight: 500; margin-bottom: 18px; }
+    .partners-note { max-width: 700px; margin: 24px auto 0; text-align: center; color: var(--muted); font-size: 0.78rem; line-height: 1.6; }
+    .payment-free { display: flex; gap: 12px; margin-top: 18px; padding: 14px 16px; border-radius: 8px; border: 1px solid rgba(46,125,91,0.3); background: rgba(46,125,91,0.07); font-size: 0.85rem; color: var(--text); line-height: 1.5; }
+    .payment-free i { color: var(--positive); margin-top: 3px; }
+    .payment-free a { color: var(--accent); font-weight: 600; text-decoration: none; }
+    .broker-btn.tgdm { border-style: dashed; }
+
     /* ══ RESPONSIVE ══ */
     @media (max-width: 1024px) {
       .footer-top { grid-template-columns: 1fr 1fr; gap: 30px; }
@@ -444,8 +463,8 @@
           <div class="dropdown-content">
             <a href="pricing.html"><i class="fas fa-book-bookmark"></i> TradeMate Journal</a>
             <a href="forex-course.html"><i class="fas fa-chart-line"></i> Free Forex Course</a>
-            <a href="#" onclick="openPayment('Trading Playbook PDF — 5 Pages','$49.99'); return false;"><i class="fas fa-scroll"></i> Trading Playbook PDF</a>
-            <a href="https://t.me/w0rldbank07" target="_blank" rel="noopener noreferrer"><i class="fas fa-lock"></i> Trade Daily with Me</a>
+            <a href="#" onclick="openPayment('Trading Playbook PDF — 5 Pages','$9.99'); return false;"><i class="fas fa-scroll"></i> Trading Playbook PDF</a>
+            <a href="https://t.me/+ixOl-P_YUW1iZTI0" target="_blank" rel="noopener noreferrer"><i class="fas fa-lock"></i> Trade Daily with Me</a>
           </div>
         </li>
         <li class="dropdown">
@@ -464,6 +483,7 @@
           </div>
         </li>
         <li><a href="forex-course.html">Fx Course</a></li>
+        <li><a href="#partners">Start Trading</a></li>
         <li><a href="pricing.html">TradeMate</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
@@ -485,8 +505,8 @@
         <div class="mobile-dropdown-content">
           <a href="pricing.html" onclick="toggleMobileMenu()"><i class="fas fa-book-bookmark"></i> TradeMate Journal</a>
           <a href="forex-course.html" onclick="toggleMobileMenu()"><i class="fas fa-chart-line"></i> Free Forex Course</a>
-          <a href="#" onclick="toggleMobileMenu(); openPayment('Trading Playbook PDF — 5 Pages','$49.99')"><i class="fas fa-scroll"></i> Trading Playbook PDF</a>
-          <a href="https://t.me/w0rldbank07" target="_blank" rel="noopener noreferrer" onclick="toggleMobileMenu()"><i class="fas fa-lock"></i> Trade Daily with Me</a>
+          <a href="#" onclick="toggleMobileMenu(); openPayment('Trading Playbook PDF — 5 Pages','$9.99')"><i class="fas fa-scroll"></i> Trading Playbook PDF</a>
+          <a href="https://t.me/+ixOl-P_YUW1iZTI0" target="_blank" rel="noopener noreferrer" onclick="toggleMobileMenu()"><i class="fas fa-lock"></i> Trade Daily with Me</a>
         </div>
       </li>
       <li>
@@ -578,7 +598,7 @@
         <p class="founder-body">Eight years in tech taught me how to build systems. Five years in forex taught me how to trust them under pressure. WorldBankFx is what happens when those two worlds meet — real strategy, real tools, and a community that proves financial independence isn't reserved for the lucky few.</p>
         <p class="founder-body">I named it WorldBankFx on purpose. Not because I'm affiliated with any institution — because I want every person who comes through here to understand a simple idea: you can be the bank your family looks up to. Self-reliant. Self-taught. Self-made.</p>
         <div class="promo-btns">
-          <a href="https://t.me/w0rldbank07" target="_blank" rel="noopener noreferrer" class="promo-btn-main">Trade Daily with Me <i class="fas fa-arrow-right"></i></a>
+          <a href="https://t.me/+ixOl-P_YUW1iZTI0" target="_blank" rel="noopener noreferrer" class="promo-btn-main">Trade Daily with Me <i class="fas fa-arrow-right"></i></a>
           <a href="contact.html" class="promo-btn-sec">Get in Touch →</a>
         </div>
       </div>
@@ -613,24 +633,24 @@
         </div>
       </a>
 
-      <div class="offer-card" onclick="openPayment('Trading Playbook PDF — 5 Pages','$49.99')">
+      <div class="offer-card" onclick="openPayment('Trading Playbook PDF — 5 Pages','$9.99')">
         <div class="icon-plate"><i class="fas fa-scroll"></i></div>
         <span class="offer-tag paid-tag">5-Page PDF</span>
         <div class="offer-title">Personal Trading Playbook</div>
-        <p class="offer-desc">My actual playbook. Five pages of real setups, entry rules, and filters I use in live trading. No theory — just what works.</p>
+        <p class="offer-desc">My actual playbook. Five pages of real setups, entry rules, and filters I use in live trading. No theory — just what works. <strong>Free</strong> if you open a verified account with one of my partner brokers — join my channel and follow the pinned message.</p>
         <div class="offer-footer">
-          <span class="offer-price paid">$49.99</span>
+          <span class="offer-price paid">$9.99</span>
           <span class="offer-arrow">Buy <i class="fas fa-arrow-right"></i></span>
         </div>
       </div>
 
-      <a href="https://t.me/w0rldbank07" target="_blank" rel="noopener noreferrer" class="offer-card offer-premium">
+      <a href="https://t.me/+ixOl-P_YUW1iZTI0" target="_blank" rel="noopener noreferrer" class="offer-card offer-premium">
         <div class="icon-plate"><i class="fas fa-lock"></i></div>
         <span class="offer-tag tg-tag">Private · Telegram</span>
         <div class="offer-title">Trade Daily with Me</div>
-        <p class="offer-desc">Join my private Telegram. I share live setups, real-time analysis, and trade with you every session. Message me: "Hey, I'm interested in trading daily with you."</p>
+        <p class="offer-desc">Join my private Telegram. I share live setups, real-time analysis, and trade with you every session. Join the channel and follow the pinned message to message me directly.</p>
         <div class="offer-footer">
-          <span class="offer-price paid">$159.99/mo</span>
+          <span class="offer-price paid">$39.99/mo</span>
           <span class="offer-arrow">Join <i class="fab fa-telegram"></i></span>
         </div>
       </a>
@@ -660,7 +680,7 @@
       <div>
         <div class="course-mockup">
           <div class="mockup-header">
-            <span class="mockup-title">FX COURSE — PROGRESS</span>
+            <span class="mockup-title">FX COURSE — SAMPLE PROGRESS</span>
             <span class="mockup-badge">FREE</span>
           </div>
           <div class="mockup-progress">
@@ -756,6 +776,38 @@
     </div>
   </section>
 
+
+  <!-- ══ START TRADING / PARTNERS ══ -->
+  <section class="partners-section" id="partners">
+    <h2 class="section-title">Start Trading With Me</h2>
+    <p class="section-sub">Open an account under my referral, join my Telegram channel, follow the pinned message to send me your verified account, and I'll send you the Trading Playbook free.</p>
+    <div class="partners-grid">
+      <a href="https://one.exnesstrack.org/a/y7scclopum" target="_blank" rel="noopener noreferrer" class="partner-card">
+        <div class="icon-plate"><i class="fas fa-building-columns"></i></div>
+        <div class="partner-name">Exness</div>
+        <p class="partner-desc">One of my two recommended brokers. Trade forex, gold and more.</p>
+        <span class="partner-cta">Open Account <i class="fas fa-arrow-right"></i></span>
+      </a>
+      <a href="https://register.hfm.com/sv/en/new-live-account/?refid=374930" target="_blank" rel="noopener noreferrer" class="partner-card">
+        <div class="icon-plate"><i class="fas fa-landmark"></i></div>
+        <div class="partner-name">HFM</div>
+        <p class="partner-desc">My second recommended broker, if you prefer a different platform or account type.</p>
+        <span class="partner-cta">Open Account <i class="fas fa-arrow-right"></i></span>
+      </a>
+      <a href="https://app.fundingpips.com/register?referral_code=V53TRJL7" target="_blank" rel="noopener noreferrer" class="partner-card">
+        <div class="icon-plate"><i class="fas fa-trophy"></i></div>
+        <div class="partner-name">FundingPips</div>
+        <p class="partner-desc">The prop firm I use. Pass the challenge and trade funded capital instead of only your own.</p>
+        <span class="partner-cta">Get Funded <i class="fas fa-arrow-right"></i></span>
+      </a>
+    </div>
+    <div class="partners-dm">
+      <p>Already registered? Join my channel, follow the pinned message to send me your verified account, and get the Playbook free.</p>
+      <a href="https://t.me/+ixOl-P_YUW1iZTI0" target="_blank" rel="noopener noreferrer" class="cta-btn cta-primary"><i class="fab fa-telegram"></i> Join My Telegram Channel</a>
+    </div>
+    <p class="partners-note">Affiliate links: I may earn a commission if you sign up, at no extra cost to you. Forex and CFD trading involve significant risk of loss. Educational content only, not financial advice.</p>
+  </section>
+
   <!-- ══ TRADEMATE PROMO ══ -->
   <section class="trademate-section">
     <div class="trademate-grid">
@@ -777,7 +829,7 @@
       <div>
         <div class="cm-mockup">
           <div class="cm-mockup-header">
-            <span class="cm-mockup-title">TRADEMATE — DASHBOARD</span>
+            <span class="cm-mockup-title">TRADEMATE — SAMPLE DATA</span>
             <span class="cm-mockup-badge">PRO</span>
           </div>
           <div class="cm-stats">
@@ -810,11 +862,11 @@
     <h2 class="section-title">Follow the Journey</h2>
     <p class="section-sub">Daily market insights, trading tips, and behind-the-scenes across all platforms.</p>
     <div class="social-grid">
-      <a href="https://www.instagram.com/_thedigitalprofessor/" target="_blank" rel="noopener noreferrer" class="social-card">
+      <a href="https://www.instagram.com/worldbank_fx/" target="_blank" rel="noopener noreferrer" class="social-card">
         <div class="social-card-header"><i class="fab fa-instagram" style="color:var(--accent);font-size:1.2rem"></i> Instagram</div>
         <div class="social-card-icon-area"><i class="fab fa-instagram"></i></div>
         <div class="social-card-body">Daily trading insights, chart analysis, and behind-the-scenes of live trading.</div>
-        <div class="social-card-action"><span class="social-card-btn">@_thedigitalprofessor <i class="fas fa-arrow-right"></i></span></div>
+        <div class="social-card-action"><span class="social-card-btn">@worldbank_fx <i class="fas fa-arrow-right"></i></span></div>
       </a>
       <a href="https://www.youtube.com/@TheWorldBankProfessor" target="_blank" rel="noopener noreferrer" class="social-card">
         <div class="social-card-header"><i class="fab fa-youtube" style="color:var(--accent);font-size:1.2rem"></i> YouTube</div>
@@ -822,17 +874,23 @@
         <div class="social-card-body">In-depth tutorials, market breakdowns, and full trading sessions.</div>
         <div class="social-card-action"><span class="social-card-btn">Subscribe on YouTube <i class="fas fa-arrow-right"></i></span></div>
       </a>
-      <a href="https://x.com/DigitoProfessor" target="_blank" rel="noopener noreferrer" class="social-card">
+      <a href="https://www.tiktok.com/@worldbank_fx" target="_blank" rel="noopener noreferrer" class="social-card">
+        <div class="social-card-header"><i class="fab fa-tiktok" style="color:var(--accent);font-size:1.2rem"></i> TikTok</div>
+        <div class="social-card-icon-area"><i class="fab fa-tiktok"></i></div>
+        <div class="social-card-body">Short trading lessons, tool demos, and quick lessons on risk and discipline.</div>
+        <div class="social-card-action"><span class="social-card-btn">@worldbank_fx <i class="fas fa-arrow-right"></i></span></div>
+      </a>
+      <a href="https://x.com/worldbank_fx" target="_blank" rel="noopener noreferrer" class="social-card">
         <div class="social-card-header"><i class="fab fa-twitter" style="color:var(--accent);font-size:1.2rem"></i> X / Twitter</div>
         <div class="social-card-icon-area"><i class="fab fa-twitter"></i></div>
         <div class="social-card-body">Quick trade ideas, market commentary, and real-time thoughts.</div>
-        <div class="social-card-action"><span class="social-card-btn">@DigitoProfessor <i class="fas fa-arrow-right"></i></span></div>
+        <div class="social-card-action"><span class="social-card-btn">@worldbank_fx <i class="fas fa-arrow-right"></i></span></div>
       </a>
-      <a href="https://t.me/w0rldbank07" target="_blank" rel="noopener noreferrer" class="social-card">
+      <a href="https://t.me/+ixOl-P_YUW1iZTI0" target="_blank" rel="noopener noreferrer" class="social-card">
         <div class="social-card-header"><i class="fab fa-telegram" style="color:var(--accent);font-size:1.2rem"></i> Telegram</div>
         <div class="social-card-icon-area"><i class="fab fa-telegram"></i></div>
         <div class="social-card-body">Live trade setups, private signals, and daily trading sessions. This is where the real work happens.</div>
-        <div class="social-card-action"><span class="social-card-btn">@w0rldbank07 <i class="fas fa-arrow-right"></i></span></div>
+        <div class="social-card-action"><span class="social-card-btn">Join the Channel <i class="fas fa-arrow-right"></i></span></div>
       </a>
     </div>
   </section>
@@ -845,10 +903,11 @@
           <h3>WorldBankFx</h3>
           <p>Empowering traders with knowledge, tools, and live daily trading. Your journey to financial freedom starts here.</p>
           <div class="footer-social">
-            <a href="https://www.instagram.com/_thedigitalprofessor/" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.instagram.com/worldbank_fx/" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-instagram"></i></a>
             <a href="https://www.youtube.com/@TheWorldBankProfessor" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-youtube"></i></a>
-            <a href="https://x.com/DigitoProfessor" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-twitter"></i></a>
-            <a href="https://t.me/w0rldbank07" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-telegram"></i></a>
+            <a href="https://www.tiktok.com/@worldbank_fx" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-tiktok"></i></a>
+            <a href="https://x.com/worldbank_fx" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="https://t.me/+ixOl-P_YUW1iZTI0" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-telegram"></i></a>
             <a href="https://wa.me/256783354348" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-whatsapp"></i></a>
             <a href="https://www.facebook.com/TheDig1talProfessor" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-facebook"></i></a>
           </div>
@@ -857,8 +916,8 @@
           <h4>Offers</h4>
           <a href="pricing.html">TradeMate Journal</a>
           <a href="forex-course.html">Free Forex Course</a>
-          <a href="#" onclick="openPayment('Trading Playbook PDF — 5 Pages','$49.99'); return false;">Trading Playbook PDF</a>
-          <a href="https://t.me/w0rldbank07" target="_blank" rel="noopener noreferrer">Trade Daily with Me</a>
+          <a href="#" onclick="openPayment('Trading Playbook PDF — 5 Pages','$9.99'); return false;">Trading Playbook PDF</a>
+          <a href="https://t.me/+ixOl-P_YUW1iZTI0" target="_blank" rel="noopener noreferrer">Trade Daily with Me</a>
         </div>
         <div class="footer-col">
           <h4>Tools</h4>
@@ -876,7 +935,7 @@
         <div class="footer-col">
           <h4>Contact</h4>
           <a href="contact.html">Contact Page</a>
-          <a href="https://t.me/w0rldbank07" target="_blank" rel="noopener noreferrer">Telegram</a>
+          <a href="https://t.me/+ixOl-P_YUW1iZTI0" target="_blank" rel="noopener noreferrer">Telegram</a>
           <a href="https://wa.me/256783354348" target="_blank" rel="noopener noreferrer">WhatsApp</a>
           <a href="mailto:unlimited.worldbankfx@gmail.com">unlimited.worldbankfx@gmail.com</a>
           <p>+256 783 354 348</p>
@@ -884,6 +943,7 @@
       </div>
       <div class="footer-bottom">
         <p>© 2025–2026 WorldBankFx. All rights reserved. | Built with discipline.</p>
+        <p style="margin-top:10px;font-size:0.74rem;line-height:1.6;">Risk warning: forex and CFD trading carry a high risk of loss. Some links on this site are affiliate links and may earn me a commission. Content is educational only, not financial advice.</p>
       </div>
     </div>
   </footer>
@@ -899,7 +959,9 @@
       <div class="payment-product" id="modalProductName">Product</div>
       <div class="payment-price" id="modalPrice">$0</div>
       <div class="payment-methods">
-        <a href="https://paypal.me/neemacharles777" target="_blank" rel="noopener noreferrer" class="pay-btn pay-paypal">
+        <p id="ppAmountNote" style="font-size:0.85rem;color:var(--muted);line-height:1.6;margin-bottom:2px;"></p>
+        <div id="paypalHosted"></div>
+        <a id="paypalBtn" href="#" target="_blank" rel="noopener noreferrer" class="pay-btn pay-paypal" style="display:none">
           <i class="fab fa-paypal"></i> Pay via PayPal
         </a>
         <a id="whatsappBtn" href="#" target="_blank" rel="noopener noreferrer" class="pay-btn pay-whatsapp">
@@ -908,6 +970,10 @@
         <a id="emailBtn" href="#" class="pay-btn pay-email">
           <i class="fas fa-envelope"></i> Order via Email
         </a>
+      </div>
+      <div class="payment-free">
+        <i class="fas fa-gift"></i>
+        <div><strong>Skip the payment.</strong> Open a verified account with Exness, HFM or FundingPips under my link, then join my Telegram channel and follow the pinned message. <a href="https://t.me/+ixOl-P_YUW1iZTI0" target="_blank" rel="noopener noreferrer">Join the channel →</a></div>
       </div>
       <div class="payment-details">
         <p><strong>PayPal:</strong> neemacharles777@gmail.com</p>
@@ -923,8 +989,8 @@
     <div class="brokers-inner">
       <button class="brokers-close" onclick="closeBrokers()">×</button>
       <div class="brokers-eyebrow">Recommended Partners</div>
-      <div class="brokers-title">Our Brokers</div>
-      <p class="brokers-sub">Open your account under my referral and trade knowing you've got a mentor behind you.</p>
+      <div class="brokers-title">Our Brokers &amp; Prop Firm</div>
+      <p class="brokers-sub">Open an account under my referral, then join my Telegram channel and follow the pinned message to send me your verified account — you get the Trading Playbook free.</p>
       <div class="broker-options">
         <a href="https://one.exnesstrack.org/a/y7scclopum" target="_blank" rel="noopener noreferrer" class="broker-btn exness" onclick="closeBrokers()">
           <div class="broker-btn-left">
@@ -940,8 +1006,22 @@
           </div>
           <span class="broker-btn-icon">→</span>
         </a>
+        <a href="https://app.fundingpips.com/register?referral_code=V53TRJL7" target="_blank" rel="noopener noreferrer" class="broker-btn fundingpips" onclick="closeBrokers()">
+          <div class="broker-btn-left">
+            <span class="broker-btn-name">FundingPips</span>
+            <span class="broker-btn-note">Prop firm — trade funded capital</span>
+          </div>
+          <span class="broker-btn-icon">→</span>
+        </a>
+        <a href="https://t.me/+ixOl-P_YUW1iZTI0" target="_blank" rel="noopener noreferrer" class="broker-btn tgdm" onclick="closeBrokers()">
+          <div class="broker-btn-left">
+            <span class="broker-btn-name"><i class="fab fa-telegram"></i> Already registered?</span>
+            <span class="broker-btn-note">Join my channel for the free Playbook</span>
+          </div>
+          <span class="broker-btn-icon">→</span>
+        </a>
       </div>
-      <p class="brokers-disclaimer">Clicking a link takes you to the broker's official website. Forex trading involves risk.</p>
+      <p class="brokers-disclaimer">These are affiliate links: I may earn a commission if you sign up, at no extra cost to you. Clicking a link takes you to the partner's official website. Forex and CFD trading involve significant risk of loss.</p>
     </div>
   </div>
 
@@ -980,10 +1060,35 @@
     updateClocks();
 
     // ── Payment Modal ──
+    // Paste your real PayPal payment-button / payment-link URLs between the quotes.
+    // While a link is empty, the PayPal button stays hidden and buyers use the PayPal email shown below.
+    const PAYPAL_LINKS = { playbook: '', room: '' };
+    // PayPal hosted button IDs. One button per product (each button carries its own price).
+    // playbook = the $9.99 Playbook button. room = add the $39.99/month Subscribe button ID when you create it.
+    const PAYPAL_HOSTED = { playbook: 'UBH5Q4VUHKNWN', room: 'UBH5Q4VUHKNWN' };
+    function renderPayPal(key) {
+      const box = document.getElementById('paypalHosted');
+      box.innerHTML = '';
+      const id = PAYPAL_HOSTED[key];
+      if (!id) return false;
+      if (!(window.paypal && window.paypal.HostedButtons)) return false;
+      box.innerHTML = '<div id="pp-' + id + '"></div>';
+      try { window.paypal.HostedButtons({ hostedButtonId: id }).render('#pp-' + id); return true; } catch (e) { return false; }
+    }
     function openPayment(product, price) {
       document.getElementById('modalProductName').textContent = product;
       document.getElementById('modalPrice').textContent = price;
       document.getElementById('paymentModal').style.display = 'flex';
+      const ppBtn = document.getElementById('paypalBtn');
+      const ppKey = product.indexOf('Playbook') !== -1 ? 'playbook' : 'room';
+      const hosted = renderPayPal(ppKey);
+      document.getElementById('ppAmountNote').textContent = PAYPAL_HOSTED[ppKey] ? ('On the PayPal window, type exactly ' + price + ' as the amount, then send me your receipt to get your product.') : '';
+      const ppLink = PAYPAL_LINKS[ppKey];
+      if (!hosted && PAYPAL_HOSTED[ppKey]) {
+        let tries = 0;
+        const iv = setInterval(() => { tries++; if (renderPayPal(ppKey) || tries > 50) clearInterval(iv); }, 300);
+      }
+      if (!hosted && ppLink) { ppBtn.href = ppLink; ppBtn.style.display = 'flex'; } else { ppBtn.style.display = 'none'; }
       document.getElementById('whatsappBtn').href = `https://wa.me/256783354348?text=${encodeURIComponent('Hi! I want to purchase: '+product+' ('+price+'). Please send payment details.')}`;
       document.getElementById('emailBtn').href = `mailto:unlimited.worldbankfx@gmail.com?subject=${encodeURIComponent('Purchase: '+product)}&body=${encodeURIComponent('Hi,\n\nI would like to purchase:\n'+product+' — '+price+'\n\nPlease confirm payment details.\n\nThank you!')}`;
     }
@@ -1004,6 +1109,16 @@
     document.getElementById('brokersModal').addEventListener('click', e => {
       if (e.target === document.getElementById('brokersModal')) closeBrokers();
     });
+
+    // ── Direct payment links (for Telegram, YouTube, etc.) ──
+    // worldbankfx.netlify.app/#buy-playbook  and  worldbankfx.netlify.app/#join-room open the payment window.
+    function checkPayHash() {
+      const h = window.location.hash;
+      if (h === '#buy-playbook') openPayment('Trading Playbook PDF — 5 Pages', '$9.99');
+      else if (h === '#join-room') openPayment('Daily Live Room — 1 Month', '$39.99');
+    }
+    checkPayHash();
+    window.addEventListener('hashchange', checkPayHash);
 
     // ── Back to Top ──
     window.addEventListener('scroll', () => {
