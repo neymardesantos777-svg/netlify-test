@@ -12,29 +12,9 @@
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
     Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
 
-# Cache static assets for performance (Core Web Vitals = ranking signal)
-[[headers]]
-  for = "/*.css"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-[[headers]]
-  for = "/*.js"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
+# Cache images for performance (Core Web Vitals = ranking signal)
 [[headers]]
   for = "/*.jpg"
-  [headers.values]
-    Cache-Control = "public, max-age=2592000"
-
-[[headers]]
-  for = "/*.png"
-  [headers.values]
-    Cache-Control = "public, max-age=2592000"
-
-[[headers]]
-  for = "/*.svg"
   [headers.values]
     Cache-Control = "public, max-age=2592000"
 
@@ -95,18 +75,48 @@
 
 [[redirects]]
   from = "/traders-playground.html"
-  to = "/traders-playground"
+  to = "/patience-test"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/traders-playground"
+  to = "/patience-test"
   status = 301
   force = true
 
 [[redirects]]
   from = "/chart-second-eye.html"
-  to = "/chart-second-eye"
+  to = "/risk-calculator"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/chart-second-eye"
+  to = "/risk-calculator"
   status = 301
   force = true
 
 [[redirects]]
   from = "/trade-partner.html"
-  to = "/trade-partner"
+  to = "/pricing"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/trade-partner"
+  to = "/pricing"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/risk-calculator.html"
+  to = "/risk-calculator"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/index.html"
+  to = "/"
   status = 301
   force = true
